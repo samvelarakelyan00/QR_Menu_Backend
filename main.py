@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException, status, Depends
 from fastapi.responses import ORJSONResponse
-
+from fastapi.middleware.cors import CORSMiddleware
 
 from models import Base, User
 from database import engine, SessionLocal
@@ -26,6 +26,18 @@ CORS_HEADERS = {
 app = FastAPI()
 
 
+origins = ["*"]
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 @app.get("/")
 def main():
     return ORJSONResponse(content={"message": "This is the main page!"},
@@ -39,8 +51,7 @@ def get_all_users():
 
         all_users = session.query(User).all()
 
-        return ORJSONResponse(content={"all_users": all_users},
-                              headers=CORS_HEADERS)
+        return all_users
     except Exception as err:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -67,10 +78,7 @@ def get_all_users(id: int):
             detail=f"User with id '{id}' was not found!"
         )
 
-    return ORJSONResponse(
-        content={"user": user},
-        headers=CORS_HEADERS
-    )
+    return user
 
 
 @app.post("/api/auth/sign-up")
