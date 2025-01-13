@@ -39,7 +39,8 @@ def get_all_users():
 
         all_users = session.query(User).all()
 
-        return all_users
+        return ORJSONResponse(content={"all_users": all_users},
+                              headers=CORS_HEADERS)
     except Exception as err:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -66,7 +67,10 @@ def get_all_users(id: int):
             detail=f"User with id '{id}' was not found!"
         )
 
-    return user
+    return ORJSONResponse(
+        content={"user": user},
+        headers=CORS_HEADERS
+    )
 
 
 @app.post("/api/auth/sign-up")
