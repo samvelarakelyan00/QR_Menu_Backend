@@ -1,15 +1,26 @@
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI, HTTPException, status, Depends
+from fastapi.responses import ORJSONResponse
 
 
 from models import Base, User
 from database import engine, SessionLocal
 from schemas import (
     UserSignupSchema,
-    UserLoginSchema
+    UserLoginSchema,
+    UsernameChangeSchema
 )
+from security import get_current_user, create_token
 
 
 Base.metadata.create_all(bind=engine)
+
+CORS_HEADERS = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Allow-Credentials": "true",
+    "Access-Control-Max-Age": "3600"
+}
 
 
 app = FastAPI()
@@ -17,7 +28,8 @@ app = FastAPI()
 
 @app.get("/")
 def main():
-    return {"message": "This is the main page!!!"}
+    return ORJSONResponse(content={"message": "This is the main page!"},
+                          headers=CORS_HEADERS)
 
 
 @app.get("/api/users")
@@ -72,7 +84,8 @@ def sign_up(user_signup_data: UserSignupSchema):
                             detail="Error while trying to add user to db"
                                    f"ERR: {err}")
 
-    return {"message": "User successfully signup!"}
+    return ORJSONResponse(content={"message": "User successfully signup!"},
+                          headers=CORS_HEADERS)
 
 
 @app.post("/api/auth/login")
@@ -93,9 +106,36 @@ def login(user_login_data: UserLoginSchema):
             detail=f"Wrong password '{user_login_data.password}'!"
         )
 
-    return {"Message": "User successfully logged in!"}  # TODO return token
+    token = create_token(user)
+
+    return token
 
 
-@app.put("/api/users/change-username")  # TODO change username with token
-def change_username():
-    pass
+@app.put("/api/users/change-username")
+def change_username(new_username_change_data: UsernameChangeSchema,
+                    current_user=Depends(get_current_user)):
+    try:
+        username = current_user.username
+
+        session = SessionLocal()
+        user = session.query(User).filter_by(username=username).first()
+    except Exception as err:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail="Error while trying to get user!"
+                                   f"ERR: {err}")
+
+    if user is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"User with username '{username}' was not found!")
+
+    try:
+        user.username = new_username_change_data.username
+        session.commit()
+    except Exception as err:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail="Error while trying to change username"
+                                   f"ERR: {err}")
+
+    return ORJSONResponse(content={"message": "Username changed successfully!"},
+                          headers=CORS_HEADERS)
