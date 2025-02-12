@@ -3,10 +3,15 @@ from sqlalchemy import Column, String, Integer, Float, Time, ForeignKey, TIMESTA
 from ..database import Base
 
 
-class Test(Base):
-    __tablename__ = "test"
+class OurAdmin(Base):
+    __tablename__ = "ouradmins"
 
     id = Column(Integer, nullable=False, primary_key=True)
+
+    name = Column(String, nullable=False)
+    email = Column(String, nullable=False)
+    password = Column(String, nullable=False)
+    created_at = Column(TIMESTAMP, nullable=False, server_default=text("now()"))
 
 
 class HoReKaClients(Base):
@@ -45,6 +50,7 @@ class HoReKaAdmin(Base):
     __tablename__ = "horekadmin"
 
     id = Column(Integer, nullable=False, primary_key=True)
+
     name = Column(String, nullable=False)
     email = Column(String, nullable=False)
     password = Column(String, nullable=False)
