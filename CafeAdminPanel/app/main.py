@@ -1,8 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 
-app = FastAPI()
+from api import router
+
+
+app = FastAPI(title="Cafe Admin Panel")
 
 
 origins = [
@@ -20,4 +25,8 @@ app.add_middleware(
 
 @app.get("/")
 def main():
-    return "OK"
+    return "Cafe Admin Panel"
+
+
+
+app.include_router(router)

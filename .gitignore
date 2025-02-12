@@ -1,3 +1,15 @@
 .idea
 UserSide/app/__pycache__/
 UserSide/app/models/__pycache__/
+CafeAdminPanel/app/__pycache__/
+CafeAdminPanel/app/api/__pycache__/
+CafeAdminPanel/app/api/endpoints/__pycache__/
+CafeAdminPanel/app/models/__pycache__/
+CafeAdminPanel/app/schemas/__pycache__/
+CafeAdminPanel/app/services/__pycache__/
+OurAdminPanel/app/__pycache__/main.cpython-310.pyc
+OurAdminPanel/app/__pycache__/security.cpython-310.pyc
+OurAdminPanel/app/api/__pycache__/
+OurAdminPanel/app/api/endpoints/__pycache__/
+OurAdminPanel/app/schemas/__pycache__/
+OurAdminPanel/app/services/__pycache__/

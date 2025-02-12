@@ -1,15 +1,23 @@
 from sqlalchemy import Column, String, Integer, Float, Time, ForeignKey, TIMESTAMP, text
 
-from ..database import Base
+from sqlalchemy.ext.declarative import declarative_base
 
 
-class Test(Base):
-    __tablename__ = "test"
+Base = declarative_base()
+
+
+class OurAdmin(Base):
+    __tablename__ = "ouradmins"
 
     id = Column(Integer, nullable=False, primary_key=True)
 
+    name = Column(String, nullable=False)
+    email = Column(String, nullable=False)
+    password = Column(String, nullable=False)
+    created_at = Column(TIMESTAMP, nullable=False, server_default=text("now()"))
 
-class HoReKaClients(Base):
+
+class HoReKaClient(Base):
     __tablename__ = "horekaclients"
 
     id = Column(Integer, nullable=False, primary_key=True)
@@ -19,6 +27,19 @@ class HoReKaClients(Base):
     phone = Column(String, nullable=False)
     address = Column(String, nullable=False)
     created_at = Column(TIMESTAMP, nullable=False, server_default=text("now()"))
+
+
+class HoReKaAdmin(Base):
+    __tablename__ = "horekadmin"
+
+    id = Column(Integer, nullable=False, primary_key=True)
+
+    name = Column(String, nullable=False)
+    email = Column(String, nullable=False)
+    password = Column(String, nullable=False)
+    created_at = Column(TIMESTAMP, nullable=False, server_default=text("now()"))
+
+    horekaclient_id = Column(Integer, ForeignKey("horekaclients.id"))
 
 
 class HoReKaMenu(Base):
@@ -38,16 +59,4 @@ class HoReKaMenu(Base):
 
     created_at = Column(TIMESTAMP, nullable=False, server_default=text("now()"))
 
-    horekaclient_id = Column(Integer, ForeignKey("horekaclients.id"), nullable=False)
-
-
-class HoReKaAdmin(Base):
-    __tablename__ = "horekadmins"
-
-    id = Column(Integer, nullable=False, primary_key=True)
-    name = Column(String, nullable=False)
-    email = Column(String, nullable=False)
-    password = Column(String, nullable=False)
-    created_at = Column(TIMESTAMP, nullable=False, server_default=text("now()"))
-
-    horekaclient_id = Column(Integer, ForeignKey("horekaclients.id"), nullable=False)
+    horekaclient_id = Column(Integer, ForeignKey("horekaclients.id"))

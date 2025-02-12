@@ -11,15 +11,16 @@ from fastapi.security.oauth2 import OAuth2PasswordBearer
 from sqlalchemy.orm.session import Session
 
 # Security
+from passlib.hash import bcrypt
 from jose import jwt, JWTError
 
 # Own
-from schemas.partner_sellers_schemas import PartnerOut, Token, PartnerLoginForm
+from schemas.auth_schema import Token, CafeAdminLoginForm, CafeAdminOut
 from database import get_session
 from models import models
 
 
-oauth2_schema = OAuth2PasswordBearer(tokenUrl='/partner_auth_router/login')
+oauth2_schema = OAuth2PasswordBearer(tokenUrl='/admin_auth/login')
 
 
 CORS_HEADERS = {
@@ -31,18 +32,25 @@ CORS_HEADERS = {
 }
 
 
-def get_current_partner(token: str = Depends(oauth2_schema)):
+def get_current_admin(token: str = Depends(oauth2_schema)):
     try:
-        current_partner = PartnerAuthService.verify_token(token)
-        return current_partner
+        current_admin = CafeAdminAuthService.verify_token(token)
+        return current_admin
     except Exception as err:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
-                            detail="In UserApp/services/partner_auth.py function get_current_partner()\n"
-                                   "Error occurred while trying to get current partner\n"
-                                   f"ERR: {err}")
+                            detail=err)
 
 
-class PartnerAuthService:
+class CafeAdminAuthService:
+    @classmethod
+    def verify_password(cls, plain_password: str, hashed_password: str):
+        try:
+            result = bcrypt.verify(plain_password, hashed_password)
+            return result
+        except Exception as err:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                                detail=err)
+
     @classmethod
     def verify_token(cls, token: str):
         try:
@@ -55,123 +63,97 @@ class PartnerAuthService:
             )
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail="In UserApp/services/admin_auth.py class AuthService, function verify_token()\n"
-                                       "Error occurred while trying to create HTTPException\n"
-                                       f"ERR: {err}")
+                                detail=err)
         try:
             payload = jwt.decode(
                 token,
-                "secret",
+                "cafesecret",
                 algorithms=["HS256"]
             )
         except JWTError:
-            raise exception
+            HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Error!"
+            )
 
         try:
-            partner_data = payload.get('partner')
+            admin_data = payload.get('cafe_admin')
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail="In UserApp/services/admin_auth.py class AuthService, function verify_token()\n"
-                                       "Error occurred while trying to get user from payload\n"
-                                       f"ERR: {err}")
+                                detail=err)
 
         try:
-            partner = PartnerOut.parse_obj(partner_data)
+            admin = CafeAdminOut.parse_obj(admin_data)
         except ValidationError:
             raise exception
 
-        return partner
+        return admin
 
     @classmethod
-    def create_token(cls, partner):
+    def create_token(cls, admin):
         try:
-            partner_data = PartnerOut.from_orm(partner)
+            admin_data = CafeAdminOut.from_orm(admin)
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail="In UserApp/services/admin_auth.py class AuthService, function create_token()\n"
-                                       "Error occurred while trying to do user_data = UserOut.from_orm(user)\n"
-                                       f"ERR: {err}")
+                                detail=err)
 
         try:
             now = datetime.datetime.utcnow()
             payload = {
                 "exp": now + datetime.timedelta(minutes=1440),  # 1440 min -> 1 day, (max av. -> 43200, 1 month)
-                "partner": partner_data.dict()
+                "cafe_admin": admin_data.dict()
             }
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail="In UserApp/services/admin_auth.py class AuthService, function create_token()\n"
-                                       "Error occurred while trying to make payload\n"
-                                       f"ERR: {err}")
+                                detail=err)
 
         try:
-            token = jwt.encode(payload, "secret", algorithm="HS256")
+            token = jwt.encode(payload, "cafesecret", algorithm="HS256")
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail="In UserApp/services/admin_auth.py class AuthService, function create_token()\n"
-                                       "Error occurred while trying to create token... jwt.encode(...)\n"
-                                       f"ERR: {err}")
+                                detail=err)
+
         try:
             access_token = Token(access_token=token)
             return access_token
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail="In UserApp/services/admin_auth.py class AuthService, function create_token()\n"
-                                       "Error occurred while trying to create and return Token... Token(token)\n"
-                                       f"ERR: {err}")
+                                detail=err)
 
     def __init__(self, session: Session = Depends(get_session)):
         self.session = session
 
-    def authenticate_partner(self, login_data: PartnerLoginForm):
+    def authenticate_admin(self, login_data: CafeAdminLoginForm):
         try:
-            name_or_email = login_data.name_or_email
+            email = login_data.email
             password = login_data.password
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail="In UserApp/services/admin_auth.py class AuthService, function authenticate_user()\n"
-                                       "Error occurred while trying to get email and password from login_data\n"
-                                       f"ERR: {err}")
+                                detail=err)
 
         try:
-            partner = self.session.query(models.PartnerProgramSeller).filter_by(email=name_or_email).first()
+            admin = self.session.query(models.HoReKaAdmin).filter_by(email=email).first()
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail="In UserApp/services/admin_auth.py class AuthService, function authenticate_user()\n"
-                                       f"Error occurred while trying to get user by email '{name_or_email}'\n"
-                                       f"ERR: {err}")
-        if partner is None:
-            try:
-                partner = self.session.query(models.PartnerProgramSeller).filter_by(name=name_or_email).first()
-            except Exception as err:
-                raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                    detail="In UserApp/services/admin_auth.py class AuthService, function authenticate_user()\n"
-                                           f"Error occurred while trying to get user by username '{name_or_email}'\n"
-                                           f"ERR: {err}")
-            if partner is None:
-                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                                    detail=f"User with username or email '{name_or_email}' was not found!")
+                                detail=err)
+        if admin is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                                detail="Wrong Data")
 
         try:
-            password_from_db = partner.__dict__.get('password')
+            password_from_db = admin.__dict__.get('password')
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail="In UserApp/services/admin_auth.py class AuthService, function authenticate_user()\n"
-                                       f"Error occurred while trying to get a password from user taken from database\n"
-                                       f"ERR: {err}")
+                                detail=err)
 
-        if password_from_db != login_data.password:
-            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
-                                detail=f"Wrong password: '{password}'")
+        if not self.verify_password(password, password_from_db):
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                                detail="Wrong Data")
 
         try:
-            access_token = self.create_token(partner)
+            access_token = self.create_token(admin)
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail="In UserApp/services/admin_auth.py class AuthService, function authenticate_user()\n"
-                                       f"Error occurred while trying to create token...function create_token(...)\n"
-                                       f"ERR: {err}")
+                                detail=err)
 
-        return {'token': access_token,
-                'promo_code': partner.__dict__.get('special_promo_code'),
-                'name': partner.__dict__.get('name')}
+        return access_token

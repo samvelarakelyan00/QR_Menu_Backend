@@ -8,10 +8,11 @@ from sqlalchemy.orm.session import Session
 # Own
 from database import get_session
 from models import models
+import security
 
 
-from schemas.horeka_schema import (
-    HoReKaClientCreateSchema
+from schemas.horeka_admin_schema import (
+    HoReKaClientAdminCreateSchema
 )
 
 CORS_HEADERS = {
@@ -23,15 +24,23 @@ CORS_HEADERS = {
 }
 
 
-class HoReKaCRUDService:
+class HoReKaAdminCRUDService:
     def __init__(self, session: Session = Depends(get_session)):
         self.session = session
 
-    def create_horeka_client(self, horeka_client_create_data: HoReKaClientCreateSchema):
+    def create_horeka_client_admin(self, horeka_client_admin_create_data: HoReKaClientAdminCreateSchema):
         try:
-            new_horeka_client = models.HoReKaClient(**horeka_client_create_data.dict())
+            horeka_client_admin_create_data.password = security.hash_password(horeka_client_admin_create_data.password)
+        except Exception  as err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=err
+            )
 
-            self.session.add(new_horeka_client)
+        try:
+            new_horeka_client_admin = models.HoReKaAdmin(**horeka_client_admin_create_data.dict())
+
+            self.session.add(new_horeka_client_admin)
             self.session.commit()
 
             return "OK"

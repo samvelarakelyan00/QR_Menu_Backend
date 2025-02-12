@@ -4,8 +4,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
+from api import router
 
-app = FastAPI()
+
+app = FastAPI(title="Our Admin Panel")
 
 
 origins = [
@@ -26,3 +28,4 @@ def main():
     return "Our Admin Panel"
 
 
+app.include_router(router)
