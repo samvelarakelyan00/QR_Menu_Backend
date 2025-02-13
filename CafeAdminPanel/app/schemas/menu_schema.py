@@ -9,6 +9,7 @@ class MenuAddNew(BaseModel):
     quantity: str
     price: float
     description: str
+    language: str
     image_src: Optional[None | str] = None
     preparation_time: Optional[None | float] = None
     weight: Optional[None | float] = None

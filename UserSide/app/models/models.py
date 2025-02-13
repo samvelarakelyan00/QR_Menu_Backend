@@ -26,6 +26,8 @@ class HoReKaClient(Base):
     email = Column(String, nullable=False)
     phone = Column(String, nullable=False)
     address = Column(String, nullable=False)
+    image_src = Column(String, nullable=True)
+    logo = Column(String, nullable=True)
     created_at = Column(TIMESTAMP, nullable=False, server_default=text("now()"))
 
 
@@ -53,6 +55,7 @@ class HoReKaMenu(Base):
     price = Column(Float, nullable=False)
     description = Column(String, nullable=False)
     image_src = Column(String, nullable=True)
+    language = Column(String, nullable=False)
 
     preparation_time = Column(Float, nullable=True)
     weight = Column(Float, nullable=True)
