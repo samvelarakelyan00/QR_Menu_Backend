@@ -1,13 +1,15 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from fastapi.openapi.docs import get_swagger_ui_html
+
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from api import router
 
 
-app = FastAPI()
+app = FastAPI(docs_url="/api/docs")
 
 app.mount("/static", StaticFiles(directory="../../Cafe-Menu/static"), name="static")
 
@@ -28,6 +30,11 @@ app.add_middleware(
 @app.get("/")
 def main():
     return "OK"
+
+
+@app.get("/api/docs", include_in_schema=False)
+async def get_docs():
+    return get_swagger_ui_html(openapi_url="/openapi.json", title="docs")
 
 
 @app.get("/sherep")
