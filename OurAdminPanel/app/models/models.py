@@ -49,11 +49,12 @@ class HoReKaMenu(Base):
 
     kind = Column(String, nullable=False)
     name = Column(String, nullable=False)
+    quantity = Column(String, nullable=False)
     price = Column(Float, nullable=False)
     description = Column(String, nullable=False)
     image_src = Column(String, nullable=True)
 
-    preparation_time = Column(Time, nullable=True)
+    preparation_time = Column(Float, nullable=True)
     weight = Column(Float, nullable=True)
     calories = Column(Float, nullable=True)
 

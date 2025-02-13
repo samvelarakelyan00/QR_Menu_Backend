@@ -20,6 +20,7 @@ class CafeAdminOut(BaseModel):
     id: int
     name: str
     email: EmailStr
+    horekaclient_id: int
 
     class Config:
         from_attributes = True
