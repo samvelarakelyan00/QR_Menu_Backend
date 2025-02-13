@@ -6,6 +6,8 @@ class HoReKaClientCreateSchema(BaseModel):
     email: EmailStr
     phone: str
     address: str
+    image_src: str
+    logo: str
 
     class Config:
         from_attributes = True
