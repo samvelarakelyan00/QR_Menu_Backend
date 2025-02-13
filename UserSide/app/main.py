@@ -27,14 +27,14 @@ app.add_middleware(
 )
 
 
-@app.get("/")
-def main():
-    return "OK"
-
-
 @app.get("/docs/", include_in_schema=False)
 async def get_docs():
     return get_swagger_ui_html(openapi_url="/api/openapi.json", title="docs")
+
+
+@app.get("/")
+def main():
+    return "OK"
 
 
 @app.get("/sherep")
