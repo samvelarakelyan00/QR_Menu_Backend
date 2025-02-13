@@ -9,7 +9,7 @@ from fastapi.staticfiles import StaticFiles
 from api import router
 
 
-app = FastAPI(docs_url="/api/docs")
+app = FastAPI(docs_url="/api/docs/")
 
 app.mount("/static", StaticFiles(directory="../../Cafe-Menu/static"), name="static")
 
@@ -32,9 +32,9 @@ def main():
     return "OK"
 
 
-@app.get("/api/docs", include_in_schema=False)
+@app.get("/docs/", include_in_schema=False)
 async def get_docs():
-    return get_swagger_ui_html(openapi_url="/openapi.json", title="docs")
+    return get_swagger_ui_html(openapi_url="/api/openapi.json", title="docs")
 
 
 @app.get("/sherep")
