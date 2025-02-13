@@ -8,7 +8,7 @@ from schemas.menu_schema import (
 )
 
 from services import admin_auth as cafe_admin_auth_service
-from services import menuCRUD as menuCRUD_service
+from services import menu_filter as menu_filter_service
 
 
 router = APIRouter(
@@ -19,7 +19,7 @@ router = APIRouter(
 
 @router.get("/by-product-id/{product_id}")
 def get_menu_by_product_id(product_id: int,
-                     menu_crud_service: menuCRUD_service.MenuCRUDService = Depends(),
+                     menu_crud_service: menu_filter_service.MenuFilterService = Depends(),
                      current_admin=Depends(cafe_admin_auth_service.get_current_admin)):
 
     try:
@@ -35,7 +35,7 @@ def get_menu_by_product_id(product_id: int,
 
 @router.get("/by-kind/{kind}")
 def get_menu_by_kind(kind: str,
-                     menu_crud_service: menuCRUD_service.MenuCRUDService = Depends(),
+                     menu_crud_service: menu_filter_service.MenuFilterService = Depends(),
                      current_admin=Depends(cafe_admin_auth_service.get_current_admin)):
 
     try:
