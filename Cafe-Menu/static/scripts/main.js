@@ -1,5 +1,5 @@
-// const currentURL = window.location.href;
-const currentURL = `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/1`;
+const currentURL = window.location.href;
+//const currentURL = `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/1`;
 
 console.log(currentURL);
 const bodyBg = document.getElementById("body-bg");
@@ -46,8 +46,8 @@ async function FetchingAPI(link) {
   }
 }
 
-// FetchingAPI(
-//   `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/${cafeIdIndex}`
-// );
+ FetchingAPI(
+   `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/${cafeIdIndex}`
+ );
 
-FetchingAPI(`http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/1`);
+//FetchingAPI(`http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/1`);
