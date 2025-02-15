@@ -32,10 +32,11 @@ def get_menu_by_product_id(horekaclient_id: int,
     return menu_fileter_service.get_menu_by_product_id(horekaclient_id, product_id)
 
 
-@router.get("/by-kind/{kind}")
+@router.get("/by-kind/{kind}/{language}")
 def get_menu_by_kind(horekaclient_id: int,
                      kind: str,
+                     language: str = 'en',
                      menu_fileter_service: menu_filter_service.MenuFilterService = Depends(),
                      ):
 
-    return menu_fileter_service.get_menu_by_kind(horekaclient_id, kind)
+    return menu_fileter_service.get_menu_by_kind(horekaclient_id, kind, language)
