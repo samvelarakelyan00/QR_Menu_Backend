@@ -13,7 +13,12 @@
   <body>
     <section class="main">
       <img alt="" id="body-bg" class="body-bg" />
-      <h1 class="title" id="r-title">Շերեփ Ռեստորան</h1>
+      <h1 class="title" id="r-title"></h1>
+      <div class="language">
+        <div class="lang active" id="en">English</div>
+        <div class="lang" id="ru">Russian</div>
+        <div class="lang" id="hy">Armenian</div>
+      </div>
       <img alt="Cafe Logo" class="main-page-icon" id="r-logo" />
       <div class="info">
         <h1 id="welcome-message"></h1>
@@ -21,45 +26,6 @@
       </div>
     </section>
     <!-- Scripts -->
-    <script>
-      const currentURL = window.location.href;
-      // const currentURL = `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/1`;
-
-      console.log(currentURL);
-      const bodyBg = document.getElementById("body-bg");
-      const rTitle = document.getElementById("r-title");
-      const rLogo = document.getElementById("r-logo");
-      const wMessage = document.getElementById("welcome-message");
-
-      const cafeIdIndexArray = currentURL.lastIndexOf("/");
-      localStorage.setItem(
-        "horecaID",
-        (cafeIdIndex = currentURL.slice(cafeIdIndexArray + 1))
-      );
-      console.log(localStorage.getItem("horecaID"));
-
-      async function FetchingAPI(link) {
-        try {
-          const response = await fetch(link);
-          const data = await response.json();
-
-          console.log(data);
-          bodyBg.src = data.image_src;
-          rTitle.innerText = data.name;
-          rLogo.src = data.logo;
-          wMessage.innerText = `Welcome to ${data.name}`;
-        } catch (error) {
-          console.log("Error fetching URL", error);
-        }
-      }
-
-      FetchingAPI(
-        `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/${cafeIdIndex}`
-      );
-
-      // FetchingAPI(
-      //   `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/1`
-      // );
-    </script>
+    <script src="static/scripts/main.js"></script>
   </body>
 </html>

@@ -51,6 +51,28 @@ body {
   font-weight: 400;
 }
 
+.main .language {
+  width: auto;
+  height: auto;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  font-size: 24px;
+
+  .lang {
+    border-radius: 50px;
+
+    &.active {
+      background-color: gray;
+      color: white;
+      padding: 6px 12px;
+    }
+  }
+}
+
 .main-page-icon {
   width: 150px;
   height: 150px;

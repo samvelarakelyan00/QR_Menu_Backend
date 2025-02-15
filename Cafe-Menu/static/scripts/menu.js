@@ -28,11 +28,10 @@ menuLinks.forEach((link) => {
 
 // ----------------------------------------------------------------------
 
-const Food_API_Link =
-  "http://23.20.175.90/api/api/menu-filter/by-kind/food?horekaclient_id=";
+const Food_API_Link = "http://23.20.175.90/api/api/menu-filter/by-kind/food/";
 const foodCont = document.getElementById("foodCont");
 
-async function foodCategories(link, category) {
+async function foodCategories(link) {
   try {
     const response = await fetch(link + localStorage.getItem("horecaID"));
     const data = await response.json();
@@ -58,7 +57,7 @@ async function foodCategories(link, category) {
   }
 }
 
-foodCategories(Food_API_Link);
+foodCategories(Food_API_Link + "" + "?horekaclient_id=");
 
 foodCont.addEventListener("click", (event) => {
   const item = event.target.closest(".item");
