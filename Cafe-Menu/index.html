@@ -29,10 +29,12 @@
       const rLogo = document.getElementById("r-logo");
       const wMessage = document.getElementById("welcome-message");
 
-
       const cafeIdIndexArray = currentURL.lastIndexOf("/");
-      cafeIdIndex = currentURL.slice(cafeIdIndexArray + 1);
-      console.log('cafeIdIndex: ', `${cafeIdIndex}`);
+      localStorage.setItem(
+        "horecaID",
+        (cafeIdIndex = currentURL.slice(cafeIdIndexArray + 1))
+      );
+      console.log(localStorage.getItem("horecaID"));
 
       async function FetchingAPI(link) {
         try {
@@ -49,7 +51,9 @@
         }
       }
 
-      FetchingAPI(`http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/${cafeIdIndex}`);
+      FetchingAPI(
+        `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/${cafeIdIndex}`
+      );
     </script>
   </body>
 </html>

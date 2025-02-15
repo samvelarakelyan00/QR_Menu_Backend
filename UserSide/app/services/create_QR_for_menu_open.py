@@ -1,7 +1,7 @@
 import qrcode
 
 # Data to encode in the QR code
-data = "http://23.20.175.90/api/api/1"
+data = "http://23.20.175.90/api/1"
 
 # Create a QR code object with specific settings
 qr = qrcode.QRCode(
@@ -19,6 +19,6 @@ qr.make(fit=True)
 img = qr.make_image(fill_color="black", back_color="white")
 
 # Save the image to a file
-img.save("qrcode.png")
+img.save("melodyqr.png")
 
 print("QR Code saved as qrcode.png")
