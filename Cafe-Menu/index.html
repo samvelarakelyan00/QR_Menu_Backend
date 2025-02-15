@@ -29,11 +29,10 @@
       const rLogo = document.getElementById("r-logo");
       const wMessage = document.getElementById("welcome-message");
 
-      console.log('cafeIdIndex');
-      const cafeIdIndex = currentURL.lastIndexOf("/");
 
-      console.log('currentURL.slice(cafeIdIndex + 1)');
-      console.log(currentURL.slice(cafeIdIndex + 1));
+      const cafeIdIndexArray = currentURL.lastIndexOf("/");
+      cafeIdIndex = currentURL.slice(cafeIdIndex + 1);
+      console.log('cafeIdIndex: ', `${cafeIdIndex}`);
 
       async function FetchingAPI(link) {
         try {
