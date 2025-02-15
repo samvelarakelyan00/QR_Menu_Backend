@@ -32,14 +32,9 @@ async def get_docs():
     return get_swagger_ui_html(openapi_url="/api/openapi.json", title="docs")
 
 
-@app.get("/")
-def main():
-    return "OK"
-
-
-@app.get("/sherep")
+@app.get("/{id}")
 def index():
-    return FileResponse('../../Cafe-Menu/sherep.html')
+    return FileResponse('../../Cafe-Menu/index.html')
 
 
 @app.get("/menu")

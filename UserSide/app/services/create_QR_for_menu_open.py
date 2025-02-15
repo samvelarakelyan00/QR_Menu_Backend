@@ -1,7 +1,7 @@
 import qrcode
 
 # Data to encode in the QR code
-data = "http://23.20.175.90/api/sherep"
+data = "http://23.20.175.90/api/api/1"
 
 # Create a QR code object with specific settings
 qr = qrcode.QRCode(

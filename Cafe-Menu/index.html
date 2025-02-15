@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cafe Menu</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="static/styles/styles.css" />
+    <!-- Page icon -->
+    <link rel="icon" href="./images/main-page-icon.png" />
+  </head>
+  <body>
+    <section class="main">
+      <img alt="" id="body-bg" class="body-bg" />
+      <h1 class="title" id="r-title">Շերեփ Ռեստորան</h1>
+      <img alt="Cafe Logo" class="main-page-icon" id="r-logo" />
+      <div class="info">
+        <h1 id="welcome-message"></h1>
+        <a href="pages/menu.html">Menu</a>
+      </div>
+    </section>
+    <!-- Scripts -->
+    <script>
+      const currentURL = window.location.href;
+      console.log(currentURL);
+      const API_Link =
+        "http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/2";
+      const bodyBg = document.getElementById("body-bg");
+      const rTitle = document.getElementById("r-title");
+      const rLogo = document.getElementById("r-logo");
+      const wMessage = document.getElementById("welcome-message");
+
+      const cafeIdIndex = currentURL.lastIndexOf("/");
+      console.log(currentURL.slice(cafeIdIndex + 1));
+
+      async function FetchingAPI(link) {
+        try {
+          const response = await fetch(link);
+          const data = await response.json();
+
+          console.log(data);
+          bodyBg.src = data.image_src;
+          rTitle.innerText = data.name;
+          rLogo.src = data.logo;
+          wMessage.innerText = `Welcome to ${data.name}`;
+        } catch (error) {
+          console.log("Error fetching URL", error);
+        }
+      }
+
+      FetchingAPI(API_Link);
+    </script>
+  </body>
+</html>

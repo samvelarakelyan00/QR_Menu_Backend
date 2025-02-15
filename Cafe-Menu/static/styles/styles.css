@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Playwrite+IT+Trad:wght@100..400&display=swap");
 
 :root {
-  --white: #ffffff;
+  --titleColor: black;
   --btn-text: #f6f6f6;
   --btn-bg: #b35c32;
 }
@@ -23,27 +23,38 @@ body {
 .main {
   width: 100%;
   min-height: 100vh;
-  background-image: url(../images/main-page-bg.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 50px 12px 25px 12px;
+  position: relative;
+}
+
+.main .body-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  filter: blur(3px);
+  opacity: 0.6;
 }
 
 .main .title {
-  font-family: "Playwrite IT Trad", serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 24px;
-  color: var(--white);
+  color: var(--titleColor);
   font-weight: 400;
 }
 
 .main-page-icon {
   width: 150px;
   height: 150px;
+  border-radius: 100%;
 }
 
 .main .info {
