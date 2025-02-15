@@ -37,7 +37,7 @@ def index():
     return FileResponse('../../Cafe-Menu/index.html')
 
 
-@app.get("/menu")
+@app.get("/menu/get")
 def index():
     return FileResponse('../../Cafe-Menu/pages/menu.html')
 
