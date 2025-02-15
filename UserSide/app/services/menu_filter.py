@@ -22,6 +22,23 @@ class MenuFilterService:
     def __init__(self, session: Session = Depends(get_session)):
         self.session = session
 
+    def get_horeka_by_id(self, horekaclient_id: int):
+        try:
+            horeka = self.session.query(models.HoReKaClient).filter_by(id=horekaclient_id).first()
+        except Exception as err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=str(err)
+            )
+
+        if not horeka:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="horeka client not found"
+            )
+
+        return horeka
+
     def get_menu_by_product_id(self, horekaclient_id: int, product_id: int):
         try:
             product = (
