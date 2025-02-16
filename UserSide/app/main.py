@@ -46,7 +46,7 @@ def index():
 
 @app.get("/cafe/menu/get-menu")
 def menu():
-    return FileResponse('../../Cafe-Menu/menu.html')
+    return FileResponse('../../Cafe-Menu/pages/menu.html')
 
 
 app.include_router(router)
