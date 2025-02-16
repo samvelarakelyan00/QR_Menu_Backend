@@ -14,11 +14,11 @@ from api import router
 app = FastAPI(docs_url="/api/docs/")
 
 # Get the absolute path to the Cafe-Menu folder
-base_dir = os.path.dirname(os.path.abspath(__file__))  # This is your backend folder
-static_dir = os.path.join(base_dir, "../..", "Cafe-Menu", "static")  # Go up one level and into Cafe-Menu
+# base_dir = os.path.dirname(os.path.abspath(__file__))  # This is your backend folder
+# static_dir = os.path.join(base_dir, "../..", "Cafe-Menu", "static")  # Go up one level and into Cafe-Menu
 
 # Mount static files
-app.mount("/static", StaticFiles(directory=static_dir), name="static")
+app.mount("/static", StaticFiles(directory="../../Cafe-Menu/static"), name="static")
 
 
 origins = [
