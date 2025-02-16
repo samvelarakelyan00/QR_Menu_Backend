@@ -1,29 +1,22 @@
 const currentURL = window.location.href;
-//const currentURL = `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/1`;
+// const currentURL = `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/1`;
+const segments = currentURL.split("/");
+const indexURL = segments[segments.length - 1]; // Get the last part of the URL
 
-console.log(currentURL);
 const bodyBg = document.getElementById("body-bg");
 const rTitle = document.getElementById("r-title");
 const rLogo = document.getElementById("r-logo");
 const wMessage = document.getElementById("welcome-message");
 const languages = document.querySelectorAll(".lang");
 
-let currentLang = "English";
+// -------------------------------------------------------------
 
-//console.log("currentURL.lastIndexOf('/')");
-//console.log(currentURL.lastIndexOf("/"));
+let cafeIndex = localStorage.setItem("cafeIdIndex", indexURL);
+let cafeLang = localStorage.setItem("language", "en");
 
-const path = window.location.pathname;
-const segments = path.split("/");
-const cafeIdIndex = segments[segments.length - 1]; // Get the last part of the URL
-console.log(cafeIdIndex);
+console.log(localStorage.getItem("cafeIdIndex"));
 
-const pageInfoData = {
-  cafeIdIndexArray: currentURL.lastIndexOf("/"),
-  lang: currentLang,
-};
-
-languages.forEach((lang, index) => {
+languages.forEach((lang) => {
   lang.addEventListener("click", () => {
     for (let i = 0; i < languages.length; i++) {
       languages[i].classList.remove("active");
@@ -31,13 +24,17 @@ languages.forEach((lang, index) => {
 
     lang.classList.add("active");
 
-    pageInfoData.lang = lang.innerText;
-    currentLang = lang.innerText;
+    cafeLang = lang.getAttribute("data-lang");
 
-    localStorage.setItem("horecaData", JSON.stringify(pageInfoData));
-    console.log(localStorage.getItem("horecaData"));
+    localStorage.setItem("language", cafeLang);
   });
 });
+
+// window.onload = () => {
+//   for (let i = 0; i < languages.length; i++) {
+//     languages[i].classList.remove("active");
+//   }
+// };
 
 async function FetchingAPI(link) {
   try {
@@ -54,8 +51,8 @@ async function FetchingAPI(link) {
   }
 }
 
- FetchingAPI(
-   `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/${cafeIdIndex}`
- );
+FetchingAPI(
+  `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/${indexURL}`
+);
 
-//FetchingAPI(`http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/1`);
+// FetchingAPI(`http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/1`);

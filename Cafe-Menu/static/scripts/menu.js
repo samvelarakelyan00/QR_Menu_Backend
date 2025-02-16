@@ -1,6 +1,13 @@
 const searchBtn = document.getElementById("searchBtn");
 const searchBar = document.getElementById("searchBar");
 const menuTitle = document.getElementById("menuTitle");
+const pageLocalData = localStorage.getItem("horecaData");
+const pageURLIndex = localStorage.getItem("cafeIdIndex");
+const pageLang = localStorage.getItem("language");
+
+console.log(pageURLIndex);
+
+// ---------------------------------------------------------
 
 searchBtn.addEventListener("click", () => {
   if (searchBar.className === "disabled-searchbar") {
@@ -33,7 +40,8 @@ const foodCont = document.getElementById("foodCont");
 
 async function foodCategories(link) {
   try {
-    const response = await fetch(link + localStorage.getItem("horecaID"));
+    console.log(link);
+    const response = await fetch(link);
     const data = await response.json();
 
     for (let i = 0; i < data.length; i++) {
@@ -57,7 +65,7 @@ async function foodCategories(link) {
   }
 }
 
-foodCategories(Food_API_Link + "" + "?horekaclient_id=");
+foodCategories(Food_API_Link + pageLang + `?horekaclient_id=${pageURLIndex}`);
 
 foodCont.addEventListener("click", (event) => {
   const item = event.target.closest(".item");
@@ -79,13 +87,12 @@ foodCont.addEventListener("click", (event) => {
 
 // ------------------------------------------------------------
 
-const Salad_API_Link =
-  "http://23.20.175.90/api/api/menu-filter/by-kind/salad?horekaclient_id=";
+const Salad_API_Link = "http://23.20.175.90/api/api/menu-filter/by-kind/salad/";
 const saladCont = document.getElementById("saladCont");
 
 async function saladCategories(link) {
   try {
-    const response = await fetch(link + localStorage.getItem("horecaID"));
+    const response = await fetch(link);
     const data = await response.json();
 
     for (let i = 0; i < data.length; i++) {
@@ -109,7 +116,7 @@ async function saladCategories(link) {
   }
 }
 
-saladCategories(Salad_API_Link);
+saladCategories(Salad_API_Link + pageLang + `?horekaclient_id=${pageURLIndex}`);
 
 saladCont.addEventListener("click", (event) => {
   const item = event.target.closest(".item");
@@ -131,13 +138,12 @@ saladCont.addEventListener("click", (event) => {
 
 // ------------------------------------------------------------
 
-const Drink_API_Link =
-  "http://23.20.175.90/api/api/menu-filter/by-kind/drink?horekaclient_id=";
+const Drink_API_Link = "http://23.20.175.90/api/api/menu-filter/by-kind/drink/";
 const drinkCont = document.getElementById("drinkCont");
 
 async function drinkCategories(link) {
   try {
-    const response = await fetch(link + localStorage.getItem("horecaID"));
+    const response = await fetch(link);
     const data = await response.json();
 
     for (let i = 0; i < data.length; i++) {
@@ -161,7 +167,7 @@ async function drinkCategories(link) {
   }
 }
 
-drinkCategories(Drink_API_Link);
+drinkCategories(Drink_API_Link + pageLang + `?horekaclient_id=${pageURLIndex}`);
 
 drinkCont.addEventListener("click", (event) => {
   const item = event.target.closest(".item");
@@ -184,12 +190,12 @@ drinkCont.addEventListener("click", (event) => {
 // ------------------------------------------------------------
 
 const Dessert_API_Link =
-  "http://23.20.175.90/api/api/menu-filter/by-kind/desert?horekaclient_id=";
+  "http://23.20.175.90/api/api/menu-filter/by-kind/desert/";
 const dessertCont = document.getElementById("dessertCont");
 
 async function dessertCategories(link) {
   try {
-    const response = await fetch(link + localStorage.getItem("horecaID"));
+    const response = await fetch(link);
     const data = await response.json();
 
     for (let i = 0; i < data.length; i++) {
@@ -213,7 +219,9 @@ async function dessertCategories(link) {
   }
 }
 
-dessertCategories(Dessert_API_Link);
+dessertCategories(
+  Dessert_API_Link + pageLang + `?horekaclient_id=${pageURLIndex}`
+);
 
 dessertCont.addEventListener("click", (event) => {
   const item = event.target.closest(".item");
