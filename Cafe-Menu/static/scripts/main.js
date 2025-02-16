@@ -10,6 +10,9 @@ const languages = document.querySelectorAll(".lang");
 
 let currentLang = "English";
 
+console.log("currentURL.lastIndexOf('/')");
+console.log(currentURL.lastIndexOf("/"));
+
 const pageInfoData = {
   cafeIdIndexArray: currentURL.lastIndexOf("/"),
   lang: currentLang,
