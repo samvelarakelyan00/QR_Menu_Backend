@@ -10,14 +10,13 @@ const languages = document.querySelectorAll(".lang");
 
 let currentLang = "English";
 
-console.log("currentURL.lastIndexOf('/')");
-console.log(currentURL.lastIndexOf("/"));
+//console.log("currentURL.lastIndexOf('/')");
+//console.log(currentURL.lastIndexOf("/"));
 
 const path = window.location.pathname;
 const segments = path.split("/");
-const id = segments[segments.length - 1]; // Get the last part of the URL
-console.log("id");
-console.log(id);
+const cafeIdIndex = segments[segments.length - 1]; // Get the last part of the URL
+console.log(cafeIdIndex);
 
 const pageInfoData = {
   cafeIdIndexArray: currentURL.lastIndexOf("/"),
