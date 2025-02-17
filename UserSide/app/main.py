@@ -49,4 +49,9 @@ def menu():
     return FileResponse('../../Cafe-Menu/pages/menu.html')
 
 
+@app.get("/cafe/menu/get-about-meal")
+def menu():
+    return FileResponse('../../Cafe-Menu/pages/about-meal.html')
+
+
 app.include_router(router)

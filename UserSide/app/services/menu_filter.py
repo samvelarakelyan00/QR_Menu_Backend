@@ -77,19 +77,3 @@ class MenuFilterService:
             )
 
         return menu_by_kind
-
-    # def get_menu_by_kind(self, horekaclient_id: int, kind: str):
-    #     try:
-    #         menu_by_kind = (
-    #             self.session.query(models.HoReKaMenu)
-    #             .filter_by(horekaclient_id=horekaclient_id)  # First filter
-    #             .filter_by(kind=kind)
-    #             .all()
-    #         )
-    #     except Exception as err:
-    #         raise HTTPException(
-    #             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-    #             detail=str(err)
-    #         )
-    #
-    #     return menu_by_kind
