@@ -9,6 +9,15 @@ console.log(pageURLIndex);
 
 // ---------------------------------------------------------
 
+let backMainPageBtn = document.querySelector(".backMainPage");
+let backMenuPageAt = backMainPageBtn.getAttribute("href");
+
+window.onload = () => {
+  backMainPageBtn.href = `http://23.20.175.90/api/${indexURL}`;
+};
+
+// ---------------------------------------------------------
+
 searchBtn.addEventListener("click", () => {
   if (searchBar.className === "disabled-searchbar") {
     searchBar.className = "enabled-searchbar";
@@ -45,7 +54,7 @@ async function foodCategories(link) {
     const data = await response.json();
 
     for (let i = 0; i < data.length; i++) {
-      foodCont.innerHTML += `<div class="item">
+      foodCont.innerHTML += `<div class="item" id=${data[i].id}>
                               <div class="likeBtn">
                                 <img src="../static/icons/liked.svg" alt="liked" />
                               </div>
@@ -60,6 +69,8 @@ async function foodCategories(link) {
                               </div>
                             </div>`;
     }
+
+    console.log(data);
   } catch (error) {
     console.log("Error fetchind api", error);
   }
@@ -68,21 +79,29 @@ async function foodCategories(link) {
 foodCategories(Food_API_Link + pageLang + `?horekaclient_id=${pageURLIndex}`);
 
 foodCont.addEventListener("click", (event) => {
+  // console.log(event);
   const item = event.target.closest(".item");
   if (!item) return;
 
   const name = item.querySelector(".name").textContent;
   const price = item.querySelector(".price").textContent;
   const imgURL = item.querySelector(".item-img").src;
+  const itemID = item.id;
 
   const mealInfo = {
     name,
     price,
     imgURL,
+    itemID,
   };
 
   localStorage.setItem("selectedMeal", JSON.stringify(mealInfo));
-  window.location.href = "./about-meal.html";
+
+  // Test Link
+  // window.location.href = "../pages/about-meal.html";
+
+  // Real Link
+  window.location.href = "http://23.20.175.90/api/cafe/menu/get-about-meal";
 });
 
 // ------------------------------------------------------------
@@ -100,11 +119,12 @@ async function saladCategories(link) {
                               <div class="likeBtn">
                                 <img src="../static/icons/liked.svg" alt="liked" />
                               </div>
-                              <img
-                                src="${data[i].image_src}"
-                                alt="meal"
-                                class="item-img"
-                              />
+                              <div class="item-img">
+                                <img
+                                  src="${data[i].image_src}"
+                                  alt="meal"
+                                />
+                              </div>  
                               <div class="info">
                                 <p class="name">${data[i].name}</p>
                                 <p class="price">AMD${data[i].price}</p>
@@ -125,15 +145,22 @@ saladCont.addEventListener("click", (event) => {
   const name = item.querySelector(".name").textContent;
   const price = item.querySelector(".price").textContent;
   const imgURL = item.querySelector(".item-img").src;
+  const itemID = item.id;
 
   const mealInfo = {
     name,
     price,
     imgURL,
+    itemID,
   };
 
   localStorage.setItem("selectedMeal", JSON.stringify(mealInfo));
-  window.location.href = "./about-meal.html";
+
+  // Test Link
+  // window.location.href = "../pages/about-meal.html";
+
+  // Real Link
+  window.location.href = "http://23.20.175.90/api/cafe/menu/get-about-meal";
 });
 
 // ------------------------------------------------------------
@@ -176,15 +203,22 @@ drinkCont.addEventListener("click", (event) => {
   const name = item.querySelector(".name").textContent;
   const price = item.querySelector(".price").textContent;
   const imgURL = item.querySelector(".item-img").src;
+  const itemID = item.id;
 
   const mealInfo = {
     name,
     price,
     imgURL,
+    itemID,
   };
 
   localStorage.setItem("selectedMeal", JSON.stringify(mealInfo));
-  window.location.href = "./about-meal.html";
+
+  // Test Link
+  // window.location.href = "../pages/about-meal.html";
+
+  // Real Link
+  window.location.href = "http://23.20.175.90/api/cafe/menu/get-about-meal";
 });
 
 // ------------------------------------------------------------
@@ -230,15 +264,22 @@ dessertCont.addEventListener("click", (event) => {
   const name = item.querySelector(".name").textContent;
   const price = item.querySelector(".price").textContent;
   const imgURL = item.querySelector(".item-img").src;
+  const itemID = item.id;
 
   const mealInfo = {
     name,
     price,
     imgURL,
+    itemID,
   };
 
   localStorage.setItem("selectedMeal", JSON.stringify(mealInfo));
-  window.location.href = "./about-meal.html";
+
+  // Test Link
+  // window.location.href = "../pages/about-meal.html";
+
+  // Real Link
+  window.location.href = "http://23.20.175.90/api/cafe/menu/get-about-meal";
 });
 
 // -------------------------------------------------------------------------
