@@ -5,16 +5,13 @@ const pageLocalData = localStorage.getItem("horecaData");
 const pageURLIndex = localStorage.getItem("cafeIdIndex");
 const pageLang = localStorage.getItem("language");
 
-console.log(pageURLIndex);
-
 // ---------------------------------------------------------
 
-let backMainPageBtn = document.querySelector(".backMainPage");
-let backMenuPageAt = backMainPageBtn.getAttribute("href");
+const backPreviousPageBtn = document.querySelectorAll(".backPreviousPage");
 
-window.onload = () => {
-  backMainPageBtn.href = `http://23.20.175.90/api/${indexURL}`;
-};
+backPreviousPageBtn.forEach((btnLink) => {
+  btnLink.setAttribute("href", `http://23.20.175.90/api/${pageURLIndex}`);
+});
 
 // ---------------------------------------------------------
 
@@ -49,7 +46,6 @@ const foodCont = document.getElementById("foodCont");
 
 async function foodCategories(link) {
   try {
-    console.log(link);
     const response = await fetch(link);
     const data = await response.json();
 
@@ -69,8 +65,6 @@ async function foodCategories(link) {
                               </div>
                             </div>`;
     }
-
-    console.log(data);
   } catch (error) {
     console.log("Error fetchind api", error);
   }
@@ -79,7 +73,6 @@ async function foodCategories(link) {
 foodCategories(Food_API_Link + pageLang + `?horekaclient_id=${pageURLIndex}`);
 
 foodCont.addEventListener("click", (event) => {
-  // console.log(event);
   const item = event.target.closest(".item");
   if (!item) return;
 
@@ -115,7 +108,7 @@ async function saladCategories(link) {
     const data = await response.json();
 
     for (let i = 0; i < data.length; i++) {
-      saladCont.innerHTML += `<div class="item">
+      saladCont.innerHTML += `<div class="item" id=${data[i].id}>
                               <div class="likeBtn">
                                 <img src="../static/icons/liked.svg" alt="liked" />
                               </div>
@@ -155,6 +148,8 @@ saladCont.addEventListener("click", (event) => {
   };
 
   localStorage.setItem("selectedMeal", JSON.stringify(mealInfo));
+  console.log(Salad_API_Link + pageLang + `?horekaclient_id=${pageURLIndex}`);
+  console.log(JSON.parse(localStorage.getItem("selectedMeal")));
 
   // Test Link
   // window.location.href = "../pages/about-meal.html";
@@ -174,7 +169,7 @@ async function drinkCategories(link) {
     const data = await response.json();
 
     for (let i = 0; i < data.length; i++) {
-      drinkCont.innerHTML += `<div class="item">
+      drinkCont.innerHTML += `<div class="item" id=${data[i].id}>
                               <div class="likeBtn">
                                 <img src="../static/icons/liked.svg" alt="liked" />
                               </div>
@@ -233,7 +228,7 @@ async function dessertCategories(link) {
     const data = await response.json();
 
     for (let i = 0; i < data.length; i++) {
-      dessertCont.innerHTML += `<div class="item">
+      dessertCont.innerHTML += `<div class="item" id=${data[i].id}>
                               <div class="likeBtn">
                                 <img src="../static/icons/liked.svg" alt="liked" />
                               </div>

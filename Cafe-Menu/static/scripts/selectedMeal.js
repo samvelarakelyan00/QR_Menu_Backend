@@ -2,6 +2,23 @@ const parsedLocalData = JSON.parse(localStorage.getItem("selectedMeal"));
 
 // ---------------------------------------------------------------
 
+const pageURLIndex = localStorage.getItem("cafeIdIndex");
+
+// ---------------------------------------------------------------
+
+const backPreviousPageBtn = document.querySelector(".backPreviousPage");
+const backHomePageBtn = document.querySelector(".backHomePage");
+const orderLink = document.getElementById("orderLink");
+
+backPreviousPageBtn.setAttribute(
+  "href",
+  `http://23.20.175.90/api/cafe/menu/get-menu`
+);
+backHomePageBtn.setAttribute("href", `http://23.20.175.90/api/${pageURLIndex}`);
+orderLink.setAttribute("href", "#");
+
+// ---------------------------------------------------------
+
 const mealName = document.getElementById("name");
 const mealPrice = document.getElementById("price");
 const mealIMG = document.getElementById("foodImg");
@@ -15,14 +32,10 @@ const Meal_API_Link_Middle_Part = parsedLocalData.itemID;
 const Meal_API_Link_Last_Part = "?horekaclient_id=";
 const cafeURLIndex = localStorage.getItem("cafeIdIndex");
 
-console.log(Meal_API_Link_Middle_Part);
-
 async function fetchingMealInfo(link) {
   try {
     const resp = await fetch(link);
     const data = await resp.json();
-
-    console.log(data);
 
     mealName.innerText = data.name;
     mealPrice.innerText = data.price + " " + "AMD";

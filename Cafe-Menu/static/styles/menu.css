@@ -116,6 +116,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0 12px;
   gap: 20px;
 }
 
@@ -123,12 +124,17 @@ body {
   width: 100%;
   height: 40px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding: 0px 20px;
-  gap: 55px;
-  top: 0px;
-  left: 0px;
+  padding: 10px 14px;
+
+  @media screen and (max-width: 323px) {
+    overflow-x: scroll;
+  }
+}
+
+.container main .links::-webkit-scrollbar {
+  display: none;
 }
 
 .container main .links .link {
@@ -153,7 +159,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 12px 20px;
+  padding: 0px 4px;
 }
 
 .container main .menu .menuItem {

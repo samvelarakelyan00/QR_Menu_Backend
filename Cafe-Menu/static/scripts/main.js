@@ -14,8 +14,6 @@ const languages = document.querySelectorAll(".lang");
 let cafeIndex = localStorage.setItem("cafeIdIndex", indexURL);
 let cafeLang = localStorage.setItem("language", "en");
 
-console.log(localStorage.getItem("cafeIdIndex"));
-
 languages.forEach((lang) => {
   lang.addEventListener("click", () => {
     for (let i = 0; i < languages.length; i++) {
@@ -23,25 +21,16 @@ languages.forEach((lang) => {
     }
 
     lang.classList.add("active");
-
     cafeLang = lang.getAttribute("data-lang");
-
     localStorage.setItem("language", cafeLang);
   });
 });
-
-// window.onload = () => {
-//   for (let i = 0; i < languages.length; i++) {
-//     languages[i].classList.remove("active");
-//   }
-// };
 
 async function FetchingAPI(link) {
   try {
     const response = await fetch(link);
     const data = await response.json();
 
-    console.log(data);
     bodyBg.src = data.image_src;
     rTitle.innerText = data.name;
     rLogo.src = data.logo;
