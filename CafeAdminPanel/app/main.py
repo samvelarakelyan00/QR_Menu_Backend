@@ -36,5 +36,14 @@ def main():
     return "Cafe Admin Panel"
 
 
+@app.get("/cafe-admin-panel")
+def index():
+    return FileResponse('../../Cafe-Menu/pages/CafeAdminLogin.html')
+
+
+@app.get("/cafe-admin-my-accout-page")
+def index():
+    return FileResponse('../../Cafe-Menu/pages/CafeAdminMyAccount.html')
+
 
 app.include_router(router)

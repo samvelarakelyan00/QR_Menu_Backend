@@ -28,4 +28,4 @@ class CafeAdminOut(BaseModel):
 
 class CafeAdminLoginForm(BaseModel):
     email: str
-    password: str
+    password: EmailStr
