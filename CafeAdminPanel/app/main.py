@@ -38,12 +38,12 @@ def main():
 
 @app.get("/cafe-admin-panel")
 def index():
-    return FileResponse('../../Cafe-Menu/pages/CafeAdminLogin.html')
+    return FileResponse('../../Cafe-Menu/pages/cafeAdminLogin.html')
 
 
 @app.get("/cafe-admin-my-accout-page")
 def index():
-    return FileResponse('../../Cafe-Menu/pages/CafeAdminMyAccount.html')
+    return FileResponse('../../Cafe-Menu/pages/cafeAdminMyAccount.html')
 
 
 app.include_router(router)
