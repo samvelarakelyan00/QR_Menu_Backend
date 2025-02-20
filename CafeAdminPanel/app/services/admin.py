@@ -1,19 +1,14 @@
 from fastapi import Depends, status
 from fastapi.exceptions import HTTPException
+from pydantic.v1 import NoneIsAllowedError
 
 # SqlAlchemy
 from sqlalchemy.orm.session import Session
 
-
 # Own
 from database import get_session
 from models import models
-import security
 
-
-from schemas.horeka_admin_schema import (
-    HoReKaClientAdminCreateSchema
-)
 
 CORS_HEADERS = {
     "Access-Control-Allow-Origin": "*",
@@ -24,28 +19,23 @@ CORS_HEADERS = {
 }
 
 
-class HoReKaAdminCRUDService:
+class AdminService:
     def __init__(self, session: Session = Depends(get_session)):
         self.session = session
 
-    def create_horeka_client_admin(self, horeka_client_admin_create_data: HoReKaClientAdminCreateSchema):
+    def get_horeka_admin_by_id(self, admin_id: int):
         try:
-            horeka_client_admin_create_data.password = security.hash_password(horeka_client_admin_create_data.password)
-        except Exception  as err:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=str(err)
-            )
-
-        try:
-            new_horeka_client_admin = models.HoReKaAdmin(**horeka_client_admin_create_data.dict())
-
-            self.session.add(new_horeka_client_admin)
-            self.session.commit()
-
-            return "OK"
+            horeka_admin = self.session.query(models.HoReKaAdmin).filter_by(id=admin_id).first()
         except Exception as err:
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail=str(err)
             )
+
+        if horeka_admin is None:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"HoReKa admin with id '{admin_id}' was not found!"
+            )
+
+        return horeka_admin
