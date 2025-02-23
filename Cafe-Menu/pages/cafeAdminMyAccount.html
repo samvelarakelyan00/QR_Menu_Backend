@@ -3,9 +3,150 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Cafe Menu</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+IT+Trad:wght@100..400&display=swap");
+
+      :root {
+        --body-bg: #1f1f1f;
+        --white: #ffffff;
+        --btn-text: #f6f6f6;
+        --btn-bg: #b35c32;
+        --menu-title-text: #f6f6f6;
+        --footer-border-top: #d7d7d7;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        width: 100%;
+        min-height: 810px;
+        background-color: var(--body-bg);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .container nav {
+        width: 100%;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0px 12px;
+        overflow: hidden;
+      }
+
+      .container nav .title {
+        color: var(--menu-title-text);
+        scale: 1;
+        transition: scale 1.2s;
+      }
+
+      .container main {
+        width: 100%;
+        min-height: 600px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container main button {
+        padding: 6px 12px;
+        background-color: #b35c32;
+        border: none;
+        cursor: pointer;
+        color: white;
+        font-size: 24px;
+      }
+
+      .container footer {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        border-top: 0.5px solid var(--footer-border-top);
+
+        a {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 4px;
+          text-decoration: none;
+          color: var(--btn-text);
+          font-family: "Libre Baskerville", serif;
+          font-size: 10px;
+          letter-spacing: 1px;
+
+          img {
+            width: 30px;
+            height: 30px;
+          }
+        }
+      }
+
+      @media screen and (max-width: 376px) {
+        .container nav .formSection .disabled-searchbar {
+          left: -750%;
+        }
+
+        .container nav .formSection .enabled-searchbar {
+          left: -750%;
+        }
+      }
+
+      @media screen and (max-width: 321px) {
+        .container nav .formSection .disabled-searchbar {
+          left: -650%;
+        }
+
+        .container nav .formSection .enabled-searchbar {
+          left: -650%;
+        }
+
+        .container main .links {
+          gap: 45px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1>You Loged in succesfull</h1>
+    <section class="container">
+      <nav id="menu">
+        <h1 id="menuTitle" class="title">My account</h1>
+      </nav>
+      <main>
+        <button id="viewEditMenu">View/Edit Menu</button>
+      </main>
+    </section>
+
+    <script>
+      const viewEditMenuBtn = document.getElementById("viewEditMenu");
+
+      viewEditMenuBtn.addEventListener("click", () => {
+        // Real Link
+        window.location.href =
+          "http://23.20.175.90/api/cafeadmin/cafe-admin-menu";
+
+        // Test Link
+        // window.location.href = "./adminMenu.html";
+      });
+    </script>
   </body>
 </html>

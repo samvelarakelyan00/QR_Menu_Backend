@@ -1,5 +1,5 @@
-const currentURL = window.location.href;
-// const currentURL = `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/1`;
+// const currentURL = window.location.href;
+const currentURL = `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/1`;
 const segments = currentURL.split("/");
 const indexURL = segments[segments.length - 1]; // Get the last part of the URL
 
@@ -40,8 +40,8 @@ async function FetchingAPI(link) {
   }
 }
 
-FetchingAPI(
-  `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/${indexURL}`
-);
+// FetchingAPI(
+//   `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/${indexURL}`
+// );
 
-// FetchingAPI(`http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/1`);
+FetchingAPI(`http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/1`);

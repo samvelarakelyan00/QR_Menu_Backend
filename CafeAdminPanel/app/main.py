@@ -46,4 +46,14 @@ def index():
     return FileResponse('../../Cafe-Menu/pages/cafeAdminMyAccount.html')
 
 
+@app.get("/cafe-admin-menu")
+def index():
+    return FileResponse('../../Cafe-Menu/pages/adminMenu.html')
+
+
+@app.get("/cafe-admin-menu-about-meal")
+def index():
+    return FileResponse('../../Cafe-Menu/pages/adminMenuAboutMeal.html')
+
+
 app.include_router(router)

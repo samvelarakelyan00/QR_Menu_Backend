@@ -1,4 +1,7 @@
-from sqlalchemy import Column, String, Integer, Float, Time, ForeignKey, TIMESTAMP, text
+from sqlalchemy import (
+    Column, String, Integer, Float,
+    ForeignKey, TIMESTAMP, text, func
+)
 
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -64,3 +67,28 @@ class HoReKaMenu(Base):
     created_at = Column(TIMESTAMP, nullable=False, server_default=text("now()"))
 
     horekaclient_id = Column(Integer, ForeignKey("horekaclients.id"))
+
+
+class Payment(Base):
+    __tablename__ = "payments"
+
+    id = Column(Integer, primary_key=True, index=True)
+    order_id = Column(String, unique=True, index=True)  # Bill number from merchant
+    amount = Column(Float)
+    status = Column(String)  # Payment status (e.g., "pending", "paid", "failed", etc.)
+    created_at = Column(TIMESTAMP, nullable=False, default=func.now() + text("Interval '4 hours'"))
+    updated_at = Column(TIMESTAMP, nullable=False, default=func.now() + text("Interval '4 hours'"),
+                        onupdate=func.now() + text("Interval '4 hours'"))
+    available_to = Column(TIMESTAMP, nullable=False, default=func.now()
+                                                             + text("Interval '4 hours'")
+                                                             + text("Interval '31 days'"))
+
+    # Foreign key to associate payment with a user
+    horeka_client_id = Column(Integer, ForeignKey('horekaclients.id'))
+
+    # Fields for tracking Idram-specific payment information
+    payer_account = Column(String, nullable=True)  # Idram ID of the payer
+    trans_id = Column(String, nullable=True)  # Transaction ID from Idram
+    trans_date = Column(String, nullable=True)  # Transaction date from Idram
+
+    subs_plan = Column(String, nullable=False)

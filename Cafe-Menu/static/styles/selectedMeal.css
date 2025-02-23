@@ -44,8 +44,6 @@ body {
 }
 
 .container nav a {
-  /* width: 23px; */
-  /* height: 23px; */
   border: none;
   background-color: transparent;
 }
@@ -63,7 +61,6 @@ body {
   letter-spacing: 1px;
   text-decoration: none;
   text-wrap: nowrap;
-  /* transform: translateX(-90px); */
 }
 
 .container main {

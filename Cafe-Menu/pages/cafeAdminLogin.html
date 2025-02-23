@@ -130,6 +130,13 @@
         if (response.ok) {
           console.log("Login successful:", data);
           localStorage.setItem("access_token", data.access_token);
+
+          // Real URL
+          window.location.href =
+            "http://23.20.175.90/api/cafeadmin/cafe-admin-my-accout-page";
+
+          // Test URL
+          // window.location.href = "../../pages/cafeAdminMyAccount.html";
           return data; // Might contain a token
         } else {
           console.error("Login failed:", data);
@@ -151,13 +158,6 @@
           }
 
           login(email, password);
-
-          // Real URL
-          window.location.href =
-            "http://23.20.175.90/api/cafeadmin/cafe-admin-my-accout-page";
-
-          // Test URL
-          // window.location.href = "../../pages/cafeAdminMyAccount.html";
         });
     </script>
   </body>
