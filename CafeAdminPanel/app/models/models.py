@@ -53,7 +53,7 @@ class HoReKaMenu(Base):
     id = Column(Integer, nullable=False, primary_key=True)
 
     kind = Column(String, nullable=False)
-    category = Column(String, nullable=True)
+    category = Column(String, nullable=False)
     name = Column(String, nullable=False)
     quantity = Column(String, nullable=False)
     price = Column(Float, nullable=False)
