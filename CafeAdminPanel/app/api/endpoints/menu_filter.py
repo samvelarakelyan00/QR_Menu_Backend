@@ -3,10 +3,6 @@ from fastapi import APIRouter, Depends, status
 from fastapi.exceptions import HTTPException
 
 # Own
-from schemas.menu_schema import (
-    MenuAddNew
-)
-
 from services import admin_auth as cafe_admin_auth_service
 from services import menu_filter as menu_filter_service
 

@@ -5,6 +5,7 @@ from pydantic import BaseModel
 
 class MenuAddNew(BaseModel):
     kind: str
+    category: str
     name: str
     quantity: str
     price: float
@@ -18,6 +19,7 @@ class MenuAddNew(BaseModel):
 
 class ProductUpdate(BaseModel):
     kind: Optional[None | str] = None
+    category: Optional[None | str] = None
     name: Optional[None | str] = None
     quantity: Optional[None | str] = None
     price: Optional[None | float] = None

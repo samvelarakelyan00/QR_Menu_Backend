@@ -40,3 +40,13 @@ def get_menu_by_kind(horekaclient_id: int,
                      ):
 
     return menu_fileter_service.get_menu_by_kind(horekaclient_id, kind, language)
+
+
+@router.get("/by-category/{category}/{language}")
+def get_menu_by_kind(horekaclient_id: int,
+                     category: str,
+                     language: str = 'en',
+                     menu_fileter_service: menu_filter_service.MenuFilterService = Depends(),
+                     ):
+
+    return menu_fileter_service.get_menu_by_category(horekaclient_id, category, language)
