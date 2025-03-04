@@ -5,17 +5,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cafe Menu</title>
 
-    <!-- Styles -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playwrite+IT+Trad:wght@100..400&display=swap");
 
-    <link rel="stylesheet" href="/api/static/styles/styles.css" />
+      :root {
+        --titleColor: black;
+        --btn-text: #f6f6f6;
+        --btn-bg: #b35c32;
+      }
 
-    <!-- Page icon -->
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-    <link rel="icon" href="/api/static/images/main-page-icon.png" />
+      body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-    <!-- Test Styles -->
+      .main {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 50px 12px 25px 12px;
+        position: relative;
+      }
 
-    <!-- <link rel="stylesheet" href="static/styles/styles.css" /> -->
+      .main .body-bg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        filter: blur(3px);
+        opacity: 0.6;
+      }
+
+      .main .title {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 24px;
+        color: var(--titleColor);
+        font-weight: 400;
+      }
+
+      .main .language {
+        width: auto;
+        height: auto;
+        padding: 8px 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        font-size: 24px;
+
+        .lang {
+          border-radius: 50px;
+
+          &.active {
+            background-color: gray;
+            color: white;
+            padding: 6px 12px;
+          }
+        }
+      }
+
+      .main-page-icon {
+        width: 150px;
+        height: 150px;
+        border-radius: 100%;
+      }
+
+      .main .info {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .main .info h1,
+      .main .info h3 {
+        color: var(--white);
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 400;
+      }
+
+      .main .info h1 {
+        font-size: 20px;
+      }
+
+      .main .info h3 {
+        font-size: 16px;
+      }
+
+      .main .info a {
+        padding: 5px 33px;
+        font-size: 12px;
+        color: var(--btn-text);
+        background-color: var(--btn-bg);
+        text-decoration: none;
+        border-radius: 4px;
+      }
+    </style>
   </head>
   <body>
     <section class="main">
@@ -29,15 +133,66 @@
       <img alt="Cafe Logo" class="main-page-icon" id="r-logo" />
       <div class="info">
         <h1 id="welcome-message"></h1>
-        <a href="http://23.20.175.90/api/cafe/menu/get-menu">Menu</a>
-        <!-- <a href="pages/menu.html">Menu</a> -->
+        <!-- <a href="http://23.20.175.90/api/cafe/menu/get-menu">Menu</a> -->
+        <a href="pages/menu.html">Menu</a>
       </div>
     </section>
-    <!-- Scripts -->
 
-    <script src="/api/static/scripts/main.js"></script>
+    <script>
+      // Real Link
+      const currentURL = window.location.href;
 
-    <!-- Test Script File -->
-    <!-- <script src="/static/scripts/main.js"></script> -->
+      // Test Link
+      // const currentURL = `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/1`;
+      const segments = currentURL.split("/");
+      const indexURL = segments[segments.length - 1]; // Get the last part of the URL
+
+      const bodyBg = document.getElementById("body-bg");
+      const rTitle = document.getElementById("r-title");
+      const rLogo = document.getElementById("r-logo");
+      const wMessage = document.getElementById("welcome-message");
+      const languages = document.querySelectorAll(".lang");
+
+      // -------------------------------------------------------------
+
+      let cafeIndex = localStorage.setItem("cafeIdIndex", indexURL);
+      let cafeLang = localStorage.setItem("language", "en");
+
+      languages.forEach((lang) => {
+        lang.addEventListener("click", () => {
+          for (let i = 0; i < languages.length; i++) {
+            languages[i].classList.remove("active");
+          }
+
+          lang.classList.add("active");
+          cafeLang = lang.getAttribute("data-lang");
+          localStorage.setItem("language", cafeLang);
+        });
+      });
+
+      async function FetchingAPI(link) {
+        try {
+          const response = await fetch(link);
+          const data = await response.json();
+
+          bodyBg.src = data.image_src;
+          rTitle.innerText = data.name;
+          rLogo.src = data.logo;
+          wMessage.innerText = `Welcome to ${data.name}`;
+        } catch (error) {
+          console.log("Error fetching URL", error);
+        }
+      }
+
+      // Real Link
+      FetchingAPI(
+        `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/${indexURL}`
+      );
+
+      // Test Link
+      // FetchingAPI(
+      //   `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/1`
+      // );
+    </script>
   </body>
 </html>
