@@ -130,9 +130,14 @@
               font-weight: 500;
             }
 
-            p {
-              font-size: 16px;
-              font-weight: 400;
+            .price-cont {
+              display: flex;
+              gap: 10px;
+
+              p {
+                font-size: 16px;
+                font-weight: 400;
+              }
             }
           }
 
@@ -193,23 +198,108 @@
 
       .container footer {
         width: 100%;
-        height: 100px;
+        min-height: 100px;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: center;
         align-items: center;
+        flex-wrap: wrap;
         border-top: 0.5px solid var(--footer-border-top);
+        padding: 12px 0px;
+        gap: 12px;
 
-        a {
+        a,
+        button {
           text-decoration: none;
           color: var(--btn-text);
           font-family: "Libre Baskerville", serif;
-          font-size: 16px;
+          font-size: 12px;
           letter-spacing: 1px;
           border: 1px solid var(--btn-bg);
           padding: 12px 30px;
           border-radius: 4px;
+          text-align: center;
 
           &:nth-child(2n) {
+            background-color: var(--btn-bg);
+          }
+        }
+      }
+
+      .popup {
+        /* display: none; */
+        opacity: 0;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -99999;
+      }
+
+      .popup-on {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: var(--body-bg);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        width: 335px;
+        height: 200px;
+        border: 1px solid var(--footer-border-top);
+        border-radius: 4px;
+        opacity: 1;
+        z-index: 99999;
+
+        h1 {
+          font-size: 16px;
+          font-family: "Playfair Display", serif;
+          color: var(--btn-text);
+        }
+
+        p {
+          font-size: 14px;
+          font-family: "Playfair Display", serif;
+          color: var(--btn-text);
+        }
+
+        .pupupImg {
+          width: 50px;
+          height: 50px;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+          }
+        }
+
+        .popupButtons {
+          width: 100%;
+          height: auto;
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+
+          button {
+            background-color: transparent;
+            color: var(--btn-text);
+            font-family: "Libre Baskerville", serif;
+            font-size: 11px;
+            letter-spacing: 1px;
+            border: 1px solid var(--btn-bg);
+            padding: 12px 30px;
+            border-radius: 4px;
+
+            &.btn-1 {
+              background-color: transparent;
+            }
+          }
+
+          button:nth-child(2n) {
             background-color: var(--btn-bg);
           }
         }
@@ -222,27 +312,30 @@
         <a href="#" class="backPreviousPage">
           <img src="/api/static/icons/left-arrow.svg" alt="icon"
         /></a>
-        <a href="#" id="editLink" class="edit-link">Click to edit</a>
+        <p href="#" id="editLink" class="edit-link">Click to edit</p>
       </nav>
       <main>
         <div class="about-food">
           <section class="food-info">
             <div class="food-n-p">
-              <h1 id="name"></h1>
-              <p id="price"></p>
+              <h1 id="name" contenteditable="true"></h1>
+              <div class="price-cont">
+                <p id="amount"></p>
+                <p contenteditable="true" id="price"></p>
+              </div>
             </div>
             <div class="items">
               <div class="item">
                 <img src="../icons/time.svg" alt="" />
-                <p>10 min</p>
+                <p contenteditable="true">10 min</p>
               </div>
               <div class="item">
                 <img src="../icons/weight.svg" alt="" />
-                <p>230 gram</p>
+                <p contenteditable="true">230 gram</p>
               </div>
               <div class="item">
                 <img src="../icons/calories.svg" alt="" />
-                <p>40 calories</p>
+                <p contenteditable="true">40 calories</p>
               </div>
             </div>
           </section>
@@ -255,36 +348,140 @@
             />
           </div>
         </div>
-        <p class="about-food-text" id="mealDescription"></p>
+        <p
+          contenteditable="true"
+          class="about-food-text"
+          id="mealDescription"
+        ></p>
       </main>
       <footer>
         <!-- Real Link -->
-        <a
+        <!-- <a
           href="http://23.20.175.90/api/cafeadmin/cafe-admin-menu"
           class="backPreviousPage"
         >
           Back to menu
-        </a>
+        </a> -->
+        <!-- <a href="#menu" id="saveCahngesBtn"> Save changes </a> -->
 
         <!-- Test Link -->
-        <!-- <a href="./adminMenu.html" class="backPreviousPage"> Back to menu </a> -->
-        <a href="#menu"> Save changes </a>
+        <a href="./adminMenu.html" class="backPreviousPage"> Back to menu </a>
+
+        <button id="saveCahngesBtn">Save changes</button>
       </footer>
+
+      <div class="popup popup-off">
+        <h1 class="popupTitle">Your changes have been saved</h1>
+        <p class="popupMessage">Thank you!</p>
+        <div class="pupupImg">
+          <img src="../static/icons/popupSuccesfull.svg" alt="Img 1" />
+        </div>
+        <div class="popupButtons">
+          <!-- <button class="btn-1">See changes</button> -->
+          <!-- <button id="backToMenu">Back to menu</button> -->
+          <button class="closePopUp">X</button>
+        </div>
+      </div>
     </section>
 
     <script>
-      const storedMeal = JSON.parse(localStorage.getItem("selectedMeal"));
+      const storedMeal = JSON.parse(localStorage.getItem("aboutMeal"));
 
       console.log(storedMeal);
       const mealName = document.getElementById("name");
+      const mealAmount = document.getElementById("amount");
       const mealPrice = document.getElementById("price");
       const mealIMG = document.getElementById("foodImg");
       const mealDesc = document.getElementById("mealDescription");
 
-      mealName.innerText = storedMeal.name;
-      mealPrice.innerText = storedMeal.price;
-      mealIMG.src = storedMeal.imgURL;
-      mealDesc.innerText = storedMeal.itemDescription;
+      console.log(mealPrice.innerText);
+
+      const update_API_URL = `http://23.20.175.90/api/cafeadmin/api/menuCRUD/update-product/${storedMeal.itemID}`;
+      const saveBtn = document.getElementById("saveCahngesBtn");
+      const popUp = document.querySelector(".popup");
+
+      // Save Changes
+      async function saveChanges(link) {
+        try {
+          let mealChanges = {
+            kind: storedMeal.innerText,
+            name: mealName.innerText,
+            quantity: "1",
+            price: Number(mealPrice.innerText),
+            description: mealDesc.innerText,
+            image_src: storedMeal.imgURL,
+            preparation_time: 0,
+            weight: 0,
+            calories: 0,
+          };
+
+          const response = await fetch(link, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+            body: JSON.stringify(mealChanges),
+          });
+
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(
+              `Error: ${errorData.detail || response.statusText}`
+            );
+          }
+
+          const data = await response.json();
+
+          console.log("Update successful:", data); // Handle successful response
+
+          if (popUp.classList.contains("popup-off")) {
+            popUp.classList.remove("popup-off");
+            popUp.classList.add("popup-on");
+          }
+
+          backMenu();
+        } catch (error) {
+          console.log("Error fetching data: ", error);
+        }
+      }
+
+      // Stored Meal in the screen
+      function onScreen() {
+        mealName.innerText = storedMeal.name;
+        mealAmount.innerText = storedMeal.valuta;
+        mealPrice.innerText = storedMeal.price;
+        mealIMG.src = storedMeal.img_url;
+        mealDesc.innerText = storedMeal.description;
+      }
+
+      /*
+        Պետք է ֆիքս անել ռեֆռեշ անելուց հետո ստացվող ուտելիքի մասին
+        ինֆորմացիան,
+        Ֆիքս անել saveChanges կնոպկեն, առաջին save-ից հետո էլ save չի անում
+      */
+
+      // Save Changes and back to menu
+      function backMenu() {
+        const closePopUpBtn = document.querySelector(".closePopUp");
+
+        closePopUpBtn.addEventListener("click", () => {
+          // Real link
+          // window.location = 'http://23.20.175.90/api/cafeadmin/cafe-admin-menu'
+
+          popUp.classList.remove("popup-on");
+        });
+      }
+
+      // Save Btn functionality
+      saveBtn.addEventListener("click", () => {
+        saveChanges(update_API_URL);
+      });
+
+      // Window onload
+      window.onload = () => {
+        onScreen();
+      };
     </script>
   </body>
 </html>

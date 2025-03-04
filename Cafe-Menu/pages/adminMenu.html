@@ -6,264 +6,259 @@
     <title>Cafe Menu</title>
 
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+IT+Trad:wght@100..400&display=swap");
-
+        @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap');
+            
         :root {
-        --body-bg: #1f1f1f;
-        --white: #ffffff;
-        --btn-text: #f6f6f6;
-        --btn-bg: #b35c32;
-        --menu-title-text: #f6f6f6;
-        --footer-border-top: #d7d7d7;
+          --body-bg: #1f1f1f;
+          --white: #ffffff;
+          --btn-text: #f6f6f6;
+          --btn-bg: #b35c32;
+          --menu-title-text: #f6f6f6;
+          --footer-border-top: #d7d7d7;
         }
 
         * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        scroll-behavior: smooth;
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          scroll-behavior: smooth;
         }
 
         body {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
 
         .container {
-        width: 100%;
-        min-height: 810px;
-        background-color: var(--body-bg);
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
+          width: 100%;
+          min-height: 810px;
+          background-color: var(--body-bg);
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
         }
 
         .container nav {
-        width: 100%;
-        height: 60px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0px 12px;
-        overflow: hidden;
+          width: 100%;
+          height: 60px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0px 12px;
+          overflow: hidden;
         }
 
         .container nav a,
         .container nav button {
-        width: 23px;
-        height: 23px;
-        border: none;
-        background-color: transparent;
+          width: 23px;
+          height: 23px;
+          border: none;
+          background-color: transparent;
         }
 
         .container nav a img,
         .container nav button img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center center;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center center;
         }
 
         .container nav .title-on {
-        color: var(--menu-title-text);
-        scale: 1;
-        transition: scale 1.2s;
+          color: var(--menu-title-text);
+          scale: 1;
+          transition: scale 1.2s;
         }
 
         .container nav .title-off {
-        color: var(--menu-title-text);
-        scale: 0;
-        transition: scale 0.2s;
+          color: var(--menu-title-text);
+          scale: 0;
+          transition: scale 0.2s;
         }
 
         .container nav .formSection {
-        width: 30px;
-        height: auto;
-        position: relative;
+          width: 30px;
+          height: auto;
+          position: relative;
         }
 
         .container nav .formSection .disabled-searchbar {
-        position: absolute;
-        width: 0px;
-        left: -800%;
-        transition: 0.6s all;
-        transition: width 0.6s all;
-        border-color: transparent;
-        background-color: transparent;
-        padding: 4px;
-        color: var(--btn-text);
-        border-radius: 4px;
-        font-size: 16px;
+          position: absolute;
+          width: 0px;
+          left: -800%;
+          transition: 0.6s all;
+          transition: width 0.6s all;
+          border-color: transparent;
+          background-color: transparent;
+          padding: 4px;
+          color: var(--btn-text);
+          border-radius: 4px;
+          font-size: 16px;
         }
 
         .container nav .formSection .enabled-searchbar {
-        position: absolute;
-        width: 160px;
-        height: 25px;
-        left: -800%;
-        transition: width 1s;
-        border: 1px solid white;
-        background-color: transparent;
-        padding: 4px;
-        color: var(--btn-text);
-        border-radius: 4px;
-        font-size: 16px;
+          position: absolute;
+          width: 160px;
+          height: 25px;
+          left: -800%;
+          transition: width 1s;
+          border: 1px solid white;
+          background-color: transparent;
+          padding: 4px;
+          color: var(--btn-text);
+          border-radius: 4px;
+          font-size: 16px;
         }
 
         .container nav .formSection .enabled-searchbar::placeholder {
-        color: var(--btn-text);
+          color: var(--btn-text);
         }
 
         .container main {
-        width: 100%;
-        min-height: 700px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 0 12px;
-        gap: 20px;
+          width: 100%;
+          min-height: 700px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 0 12px;
+          gap: 20px;
         }
 
         .container main .links {
-        width: 100%;
-        height: 40px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 14px;
-
-        @media screen and (max-width: 323px) {
+          width: 100%;
+          height: 40px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px 14px;
+        
+          @media screen and (max-width: 323px) {
             overflow-x: scroll;
-        }
+          }
         }
 
         .container main .links::-webkit-scrollbar {
-        display: none;
+          display: none;
         }
 
         .container main .links .link {
-        text-decoration: none;
-        font-family: "Libre Baskerville", serif;
-        font-size: 14px;
-        color: var(--menu-title-text);
-        transition: color 0.4s;
-
-        &.active {
+          text-decoration: none;
+          font-family: "Libre Baskerville", serif;
+          font-size: 14px;
+          color: var(--menu-title-text);
+          transition: color 0.4s;
+        
+          &.active {
             color: var(--btn-bg);
             border-bottom: 1px solid var(--btn-bg);
             line-height: 17.36px;
             transition: color 0.4s;
-        }
+          }
         }
 
         .container main .menu {
-        width: 100%;
-        min-height: 660px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        padding: 0px 4px;
+          width: 100%;
+          min-height: 660px;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: center;
+          padding: 0px 4px;
+          gap: 24px;
         }
 
         .container main .menu .menuItem {
-        width: 100%;
-        min-height: 200px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
-        h1 {
+          width: 100%;
+          min-height: 200px;
+          display: flex;
+          flex-direction: column;
+        
+          h1 {
             color: var(--btn-text);
             font-family: "Playfair Display", serif;
             font-weight: 500;
             font-size: 20px;
             letter-spacing: 1px;
-        }
+          }
         }
 
         .container main .menu .menuItem .items {
-        width: auto;
-        height: auto;
-        display: flex;
-        gap: 35px;
-        padding: 14px 0px;
-        overflow: scroll;
+          width: auto;
+          height: auto;
+          display: flex;
+          gap: 35px;
+          padding: 14px 0px;
+          overflow: scroll;
         }
 
         .container main .menu .menuItem .items::-webkit-scrollbar {
-        display: none;
+          display: none;
         }
 
         .container main .menu .menuItem .items .item {
-        min-width: 100px;
-        height: 150px;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 10px;
-        box-shadow: 0px 4px 8px #000000;
-        border: 1px solid grey;
-        border-radius: 6px;
-
-        .likeBtn {
-            width: 10px;
-            height: 10px;
-
-            img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center center;
-            }
-        }
-
-        .item-img {
-            position: absolute;
+          max-width: 100px;
+          min-height: 150px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          padding: 10px;
+          box-shadow: 0px 4px 8px #000000;
+          border: 1px solid grey;
+          border-radius: 6px;
+          gap: 12px;
+          
+        
+          .item-img {
             left: 20px;
             width: 100px;
             height: 100px;
             border-radius: 100%;
             overflow: hidden;
             filter: drop-shadow(10px 4px 5px black);
-
+            transform: translate(10px, 0px);
+          
             img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center center;
+              border-radius: 100%;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              object-position: center center;
             }
-        }
-
-        .info {
+          }
+        
+          .info {
             display: flex;
             flex-direction: column;
             gap: 2px;
-
+          
             p {
-            color: var(--btn-text);
-            font-family: "Playfair Display", serif;
-            font-weight: 400;
-            font-size: 10px;
-            letter-spacing: 1px;
+              color: var(--btn-text);
+              font-family: "Playfair Display", serif;
+              font-weight: 400;
+              font-size: 10px;
+              letter-spacing: 1px;
             }
-        }
+          }
         }
 
         .container footer {
-        width: 100%;
-        height: 100px;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        border-top: 0.5px solid var(--footer-border-top);
-
-        a {
+          width: 100%;
+          min-height: 100px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          border-top: 0.5px solid var(--footer-border-top);
+          text-align: center;
+          font-size: 14px;
+          gap: 12px;
+          padding: 12px 0px;
+        
+          a {
             text-decoration: none;
             color: var(--btn-text);
             font-family: "Libre Baskerville", serif;
@@ -272,35 +267,35 @@
             border: 1px solid var(--btn-bg);
             padding: 12px 30px;
             border-radius: 4px;
-
+          
             &:nth-child(2n) {
-                background-color: var(--btn-bg);
+              background-color: var(--btn-bg);
             }
-        }
+          }
         }
 
         @media screen and (max-width: 376px) {
-        .container nav .formSection .disabled-searchbar {
+          .container nav .formSection .disabled-searchbar {
             left: -750%;
-        }
-
-        .container nav .formSection .enabled-searchbar {
+          }
+        
+          .container nav .formSection .enabled-searchbar {
             left: -750%;
-        }
+          }
         }
 
         @media screen and (max-width: 321px) {
-        .container nav .formSection .disabled-searchbar {
+          .container nav .formSection .disabled-searchbar {
             left: -650%;
-        }
-
-        .container nav .formSection .enabled-searchbar {
+          }
+        
+          .container nav .formSection .enabled-searchbar {
             left: -650%;
-        }
-
-        .container main .links {
+          }
+        
+          .container main .links {
             gap: 45px;
-        }
+          }
         }
     </style>
   </head>
@@ -325,28 +320,16 @@
       </nav>
       <main>
         <div class="links">
-          <a href="#meals" class="link active">Food</a>
-          <a href="#salad" class="link">Salad</a>
-          <a href="#drink" class="link">Drink</a>
-          <a href="#dessert" class="link">Dessert</a>
+          <a href="#meals" id="food" class="link active">Food</a>
+          <a href="#salad" id="salad" class="link">Salad</a>
+          <a href="#drink" id="drink" class="link">Drink</a>
+          <a href="#dessert" id="dessert" class="link">Dessert</a>
         </div>
-        <div class="menu">
-          <div class="menuItem" id="meals">
+        <div class="menu" id="menuCont">
+          <!-- <div class="menuItem" id="meals">
             <h1>First Meal</h1>
             <div class="items meals" id="foodCont"></div>
-          </div>
-          <div class="menuItem" id="salad">
-            <h1>Salad</h1>
-            <div class="items salads" id="saladCont"></div>
-          </div>
-          <div class="menuItem" id="drink">
-            <h1>Drink</h1>
-            <div class="items drinks" id="drinkCont"></div>
-          </div>
-          <div class="menuItem" id="dessert">
-            <h1>Dessert</h1>
-            <div class="items desserts" id="dessertCont"></div>
-        </div>
+          </div> -->
       </main>
       <footer>
         <a href="#" class="backPreviousPage"> Edit a meal </a>
@@ -356,20 +339,27 @@
     
     <script>
         const admin_menu_API =
-          "http://23.20.175.90/api/cafeadmin/api/menuCRUD/all-menu";
+              "http://23.20.175.90/api/cafeadmin/api/menuCRUD/all-menu";
         const menuToken = localStorage.getItem("access_token");
-        const foodCont = document.getElementById("foodCont");
-        const saladCont = document.getElementById("saladCont");
-        const drinkCont = document.getElementById("drinkCont");
-        const dessertCont = document.getElementById("dessertCont");
-        const currentLang = localStorage.getItem('language');
+        const menuCont = document.querySelector("#menuCont");
+        const navbarLinks = document.querySelectorAll(".link");
+        let currentLinkId = "food";
+        let dataArray = [];
+        let filteredByKind;
+        let meals = {};
+        let mealCategories;
+        let aboutMeal = {};
+        let menuItem = document.createElement('div');
+
+        const currentLang = localStorage.getItem("language");
 
         const valuta = {
-                          "en": "AMD",
-                          "hy": "դր",
-                          "ru": "др"
-                        };
-            
+          en: "AMD",
+          hy: "դր",
+          ru: "др",
+        };
+
+        // API fetcing
         async function fetchingAPI(link) {
           try {
             const response = await fetch(link, {
@@ -380,180 +370,114 @@
               },
             });
             const data = await response.json();
-        
-            console.log(data);
+            dataArray = data.filter(meal => meal);
+            console.log(dataArray);
+            console.log((meals))
 
-            data.forEach((meal) => {
-                if (meal.kind === 'food' && meal.language === currentLang) {
-                    foodCont.innerHTML += `<div class="item" id=${meal.id}>
-                                              <div class="likeBtn">
-                                                <input type="checkbox" />
-                                              </div>
-                                              <img
-                                                src="${meal.image_src}"
-                                                alt="meal"
-                                                class="item-img"
-                                              />
-                                              <div class="info">
-                                                <p class="name">${meal.name}</p>
-                                                <p class="price">${valuta[currentLang]} ${meal.price}</p>
-                                              </div>
-                                            </div>`;
-
-                    document.querySelectorAll('.item').forEach(item => {
-                        item.addEventListener('click', (index) => {
-                            const name = item.querySelector(".name").textContent;
-                            const price = item.querySelector(".price").textContent;
-                            const imgURL = item.querySelector(".item-img").src;
-                            const itemID = item.id;
-                            const itemDescription = data.find(item => item.id === Number(itemID)).description;
-
-                            const mealInfo = {
-                              name,
-                              price,
-                              imgURL,
-                              itemID,
-                              itemDescription
-                            };
-                        
-                            localStorage.setItem("selectedMeal", JSON.stringify(mealInfo));
-                    
-                            // Test Link
-                            // window.location.href = "../pages/adminMenuAboutMeal.html";
-                            
-                            // Real Link
-                            window.location.href = "http://23.20.175.90/api/cafeadmin/cafe-admin-menu-about-meal";
-                            })
-                    })
-                } else if (meal.kind === 'salad' && meal.language === currentLang) {
-                    saladCont.innerHTML += `<div class="item" id=${meal.id}>
-                                              <div class="likeBtn">
-                                                <input type="checkbox" />
-                                              </div>
-                                              <img
-                                                src="${meal.image_src}"
-                                                alt="meal"
-                                                class="item-img"
-                                              />
-                                              <div class="info">
-                                                <p class="name">${meal.name}</p>
-                                                <p class="price">${valuta[currentLang]} ${meal.price}</p>
-                                              </div>
-                                            </div>`;
-
-                    document.querySelectorAll('.item').forEach(item => {
-                        item.addEventListener('click', (index) => {
-                            const name = item.querySelector(".name").textContent;
-                            const price = item.querySelector(".price").textContent;
-                            const imgURL = item.querySelector(".item-img").src;
-                            const itemID = item.id;
-                            const itemDescription = data.find(item => item.id === Number(itemID)).description;
-
-                            const mealInfo = {
-                              name,
-                              price,
-                              imgURL,
-                              itemID,
-                              itemDescription
-                            };
-                        
-                            localStorage.setItem("selectedMeal", JSON.stringify(mealInfo));
-                    
-                            // Test Link
-                            // window.location.href = "../pages/adminMenuAboutMeal.html";
-                            
-                            // Real Link
-                            window.location.href = "http://23.20.175.90/api/cafeadmin/cafe-admin-menu-about-meal";
-                            })
-                    })
-                } else if (meal.kind === 'drink' && meal.language === currentLang) {
-                    drinkCont.innerHTML += `<div class="item" id=${meal.id}>
-                                              <div class="likeBtn">
-                                                <input type="checkbox" />
-                                              </div>
-                                              <img
-                                                src="${meal.image_src}"
-                                                alt="meal"
-                                                class="item-img"
-                                              />
-                                              <div class="info">
-                                                <p class="name">${meal.name}</p>
-                                                <p class="price">${valuta[currentLang]} ${meal.price}</p>
-                                              </div>
-                                            </div>`;
-                    document.querySelectorAll('.item').forEach(item => {
-                        item.addEventListener('click', (index) => {
-                            const name = item.querySelector(".name").textContent;
-                            const price = item.querySelector(".price").textContent;
-                            const imgURL = item.querySelector(".item-img").src;
-                            const itemID = item.id;
-                            const itemDescription = data.find(item => item.id === Number(itemID)).description;
-
-                            const mealInfo = {
-                              name,
-                              price,
-                              imgURL,
-                              itemID,
-                              itemDescription
-                            };
-                        
-                            localStorage.setItem("selectedMeal", JSON.stringify(mealInfo));
-                    
-                            // Test Link
-                            // window.location.href = "../pages/adminMenuAboutMeal.html";
-                            
-                            // Real Link
-                            window.location.href = "http://23.20.175.90/api/cafeadmin/cafe-admin-menu-about-meal";
-                            })
-                    })
-                } else if (meal.kind === 'desert' && meal.language === currentLang) {
-                    dessertCont.innerHTML += `<div class="item" id=${meal.id}>
-                                              <div class="likeBtn">
-                                                <input type="checkbox" />
-                                              </div>
-                                              <img
-                                                src="${meal.image_src}"
-                                                alt="meal"
-                                                class="item-img"
-                                              />
-                                              <div class="info">
-                                                <p class="name">${meal.name}</p>
-                                                <p class="price">${valuta[currentLang]} ${meal.price}</p>
-                                              </div>
-                                            </div>`;
-                    document.querySelectorAll('.item').forEach(item => {
-                        item.addEventListener('click', (index) => {
-                            const name = item.querySelector(".name").textContent;
-                            const price = item.querySelector(".price").textContent;
-                            const imgURL = item.querySelector(".item-img").src;
-                            const itemID = item.id;
-                            const itemDescription = data.find(item => item.id === Number(itemID)).description;
-
-                            const mealInfo = {
-                              name,
-                              price,
-                              imgURL,
-                              itemID,
-                              itemDescription
-                            };
-                        
-                            localStorage.setItem("selectedMeal", JSON.stringify(mealInfo));
-                    
-                            // Test Link
-                            // window.location.href = "../pages/adminMenuAboutMeal.html";
-                            
-                            // Real Link
-                            window.location.href = "http://23.20.175.90/api/cafeadmin/cafe-admin-menu-about-meal";
-                            })
-                    })
-                }
-            })
           } catch (error) {
             console.log("Error fetching data: ", error);
           }
         }
         
-        fetchingAPI(admin_menu_API);
-    </script>     
+
+        // Getting meal section data by kind
+        function updateContent() {
+          setTimeout(() => {
+          filteredByKind = dataArray.filter(m => m.kind === currentLinkId);
+          for(let i = 0; i < filteredByKind.length; i++) {
+            if(filteredByKind[i].category.replace(' ', '') in meals) {
+              meals[filteredByKind[i].category.replace(' ', '')].push(filteredByKind[i]);
+            } else {
+              meals[filteredByKind[i].category.replace(' ', '')] = [filteredByKind[i]];
+            }
+          }
+          
+          menuItem.className = 'menuItem';
+          mealCategories = Object.keys(meals);
+          mealCategories.forEach(category => {
+            menuItem.innerHTML += `
+                                    <h1> ${category} </h1>
+                                    <div class="items ${category}" id="${category}"> </div>
+                                  `
+          });
+
+          menuCont.appendChild(menuItem);
+
+          let categoryItems = document.querySelectorAll(`.items`);
+
+          categoryItems.forEach((item, index) => {
+            if(item.classList.contains(mealCategories[index])) {
+              meals[mealCategories[index]].forEach((meal, i) => {
+                item.innerHTML += `
+                                    <div data-kind="${meal.kind}" class="item" id="${mealCategories[index] + i} ${meal.id}">
+                                      <img src="${meals[mealCategories[index]][i].image_src}" alt="${meals[mealCategories[index]][i].image_src}" class="item-img" />
+                                      <div class="info">
+                                        <p class="name">${meals[mealCategories[index]][i].name}</p>
+                                        <p class="price">${valuta[currentLang]} ${meals[mealCategories[index]][i].price}</p>
+                                      </div>
+                                    </div>
+                                  `
+              })
+            }
+          })
+        }, 2000)
+        }
+
+        // Adding event click listener to cards
+        function clickedMealPage() {
+          setTimeout(() => {
+            const itemCards = document.querySelectorAll('.item');
+          
+            itemCards.forEach((card) => {
+              card.addEventListener('click', () => {
+                const itemID = Number(card.id.split(' ')[1]); // Ensure it's a number
+              
+                const mealData = dataArray.find(meal => meal.id === itemID);
+
+                if (!mealData) {
+                  console.error(`Meal with ID ${itemID} not found in dataArray`);
+                  return;
+                }
+              
+                const aboutMeal = {
+                  name: card.querySelector('.name').innerText,
+                  img_url: card.querySelector('img').src,
+                  valuta: valuta[currentLang],
+                  price: card.querySelector('.price').innerText.split(' ')[1],
+                  itemID: itemID,
+                  kind: card.getAttribute('data-kind'),
+                  description: mealData.description // Now correctly accessing it
+                };
+              
+                localStorage.setItem('aboutMeal', JSON.stringify(aboutMeal));
+                window.location = './adminMenuAboutMeal.html';
+              })
+            })
+          }, 2100)
+        }
+
+        // Getting food links
+        navbarLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            for(let i = 0; i < navbarLinks.length; i++) {
+              navbarLinks[i].classList.remove('active');
+            }
+            link.classList.add('active');
+
+            currentLinkId = link.textContent.toLocaleLowerCase();
+
+            meals = {};
+            menuItem.innerHTML = '';
+
+            
+            updateContent();
+            clickedMealPage();
+            console.log(meals);
+          })
+        })
+
+        window.onload = (updateContent(), clickedMealPage(),fetchingAPI(admin_menu_API));
+
+    </script>    
   </body>
 </html>
