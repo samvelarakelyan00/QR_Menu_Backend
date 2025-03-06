@@ -23,6 +23,12 @@ def get_menu_by_product_id(horekaclient_id: int,
     return menu_fileter_service.get_horeka_by_id(horekaclient_id)
 
 
+@router.get("/all-menu/{horekaclient_id}")
+def get_all_menu(horekaclient_id: int,
+                 menu_fileter_service: menu_filter_service.MenuFilterService = Depends()):
+
+    return menu_fileter_service.get_all_menu(horekaclient_id)
+
 @router.get("/by-product-id/{product_id}")
 def get_menu_by_product_id(horekaclient_id: int,
                            product_id: int,
