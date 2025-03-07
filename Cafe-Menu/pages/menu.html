@@ -5,18 +5,307 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cafe Menu</title>
 
-    <!-- Styles -->
-    
-    <link rel="stylesheet" href="/api/static/styles/menu.css" />
-    
-    <!-- Page icon -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+IT+Trad:wght@100..400&display=swap");
 
-    <link rel="icon" href="/api/static/icons/main-page-icon.png" />
+      :root {
+        --body-bg: #1f1f1f;
+        --white: #ffffff;
+        --btn-text: #f6f6f6;
+        --btn-bg: #b35c32;
+        --menu-title-text: #f6f6f6;
+        --footer-border-top: #d7d7d7;
+      }
 
-    <!-- Test Styles -->
-     
-    <!-- <link rel="stylesheet" href="../static/styles/menu.css" /> -->
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
 
+      body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        width: 100%;
+        min-height: 810px;
+        background-color: var(--body-bg);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .container nav {
+        width: 100%;
+        height: 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 12px;
+        overflow: hidden;
+      }
+
+      .container nav a,
+      .container nav button {
+        width: 23px;
+        height: 23px;
+        border: none;
+        background-color: transparent;
+      }
+
+      .container nav a img,
+      .container nav button img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+      }
+
+      .container nav .title-on {
+        color: var(--menu-title-text);
+        scale: 1;
+        transition: scale 1.2s;
+      }
+
+      .container nav .title-off {
+        color: var(--menu-title-text);
+        scale: 0;
+        transition: scale 0.2s;
+      }
+
+      .container nav .formSection {
+        width: 30px;
+        height: auto;
+        position: relative;
+      }
+
+      .container nav .formSection .disabled-searchbar {
+        position: absolute;
+        width: 0px;
+        left: -800%;
+        transition: 0.6s all;
+        transition: width 0.6s all;
+        border-color: transparent;
+        background-color: transparent;
+        padding: 4px;
+        color: var(--btn-text);
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      .container nav .formSection .enabled-searchbar {
+        position: absolute;
+        width: 160px;
+        height: 25px;
+        left: -800%;
+        transition: width 1s;
+        border: 1px solid white;
+        background-color: transparent;
+        padding: 4px;
+        color: var(--btn-text);
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      .container nav .formSection .enabled-searchbar::placeholder {
+        color: var(--btn-text);
+      }
+
+      .container main {
+        width: 100%;
+        min-height: 700px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 12px;
+        gap: 20px;
+      }
+
+      .container main .links {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 14px;
+
+        @media screen and (max-width: 323px) {
+          overflow-x: scroll;
+        }
+      }
+
+      .container main .links::-webkit-scrollbar {
+        display: none;
+      }
+
+      .container main .links .link {
+        text-decoration: none;
+        font-family: "Libre Baskerville", serif;
+        font-size: 14px;
+        color: var(--menu-title-text);
+        transition: color 0.4s;
+
+        &.active {
+          color: var(--btn-bg);
+          border-bottom: 1px solid var(--btn-bg);
+          line-height: 17.36px;
+          transition: color 0.4s;
+        }
+      }
+
+      .container main .menu {
+        width: 100%;
+        min-height: 660px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0px 4px;
+      }
+
+      .container main .menu .menuItem {
+        width: 100%;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        h1 {
+          color: var(--btn-text);
+          font-family: "Playfair Display", serif;
+          font-weight: 500;
+          font-size: 20px;
+          letter-spacing: 1px;
+        }
+      }
+
+      .container main .menu .menuItem .items {
+        width: auto;
+        height: auto;
+        display: flex;
+        gap: 35px;
+        padding: 14px 0px;
+        overflow: scroll;
+      }
+
+      .container main .menu .menuItem .items::-webkit-scrollbar {
+        display: none;
+      }
+
+      .container main .menu .menuItem .items .item {
+        min-width: 100px;
+        height: 150px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 10px;
+        box-shadow: 0px 4px 8px #000000;
+        border: 1px solid grey;
+        border-radius: 6px;
+
+        .likeBtn {
+          width: 10px;
+          height: 10px;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+          }
+        }
+
+        .item-img {
+          position: absolute;
+          left: 20px;
+          width: 100px;
+          height: 100px;
+          border-radius: 100%;
+          overflow: hidden;
+          filter: drop-shadow(10px 4px 5px black);
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+          }
+        }
+
+        .info {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+
+          p {
+            color: var(--btn-text);
+            font-family: "Playfair Display", serif;
+            font-weight: 400;
+            font-size: 10px;
+            letter-spacing: 1px;
+          }
+        }
+      }
+
+      .container footer {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        border-top: 0.5px solid var(--footer-border-top);
+
+        a {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 4px;
+          text-decoration: none;
+          color: var(--btn-text);
+          font-family: "Libre Baskerville", serif;
+          font-size: 10px;
+          letter-spacing: 1px;
+
+          img {
+            width: 30px;
+            height: 30px;
+          }
+        }
+      }
+
+      @media screen and (max-width: 376px) {
+        .container nav .formSection .disabled-searchbar {
+          left: -750%;
+        }
+
+        .container nav .formSection .enabled-searchbar {
+          left: -750%;
+        }
+      }
+
+      @media screen and (max-width: 321px) {
+        .container nav .formSection .disabled-searchbar {
+          left: -650%;
+        }
+
+        .container nav .formSection .enabled-searchbar {
+          left: -650%;
+        }
+
+        .container main .links {
+          gap: 45px;
+        }
+      }
+    </style>
   </head>
   <body>
     <section class="container">
@@ -44,46 +333,181 @@
           <a href="#drink" class="link">Drink</a>
           <a href="#dessert" class="link">Dessert</a>
         </div>
-        <div class="menu">
-          <div class="menuItem" id="meals">
-            <h1>First Meal</h1>
-            <div class="items meals" id="foodCont"></div>
-          </div>
-          <div class="menuItem" id="salad">
-            <h1>Salad</h1>
-            <div class="items salads" id="saladCont"></div>
-          </div>
-          <div class="menuItem" id="drink">
-            <h1>Drink</h1>
-            <div class="items drinks" id="drinkCont"></div>
-          </div>
-          <div class="menuItem" id="dessert">
-            <h1>Dessert</h1>
-            <div class="items desserts" id="dessertCont"></div>
-        </div>
+        <div class="menu" id="menuCont"></div>
       </main>
       <footer>
         <a class="backPreviousPage">
-          <img src="/api/static/icons/home.svg" alt="home">
+          <img src="/api/static/icons/home.svg" alt="home" />
           Home
         </a>
         <a href="#menu">
-          <img src="/api/static/icons/menu.svg" alt="menu">
+          <img src="/api/static/icons/menu.svg" alt="menu" />
           Menu
         </a>
         <a href="#">
-          <img src="/api/static/icons/order.svg" alt="order">
+          <img src="/api/static/icons/order.svg" alt="order" />
           Order
         </a>
       </footer>
     </section>
 
-    <!-- Scripts -->
+    <script>
+      const admin_menu_API =
+        "http://23.20.175.90/api/api/menu-filter/all-menu/";
+      const cafeIdIndex = localStorage.getItem("cafeIdIndex");
+      const admin_menu_API_Link = admin_menu_API + cafeIdIndex;
+      const menuCont = document.querySelector("#menuCont");
+      const navbarLinks = document.querySelectorAll(".link");
+      let currentLinkId = "food";
+      let dataArray = [];
+      let filteredByKind;
+      let meals = {};
+      let mealCategories;
+      let aboutMeal = {};
+      let menuItem = document.createElement("div");
 
-    <script src="/api/static/scripts/menu.js"></script>
-    
-    <!-- Test Script -->
-    
-    <!-- <script src="../static/scripts/menu.js"></script> -->
+      const currentLang = localStorage.getItem("language");
+
+      const valuta = {
+        en: "AMD",
+        hy: "դր",
+        ru: "др",
+      };
+
+      // API fetcing
+      async function fetchingAPI(link) {
+        try {
+          const response = await fetch(link, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          const data = await response.json();
+          dataArray = data.filter((meal) => meal);
+          console.log(dataArray);
+          console.log(meals);
+        } catch (error) {
+          console.log("Error fetching data: ", error);
+        }
+      }
+
+      // Getting meal section data by kind
+      function updateContent() {
+        setTimeout(() => {
+          filteredByKind = dataArray.filter((m) => m.kind === currentLinkId);
+          for (let i = 0; i < filteredByKind.length; i++) {
+            if (filteredByKind[i].category.replace(" ", "") in meals) {
+              meals[filteredByKind[i].category.replace(" ", "")].push(
+                filteredByKind[i]
+              );
+            } else {
+              meals[filteredByKind[i].category.replace(" ", "")] = [
+                filteredByKind[i],
+              ];
+            }
+          }
+
+          menuItem.className = "menuItem";
+          mealCategories = Object.keys(meals);
+          mealCategories.forEach((category) => {
+            menuItem.innerHTML += `
+                                  <h1> ${category} </h1>
+                                  <div class="items ${category}" id="${category}"> </div>
+                                `;
+          });
+
+          menuCont.appendChild(menuItem);
+
+          let categoryItems = document.querySelectorAll(`.items`);
+
+          categoryItems.forEach((item, index) => {
+            if (item.classList.contains(mealCategories[index])) {
+              meals[mealCategories[index]].forEach((meal, i) => {
+                item.innerHTML += `
+                                  <div data-kind="${
+                                    meal.kind
+                                  }" class="item" id="${
+                  mealCategories[index] + i
+                } ${meal.id}">
+                              <div class="likeBtn">
+                                <img src="../static/icons/liked.svg" alt="liked" />
+                              </div>
+                                    <img src="${
+                                      meals[mealCategories[index]][i].image_src
+                                    }" alt="${
+                  meals[mealCategories[index]][i].image_src
+                }" class="item-img" />
+                                    <div class="info">
+                                      <p class="name">${
+                                        meals[mealCategories[index]][i].name
+                                      }</p>
+                                      <p class="price">${valuta[currentLang]} ${
+                  meals[mealCategories[index]][i].price
+                }</p>
+                                    </div>
+                                  </div>
+                                `;
+              });
+            }
+          });
+        }, 1500);
+      }
+
+      // Adding event click listener to cards
+      function clickedMealPage() {
+        setTimeout(() => {
+          const itemCards = document.querySelectorAll(".item");
+
+          itemCards.forEach((card) => {
+            card.addEventListener("click", () => {
+              const itemID = Number(card.id.split(" ")[1]); // Ensure it's a number
+
+              const mealData = dataArray.find((meal) => meal.id === itemID);
+
+              if (!mealData) {
+                console.error(`Meal with ID ${itemID} not found in dataArray`);
+                return;
+              }
+
+              const aboutMeal = {
+                name: card.querySelector(".name").innerText,
+                img_url: card.querySelector("img").src,
+                valuta: valuta[currentLang],
+                price: card.querySelector(".price").innerText.split(" ")[1],
+                itemID: itemID,
+                kind: card.getAttribute("data-kind"),
+                description: mealData.description, // Now correctly accessing it
+              };
+
+              localStorage.setItem("aboutMeal", JSON.stringify(aboutMeal));
+              window.location = "./about-meal.html";
+            });
+          });
+        }, 1600);
+      }
+
+      // Getting food links
+      navbarLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          for (let i = 0; i < navbarLinks.length; i++) {
+            navbarLinks[i].classList.remove("active");
+          }
+          link.classList.add("active");
+
+          currentLinkId = link.textContent.toLocaleLowerCase();
+
+          meals = {};
+          menuItem.innerHTML = "";
+
+          updateContent();
+          clickedMealPage();
+          console.log(meals);
+        });
+      });
+
+      window.onload =
+        (updateContent(), clickedMealPage(), fetchingAPI(admin_menu_API_Link));
+    </script>
   </body>
 </html>

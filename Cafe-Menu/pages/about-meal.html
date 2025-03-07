@@ -5,14 +5,266 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cafe Menu</title>
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="/api/static/styles/selectedMeal.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+IT+Trad:wght@100..400&display=swap");
 
-    <!-- Icon -->
-    <link rel="icon" href="/api/static/icons/main-page-icon.png" />
+      :root {
+        --body-bg: #1f1f1f;
+        --white: #ffffff;
+        --btn-text: #f6f6f6;
+        --btn-bg: #b35c32;
+        --menu-title-text: #f6f6f6;
+        --footer-border-top: #d7d7d7;
+        --navbar-title: #e78c52;
+      }
 
-    <!-- Test Styles -->
-    <!-- <link rel="stylesheet" href="../static/styles/selectedMeal.css" /> -->
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        width: 100%;
+        min-height: 810px;
+        background-color: var(--body-bg);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .container nav {
+        width: 100%;
+        height: 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 24px;
+        overflow: hidden;
+      }
+
+      .container nav a {
+        border: none;
+        background-color: transparent;
+      }
+
+      .container nav a img {
+        width: 23px;
+        height: 23px;
+        object-fit: cover;
+        object-position: center center;
+      }
+
+      .container nav .order-link {
+        font-size: 20px;
+        color: var(--navbar-title);
+        letter-spacing: 1px;
+        text-decoration: none;
+        text-wrap: nowrap;
+      }
+
+      .container main {
+        width: 100%;
+        min-height: 700px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0px 20px 12px 20px;
+        gap: 24px;
+      }
+
+      .container main .about-food {
+        width: 100%;
+        height: 300px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+
+        .food-info {
+          width: auto;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 12px 0px;
+          gap: 30px;
+
+          .food-n-p {
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 10px;
+
+            h1,
+            p {
+              color: var(--btn-text);
+              font-family: "Playfair Display", serif;
+            }
+
+            h1 {
+              font-size: 18px;
+              font-weight: 500;
+            }
+
+            p {
+              font-size: 16px;
+              font-weight: 400;
+            }
+          }
+
+          .items {
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+
+            .item {
+              width: 100%;
+              height: auto;
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              gap: 15px;
+              text-align: center;
+
+              p {
+                color: var(--btn-text);
+                font-size: 13px;
+              }
+            }
+          }
+        }
+
+        .food-img-cont {
+          width: 180px;
+          height: 180px;
+          border-radius: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          filter: drop-shadow(10px 4px 12px black);
+          overflow: hidden;
+
+          .food-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+          }
+        }
+      }
+
+      .container main .about-food-text {
+        width: 100%;
+        color: var(--btn-text);
+        font-family: "Playfair Display", serif;
+        font-size: 12px;
+        margin-bottom: 40px;
+        font-weight: 400;
+        line-height: 18px;
+      }
+
+      .container main .other-foods {
+        width: 100%;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        h1 {
+          color: var(--btn-text);
+          font-family: "Playfair Display", serif;
+          font-weight: 400;
+          font-size: 18px;
+        }
+
+        .items {
+          width: auto;
+          min-height: 140px;
+          display: flex;
+          gap: 20px;
+          overflow: scroll;
+
+          .item {
+            min-width: 110px;
+            min-height: 120px;
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 10px;
+            border-radius: 6px;
+            border: 1px solid #999999;
+            padding: 6px 12px;
+
+            img {
+              width: 80px;
+              height: 80px;
+              filter: drop-shadow(10px 10px 10px black);
+              border-radius: 100%;
+            }
+
+            div {
+              p {
+                color: var(--btn-text);
+                font-family: "Playfair Display", serif;
+                font-size: 12px;
+                font-weight: 400;
+                letter-spacing: 1px;
+              }
+            }
+          }
+        }
+      }
+
+      .container main .other-foods .items::-webkit-scrollbar {
+        display: none;
+      }
+
+      .container footer {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        border-top: 0.5px solid var(--footer-border-top);
+
+        a {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 4px;
+          text-decoration: none;
+          color: var(--btn-text);
+          font-family: "Libre Baskerville", serif;
+          font-size: 10px;
+          letter-spacing: 1px;
+
+          img {
+            width: 30px;
+            height: 30px;
+          }
+        }
+      }
+    </style>
   </head>
   <body>
     <section class="container">
@@ -104,10 +356,66 @@
       </footer>
     </section>
 
-    <!-- Scripts -->
-    <script src="/api/static/scripts/selectedMeal.js"></script>
+    <script>
+      const parsedLocalData = JSON.parse(localStorage.getItem("selectedMeal"));
 
-    <!-- Test Scipt File -->
-    <!-- <script src="../static/scripts/selectedMeal.js"></script> -->
+      // ---------------------------------------------------------------
+
+      const pageURLIndex = localStorage.getItem("cafeIdIndex");
+
+      // ---------------------------------------------------------------
+
+      const backPreviousPageBtn = document.querySelector(".backPreviousPage");
+      const backHomePageBtn = document.querySelector(".backHomePage");
+      const orderLink = document.getElementById("orderLink");
+
+      backPreviousPageBtn.setAttribute(
+        "href",
+        `http://23.20.175.90/api/cafe/menu/get-menu`
+      );
+      backHomePageBtn.setAttribute(
+        "href",
+        `http://23.20.175.90/api/${pageURLIndex}`
+      );
+      orderLink.setAttribute("href", "#");
+
+      // ---------------------------------------------------------
+
+      const mealName = document.getElementById("name");
+      const mealPrice = document.getElementById("price");
+      const mealIMG = document.getElementById("foodImg");
+      const mealDesc = document.getElementById("mealDescription");
+
+      // ---------------------------------------------------------------
+
+      const About_Meal_API_Link =
+        "http://23.20.175.90/api/api/menu-filter/by-product-id/";
+      const Meal_API_Link_Middle_Part = parsedLocalData.itemID;
+      const Meal_API_Link_Last_Part = "?horekaclient_id=";
+      const cafeURLIndex = localStorage.getItem("cafeIdIndex");
+
+      async function fetchingMealInfo(link) {
+        try {
+          console.log(link);
+
+          const resp = await fetch(link);
+          const data = await resp.json();
+
+          mealName.innerText = data.name;
+          mealPrice.innerText = data.price + " " + "AMD";
+          foodImg.src = data.image_src;
+          mealDesc.innerText = data.description;
+        } catch (error) {
+          console.log("Error fetching data", error);
+        }
+      }
+
+      fetchingMealInfo(
+        About_Meal_API_Link +
+          Meal_API_Link_Middle_Part +
+          Meal_API_Link_Last_Part +
+          cafeURLIndex
+      );
+    </script>
   </body>
 </html>
