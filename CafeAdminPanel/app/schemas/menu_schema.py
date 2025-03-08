@@ -22,6 +22,7 @@ class ProductImageGet(BaseModel):
     category: str
     filename: str
 
+
 class ProductUpdate(BaseModel):
     kind: Optional[None | str] = None
     category: Optional[None | str] = None

@@ -1,11 +1,15 @@
+import os
+
 # FastAPI
 from fastapi import APIRouter, Depends, status
+from fastapi.responses import FileResponse
 from fastapi.exceptions import HTTPException
 
 from services import menu_filter as menu_filter_service
 
 from schemas.menu_schema import (
-    HoReKaClientResponse
+    HoReKaClientResponse,
+    ProductImageGet
 )
 
 
@@ -28,6 +32,21 @@ def get_all_menu(horekaclient_id: int,
                  menu_fileter_service: menu_filter_service.MenuFilterService = Depends()):
 
     return menu_fileter_service.get_all_menu(horekaclient_id)
+
+
+@router.post("/get-image")
+async def get_image(product_image_get_data: ProductImageGet):
+    kind = product_image_get_data.kind
+    category = product_image_get_data.category
+    filename = product_image_get_data.filename
+    file_path = os.path.abspath(os.path.join(os.getcwd(), "..", "..", ".."))
+    file_path = os.path.join(f"{file_path}/{kind}/{category}", filename)
+
+    if not os.path.exists(file_path):
+        raise HTTPException(status_code=404, detail="Image not found")
+
+    return FileResponse(file_path)
+
 
 @router.get("/by-product-id/{product_id}")
 def get_menu_by_product_id(horekaclient_id: int,

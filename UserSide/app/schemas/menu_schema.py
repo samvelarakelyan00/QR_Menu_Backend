@@ -8,3 +8,10 @@ class HoReKaClientResponse(BaseModel):
     address: str
     image_src: str
     logo: str
+
+
+
+class ProductImageGet(BaseModel):
+    kind: str
+    category: str
+    filename: str
