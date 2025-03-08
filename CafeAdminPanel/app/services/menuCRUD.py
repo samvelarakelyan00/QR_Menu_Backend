@@ -27,9 +27,9 @@ class MenuCRUDService:
     def __init__(self, session: Session = Depends(get_session)):
         self.session = session
 
-    def add_menu_new(self, horekaclient_id: int, add_menu_new_data: MenuAddNew):
+    def add_menu_new(self, horekaclient_id: int, add_menu_new_data: dict):
         try:
-            new_menu_add = models.HoReKaMenu(**add_menu_new_data.dict(), horekaclient_id=horekaclient_id)
+            new_menu_add = models.HoReKaMenu(**add_menu_new_data, horekaclient_id=horekaclient_id)
 
             self.session.add(new_menu_add)
             self.session.commit()

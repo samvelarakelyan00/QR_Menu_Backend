@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<img src="#" id="image">
+<script>
+    async function getImage(kind, category, filename) {
+    try {
+        const response = await fetch("http://127.0.0.1:8080/api/menuCRUD/get-image", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDE1MDczMjIsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJ0bWJsIEFybWVuIiwiZW1haWwiOiJ0bWJsQGdtYWlsLmNvbSIsImhvcmVrYWNsaWVudF9pZCI6MX19.9JkSJzvvg6Skyt098WBhQiyUZRvWXdsWvIZY8ucKa5U"
+            },
+            body: JSON.stringify({
+                kind: kind,
+                category: category,
+                filename: filename
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${await response.text()}`);
+        }
+
+        // Convert response to a Blob (binary data)
+        const blob = await response.blob();
+
+        // Create an object URL to display the image
+        const imageUrl = URL.createObjectURL(blob);
+
+        // Example: Set the image source in an <img> element
+        document.getElementById("image").src = imageUrl;
+
+    } catch (error) {
+        console.error("Error fetching image:", error);
+    }
+}
+
+// Example usage
+getImage("drinks", "cocktails", "e547efc8-5200-42cd-903c-c459d92172b1.jpg");
+
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Menu Item</title>
+</head>
+<body>
+
+    <input type="file" id="imageInput" />
+    <button id="uploadButton">Upload Menu Item</button>
+
+    <script>
+        async function addMenuNew(formData, token) {
+            try {
+                const response = await fetch("http://127.0.0.1:8080/api/menuCRUD/add-menu-new", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status} - ${await response.text()}`);
+                }
+
+                const result = await response.json();
+                console.log("Menu item added:", result);
+                alert("Menu item added successfully!");
+
+            } catch (error) {
+                console.error("Error adding menu item:", error);
+                alert("Failed to add menu item!");
+            }
+        }
+
+        document.getElementById("uploadButton").addEventListener("click", function () {
+            const formData = new FormData();
+            formData.append("kind", "drinks");
+            formData.append("category", "cocktails");
+            formData.append("name", "Long Island");
+            formData.append("quantity", "1 cup");
+            formData.append("price", "9.70");
+            formData.append("description", "A refreshing cocktail with tequila, lime, and orange liqueur.");
+            formData.append("language", "en");
+            formData.append("preparation_time", "5");
+            formData.append("weight", "250");
+            formData.append("calories", "200");
+
+            const imageInput = document.getElementById("imageInput");
+            if (imageInput.files.length > 0) {
+                formData.append("image", imageInput.files[0]);
+            } else {
+                alert("Please select an image!");
+                return;
+            }
+
+            const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDE1MDczMjIsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJ0bWJsIEFybWVuIiwiZW1haWwiOiJ0bWJsQGdtYWlsLmNvbSIsImhvcmVrYWNsaWVudF9pZCI6MX19.9JkSJzvvg6Skyt098WBhQiyUZRvWXdsWvIZY8ucKa5U";
+            addMenuNew(formData, authToken);
+        });
+    </script>
+
+</body>
+</html>

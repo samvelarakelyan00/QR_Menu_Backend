@@ -17,6 +17,11 @@ class MenuAddNew(BaseModel):
     calories: Optional[None | float] = None
 
 
+class ProductImageGet(BaseModel):
+    kind: str
+    category: str
+    filename: str
+
 class ProductUpdate(BaseModel):
     kind: Optional[None | str] = None
     category: Optional[None | str] = None
