@@ -385,8 +385,6 @@
           });
           const data = await response.json();
           dataArray = data.filter((meal) => meal);
-          console.log(dataArray);
-          console.log(meals);
         } catch (error) {
           console.log("Error fetching data: ", error);
         }
@@ -396,6 +394,7 @@
       function updateContent() {
         setTimeout(() => {
           filteredByKind = dataArray.filter((m) => m.kind === currentLinkId);
+
           for (let i = 0; i < filteredByKind.length; i++) {
             if (filteredByKind[i].category.replace(" ", "") in meals) {
               meals[filteredByKind[i].category.replace(" ", "")].push(
@@ -423,7 +422,13 @@
 
           categoryItems.forEach((item, index) => {
             if (item.classList.contains(mealCategories[index])) {
-              meals[mealCategories[index]].forEach((meal, i) => {
+              meals[mealCategories[index]].forEach(async (meal, i) => {
+                let imgURL = await getImage(
+                  currentLinkId,
+                  mealCategories[index],
+                  meals[mealCategories[index]][i].image_src
+                );
+
                 item.innerHTML += `
                                   <div data-kind="${
                                     meal.kind
@@ -433,9 +438,7 @@
                               <div class="likeBtn">
                                 <img src="../static/icons/liked.svg" alt="liked" />
                               </div>
-                                    <img src="${
-                                      meals[mealCategories[index]][i].image_src
-                                    }" alt="${
+                                    <img src="${imgURL}" alt="${
                   meals[mealCategories[index]][i].image_src
                 }" class="item-img" />
                                     <div class="info">
@@ -452,6 +455,41 @@
             }
           });
         }, 1500);
+      }
+
+      // Getting meal IMG from API
+      async function getImage(kind, category, filename) {
+        try {
+          const response = await fetch(
+            "http://23.20.175.90/api/cafeadmin/api/menuCRUD/get-image",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+              },
+              body: JSON.stringify({
+                kind: kind,
+                category: category,
+                filename: filename,
+              }),
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error(
+              `Error: ${response.status} - ${await response.text()}`
+            );
+          }
+
+          // Convert response to a Blob (binary data)
+          const blob = await response.blob();
+
+          // Create an object URL to display the image
+          return URL.createObjectURL(blob);
+        } catch (error) {
+          console.error("Error fetching image:", error);
+        }
       }
 
       // Adding event click listener to cards
@@ -502,7 +540,6 @@
 
           updateContent();
           clickedMealPage();
-          console.log(meals);
         });
       });
 

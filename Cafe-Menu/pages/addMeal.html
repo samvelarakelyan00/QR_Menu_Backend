@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Menu Item</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+IT+Trad:wght@100..400&display=swap");
+
+      :root {
+        --body-bg: #1f1f1f;
+        --white: #ffffff;
+        --btn-text: #f6f6f6;
+        --btn-bg: #b35c32;
+        --menu-title-text: #f6f6f6;
+        --footer-border-top: #d7d7d7;
+        --navbar-title: #e78c52;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--body-bg);
+      }
+
+      .container {
+        width: 100%;
+        min-height: 810px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .container nav {
+        width: 100%;
+        height: 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 24px;
+      }
+
+      .container nav a {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+
+      .container nav a img {
+        width: 23px;
+        height: 23px;
+        object-fit: cover;
+      }
+
+      .container nav .order-link {
+        font-size: 20px;
+        color: var(--navbar-title);
+        letter-spacing: 1px;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .container main {
+        width: 100%;
+        min-height: 700px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0 20px 12px 20px;
+        gap: 24px;
+      }
+
+      .container main .about-food {
+        width: 100%;
+        height: 300px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .food-info {
+        width: auto;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 12px 0;
+        gap: 30px;
+      }
+
+      .food-n-p {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .food-n-p h1,
+      .food-n-p p {
+        color: var(--btn-text);
+        font-family: "Playfair Display", serif;
+      }
+
+      .food-n-p h1 {
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .food-n-p p {
+        font-size: 16px;
+        font-weight: 400;
+      }
+
+      .items {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .item {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 15px;
+        text-align: center;
+      }
+
+      .item p {
+        color: var(--btn-text);
+        font-size: 13px;
+      }
+
+      .food-img-cont {
+        width: 180px;
+        height: 180px;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        filter: drop-shadow(10px 4px 12px black);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .food-img-cont input {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+      }
+
+      .food-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .container main .about-food-text {
+        width: 100%;
+        color: var(--btn-text);
+        font-family: "Playfair Display", serif;
+        font-size: 12px;
+        margin-bottom: 40px;
+        font-weight: 400;
+        line-height: 18px;
+      }
+
+      #uploadButton {
+        padding: 10px 20px;
+        background-color: var(--btn-bg);
+        color: var(--btn-text);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: "Playfair Display", serif;
+      }
+
+      .container footer {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        border-top: 0.5px solid var(--footer-border-top);
+      }
+
+      .container footer a {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        text-decoration: none;
+        color: var(--btn-text);
+        font-family: "Libre Baskerville", serif;
+        font-size: 10px;
+        letter-spacing: 1px;
+      }
+
+      .container footer a img {
+        width: 30px;
+        height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="container">
+      <nav id="menu">
+        <a class="backPreviousPage">
+          <img src="/api/static/icons/left-arrow.svg" alt="back icon" />
+        </a>
+        <a id="orderLink" class="order-link">Add to order</a>
+      </nav>
+      <main>
+        <div class="about-food">
+          <section class="food-info">
+            <div class="food-n-p">
+              <h1 id="name" contenteditable="true">Your meal name here</h1>
+              <p id="price" contenteditable="true">Your meal price here</p>
+            </div>
+            <div class="items">
+              <div class="item">
+                <img src="../icons/time.svg" alt="time icon" />
+                <p id="preparation_time" contenteditable="true">
+                  Meal ready time here
+                </p>
+              </div>
+              <div class="item">
+                <img src="../icons/weight.svg" alt="weight icon" />
+                <p id="meal_weight" contenteditable="true">Meal weight here</p>
+              </div>
+              <div class="item">
+                <img src="../icons/calories.svg" alt="calories icon" />
+                <p id="meal_calories" contenteditable="true">
+                  Meal calories here
+                </p>
+              </div>
+            </div>
+          </section>
+          <div class="food-img-cont">
+            <label for="mealImg">Choose your meal image</label>
+            <input type="file" id="mealImg" accept="image/*" />
+          </div>
+        </div>
+        <p class="about-food-text" id="mealDescription" contenteditable="true">
+          Meal description here
+        </p>
+
+        <div id="selectKindCont"></div>
+        <div id="selectCategoryCont"></div>
+
+        <button id="uploadButton">Upload Menu Item</button>
+      </main>
+      <footer>
+        <a class="backHomePage">
+          <img src="/api/static/icons/home.svg" alt="home" />
+          Home
+        </a>
+        <a href="#menu">
+          <img src="/api/static/icons/menu.svg" alt="menu" />
+          Menu
+        </a>
+        <a href="#">
+          <img src="/api/static/icons/order.svg" alt="order" />
+          Order
+        </a>
+      </footer>
+    </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const access_token = localStorage.getItem("access_token");
+        const selectKindCont = document.getElementById("selectKindCont");
+        const selectCategoryCont =
+          document.getElementById("selectCategoryCont");
+
+        async function fetchKinds(link) {
+          try {
+            const response = await fetch(link, {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${access_token}`,
+              },
+            });
+            if (!response.ok)
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            const data = await response.json();
+            const select = document.createElement("select");
+            select.id = "kind_selects";
+            data.forEach((kind) => {
+              const option = document.createElement("option");
+              option.value = kind.toLowerCase();
+              option.textContent = kind;
+              if (option.value === "food") option.selected = true;
+              select.appendChild(option);
+            });
+            selectKindCont.appendChild(select);
+            select.addEventListener("change", updateCategories);
+          } catch (error) {
+            console.error("Error fetching kinds:", error);
+          }
+        }
+
+        async function updateCategories() {
+          try {
+            const kind = document.getElementById("kind_selects").value;
+            const link = `http://23.20.175.90/api/cafeadmin/api/menu-filter/get-menu-categories-by-kind/${kind}`;
+            const response = await fetch(link, {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${access_token}`,
+              },
+            });
+            if (!response.ok)
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            const data = await response.json();
+            const select = document.createElement("select");
+            select.id = "category_selects";
+            data.forEach((category) => {
+              const option = document.createElement("option");
+              option.value = category.toLowerCase();
+              option.textContent = category;
+              select.appendChild(option);
+            });
+            selectCategoryCont.innerHTML = "";
+            selectCategoryCont.appendChild(select);
+          } catch (error) {
+            console.error("Error fetching categories:", error);
+          }
+        }
+
+        async function addMenuNew(formData, token) {
+          try {
+            const response = await fetch(
+              "http://23.20.175.90/api/cafeadmin/api/menuCRUD/add-menu-new",
+              {
+                method: "POST",
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+                body: formData,
+              }
+            );
+            if (!response.ok) {
+              const errorText = await response.text();
+              throw new Error(
+                `Error: ${response.status} - ${
+                  errorText || "Unprocessable Entity"
+                }`
+              );
+            }
+            const result = await response.json();
+            console.log("Menu item added:", result);
+            alert("Menu item added successfully!");
+          } catch (error) {
+            console.error("Error adding menu item:", error.message);
+            alert(`Failed to add menu item: ${error.message}`);
+          }
+        }
+
+        fetchKinds(
+          "http://23.20.175.90/api/cafeadmin/api/menu-filter/get-menu-all-kinds"
+        );
+        updateCategories();
+
+        document
+          .getElementById("uploadButton")
+          .addEventListener("click", () => {
+            const kind = document.getElementById("kind_selects")?.value;
+            const category = document.getElementById("category_selects")?.value;
+
+            if (!kind || !category) {
+              alert("Please select a kind and category!");
+              return;
+            }
+
+            const formData = new FormData();
+            formData.append("kind", kind);
+            formData.append("category", category);
+
+            const name = document.getElementById("name").textContent.trim();
+            if (!name || name === "Your meal name here") {
+              alert("Please enter a valid meal name!");
+              return;
+            }
+            formData.append("name", name);
+
+            formData.append("quantity", "1 cup");
+
+            const price = document.getElementById("price").textContent.trim();
+            if (!price || isNaN(parseFloat(price))) {
+              alert("Please enter a valid numeric price!");
+              return;
+            }
+            formData.append("price", parseFloat(price));
+
+            const description = document
+              .getElementById("mealDescription")
+              .textContent.trim();
+            if (!description || description === "Meal description here") {
+              alert("Please enter a valid description!");
+              return;
+            }
+            formData.append("description", description);
+
+            formData.append("language", "en");
+
+            const prepTimeElement = document.getElementById("preparation_time");
+            if (!prepTimeElement) {
+              console.error("Preparation time element not found!");
+              alert("Preparation time element not found!");
+              return;
+            }
+            const prepTime = prepTimeElement.textContent.trim();
+            if (!prepTime || isNaN(parseInt(prepTime))) {
+              alert("Please enter a valid numeric preparation time!");
+              return;
+            }
+            formData.append("preparation_time", parseInt(prepTime));
+
+            const weight = document
+              .getElementById("meal_weight")
+              .textContent.trim();
+            if (!weight || isNaN(parseInt(weight))) {
+              alert("Please enter a valid numeric weight!");
+              return;
+            }
+            formData.append("weight", parseInt(weight));
+
+            const calories = document
+              .getElementById("meal_calories")
+              .textContent.trim();
+            if (!calories || isNaN(parseInt(calories))) {
+              alert("Please enter a valid numeric calorie count!");
+              return;
+            }
+            formData.append("calories", parseInt(calories));
+
+            const imageInput = document.getElementById("mealImg");
+            if (imageInput.files.length === 0) {
+              alert("Please select an image!");
+              return;
+            }
+            formData.append("image", imageInput.files[0]);
+
+            if (!access_token) {
+              alert("Authorization token is missing!");
+              return;
+            }
+
+            console.log("FormData being sent:");
+            for (let [key, value] of formData.entries()) {
+              console.log(`${key}: ${value}`);
+            }
+
+            addMenuNew(formData, access_token);
+          });
+      });
+    </script>
+  </body>
+</html>

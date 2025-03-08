@@ -333,7 +333,7 @@
       </main>
       <footer>
         <a href="#" class="backPreviousPage"> Edit a meal </a>
-        <a href="#"> Add a meal </a>
+        <a href="./addMeal.html"> Add a meal </a>
       </footer>
     </section>
     
@@ -349,6 +349,7 @@
         let meals = {};
         let mealCategories;
         let aboutMeal = {};
+        let imgSrc;
         let menuItem = document.createElement('div');
 
         const currentLang = localStorage.getItem("language");
@@ -359,7 +360,7 @@
           ru: "др",
         };
 
-        // API fetcing
+        //Menu API fetcing
         async function fetchingAPI(link) {
           try {
             const response = await fetch(link, {
@@ -403,24 +404,73 @@
 
           menuCont.appendChild(menuItem);
 
+          console.log(mealCategories);
+
+
           let categoryItems = document.querySelectorAll(`.items`);
 
           categoryItems.forEach((item, index) => {
             if(item.classList.contains(mealCategories[index])) {
-              meals[mealCategories[index]].forEach((meal, i) => {
+              meals[mealCategories[index]].forEach(async (meal, i) => {
+                let imgURL = await getImage(
+                                     currentLinkId,
+                                     mealCategories[index],
+                                     meals[mealCategories[index]][i].image_src,
+                                   )
+
+                console.log(meals[mealCategories[index]][i].image_src);
+                
                 item.innerHTML += `
                                     <div data-kind="${meal.kind}" class="item" id="${mealCategories[index] + i} ${meal.id}">
-                                      <img src="${meals[mealCategories[index]][i].image_src}" alt="${meals[mealCategories[index]][i].image_src}" class="item-img" />
+                                      <img src="${imgURL}" alt="${meals[mealCategories[index]][i].image_src}" class="item-img" id="image${mealCategories[index] + i}"/>
                                       <div class="info">
                                         <p class="name">${meals[mealCategories[index]][i].name}</p>
                                         <p class="price">${valuta[currentLang]} ${meals[mealCategories[index]][i].price}</p>
                                       </div>
                                     </div>
                                   `
+                                  
+                
               })
             }
           })
         }, 1500)
+        }
+
+        // Getting meal IMG from API
+        async function getImage(kind, category, filename) {
+          try {
+            const response = await fetch(
+              "http://23.20.175.90/api/cafeadmin/api/menuCRUD/get-image",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization:
+                    `Bearer ${localStorage.getItem('access_token')}`,
+                },
+                body: JSON.stringify({
+                  kind: kind,
+                  category: category,
+                  filename: filename,
+                }),
+              }
+            );
+            
+            if (!response.ok) {
+              throw new Error(
+                `Error: ${response.status} - ${await response.text()}`
+              );
+            }
+          
+            // Convert response to a Blob (binary data)
+            const blob = await response.blob();
+          
+            // Create an object URL to display the image
+            return URL.createObjectURL(blob);
+          } catch (error) {
+            console.error("Error fetching image:", error);
+          }
         }
 
         // Adding event click listener to cards

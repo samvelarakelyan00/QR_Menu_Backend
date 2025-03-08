@@ -1,3 +1,6 @@
+import glob
+import os
+
 from fastapi import Depends, status
 from fastapi.exceptions import HTTPException
 
@@ -110,6 +113,23 @@ class MenuCRUDService:
             )
 
         try:
+            product_kind = product.__dict__.get("kind")
+            product_category = product.__dict__.get("category")
+
+            search_path = f"../../../{product_kind}/{product_category}"
+            image_name = product.__dict__.get('image_src')
+
+            matching_files = glob.glob(f"{search_path}/**/{image_name}", recursive=True)
+
+            if not matching_files:
+                return f"File '{image_name}' not found."
+
+            try:
+                for file_path in matching_files:
+                    os.remove(file_path)
+            except Exception as e:
+                return f"Error deleting {file_path}: {e}"
+
             self.session.delete(product)
             self.session.commit()
         except Exception as err:
