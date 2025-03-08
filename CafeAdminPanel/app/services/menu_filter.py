@@ -2,6 +2,7 @@ from fastapi import Depends, status
 from fastapi.exceptions import HTTPException
 
 # SqlAlchemy
+from sqlalchemy import distinct
 from sqlalchemy.orm.session import Session
 
 # Own
@@ -59,3 +60,34 @@ class MenuFilterService:
             )
 
         return menu_by_kind
+
+    def get_menu_all_kinds(self, horekaclient_id: int):
+        try:
+            kinds = (
+                self.session.query(distinct(models.HoReKaMenu.kind))
+                .filter_by(horekaclient_id=horekaclient_id)
+                .all()
+            )
+        except Exception as err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=str(err)
+            )
+
+        return [kind[0] for kind in kinds]
+
+    def get_menu_all_categories(self, horekaclient_id: int, kind: str):
+        try:
+            categories = (
+                self.session.query(distinct(models.HoReKaMenu.category))
+                .filter_by(horekaclient_id=horekaclient_id)
+                .filter_by(kind=kind)
+                .all()
+            )
+        except Exception as err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=str(err)
+            )
+
+        return [category[0] for category in categories]

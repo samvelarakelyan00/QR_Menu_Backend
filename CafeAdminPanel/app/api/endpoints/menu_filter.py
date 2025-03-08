@@ -43,3 +43,34 @@ def get_menu_by_kind(kind: str,
         )
 
     return menu_crud_service.get_menu_by_kind(horekaclient_id, kind)
+
+
+@router.get("/get-menu-all-kinds")
+def get_menu_all_kinds(
+                menu_filter_service: menu_filter_service.MenuFilterService = Depends(),
+                current_admin=Depends(cafe_admin_auth_service.get_current_admin)):
+    try:
+        horekaclient_id = current_admin.__dict__.get("horekaclient_id")
+    except Exception as err:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=err
+        )
+
+    return menu_filter_service.get_menu_all_kinds(horekaclient_id)
+
+
+@router.get("/get-menu-categories-by-kind/{kind}")
+def get_menu_all_categories(
+                kind: str,
+                menu_filter_service: menu_filter_service.MenuFilterService = Depends(),
+                current_admin=Depends(cafe_admin_auth_service.get_current_admin)):
+    try:
+        horekaclient_id = current_admin.__dict__.get("horekaclient_id")
+    except Exception as err:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=err
+        )
+
+    return menu_filter_service.get_menu_all_categories(horekaclient_id, kind)
