@@ -160,5 +160,192 @@
           login(email, password);
         });
     </script>
+
+    <!-- <script>
+      const admin_menu_API =
+        "http://23.20.175.90/api/cafeadmin/api/menuCRUD/all-menu";
+      const menuToken = localStorage.getItem("access_token");
+      const menuCont = document.querySelector("#menuCont");
+      const navbarLinks = document.querySelectorAll(".link");
+      let currentLinkId = "food";
+      let dataArray = [];
+      let filteredByKind;
+      let meals = {};
+      let mealCategories;
+      let menuItem = document.createElement("div");
+
+      const currentLang = localStorage.getItem("language");
+
+      const valuta = {
+        en: "AMD",
+        hy: "դր",
+        ru: "др",
+      };
+
+      // Menu API fetching
+      async function fetchingAPI(link) {
+        try {
+          const response = await fetch(link, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+          });
+          const data = await response.json();
+          dataArray = data.filter((meal) => meal);
+          console.log(dataArray);
+        } catch (error) {
+          console.log("Error fetching data: ", error);
+        }
+      }
+
+      // Getting meal section data by kind
+      async function updateContent() {
+        meals = {}; // Reset meals for a new content load
+        menuItem.innerHTML = ""; // Reset menu items
+        filteredByKind = dataArray.filter((m) => m.kind === currentLinkId);
+
+        for (let i = 0; i < filteredByKind.length; i++) {
+          const category = filteredByKind[i].category.replace(" ", "");
+          if (!meals[category]) {
+            meals[category] = [];
+          }
+          meals[category].push(filteredByKind[i]);
+        }
+
+        // Dynamically add categories and items
+        mealCategories = Object.keys(meals);
+        mealCategories.forEach((category) => {
+          menuItem.innerHTML += `
+                  <h1>${category}</h1>
+                  <div class="items ${category}" id="${category}"></div>
+              `;
+        });
+
+        menuCont.appendChild(menuItem);
+
+        let categoryItems = document.querySelectorAll(".items");
+        categoryItems.forEach((item, index) => {
+          if (item.classList.contains(mealCategories[index])) {
+            meals[mealCategories[index]].forEach(async (meal, i) => {
+              let imgURL = await getImage(
+                currentLinkId,
+                mealCategories[index],
+                meal.image_src
+              );
+              item.innerHTML += `
+                          <div data-kind="${meal.kind}" class="item" id="${
+                mealCategories[index] + i
+              } ${meal.id}">
+                              <img src="${imgURL}" alt="${
+                meal.name
+              }" class="item-img"/>
+                              <div class="info">
+                                  <p class="name">${meal.name}</p>
+                                  <p class="price">${valuta[currentLang]} ${
+                meal.price
+              }</p>
+                              </div>
+                          </div>
+                      `;
+            });
+          }
+        });
+      }
+
+      // Getting meal IMG from API
+      async function getImage(kind, category, filename) {
+        try {
+          const response = await fetch(
+            "http://23.20.175.90/api/cafeadmin/api/menuCRUD/get-image",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+              },
+              body: JSON.stringify({
+                kind: kind,
+                category: category,
+                filename: filename,
+              }),
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error(
+              `Error: ${response.status} - ${await response.text()}`
+            );
+          }
+
+          const blob = await response.blob();
+          return URL.createObjectURL(blob);
+        } catch (error) {
+          console.error("Error fetching image:", error);
+          return null; // Return null or a fallback image URL if the fetch fails
+        }
+      }
+
+      // Adding event click listener to cards
+      function clickedMealPage() {
+        const itemCards = document.querySelectorAll(".item");
+
+        itemCards.forEach((card) => {
+          card.addEventListener("click", () => {
+            const itemID = Number(card.id.split(" ")[1]); // Extract ID from card
+            const mealData = dataArray.find((meal) => meal.id === itemID);
+
+            if (!mealData) {
+              console.error(`Meal with ID ${itemID} not found in dataArray`);
+              return;
+            }
+
+            const aboutMeal = {
+              name: card.querySelector(".name").innerText,
+              valuta: valuta[currentLang],
+              price: card.querySelector(".price").innerText.split(" ")[1],
+              itemID: itemID,
+              kind: card.getAttribute("data-kind"),
+              category: mealData.category.replace(" ", ""), // Store category
+              filename: mealData.image_src, // Store filename
+              description: mealData.description, // Access description from mealData
+            };
+
+            localStorage.setItem("aboutMeal", JSON.stringify(aboutMeal));
+            window.location = "./adminMenuAboutMeal.html"; // Navigate to the about meal page
+          });
+        });
+      }
+
+      // Getting food links
+      navbarLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          for (let i = 0; i < navbarLinks.length; i++) {
+            navbarLinks[i].classList.remove("active");
+          }
+          link.classList.add("active");
+
+          currentLinkId = link.textContent.toLocaleLowerCase();
+
+          meals = {};
+          menuItem.innerHTML = "";
+
+          updateContent();
+          clickedMealPage();
+          console.log(meals);
+        });
+      });
+
+      // Fetch data and render menu content
+      async function fetchDataAndRender() {
+        await fetchingAPI(admin_menu_API); // Fetch menu data
+        await updateContent(); // Render menu items
+        clickedMealPage(); // Attach event listeners to meal cards
+      }
+
+      // Initial data load and event binding
+      window.onload = fetchDataAndRender;
+    </script> -->
   </body>
 </html>

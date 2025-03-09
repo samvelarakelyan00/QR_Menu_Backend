@@ -309,7 +309,7 @@
   <body>
     <section class="container">
       <nav id="menu">
-        <a href="#" class="backPreviousPage">
+        <a href="#" class="backPreviousPage" id="backPreviousPage">
           <img src="/api/static/icons/left-arrow.svg" alt="icon"
         /></a>
         <p href="#" id="editLink" class="edit-link">Click to edit</p>
@@ -388,17 +388,23 @@
       const storedMeal = JSON.parse(localStorage.getItem("aboutMeal"));
 
       console.log(storedMeal);
+      let blobURL = storedMeal.img_url;
       const mealName = document.getElementById("name");
       const mealAmount = document.getElementById("amount");
       const mealPrice = document.getElementById("price");
       const mealIMG = document.getElementById("foodImg");
       const mealDesc = document.getElementById("mealDescription");
 
-      console.log(mealPrice.innerText);
-
       const update_API_URL = `http://23.20.175.90/api/cafeadmin/api/menuCRUD/update-product/${storedMeal.itemID}`;
       const saveBtn = document.getElementById("saveCahngesBtn");
       const popUp = document.querySelector(".popup");
+
+      const backPreviousPage = document.getElementById("backPreviousPage");
+
+      backPreviousPage.addEventListener("click", () => {
+        window.location.href =
+          "http://23.20.175.90/api/cafeadmin/cafe-admin-menu";
+      });
 
       // Save Changes
       async function saveChanges(link) {
@@ -452,7 +458,7 @@
         mealAmount.innerText = storedMeal.valuta;
         mealPrice.innerText = storedMeal.price;
         mealIMG.src = storedMeal.img_url;
-        mealDesc.innerText = storedMeal.description;
+        mealIMG.src = mealDesc.innerText = storedMeal.description;
       }
 
       /*
@@ -466,7 +472,7 @@
         const closePopUpBtn = document.querySelector(".closePopUp");
 
         closePopUpBtn.addEventListener("click", () => {
-          // Real link -> փոխելու կարիք չկա ներկա պահին, աշղատումա close-ով popup-ը
+          // Real link -> փոխելու կարիք չկա ներկա պահին, աշխատումա close-ով popup-ը
           // window.location = 'http://23.20.175.90/api/cafeadmin/cafe-admin-menu'
 
           popUp.classList.remove("popup-on");

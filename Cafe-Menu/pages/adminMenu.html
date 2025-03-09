@@ -302,7 +302,7 @@
   <body>
     <section class="container">
       <nav id="menu">
-        <a class="backPreviousPage">
+        <a class="backPreviousPage" id="backPreviousPage">
           <img src="/api/static/icons/left-arrow.svg" alt="icon"
         /></a>
         <h1 id="menuTitle" class="title-on">Menu</h1>
@@ -351,7 +351,7 @@
         let aboutMeal = {};
         let imgSrc;
         let menuItem = document.createElement('div');
-
+        
         const currentLang = localStorage.getItem("language");
 
         const valuta = {
@@ -372,14 +372,10 @@
             });
             const data = await response.json();
             dataArray = data.filter(meal => meal);
-            console.log(dataArray);
-            console.log((meals))
-
           } catch (error) {
             console.log("Error fetching data: ", error);
           }
         }
-        
 
         // Getting meal section data by kind
         function updateContent() {
@@ -421,16 +417,14 @@
                 console.log(meals[mealCategories[index]][i].image_src);
                 
                 item.innerHTML += `
-                                    <div data-kind="${meal.kind}" class="item" id="${mealCategories[index] + i} ${meal.id}">
-                                      <img src="${imgURL}" alt="${meals[mealCategories[index]][i].image_src}" class="item-img" id="image${mealCategories[index] + i}"/>
+                                    <div data-kind="${meal.kind}" data-category="${meal.category}" class="item" id="${mealCategories[index] + i} ${meal.id}">
+                                      <img src="${imgURL}" alt="${imgURL}" class="item-img" id="image${mealCategories[index] + i}"/>
                                       <div class="info">
                                         <p class="name">${meals[mealCategories[index]][i].name}</p>
                                         <p class="price">${valuta[currentLang]} ${meals[mealCategories[index]][i].price}</p>
                                       </div>
                                     </div>
                                   `
-                                  
-                
               })
             }
           })
@@ -477,8 +471,9 @@
         function clickedMealPage() {
           setTimeout(() => {
             const itemCards = document.querySelectorAll('.item');
+            const childs = document.querySelectorAll('.item-img');
           
-            itemCards.forEach((card) => {
+            itemCards.forEach((card, index) => {
               card.addEventListener('click', () => {
                 const itemID = Number(card.id.split(' ')[1]); // Ensure it's a number
               
@@ -489,13 +484,14 @@
                   return;
                 }
               
-                const aboutMeal = {
+                let aboutMeal = {
                   name: card.querySelector('.name').innerText,
-                  img_url: card.querySelector('img').src,
+                  img_url: card.querySelector('.item-img').src,
                   valuta: valuta[currentLang],
                   price: card.querySelector('.price').innerText.split(' ')[1],
                   itemID: itemID,
                   kind: card.getAttribute('data-kind'),
+                  category: card.getAttribute('data-category'),
                   description: mealData.description // Now correctly accessing it
                 };
               
@@ -503,7 +499,7 @@
                 window.location = './adminMenuAboutMeal.html';
               })
             })
-          }, 1600)
+          }, 3000)
         }
 
         // Getting food links
@@ -525,6 +521,11 @@
             console.log(meals);
           })
         })
+
+        /*
+          Ավելացնել իվենթ լիսեներ կարտչկեքին ուտելիքների
+          համ ադմինկում համ սովորական մենյուում
+        */
 
         window.onload = (updateContent(), clickedMealPage(),fetchingAPI(admin_menu_API));
 
