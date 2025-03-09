@@ -63,7 +63,7 @@ async def add_menu_new(
     try:
         horekaclient_id = current_admin.__dict__.get("horekaclient_id")
 
-        UPLOAD_FOLDER = f"../../../{kind}/{category}/"
+        UPLOAD_FOLDER = f"../../../{kind.replace(' ', '')}/{category.replace(' ', '')}/"
         # Generate a unique filename
         file_extension = image.filename.split(".")[-1]
         unique_filename = f"{uuid.uuid4()}.{file_extension}"

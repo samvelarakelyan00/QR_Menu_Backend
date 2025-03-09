@@ -113,8 +113,8 @@ class MenuCRUDService:
             )
 
         try:
-            product_kind = product.__dict__.get("kind")
-            product_category = product.__dict__.get("category")
+            product_kind = product.__dict__.get("kind").replace(" ", "")
+            product_category = product.__dict__.get("category").replace(" ", "")
 
             search_path = f"../../../{product_kind}/{product_category}"
             image_name = product.__dict__.get('image_src')
