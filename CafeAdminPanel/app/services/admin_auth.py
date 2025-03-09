@@ -38,7 +38,7 @@ def get_current_admin(token: str = Depends(oauth2_schema)):
         return current_admin
     except Exception as err:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
-                            detail=err)
+                            detail=str(err))
 
 
 class CafeAdminAuthService:
@@ -63,7 +63,7 @@ class CafeAdminAuthService:
             )
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+                                detail=str(err))
         try:
             payload = jwt.decode(
                 token,
@@ -71,16 +71,13 @@ class CafeAdminAuthService:
                 algorithms=["HS256"]
             )
         except JWTError:
-            HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail="Error!"
-            )
+            raise exception
 
         try:
             admin_data = payload.get('cafe_admin')
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+                                detail=str(err))
 
         try:
             admin = CafeAdminOut.parse_obj(admin_data)
@@ -95,7 +92,7 @@ class CafeAdminAuthService:
             admin_data = CafeAdminOut.from_orm(admin)
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+                                detail=str(err))
 
         try:
             now = datetime.datetime.utcnow()
@@ -105,20 +102,20 @@ class CafeAdminAuthService:
             }
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+                                detail=str(err))
 
         try:
             token = jwt.encode(payload, "cafesecret", algorithm="HS256")
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+                                detail=str(err))
 
         try:
             access_token = Token(access_token=token)
             return access_token
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+                                detail=str(err))
 
     def __init__(self, session: Session = Depends(get_session)):
         self.session = session
@@ -129,13 +126,13 @@ class CafeAdminAuthService:
             password = login_data.password
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+                                detail=str(err))
 
         try:
             admin = self.session.query(models.HoReKaAdmin).filter_by(email=email).first()
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+                                detail=str(err))
         if admin is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                                 detail="Wrong Data")
@@ -144,7 +141,7 @@ class CafeAdminAuthService:
             password_from_db = admin.__dict__.get('password')
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+                                detail=str(err))
 
         if not self.verify_password(password, password_from_db):
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
@@ -154,6 +151,6 @@ class CafeAdminAuthService:
             access_token = self.create_token(admin)
         except Exception as err:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+                                detail=str(err))
 
         return access_token
