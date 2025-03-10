@@ -302,9 +302,9 @@
   <body>
     <section class="container">
       <nav id="menu">
-        <a class="backPreviousPage" id="backPreviousPage">
-          <img src="/api/static/icons/left-arrow.svg" alt="icon"
-        /></a>
+        <button class="backPreviousPage" id="backPreviousPage">
+          <img src="../static/icons/left-arrow.svg" alt="icon"
+        /></button>
         <h1 id="menuTitle" class="title-on">Menu</h1>
         <div class="formSection">
           <input
@@ -314,7 +314,7 @@
             id="searchBar"
           />
           <button id="searchBtn">
-            <img src="/api/static/icons/search.svg" alt="search" />
+            <img src="../static/icons/search.svg" alt="search" />
           </button>
         </div>
       </nav>
@@ -343,6 +343,7 @@
         const menuToken = localStorage.getItem("access_token");
         const menuCont = document.querySelector("#menuCont");
         const navbarLinks = document.querySelectorAll(".link");
+        const backPreviousPage = document.getElementById('backPreviousPage')
         let currentLinkId = "food";
         let dataArray = [];
         let filteredByKind;
@@ -350,15 +351,19 @@
         let mealCategories;
         let aboutMeal = {};
         let imgSrc;
-        let menuItem = document.createElement('div');
-        
+        let menuItem = document.createElement('div');        
         const currentLang = localStorage.getItem("language");
-
         const valuta = {
           en: "AMD",
           hy: "դր",
           ru: "др",
         };
+
+        // Previous page logic
+        backPreviousPage.addEventListener('click', () => {
+          // window.location.href = "http://23.20.175.90/api/cafeadmin/cafe-admin-my-account";
+          window.location.href = './cafeAdminMyAccount.html'
+        })
 
         //Menu API fetcing
         async function fetchingAPI(link) {
@@ -400,25 +405,15 @@
 
           menuCont.appendChild(menuItem);
 
-          console.log(mealCategories);
-
-
           let categoryItems = document.querySelectorAll(`.items`);
 
           categoryItems.forEach((item, index) => {
             if(item.classList.contains(mealCategories[index])) {
               meals[mealCategories[index]].forEach(async (meal, i) => {
-                let imgURL = await getImage(
-                                     currentLinkId,
-                                     mealCategories[index],
-                                     meals[mealCategories[index]][i].image_src,
-                                   )
-
-                console.log(meals[mealCategories[index]][i].image_src);
                 
                 item.innerHTML += `
                                     <div data-kind="${meal.kind}" data-category="${meal.category}" class="item" id="${mealCategories[index] + i} ${meal.id}">
-                                      <img src="${imgURL}" alt="${imgURL}" class="item-img" id="image${mealCategories[index] + i}"/>
+                                      <img src="${meal.image_src}" alt="{imgURL}" class="item-img" id="image${mealCategories[index] + i}"/>
                                       <div class="info">
                                         <p class="name">${meals[mealCategories[index]][i].name}</p>
                                         <p class="price">${valuta[currentLang]} ${meals[mealCategories[index]][i].price}</p>
@@ -429,42 +424,6 @@
             }
           })
         }, 1500)
-        }
-
-        // Getting meal IMG from API
-        async function getImage(kind, category, filename) {
-          try {
-            const response = await fetch(
-              "http://23.20.175.90/api/cafeadmin/api/menuCRUD/get-image",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization:
-                    `Bearer ${localStorage.getItem('access_token')}`,
-                },
-                body: JSON.stringify({
-                  kind: kind,
-                  category: category,
-                  filename: filename,
-                }),
-              }
-            );
-            
-            if (!response.ok) {
-              throw new Error(
-                `Error: ${response.status} - ${await response.text()}`
-              );
-            }
-          
-            // Convert response to a Blob (binary data)
-            const blob = await response.blob();
-          
-            // Create an object URL to display the image
-            return URL.createObjectURL(blob);
-          } catch (error) {
-            console.error("Error fetching image:", error);
-          }
         }
 
         // Adding event click listener to cards
@@ -486,7 +445,7 @@
               
                 let aboutMeal = {
                   name: card.querySelector('.name').innerText,
-                  img_url: card.querySelector('.item-img').src,
+                  img_url: card.querySelector('img').src,
                   valuta: valuta[currentLang],
                   price: card.querySelector('.price').innerText.split(' ')[1],
                   itemID: itemID,
@@ -518,17 +477,10 @@
             
             updateContent();
             clickedMealPage();
-            console.log(meals);
           })
         })
 
-        /*
-          Ավելացնել իվենթ լիսեներ կարտչկեքին ուտելիքների
-          համ ադմինկում համ սովորական մենյուում
-        */
-
         window.onload = (updateContent(), clickedMealPage(),fetchingAPI(admin_menu_API));
-
     </script>    
   </body>
 </html>
