@@ -337,15 +337,15 @@
       </main>
       <footer>
         <a class="backPreviousPage">
-          <img src="../static/icons/home.svg" alt="home" />
+          <img src="/api/static/icons/home.svg" alt="home" />
           Home
         </a>
         <a href="#menu">
-          <img src="../static/icons/menu.svg" alt="menu" />
+          <img src="/api/static/icons/menu.svg" alt="menu" />
           Menu
         </a>
         <a href="#">
-          <img src="../static/icons/order.svg" alt="order" />
+          <img src="/api/static/icons/order.svg" alt="order" />
           Order
         </a>
       </footer>
@@ -364,6 +364,8 @@
       let mealCategories;
       let aboutMeal = {};
       let menuItem = document.createElement("div");
+      const backPreviousPageBtns =
+        document.querySelectorAll(".backPreviousPage");
 
       const currentLang = localStorage.getItem("language");
 
@@ -372,6 +374,14 @@
         hy: "դր",
         ru: "др",
       };
+
+      // backPreviousPage bt event listener
+      backPreviousPageBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          // Real Link
+          window.location.href = `http://3.93.76.24/api/${cafeIdIndex}`;
+        });
+      });
 
       // API fetcing
       async function fetchingAPI(link) {
@@ -429,7 +439,7 @@
                   mealCategories[index] + i
                 } ${meal.id}">
                               <div class="likeBtn">
-                                <img src="../static/icons/liked.svg" alt="liked" />
+                                <img src="/api/static/icons/liked.svg" alt="liked" />
                               </div>
                                     <img src="${meal.image_src}" alt="${
                   meal.image_src
@@ -477,7 +487,12 @@
               };
 
               localStorage.setItem("aboutMeal", JSON.stringify(aboutMeal));
-              window.location = "./about-meal.html";
+              // Real Link
+              window.location.href =
+                "http://3.93.76.24/api/cafe/menu/get-about-meal";
+
+              // Test Link
+              // window.location.href = "./about-meal.html";
             });
           });
         }, 1600);
