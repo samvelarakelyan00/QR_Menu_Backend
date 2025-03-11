@@ -416,7 +416,7 @@
                 
                 item.innerHTML += `
                                     <div data-kind="${meal.kind}" data-category="${meal.category}" class="item" id="${mealCategories[index] + i} ${meal.id}">
-                                      <img src="${meal.image_src}" alt="{imgURL}" class="item-img" id="image${mealCategories[index] + i}"/>
+                                      <img src="${meal.image_src}" alt="${meal.image_src}" class="item-img" id="image${mealCategories[index] + i}"/>
                                       <div class="info">
                                         <p class="name">${meals[mealCategories[index]][i].name}</p>
                                         <p class="price">${valuta[currentLang]} ${meals[mealCategories[index]][i].price}</p>
