@@ -381,7 +381,7 @@
       const mealIMG = document.getElementById("foodImg");
       const mealDesc = document.getElementById("mealDescription");
 
-      const update_API_URL = `http://23.20.175.90/api/cafeadmin/api/menuCRUD/update-product/${storedMeal.itemID}`;
+      const update_API_URL = `http://3.93.76.24/api/cafeadmin/api/menuCRUD/update-product/${storedMeal.itemID}`;
       const saveBtn = document.getElementById("saveCahngesBtn");
       const popUp = document.querySelector(".popup");
 
@@ -390,7 +390,7 @@
       backPreviousPage.forEach((btn) => {
         btn.addEventListener("click", () => {
           window.location.href =
-            "http://23.20.175.90/api/cafeadmin/cafe-admin-menu";
+            "http://3.93.76.24/api/cafeadmin/cafe-admin-menu";
         });
       });
 
@@ -462,7 +462,7 @@
 
         closePopUpBtn.addEventListener("click", () => {
           // Real link -> փոխելու կարիք չկա ներկա պահին, աշխատումա close-ով popup-ը
-          // window.location = 'http://23.20.175.90/api/cafeadmin/cafe-admin-menu'
+          // window.location = 'http://3.93.76.24/api/cafeadmin/cafe-admin-menu'
 
           popUp.classList.remove("popup-on");
         });

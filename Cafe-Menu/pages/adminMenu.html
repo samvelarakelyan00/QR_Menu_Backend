@@ -339,7 +339,7 @@
     
     <script>
         const admin_menu_API =
-              "http://23.20.175.90/api/cafeadmin/api/menuCRUD/all-menu";
+              "http://3.93.76.24/api/cafeadmin/api/menuCRUD/all-menu";
         const menuToken = localStorage.getItem("access_token");
         const menuCont = document.querySelector("#menuCont");
         const navbarLinks = document.querySelectorAll(".link");
@@ -361,7 +361,7 @@
 
         // Previous page logic
         backPreviousPage.addEventListener('click', () => {
-          // window.location.href = "http://23.20.175.90/api/cafeadmin/cafe-admin-my-account";
+          // window.location.href = "http://3.93.76.24/api/cafeadmin/cafe-admin-my-account";
           window.location.href = './cafeAdminMyAccount.html'
         })
 
@@ -455,6 +455,7 @@
                 };
               
                 localStorage.setItem('aboutMeal', JSON.stringify(aboutMeal));
+                // ------------------------------------------
                 window.location = './adminMenuAboutMeal.html';
               })
             })

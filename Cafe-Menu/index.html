@@ -133,7 +133,7 @@
       <img alt="Cafe Logo" class="main-page-icon" id="r-logo" />
       <div class="info">
         <h1 id="welcome-message"></h1>
-        <a href="http://23.20.175.90/api/cafe/menu/get-menu">Menu</a>
+        <a href="http://3.93.76.24/api/cafe/menu/get-menu">Menu</a>
         <!-- <a href="pages/menu.html">Menu</a> -->
       </div>
     </section>
@@ -143,7 +143,7 @@
       const currentURL = window.location.href;
 
       // Test Link
-      // const currentURL = `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/1`;
+      // const currentURL = `http://3.93.76.24/api/api/menu-filter/by-horekaclient-id/1`;
       const segments = currentURL.split("/");
       const indexURL = segments[segments.length - 1]; // Get the last part of the URL
 
@@ -186,12 +186,12 @@
 
       // Real Link
       FetchingAPI(
-        `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/${indexURL}`
+        `http://3.93.76.24/api/api/menu-filter/by-horekaclient-id/${indexURL}`
       );
 
       // Test Link
       // FetchingAPI(
-      //   `http://23.20.175.90/api/api/menu-filter/by-horekaclient-id/1`
+      //   `http://3.93.76.24/api/api/menu-filter/by-horekaclient-id/1`
       // );
     </script>
   </body>

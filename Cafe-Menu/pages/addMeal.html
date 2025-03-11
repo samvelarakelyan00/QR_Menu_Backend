@@ -231,7 +231,7 @@
     <section class="container">
       <nav id="menu">
         <a class="backPreviousPage">
-          <img src="/api/static/icons/left-arrow.svg" alt="back icon" />
+          <img src="../static/icons/left-arrow.svg" alt="back icon" />
         </a>
         <a id="orderLink" class="order-link">Add to order</a>
       </nav>
@@ -329,7 +329,7 @@
         async function updateCategories() {
           try {
             const kind = document.getElementById("kind_selects").value;
-            const link = `http://23.20.175.90/api/cafeadmin/api/menu-filter/get-menu-categories-by-kind/${kind}`;
+            const link = `http://3.93.76.24/api/cafeadmin/api/menu-filter/get-menu-categories-by-kind/${kind}`;
             const response = await fetch(link, {
               method: "GET",
               headers: {
@@ -358,7 +358,7 @@
         async function addMenuNew(formData, token) {
           try {
             const response = await fetch(
-              "http://23.20.175.90/api/cafeadmin/api/menuCRUD/add-menu-new",
+              "http://3.93.76.24/api/cafeadmin/api/menuCRUD/add-menu-new",
               {
                 method: "POST",
                 headers: {
@@ -385,7 +385,7 @@
         }
 
         fetchKinds(
-          "http://23.20.175.90/api/cafeadmin/api/menu-filter/get-menu-all-kinds"
+          "http://3.93.76.24/api/cafeadmin/api/menu-filter/get-menu-all-kinds"
         );
         updateCategories();
 

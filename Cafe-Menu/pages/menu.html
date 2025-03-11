@@ -337,23 +337,22 @@
       </main>
       <footer>
         <a class="backPreviousPage">
-          <img src="/api/static/icons/home.svg" alt="home" />
+          <img src="../static/icons/home.svg" alt="home" />
           Home
         </a>
         <a href="#menu">
-          <img src="/api/static/icons/menu.svg" alt="menu" />
+          <img src="../static/icons/menu.svg" alt="menu" />
           Menu
         </a>
         <a href="#">
-          <img src="/api/static/icons/order.svg" alt="order" />
+          <img src="../static/icons/order.svg" alt="order" />
           Order
         </a>
       </footer>
     </section>
 
     <script>
-      const admin_menu_API =
-        "http://23.20.175.90/api/api/menu-filter/all-menu/";
+      const admin_menu_API = "http://3.93.76.24/api/api/menu-filter/all-menu/";
       const cafeIdIndex = localStorage.getItem("cafeIdIndex");
       const admin_menu_API_Link = admin_menu_API + cafeIdIndex;
       const menuCont = document.querySelector("#menuCont");
@@ -461,7 +460,7 @@
       async function getImage(kind, category, filename) {
         try {
           const response = await fetch(
-            "http://23.20.175.90/api/cafeadmin/api/menuCRUD/get-image",
+            "http://3.93.76.24/api/cafeadmin/api/menuCRUD/get-image",
             {
               method: "POST",
               headers: {
