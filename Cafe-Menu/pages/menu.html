@@ -433,27 +433,29 @@
             if (item.classList.contains(mealCategories[index])) {
               meals[mealCategories[index]].forEach(async (meal, i) => {
                 item.innerHTML += `
-                                  <div data-kind="${
-                                    meal.kind
-                                  }" class="item" id="${
+                                    <div data-kind="${
+                                      meal.kind
+                                    }" class="item" id="${
                   mealCategories[index] + i
                 } ${meal.id}">
-                              <div class="likeBtn">
-                                <img src="/api/static/icons/liked.svg" alt="liked" />
-                              </div>
-                                    <img src="${meal.image_src}" alt="${
+                                <div class="likeBtn">
+                                  <img src="/api/static/icons/liked.svg" alt="liked" />
+                                </div>
+                                      <img src="${meal.image_src}" alt="${
                   meal.image_src
                 }" class="item-img" />
-                                    <div class="info">
-                                      <p class="name">${
-                                        meals[mealCategories[index]][i].name
-                                      }</p>
-                                      <p class="price">${valuta[currentLang]} ${
+                                      <div class="info">
+                                        <p class="name">${
+                                          meals[mealCategories[index]][i].name
+                                        }</p>
+                                        <p class="price">${
+                                          valuta[currentLang]
+                                        } ${
                   meals[mealCategories[index]][i].price
                 }</p>
+                                      </div>
                                     </div>
-                                  </div>
-                                `;
+                                  `;
               });
             }
           });
