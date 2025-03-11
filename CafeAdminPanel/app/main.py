@@ -37,23 +37,28 @@ def main():
 
 
 @app.get("/cafe-admin-panel")
-def index():
+def cafe_admin_panel():
     return FileResponse('../../Cafe-Menu/pages/cafeAdminLogin.html')
 
 
 @app.get("/cafe-admin-my-accout-page")
-def index():
+def admin_my_accout():
     return FileResponse('../../Cafe-Menu/pages/cafeAdminMyAccount.html')
 
 
 @app.get("/cafe-admin-menu")
-def index():
+def admin_menu():
     return FileResponse('../../Cafe-Menu/pages/adminMenu.html')
 
 
 @app.get("/cafe-admin-menu-about-meal")
-def index():
+def admin_about_meal():
     return FileResponse('../../Cafe-Menu/pages/adminMenuAboutMeal.html')
+
+
+@app.get("/cafe-admin-menu-add-meal")
+def admin_add_meal():
+    return FileResponse('../../Cafe-Menu/pages/addMeal.html')
 
 
 app.include_router(router)

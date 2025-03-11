@@ -333,7 +333,10 @@
       </main>
       <footer>
         <a href="#" class="backPreviousPage"> Edit a meal </a>
-        <a href="./addMeal.html"> Add a meal </a>
+        <!-- Real Link -->
+        <a href="http://3.93.76.24/api/cafeadmin/cafe-admin-menu-add-meal">Add a meal</a>
+        <!-- Test Link -->
+        <!-- <a href="./addMeal.html"> Add a meal </a> -->
       </footer>
     </section>
     
@@ -361,8 +364,8 @@
 
         // Previous page logic
         backPreviousPage.addEventListener('click', () => {
-          // window.location.href = "http://3.93.76.24/api/cafeadmin/cafe-admin-my-account";
-          window.location.href = './cafeAdminMyAccount.html'
+          window.location.href = "http://3.93.76.24/api/cafeadmin/cafe-admin-my-accout-page";
+          // window.location.href = './cafeAdminMyAccount.html'
         })
 
         //Menu API fetcing
@@ -423,7 +426,7 @@
               })
             }
           })
-        }, 1500)
+        }, 1000)
         }
 
         // Adding event click listener to cards
@@ -456,10 +459,14 @@
               
                 localStorage.setItem('aboutMeal', JSON.stringify(aboutMeal));
                 // ------------------------------------------
-                window.location = './adminMenuAboutMeal.html';
+                // Real Link
+                window.location.href = 'http://3.93.76.24/api/cafeadmin/cafe-admin-menu-about-meal'
+
+                // Test Link
+                // window.location.href = './adminMenuAboutMeal.html';
               })
             })
-          }, 3000)
+          }, 2000)
         }
 
         // Getting food links
