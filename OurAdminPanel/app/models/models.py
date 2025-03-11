@@ -55,7 +55,7 @@ class HoReKaMenu(Base):
     quantity = Column(String, nullable=False)
     price = Column(Float, nullable=False)
     description = Column(String, nullable=False)
-    image_src = Column(String, nullable=True)
+    image_src = Column(String, nullable=False)
     language = Column(String, nullable=False)
 
     preparation_time = Column(Float, nullable=True)
