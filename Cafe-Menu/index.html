@@ -52,28 +52,23 @@
         opacity: 0.6;
       }
 
-      .main .title {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 24px;
-        color: var(--titleColor);
-        font-weight: 400;
-      }
-
-      .main .language {
-        width: auto;
+      .main .banner {
+        width: 100%;
         height: auto;
-        padding: 8px 12px;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
+        justify-content: space-evenly;
         align-items: center;
-        gap: 12px;
-        font-size: 24px;
-        position: absolute;
-        top: 42px;
-        right: 16px;
+
+        .title {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 24px;
+          color: var(--titleColor);
+          font-weight: 400;
+        }
 
         select {
+          width: auto;
+          height: auto;
           padding: 4px 12px;
           background-color: transparent;
           border: 2px solid black;
@@ -146,20 +141,20 @@
   <body>
     <section class="main">
       <img alt="" id="body-bg" class="body-bg" />
-      <h1 class="title" id="r-title"></h1>
-      <div class="info">
-        <h1 id="welcome-message"></h1>
-        <a href="http://3.93.76.24/api/cafe/menu/get-menu">Go to menu</a>
-        <!-- <a href="pages/menu.html">Go to menu</a> -->
-      </div>
-      <img alt="Cafe Logo" class="main-page-icon" id="r-logo" />
-      <div class="language">
+      <div class="banner">
+        <h1 class="title" id="r-title"></h1>
         <select name="languages" id="language">
           <option class="lang" value="en" selected>English</option>
           <option class="lang" value="ru">Russian</option>
           <option class="lang" value="hy">Armenian</option>
         </select>
       </div>
+      <div class="info">
+        <h1 id="welcome-message"></h1>
+        <a href="http://3.93.76.24/api/cafe/menu/get-menu">Go to menu</a>
+        <!-- <a href="pages/menu.html">Go to menu</a> -->
+      </div>
+      <img alt="Cafe Logo" class="main-page-icon" id="r-logo" />
     </section>
 
     <script>

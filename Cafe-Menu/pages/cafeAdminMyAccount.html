@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cafe Menu</title>
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+IT+Trad:wght@100..400&display=swap");
 
@@ -22,6 +25,7 @@
         padding: 0;
         box-sizing: border-box;
         scroll-behavior: smooth;
+        font-family: "Roboto", sans-serif;
       }
 
       body {
@@ -34,118 +38,287 @@
 
       .container {
         width: 100%;
-        min-height: 810px;
-        background-color: var(--body-bg);
+        max-width: 480px;
+        min-height: 100vh;
+        padding: 20px;
+        box-sizing: border-box;
+        position: relative; /* Needed for absolute positioning of menu */
+        background: #121212;
+        color: #ffffff;
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        justify-content: space-between;
       }
 
-      .container nav {
-        width: 100%;
-        height: 60px;
+      .top-bar {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        padding: 0px 12px;
-        overflow: hidden;
+        margin-bottom: 20px;
       }
 
-      .container nav .title {
-        color: var(--menu-title-text);
-        scale: 1;
-        transition: scale 1.2s;
-      }
-
-      .container main {
-        width: 100%;
-        min-height: 600px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .container main button {
-        padding: 6px 12px;
-        background-color: #b35c32;
-        border: none;
+      .language-selector span {
+        margin: 0 5px;
         cursor: pointer;
-        color: white;
+      }
+
+      .burger-menu {
+        cursor: pointer;
         font-size: 24px;
       }
 
-      .container footer {
-        width: 100%;
-        height: 100px;
+      /* Menu Items Styles */
+      .menu-items {
+        position: absolute;
+        top: 60px; /* Adjust as needed */
+        right: 20px;
+        background-color: #2a2a2a;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: none; /* Initially hidden */
+        flex-direction: column;
+        padding: 10px;
+        z-index: 10; /* Ensure it's on top */
+      }
+
+      .menu-items.show-menu {
+        display: flex; /* Show the menu */
+      }
+
+      .menu-item {
         display: flex;
-        justify-content: space-evenly;
         align-items: center;
-        border-top: 0.5px solid var(--footer-border-top);
-
-        a {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          gap: 4px;
-          text-decoration: none;
-          color: var(--btn-text);
-          font-family: "Libre Baskerville", serif;
-          font-size: 10px;
-          letter-spacing: 1px;
-
-          img {
-            width: 30px;
-            height: 30px;
-          }
-        }
+        padding: 10px;
+        text-decoration: none;
+        color: #fff;
+        transition: background-color 0.2s ease;
+        cursor: pointer;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
       }
 
-      @media screen and (max-width: 376px) {
-        .container nav .formSection .disabled-searchbar {
-          left: -750%;
-        }
-
-        .container nav .formSection .enabled-searchbar {
-          left: -750%;
-        }
+      .menu-item:hover {
+        background-color: #333;
       }
 
-      @media screen and (max-width: 321px) {
-        .container nav .formSection .disabled-searchbar {
-          left: -650%;
-        }
+      .menu-item i {
+        margin-right: 10px;
+        color: #b35c32;
+      }
 
-        .container nav .formSection .enabled-searchbar {
-          left: -650%;
-        }
+      .header-image img {
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
 
-        .container main .links {
-          gap: 45px;
-        }
+      .account-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .account-title h1 {
+        font-size: 24px;
+      }
+
+      .welcome-message {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .account-details {
+        background-color: #2a2a2a;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+
+      .detail-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .detail-item i {
+        margin-right: 10px;
+        color: #b35c32; /* Use your accent color */
+      }
+
+      .date-range {
+        margin-left: auto;
+        font-size: 14px;
+        color: #999;
+      }
+
+      /* Contact, Social Media, Payment, Footer, Copyright (unchanged) */
+      .contact-us,
+      .social-media {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+
+      .contact-item i {
+        margin-right: 10px;
+        color: #b35c32;
+      }
+
+      .social-icons {
+        display: flex;
+        justify-content: center;
+      }
+
+      .social-icons i {
+        margin: 0 10px;
+        font-size: 20px;
+      }
+
+      .payment-methods {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .payment-methods img {
+        margin: 0 10px;
+        height: 27px; /* Adjust image size */
+      }
+
+      .footer-links {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .footer-links a {
+        margin: 0 10px;
+        color: #999;
+        text-decoration: none;
+      }
+
+      .copyright {
+        text-align: center;
+        font-size: 12px;
+        color: #999;
       }
     </style>
   </head>
   <body>
     <section class="container">
-      <nav id="menu">
-        <h1 id="menuTitle" class="title">My account</h1>
-      </nav>
       <main>
-        <button id="viewEditMenu">View/Edit Menu</button>
+        <div class="container">
+          <div class="top-bar">
+            <div class="language-selector">
+              <span>EN</span> <span>RU</span> <span>AM</span>
+            </div>
+            <div class="burger-menu">
+              <i class="fas fa-bars"></i>
+            </div>
+          </div>
+
+          <div class="menu-items">
+            <a href="#" class="menu-item">
+              <i class="fas fa-tag"></i> Pricing
+            </a>
+            <!-- Real Link -->
+            <a
+              href="http://3.93.76.24/api/cafeadmin/cafe-admin-menu"
+              class="menu-item"
+            >
+              <i class="fas fa-utensils"></i> View/Edit Menu
+            </a>
+            <!-- Test Link -->
+            <!-- <a href="./adminMenu.html" class="menu-item">
+              <i class="fas fa-utensils"></i> View/Edit Menu
+            </a> -->
+            <button class="menu-item logout-btn">
+              <i class="fas fa-sign-out-alt"></i> Log Out
+            </button>
+          </div>
+
+          <div class="account-title">
+            <h1>My Account</h1>
+            <i class="fas fa-pencil-alt"></i>
+          </div>
+
+          <div class="welcome-message">
+            <p>Welcome to Your Menu Admin Panel!</p>
+          </div>
+
+          <div class="account-details">
+            <div class="detail-item">
+              <i class="fas fa-store"></i> <span>Cafe Example</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-user"></i> <span>John Doe</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-envelope"></i> <span>john.doe@example.com</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-gem"></i> <span>Basic Plan</span>
+              <span class="date-range">Expires: 2024-12-31</span>
+            </div>
+          </div>
+
+          <div class="contact-us">
+            <h2>Contact Us</h2>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>samvel.arakelyan00@gmail.com</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-phone"></i> <span>077-34-48-78</span>
+            </div>
+          </div>
+
+          <div class="payment-methods">
+            <img
+              src="/api/static/images/Cafe Menu Images/idramLogo.webp"
+              alt="Idarm Logo"
+            />
+            <img
+              src="/api/static/images/Cafe Menu Images/visaLogo.webp"
+              alt="Visa Logo"
+            />
+            <img
+              src="/api/static/images/Cafe Menu Images/arca.webp"
+              alt="Arca Logo"
+            />
+            <img
+              src="/api/static/images/Cafe Menu Images/mastercardLogo.png"
+              alt="MasterCard Logo"
+            />
+          </div>
+
+          <div class="footer-links">
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Support</a>
+          </div>
+
+          <div class="copyright">
+            <p>© 2025 Your Company. All rights reserved.</p>
+          </div>
+        </div>
       </main>
     </section>
 
     <script>
-      const viewEditMenuBtn = document.getElementById("viewEditMenu");
+      const burgerMenu = document.querySelector(".burger-menu");
+      const menuItems = document.querySelector(".menu-items");
 
-      viewEditMenuBtn.addEventListener("click", () => {
-        // Real Link
-        window.location.href =
-          "http://3.93.76.24/api/cafeadmin/cafe-admin-menu";
-
-        // Test Link
-        // window.location.href = "./adminMenu.html";
+      burgerMenu.addEventListener("click", () => {
+        menuItems.classList.toggle("show-menu");
       });
     </script>
   </body>
