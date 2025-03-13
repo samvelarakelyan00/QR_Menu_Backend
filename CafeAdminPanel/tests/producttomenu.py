@@ -27,25 +27,25 @@ def add_menu_new(url: str, form_data: dict, file_path: str = "", token: str=""):
 
 
 # localhost url
-url = "http://127.0.0.1:8080/api/menuCRUD/add-menu-new"
+# url = "http://127.0.0.1:8080/api/menuCRUD/add-menu-new"
 
 # localhost token
-auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDE2ODg3MjgsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJ0bWJsIEFybWVuIiwiZW1haWwiOiJ0bWJsQGdtYWlsLmNvbSIsImhvcmVrYWNsaWVudF9pZCI6MX19.5gpBnEZ876lw4p4DZ3dC-BUlxkqghyXTG-ZAicaFk88"
+# auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDE2ODg3MjgsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJ0bWJsIEFybWVuIiwiZW1haWwiOiJ0bWJsQGdtYWlsLmNvbSIsImhvcmVrYWNsaWVudF9pZCI6MX19.5gpBnEZ876lw4p4DZ3dC-BUlxkqghyXTG-ZAicaFk88"
 
 # aws test ec2 url
 # url = "http://23.20.175.90/api/cafeadmin/api/menuCRUD/add-menu-new"
 
 url = "http://3.93.76.24/api/cafeadmin/api/menuCRUD/add-menu-new"
 
-auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDE3OTkxNjEsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJtZWxvZHlfYWRtaW4iLCJlbWFpbCI6Im1lbG9keUBnbWFpbC5jb20iLCJob3Jla2FjbGllbnRfaWQiOjF9fQ.zhAUJs0FgzhEvshVShLsLc4HpZzqQpR4lny4l2nAb1o"
+auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDE5NTAzNTcsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJtZWxvZHlfYWRtaW4iLCJlbWFpbCI6Im1lbG9keUBnbWFpbC5jb20iLCJob3Jla2FjbGllbnRfaWQiOjF9fQ.edFS6dI1T_TnNPoT9c6t6-MzOd9mn9qwm4_dpxTTFtM"
 # aws test ec2 token
 # auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDE2OTA2OTIsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJtZWxvZHlfYWRtaW4iLCJlbWFpbCI6Im1lbG9keUBnbWFpbC5jb20iLCJob3Jla2FjbGllbnRfaWQiOjF9fQ.OUxhvrgyU1Evfy0AoMM0C52hrMbqIXPN2B-0iHQEMeg"
 
-image_directory = "../../../../images/"
+image_directory = "../../../../images"
 
 for form_data in datalist:
     # Construct full image file path
-    image_path = os.path.join(image_directory, form_data["image"])
+    image_path = os.path.join(f"{image_directory}/{form_data.get('kind')}/{form_data.get('category')}/", form_data["image"])
 
     if not os.path.exists(image_path):
         print(f"Warning: Image file not found for {form_data['name']} at {image_path}")

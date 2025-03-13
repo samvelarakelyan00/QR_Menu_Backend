@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Account</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="my-account.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="top-bar">
+      <div class="language-selector">
+        <span>EN</span> <span>RU</span> <span>AM</span>
+      </div>
+      <div class="burger-menu">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+
+    <div class="menu-items">
+      <a href="pricing.html" class="menu-item">
+        <i class="fas fa-tag"></i> Pricing
+      </a>
+      <a href="http://3.93.76.24/api/cafeadmin/cafe-admin-menu" class="menu-item">
+        <i class="fas fa-utensils"></i> View/Edit Menu
+      </a>
+      <button class="menu-item logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Log Out
+      </button>
+    </div>
+
+    <div class="account-title">
+      <h1>My Account</h1>
+      <i class="fas fa-pencil-alt"></i>
+    </div>
+
+    <div class="welcome-message">
+      <p>Welcome to Your Menu Admin Panel!</p>
+    </div>
+
+    <div class="account-details">
+      <div class="detail-item">
+        <i class="fas fa-store"></i> <span>Cafe Example</span>
+      </div>
+      <div class="detail-item">
+        <i class="fas fa-user"></i> <span>John Doe</span>
+      </div>
+      <div class="detail-item">
+        <i class="fas fa-envelope"></i> <span>john.doe@example.com</span>
+      </div>
+      <div class="detail-item">
+        <i class="fas fa-gem"></i> <span>Basic Plan</span>
+        <span class="date-range">Expires: 2024-12-31</span>
+      </div>
+    </div>
+
+    <div class="contact-us">
+      <h2>Contact Us</h2>
+      <div class="contact-item">
+        <i class="fas fa-envelope"></i> <span>support@example.com</span>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-phone"></i> <span>+1 123-456-7890</span>
+      </div>
+    </div>
+
+    <div class="social-media">
+      <h2>Follow us on social media</h2>
+      <div class="social-icons">
+        <i class="fab fa-twitter"></i>
+        <i class="fab fa-linkedin"></i>
+      </div>
+    </div>
+
+    <div class="payment-methods">
+      <img src="your-payment-logo-1.png" alt="Payment Logo 1">
+      <img src="your-payment-logo-2.png" alt="Payment Logo 2">
+    </div>
+
+    <div class="footer-links">
+      <a href="#">Terms of Service</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Support</a>
+    </div>
+
+    <div class="copyright">
+      <p>© 2024 Your Company. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script>
+    const burgerMenu = document.querySelector('.burger-menu');
+    const menuItems = document.querySelector('.menu-items');
+
+    burgerMenu.addEventListener('click', () => {
+      menuItems.classList.toggle('show-menu');
+    });
+  </script>
+</body>
+</html>

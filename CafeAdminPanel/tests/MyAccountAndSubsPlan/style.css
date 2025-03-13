@@ -1,0 +1,270 @@
+/* Reset and General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body.menu-style {
+  background-color: #121212; /* Dark background */
+  color: #f0f0f0; /* Light text color */
+  font-family: Arial, Helvetica, sans-serif; /* Sans-serif font */
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+/* Plan Section Styles */
+.plan-section {
+  background-color: #222; /* Card background */
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: opacity 0.3s ease; /* Smooth opacity transition */
+}
+
+.plan-section h2 {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #f0f0f0;
+}
+
+.plan-description {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 20px;
+}
+
+/* Plan Options Styles */
+.plan-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.plan-option {
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 15px;
+  text-align: center;
+  transition: border-color 0.3s ease;
+}
+
+.plan-option:hover {
+  border-color: #555;
+}
+
+.duration {
+  font-size: 16px;
+  font-weight: 500;
+  color: #ccc;
+  margin-bottom: 5px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 10px; /* Added margin for button */
+}
+
+/* Emphasis Color (Adjust to match your menu) */
+.plan-section h2 {
+  color: #b35c32;
+}
+
+/* Get Started Button Styles */
+.get-started-btn {
+  background-color: #b35c32;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, opacity 0.3s ease; /* Smooth opacity transition */
+}
+
+.get-started-btn:hover {
+  background-color: #964b27;
+}
+
+/* Coming Soon Styles */
+.plan-section.coming-soon {
+  opacity: 0.6; /* Reduce opacity for "Coming Soon" */
+}
+
+.plan-section.coming-soon .get-started-btn {
+  background-color: #666; /* Grayed out button */
+  cursor: not-allowed; /* Change cursor on hover */
+}
+
+/* Feature List Styles */
+.feature-list {
+  list-style: none;
+  padding: 20px 0 0 0;
+  margin: 20px 0 0 0;
+  border-top: 1px solid #333;
+}
+
+.feature-list li {
+  margin-bottom/* Reset and General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body.menu-style {
+  background-color: #121212; /* Dark background */
+  color: #f0f0f0; /* Light text color */
+  font-family: Arial, Helvetica, sans-serif; /* Sans-serif font */
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+/* Plan Section Styles */
+.plan-section {
+  background-color: #222; /* Card background */
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: opacity 0.3s ease; /* Smooth opacity transition */
+}
+
+.plan-section h2 {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #f0f0f0;
+}
+
+.plan-description {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 20px;
+}
+
+/* Plan Options Styles */
+.plan-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.plan-option {
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 15px;
+  text-align: center;
+  transition: border-color 0.3s ease;
+  position: relative; /* Needed for absolute positioning of feature list */
+}
+
+.plan-option:hover {
+  border-color: #555;
+}
+
+.duration {
+  font-size: 16px;
+  font-weight: 500;
+  color: #ccc;
+  margin-bottom: 5px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+/* Emphasis Color (Adjust to match your menu) */
+.plan-section h2 {
+  color: #b35c32;
+}
+
+/* Get Started Button Styles */
+.get-started-btn {
+  background-color: #b35c32;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.get-started-btn:hover {
+  background-color: #964b27;
+}
+
+/* Coming Soon Styles */
+.plan-section.coming-soon {
+  opacity: 0.6;
+}
+
+.plan-section.coming-soon .get-started-btn {
+  background-color: #666;
+  cursor: not-allowed;
+}
+
+/* Feature List Styles */
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0; /* Adjust margin */
+  font-size: 12px;
+  color: #999;
+}
+
+.feature-list li {
+  margin-bottom: 5px;
+  position: relative;
+  padding-left: 20px; /* Space for checkmark */
+  text-align: left;
+}
+
+.feature-list li i.checkmark {
+  position: absolute;
+  left: 0;
+  top: 2px; /* Adjust vertical alignment */
+  color: #b35c32; /* Checkmark color */
+  font-size: 10px; /* Adjust checkmark size */
+}
+
+/* Example Checkmark (You might need to include a font library like Font Awesome) */
+i.checkmark::before {
+  content: "\2713"; /* Unicode checkmark */
+}
