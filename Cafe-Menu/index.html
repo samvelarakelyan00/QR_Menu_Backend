@@ -74,6 +74,7 @@
           border: 2px solid black;
           border-radius: 100px;
           backdrop-filter: blur(4px);
+          animation: pulse 1s infinite linear;
 
           option {
             font-size: 16px;
@@ -143,7 +144,7 @@
       <img alt="" id="body-bg" class="body-bg" />
       <div class="banner">
         <h1 class="title" id="r-title"></h1>
-        <select name="languages" id="language">
+        <select name="languages" id="languages">
           <option class="lang" value="en" selected>English</option>
           <option class="lang" value="ru">Russian</option>
           <option class="lang" value="hy">Armenian</option>
@@ -151,7 +152,9 @@
       </div>
       <div class="info">
         <h1 id="welcome-message"></h1>
-        <a href="https://qrmenuarmenia.site/api/cafe/menu/get-menu">Go to menu</a>
+        <a href="https://qrmenuarmenia.site/api/cafe/menu/get-menu"
+          >Go to menu</a
+        >
         <!-- <a href="pages/menu.html">Go to menu</a> -->
       </div>
       <img alt="Cafe Logo" class="main-page-icon" id="r-logo" />
@@ -161,6 +164,8 @@
       // Real Link
       const currentURL = window.location.href;
 
+      // Test Link
+      // const currentURL = `https://qrmenuarmenia.site/api/api/menu-filter/by-horekaclient-id/1`;
       const segments = currentURL.split("/");
       const indexURL = segments[segments.length - 1]; // Get the last part of the URL
 
@@ -168,18 +173,18 @@
       const rTitle = document.getElementById("r-title");
       const rLogo = document.getElementById("r-logo");
       const wMessage = document.getElementById("welcome-message");
-      const languages = document.querySelectorAll(".lang");
+      const languages = document.getElementById("languages");
+
+      console.log(languages);
 
       // -------------------------------------------------------------
 
       let cafeIndex = localStorage.setItem("cafeIdIndex", indexURL);
       let cafeLang = localStorage.setItem("language", "en");
 
-      languages.forEach((lang) => {
-        lang.addEventListener("click", () => {
-          cafeLang = lang.getAttribute("value");
-          localStorage.setItem("language", cafeLang);
-        });
+      languages.addEventListener("change", (event) => {
+        cafeLang = event.target.value;
+        localStorage.setItem("language", cafeLang);
       });
 
       async function FetchingAPI(link) {
@@ -201,7 +206,10 @@
         `https://qrmenuarmenia.site/api/api/menu-filter/by-horekaclient-id/${indexURL}`
       );
 
-
+      // Test Link
+      // FetchingAPI(
+      //   `https://qrmenuarmenia.site/api/api/menu-filter/by-horekaclient-id/1`
+      // );
     </script>
   </body>
 </html>

@@ -310,7 +310,7 @@
     <section class="container">
       <nav id="menu">
         <button href="#" class="backPreviousPage">
-          <img src="../static/icons/left-arrow.svg" alt="icon" />
+          <img src="/api/static/icons/left-arrow.svg" alt="icon" />
         </button>
         <p href="#" id="editLink" class="edit-link">Click to edit</p>
       </nav>
@@ -326,15 +326,15 @@
             </div>
             <div class="items">
               <div class="item">
-                <img src="../static/icons/time.svg" alt="" />
+                <img src="/api/static/icons/time.svg" alt="" />
                 <p contenteditable="true">10 min</p>
               </div>
               <div class="item">
-                <img src="../static/icons/weight.svg" alt="" />
+                <img src="/api/static/icons/weight.svg" alt="" />
                 <p contenteditable="true">230 gram</p>
               </div>
               <div class="item">
-                <img src="../static/icons/calories.svg" alt="" />
+                <img src="/api/static/icons/calories.svg" alt="" />
                 <p contenteditable="true">40 calories</p>
               </div>
             </div>
@@ -362,7 +362,7 @@
         <h1 class="popupTitle">Your changes have been saved</h1>
         <p class="popupMessage">Thank you!</p>
         <div class="pupupImg">
-          <img src="../static/icons/popupSuccesfull.svg" alt="Img 1" />
+          <img src="/api/static/icons/popupSuccesfull.svg" alt="Img 1" />
         </div>
         <div class="popupButtons">
           <!-- <button class="btn-1">See changes</button> -->
@@ -381,7 +381,7 @@
       const mealIMG = document.getElementById("foodImg");
       const mealDesc = document.getElementById("mealDescription");
 
-      const update_API_URL = `http://3.93.76.24/api/cafeadmin/api/menuCRUD/update-product/${storedMeal.itemID}`;
+      const update_API_URL = `https://qrmenuarmenia.site/api/cafeadmin/api/menuCRUD/update-product/${storedMeal.itemID}`;
       const saveBtn = document.getElementById("saveCahngesBtn");
       const popUp = document.querySelector(".popup");
 
@@ -390,7 +390,7 @@
       backPreviousPage.forEach((btn) => {
         btn.addEventListener("click", () => {
           window.location.href =
-            "http://3.93.76.24/api/cafeadmin/cafe-admin-menu";
+            "https://qrmenuarmenia.site/api/cafeadmin/cafe-admin-menu";
         });
       });
 
@@ -462,7 +462,7 @@
 
         closePopUpBtn.addEventListener("click", () => {
           // Real link -> փոխելու կարիք չկա ներկա պահին, աշխատումա close-ով popup-ը
-          // window.location = 'http://3.93.76.24/api/cafeadmin/cafe-admin-menu'
+          // window.location = 'https://qrmenuarmenia.site/api/cafeadmin/cafe-admin-menu'
 
           popUp.classList.remove("popup-on");
         });

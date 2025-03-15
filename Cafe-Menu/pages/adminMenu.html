@@ -303,7 +303,7 @@
     <section class="container">
       <nav id="menu">
         <button class="backPreviousPage" id="backPreviousPage">
-          <img src="../static/icons/left-arrow.svg" alt="icon"
+          <img src="/api/static/icons/left-arrow.svg" alt="icon"
         /></button>
         <h1 id="menuTitle" class="title-on">Menu</h1>
         <!-- <div class="formSection">
@@ -314,7 +314,7 @@
             id="searchBar"
           />
           <button id="searchBtn">
-            <img src="../static/icons/search.svg" alt="search" />
+            <img src="/api/static/icons/search.svg" alt="search" />
           </button>
         </div> -->
       </nav>
@@ -334,7 +334,7 @@
       <footer>
         <a href="#" class="backPreviousPage"> Edit a meal </a>
         <!-- Real Link -->
-        <a href="http://3.93.76.24/api/cafeadmin/cafe-admin-menu-add-meal">Add a meal</a>
+        <a href="https://qrmenuarmenia.site/api/cafeadmin/cafe-admin-menu-add-meal">Add a meal</a>
         <!-- Test Link -->
         <!-- <a href="./addMeal.html"> Add a meal </a> -->
       </footer>
@@ -342,7 +342,7 @@
     
     <script>
         const admin_menu_API =
-              "http://3.93.76.24/api/cafeadmin/api/menuCRUD/all-menu";
+              "https://qrmenuarmenia.site/api/cafeadmin/api/menuCRUD/all-menu";
         const menuToken = localStorage.getItem("access_token");
         const menuCont = document.querySelector("#menuCont");
         const navbarLinks = document.querySelectorAll(".link");
@@ -364,7 +364,7 @@
 
         // Previous page logic
         backPreviousPage.addEventListener('click', () => {
-          window.location.href = "http://3.93.76.24/api/cafeadmin/cafe-admin-my-accout-page";
+          window.location.href = "https://qrmenuarmenia.site/api/cafeadmin/cafe-admin-my-accout-page";
           // window.location.href = './cafeAdminMyAccount.html'
         })
 
@@ -460,7 +460,7 @@
                 localStorage.setItem('aboutMeal', JSON.stringify(aboutMeal));
                 // ------------------------------------------
                 // Real Link
-                window.location.href = 'http://3.93.76.24/api/cafeadmin/cafe-admin-menu-about-meal'
+                window.location.href = 'https://qrmenuarmenia.site/api/cafeadmin/cafe-admin-menu-about-meal'
 
                 // Test Link
                 // window.location.href = './adminMenuAboutMeal.html';
