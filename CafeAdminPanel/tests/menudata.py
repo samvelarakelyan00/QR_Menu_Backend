@@ -364,61 +364,60 @@ datalist = [
 #   "language": "en"
 # },
 
-  # Beer
-{
-  "kind": "drink",
-  "category": "Beer",
-  "name": "Stella",
-  "quantity": "1 bottle",
-  "price": 1000,
-  "description": "Stella, very good Stella, nice Stella",
-  "image": "test_beer_stella.webp",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "Beer",
-  "name": "Bud",
-  "quantity": "1 bottle",
-  "price": 1100,
-  "description": "Bud, very good Bud, nice Bud",
-  "image": "test_bud_beer.webp",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "Beer",
-  "name": "Heineken",
-  "quantity": "1 bottle",
-  "price": 1500,
-  "description": "Heineken, very good Heineken, nice Heineken",
-  "image": "test_heineken_beer.webp",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "Beer",
-  "name": "Corona",
-  "quantity": "1 bottle",
-  "price": 800,
-  "description": "Corona, very good Corona, nice Corona",
-  "image": "test_corona_beer.webp",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "Beer",
-  "name": "Tuborg",
-  "quantity": "1 bottle",
-  "price": 1100,
-  "description": "Tuborg, very good Tuborg, nice Tuborg",
-  "image": "test_tuborg_beer.webp",
-  "language": "en"
-},
+#   # Beer
+# {
+#   "kind": "drink",
+#   "category": "Beer",
+#   "name": "Stella",
+#   "quantity": "1 bottle",
+#   "price": 1000,
+#   "description": "Stella, very good Stella, nice Stella",
+#   "image": "test_beer_stella.webp",
+#   "language": "en"
+# },
+# {
+#   "kind": "drink",
+#   "category": "Beer",
+#   "name": "Bud",
+#   "quantity": "1 bottle",
+#   "price": 1100,
+#   "description": "Bud, very good Bud, nice Bud",
+#   "image": "test_bud_beer.webp",
+#   "language": "en"
+# },
+# {
+#   "kind": "drink",
+#   "category": "Beer",
+#   "name": "Heineken",
+#   "quantity": "1 bottle",
+#   "price": 1500,
+#   "description": "Heineken, very good Heineken, nice Heineken",
+#   "image": "test_heineken_beer.webp",
+#   "language": "en"
+# },
+# {
+#   "kind": "drink",
+#   "category": "Beer",
+#   "name": "Corona",
+#   "quantity": "1 bottle",
+#   "price": 800,
+#   "description": "Corona, very good Corona, nice Corona",
+#   "image": "test_corona_beer.webp",
+#   "language": "en"
+# },
+# {
+#   "kind": "drink",
+#   "category": "Beer",
+#   "name": "Tuborg",
+#   "quantity": "1 bottle",
+#   "price": 1100,
+#   "description": "Tuborg, very good Tuborg, nice Tuborg",
+#   "image": "test_tuborg_beer.webp",
+#   "language": "en"
+# },
 
-
-
-
+  # # dessert
+  # # Cake
 # {
 #   "kind": "dessert",
 #   "category": "Cake",
@@ -426,9 +425,51 @@ datalist = [
 #   "quantity": "1 peace",
 #   "price": 800,
 #   "description": "Brownie, very good Brownie, nice Brownie",
-#   "image": "test_dessert_brownie.jpg",
+#   "image": "test_dessert_brownie.webp",
 #   "language": "en"
 # },
+# {
+#   "kind": "dessert",
+#   "category": "Cake",
+#   "name": "Angel",
+#   "quantity": "1 peace",
+#   "price": 550,
+#   "description": "Angel, very good Angel, nice Angel",
+#   "image": "test_angel_cake.webp",
+#   "language": "en"
+# },
+# {
+#   "kind": "dessert",
+#   "category": "Cake",
+#   "name": "Blackout",
+#   "quantity": "1 peace",
+#   "price": 650,
+#   "description": "Blackout, very good Blackout, nice Blackout",
+#   "image": "test_blackout_cake.webp",
+#   "language": "en"
+# },
+# {
+#   "kind": "dessert",
+#   "category": "Cake",
+#   "name": "Battenberg",
+#   "quantity": "1 peace",
+#   "price": 400,
+#   "description": "Battenberg, very good Battenberg, nice Battenberg",
+#   "image": "test_battenberg_cake.webp",
+#   "language": "en"
+# },
+# {
+#   "kind": "dessert",
+#   "category": "Cake",
+#   "name": "Bundt",
+#   "quantity": "1 peace",
+#   "price": 800,
+#   "description": "Bundt, very good Bundt, nice Bundt",
+#   "image": "test_bundt_cake.webp",
+#   "language": "en"
+# },
+
+#   # Icecream
 # {
 #   "kind": "dessert",
 #   "category": "Icecream",
@@ -436,17 +477,198 @@ datalist = [
 #   "quantity": "1 peace",
 #   "price": 800,
 #   "description": "Gelato, very good Gelato, nice Gelato",
-#   "image": "test_icecream_chocolategelato.jpg",
+#   "image": "test_icecream_chocolategelato.webp",
 #   "language": "en"
 # },
 # {
+#   "kind": "dessert",
+#   "category": "Icecream",
+#   "name": "Mango Kulfi",
+#   "quantity": "1 peace",
+#   "price": 650,
+#   "description": "Mango Kulfi, very good Mango Kulfi, nice Mango Kulfi",
+#   "image": "test_mangokulfi_icecream.webp",
+#   "language": "en"
+# },
+# {
+#   "kind": "dessert",
+#   "category": "Icecream",
+#   "name": "Philadelphia",
+#   "quantity": "1 peace",
+#   "price": 700,
+#   "description": "Philadelphia, very good Philadelphia, nice Philadelphia",
+#   "image": "test_philadelphia_icecream.webp",
+#   "language": "en"
+# },
+# {
+#   "kind": "dessert",
+#   "category": "Icecream",
+#   "name": "Italian Ice",
+#   "quantity": "1 peace",
+#   "price": 600,
+#   "description": "Italian Ice, very good Italian Ice, nice Italian Ice",
+#   "image": "test_italianice_icecream.webp",
+#   "language": "en"
+# },
+# {
+#   "kind": "dessert",
+#   "category": "Icecream",
+#   "name": "Popsicle",
+#   "quantity": "1 peace",
+#   "price": 800,
+#   "description": "Popsicle, very good Popsicle, nice Popsicle",
+#   "image": "test_popsicle_icecream.webp",
+#   "language": "en"
+# },
+
+#   # salad
+#   # Green
+# {
 #   "kind": "salad",
-#   "category": "Green Salad",
+#   "category": "GreenSalad",
 #   "name": "Big Italian Salad",
 #   "quantity": "1 pate",
 #   "price": 1200,
 #   "description": "Italian Salad, very good Italian Salad, nice Italian Salad",
-#   "image": "test_salad_bigitaliansalad.jpg",
+#   "image": "test_salad_bigitaliansalad.webp",
 #   "language": "en"
-# }
+# },
+# {
+#   "kind": "salad",
+#   "category": "GreenSalad",
+#   "name": "Caesar Salad",
+#   "quantity": "1 plate",
+#   "price": 1500,
+#   "description": "Classic Caesar Salad with crispy romaine, Parmesan, croutons, and creamy dressing.",
+#   "image": "test_caesar_green.webp",
+#   "language": "en"
+# },
+# {
+#   "kind": "salad",
+#   "category": "GreenSalad",
+#   "name": "Garden Salad",
+#   "quantity": "1 plate",
+#   "price": 1600,
+#   "description": "Classic Garden Salad with crispy romaine, Parmesan, croutons, and creamy dressing.",
+#   "image": "test_garden_green.webp",
+#   "language": "en"
+# },
+# {
+#   "kind": "salad",
+#   "category": "GreenSalad",
+#   "name": "Michigan Salad",
+#   "quantity": "1 plate",
+#   "price": 2300,
+#   "description": "Michigan Salad with crispy romaine, Parmesan, croutons, and creamy dressing.",
+#   "image": "test_michigan_green.webp",
+#   "language": "en"
+# },
+
+#     # Vegetable
+#
+# {
+#   "kind": "salad",
+#   "category": "VegetableSalad",
+#   "name": "Cobb",
+#   "quantity": "1 portion",
+#   "price": 2800,
+#   "description": "Cobb with crispy romaine, Parmesan, croutons, and creamy dressing.",
+#   "image": "test_cobb_vegetable.webp",
+#   "language": "en"
+# },
+# {
+#   "kind": "salad",
+#   "category": "VegetableSalad",
+#   "name": "Acar",
+#   "quantity": "1 portion",
+#   "price": 1800,
+#   "description": "Acar with crispy romaine, Parmesan, croutons, and creamy dressing.",
+#   "image": "test_acarvegetable.webp",
+#   "language": "en"
+# },
+# {
+#   "kind": "salad",
+#   "category": "VegetableSalad",
+#   "name": "dressed herring",
+#   "quantity": "1 portion",
+#   "price": 1900,
+#   "description": "dressed herring with crispy romaine, Parmesan, croutons, and creamy dressing.",
+#   "image": "test_dressedherring_vegetable.webp",
+#   "language": "en"
+# },
+# {
+#   "kind": "salad",
+#   "category": "VegetableSalad",
+#   "name": "Avghan",
+#   "quantity": "1 portion",
+#   "price": 2000,
+#   "description": "Avghan with crispy romaine, Parmesan, croutons, and creamy dressing.",
+#   "image": "test_ahfgan_vegetable.webp",
+#   "language": "en"
+# },
+# {
+#   "kind": "salad",
+#   "category": "VegetableSalad",
+#   "name": "Celery Victor",
+#   "quantity": "1 portion",
+#   "price": 2100,
+#   "description": "Celery Victor with crispy romaine, Parmesan, croutons, and creamy dressing.",
+#   "image": "test_celeryvictor_vegetable.webp",
+#   "language": "en"
+# },
+
+    # Fruit
+
+{
+  "kind": "salad",
+  "category": "FruitSalad",
+  "name": "Macedonia",
+  "quantity": "1 portion",
+  "price": 2400,
+  "description": "Macedonia with crispy romaine, Parmesan, croutons, and creamy dressing.",
+  "image": "test_macadonia_fruit.webp",
+  "language": "en"
+},
+{
+  "kind": "salad",
+  "category": "FruitSalad",
+  "name": "Ambrosia",
+  "quantity": "1 portion",
+  "price": 2400,
+  "description": "Ambrosia with crispy romaine, Parmesan, croutons, and creamy dressing.",
+  "image": "test_ambrosia_fruit.webp",
+  "language": "en"
+},
+{
+  "kind": "salad",
+  "category": "FruitSalad",
+  "name": "Tam phonlamai ruam",
+  "quantity": "1 portion",
+  "price": 2000,
+  "description": "Tam phonlamai ruam with crispy romaine, Parmesan, croutons, and creamy dressing.",
+  "image": "test_tamphonlamai_fruit.webp",
+  "language": "en"
+},
+{
+  "kind": "salad",
+  "category": "FruitSalad",
+  "name": "Banana",
+  "quantity": "1 portion",
+  "price": 1100,
+  "description": "Banana with crispy romaine, Parmesan, croutons, and creamy dressing.",
+  "image": "test_banana_fruit.webp",
+  "language": "en"
+},
+{
+  "kind": "salad",
+  "category": "FruitSalad",
+  "name": "Jello",
+  "quantity": "1 portion",
+  "price": 1750,
+  "description": "Jello with crispy romaine, Parmesan, croutons, and creamy dressing.",
+  "image": "test_jello_fruit.webp",
+  "language": "en"
+},
+
+
 ]

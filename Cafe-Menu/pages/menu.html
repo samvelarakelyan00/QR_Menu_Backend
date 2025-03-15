@@ -348,7 +348,7 @@
     </section>
 
     <script>
-      const admin_menu_API = "http://3.93.76.24/api/api/menu-filter/all-menu/";
+      const admin_menu_API = "https://qrmenuarmenia.site/api/api/menu-filter/all-menu/";
       const cafeIdIndex = localStorage.getItem("cafeIdIndex");
       const admin_menu_API_Link = admin_menu_API + cafeIdIndex;
       const menuCont = document.querySelector("#menuCont");
@@ -375,7 +375,7 @@
       backPreviousPageBtns.forEach((btn) => {
         btn.addEventListener("click", () => {
           // Real Link
-          window.location.href = `http://3.93.76.24/api/${cafeIdIndex}`;
+          window.location.href = `https://qrmenuarmenia.site/api/${cafeIdIndex}`;
         });
       });
 
@@ -487,7 +487,7 @@
               localStorage.setItem("aboutMeal", JSON.stringify(aboutMeal));
               // Real Link
               window.location.href =
-                "http://3.93.76.24/api/cafe/menu/get-about-meal";
+                "https://qrmenuarmenia.site/api/cafe/menu/get-about-meal";
 
               // Test Link
               // window.location.href = "./about-meal.html";

@@ -151,7 +151,7 @@
       </div>
       <div class="info">
         <h1 id="welcome-message"></h1>
-        <a href="http://3.93.76.24/api/cafe/menu/get-menu">Go to menu</a>
+        <a href="https://qrmenuarmenia.site/api/cafe/menu/get-menu">Go to menu</a>
         <!-- <a href="pages/menu.html">Go to menu</a> -->
       </div>
       <img alt="Cafe Logo" class="main-page-icon" id="r-logo" />
@@ -161,8 +161,6 @@
       // Real Link
       const currentURL = window.location.href;
 
-      // Test Link
-      // const currentURL = `http://3.93.76.24/api/api/menu-filter/by-horekaclient-id/1`;
       const segments = currentURL.split("/");
       const indexURL = segments[segments.length - 1]; // Get the last part of the URL
 
@@ -200,11 +198,10 @@
 
       // Real Link
       FetchingAPI(
-        `http://3.93.76.24/api/api/menu-filter/by-horekaclient-id/${indexURL}`
+        `https://qrmenuarmenia.site/api/api/menu-filter/by-horekaclient-id/${indexURL}`
       );
 
-      // Test Link
-      // FetchingAPI(`http://3.93.76.24/api/api/menu-filter/by-horekaclient-id/1`);
+
     </script>
   </body>
 </html>
