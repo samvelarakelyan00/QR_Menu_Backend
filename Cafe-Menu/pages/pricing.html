@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Subscription Plans</title>
+    <style>
+      /* Reset and General Styles */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body.menu-style {
+        background-color: #121212; /* Dark background */
+        color: #f0f0f0; /* Light text color */
+        font-family: Arial, Helvetica, sans-serif; /* Sans-serif font */
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      h1 {
+        font-size: 28px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 30px;
+        color: #fff;
+      }
+
+      .back_btn {
+        text-decoration: none;
+        padding: 6px 18px;
+        background-color: transparent;
+        border: 1px solid #2f2f31;
+        border-radius: 100px;
+        font-size: 18px;
+        color: #ffffff;
+        display: grid;
+        place-content: center;
+
+        img {
+          width: 30px;
+          height: 30px;
+        }
+      }
+
+      /* Plan Section Styles */
+      .plan-section {
+        background-color: #222; /* Card background */
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        transition: opacity 0.3s ease; /* Smooth opacity transition */
+      }
+
+      .plan-section h2 {
+        font-size: 22px;
+        font-weight: 500;
+        margin-bottom: 10px;
+        color: #f0f0f0;
+      }
+
+      .plan-description {
+        font-size: 14px;
+        color: #999;
+        margin-bottom: 20px;
+      }
+
+      /* Plan Options Styles */
+      .plan-options {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .plan-option {
+        border: 1px solid #333;
+        border-radius: 4px;
+        padding: 15px;
+        text-align: center;
+        transition: border-color 0.3s ease;
+        position: relative; /* Needed for absolute positioning of feature list */
+      }
+
+      .plan-option:hover {
+        border-color: #555;
+      }
+
+      .duration {
+        font-size: 16px;
+        font-weight: 500;
+        color: #ccc;
+        margin-bottom: 5px;
+      }
+
+      .price {
+        font-size: 18px;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 10px;
+      }
+
+      /* Emphasis Color (Adjust to match your menu) */
+      .plan-section h2 {
+        color: #b35c32;
+      }
+
+      /* Get Started Button Styles */
+      .get-started-btn {
+        background-color: #b35c32;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: background-color 0.3s ease, opacity 0.3s ease;
+      }
+
+      .get-started-btn:hover {
+        background-color: #964b27;
+      }
+
+      /* Coming Soon Styles */
+      .plan-section.coming-soon {
+        opacity: 0.6;
+      }
+
+      .plan-section.coming-soon .get-started-btn {
+        background-color: #666;
+        cursor: not-allowed;
+      }
+
+      /* Feature List Styles */
+      .feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0 0 0; /* Adjust margin */
+        font-size: 12px;
+        color: #999;
+      }
+
+      .feature-list li {
+        margin-bottom: 5px;
+        position: relative;
+        padding-left: 20px; /* Space for checkmark */
+        text-align: left;
+      }
+
+      .feature-list li i.checkmark {
+        position: absolute;
+        left: 0;
+        top: 2px; /* Adjust vertical alignment */
+        color: #b35c32; /* Checkmark color */
+        font-size: 10px; /* Adjust checkmark size */
+      }
+
+      /* Example Checkmark (You might need to include a font library like Font Awesome) */
+      i.checkmark::before {
+        content: "\2713"; /* Unicode checkmark */
+      }
+    </style>
+  </head>
+  <body class="menu-style">
+    <div class="container">
+      <h1>Choose Your Subscription Plan</h1>
+
+      <!-- Real Link -->
+      <a
+        href="https://qrmenuarmenia.site/api/cafeadmin/cafe-admin-my-account-page"
+        class="back_btn"
+      >
+        <img src="/api/static/icons/left-arrow.svg" alt="Back" />
+      </a>
+
+      <!-- Test Links -->
+      <!-- <a href="./cafeAdminMyAccount.html" class="back_btn">
+        <img src="../static/icons/left-arrow.svg" alt="" />
+      </a> -->
+
+      <div class="plan-section">
+        <h2>Basic Plan</h2>
+        <p class="plan-description">Starting from 4800 AMD/month</p>
+        <div class="plan-options">
+          <div class="plan-option">
+            <p class="duration">1 Month</p>
+            <p class="price">4800 AMD</p>
+            <button
+              class="get-started-btn"
+              data-plan="Basic"
+              data-duration="1"
+              data-price="4800"
+            >
+              Get Started
+            </button>
+            <ul class="feature-list">
+              <li><i class="checkmark"></i> Access to QR Menu Admin Panel</li>
+            </ul>
+          </div>
+          <div class="plan-option">
+            <p class="duration">3 Months</p>
+            <p class="price">10800 AMD</p>
+            <button
+              class="get-started-btn"
+              data-plan="Basic"
+              data-duration="3"
+              data-price="10800"
+            >
+              Get Started
+            </button>
+            <ul class="feature-list">
+              <li><i class="checkmark"></i> Access to QR Menu Admin Panel</li>
+              <li><i class="checkmark"></i> Enhanced Analytics Reports</li>
+            </ul>
+          </div>
+          <div class="plan-option">
+            <p class="duration">6 Months</p>
+            <p class="price">20800 AMD</p>
+            <button
+              class="get-started-btn"
+              data-plan="Basic"
+              data-duration="6"
+              data-price="20800"
+            >
+              Get Started
+            </button>
+            <ul class="feature-list">
+              <li><i class="checkmark"></i> Access to QR Menu Admin Panel</li>
+              <li><i class="checkmark"></i> Enhanced Analytics Reports</li>
+              <li><i class="checkmark"></i> Priority Support</li>
+            </ul>
+          </div>
+          <div class="plan-option">
+            <p class="duration">12 Months</p>
+            <p class="price">48800 AMD</p>
+            <button
+              class="get-started-btn"
+              data-plan="Basic"
+              data-duration="12"
+              data-price="48800"
+            >
+              Get Started
+            </button>
+            <ul class="feature-list">
+              <li><i class="checkmark"></i> Access to QR Menu Admin Panel</li>
+              <li><i class="checkmark"></i> Enhanced Analytics Reports</li>
+              <li><i class="checkmark"></i> Priority Support</li>
+              <li><i class="checkmark"></i> Custom Branding</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="plan-section coming-soon">
+        <h2>Premium Plan</h2>
+        <p class="plan-description">Starting from 8800 AMD/month</p>
+        <div class="plan-options">
+          <div class="plan-option">
+            <p class="duration">1 Month</p>
+            <p class="price">8800 AMD</p>
+            <button
+              class="get-started-btn"
+              data-plan="Premium"
+              data-duration="1"
+              data-price="8800"
+              disabled
+            >
+              Coming Soon
+            </button>
+            <ul class="feature-list">
+              <li><i class="checkmark"></i> All Basic Features</li>
+            </ul>
+          </div>
+          <div class="plan-option">
+            <p class="duration">3 Months</p>
+            <p class="price">18800 AMD</p>
+            <button
+              class="get-started-btn"
+              data-plan="Premium"
+              data-duration="3"
+              data-price="18800"
+              disabled
+            >
+              Coming Soon
+            </button>
+            <ul class="feature-list">
+              <li><i class="checkmark"></i> All Basic Features</li>
+              <li><i class="checkmark"></i> Advanced Integrations</li>
+            </ul>
+          </div>
+          <div class="plan-option">
+            <p class="duration">6 Months</p>
+            <p class="price">40800 AMD</p>
+            <button
+              class="get-started-btn"
+              data-plan="Premium"
+              data-duration="6"
+              data-price="40800"
+              disabled
+            >
+              Coming Soon
+            </button>
+            <ul class="feature-list">
+              <li><i class="checkmark"></i> All Basic Features</li>
+              <li><i class="checkmark"></i> Advanced Integrations</li>
+              <li><i class="checkmark"></i> Dedicated Support</li>
+            </ul>
+          </div>
+          <div class="plan-option">
+            <p class="duration">12 Months</p>
+            <p class="price">90800 AMD</p>
+            <button
+              class="get-started-btn"
+              data-plan="Premium"
+              data-duration="12"
+              data-price="90800"
+              disabled
+            >
+              Coming Soon
+            </button>
+            <ul class="feature-list">
+              <li><i class="checkmark"></i> All Basic Features</li>
+              <li><i class="checkmark"></i> Advanced Integrations</li>
+              <li><i class="checkmark"></i> Dedicated Support</li>
+              <li><i class="checkmark"></i> Custom Development</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const getStartedButtons = document.querySelectorAll(".get-started-btn");
+
+      getStartedButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const plan = button.dataset.plan;
+          const duration = button.dataset.duration;
+          const price = button.dataset.price;
+
+          // You can replace this alert with your actual payment processing logic
+          alert(
+            `Selected: ${plan} Plan, ${duration} Months, Price: ${price} AMD. Proceed to payment.`
+          );
+
+          // Here, you would typically redirect the user to a payment page or trigger
+          // a payment modal, passing the plan details (plan, duration, price)
+          // to your payment processing system.
+        });
+      });
+    </script>
+  </body>
+</html>

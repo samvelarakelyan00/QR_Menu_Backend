@@ -41,9 +41,14 @@ def cafe_admin_panel():
     return FileResponse('../../Cafe-Menu/pages/cafeAdminLogin.html')
 
 
-@app.get("/cafe-admin-my-accout-page")
+@app.get("/cafe-admin-my-account-page")
 def admin_my_accout():
     return FileResponse('../../Cafe-Menu/pages/cafeAdminMyAccount.html')
+
+
+@app.get("/cafe-admin-pricing")
+def get_pricing_page():
+    return FileResponse('../../Cafe-Menu/pages/pricing.html')
 
 
 @app.get("/cafe-admin-menu")
