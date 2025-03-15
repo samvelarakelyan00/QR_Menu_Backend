@@ -200,47 +200,67 @@
         }
 
         .container main .menu .menuItem .items .item {
-          max-width: 100px;
-          min-height: 150px;
+          min-width: 120px;
+          height: 160px;
+          position: relative;
           display: flex;
           flex-direction: column;
-          justify-content: space-around;
+          justify-content: space-between;
           padding: 10px;
           box-shadow: 0px 4px 8px #000000;
           border: 1px solid grey;
           border-radius: 6px;
-          gap: 12px;
-          
-        
-          .item-img {
-            left: 20px;
-            width: 100px;
-            height: 100px;
-            border-radius: 100%;
-            overflow: hidden;
-            filter: drop-shadow(10px 4px 5px black);
-            transform: translate(10px, 0px);
-          
+
+          .likeBtn {
+            width: 10px;
+            height: 10px;
+
             img {
-              border-radius: 100%;
               width: 100%;
               height: 100%;
               object-fit: cover;
               object-position: center center;
             }
           }
-        
+
+          .item-img {
+            position: absolute;
+            left: 50px;
+            width: 100px;
+            height: 100px;
+            border-radius: 100%;
+            overflow: hidden;
+            filter: drop-shadow(10px 4px 5px black);
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              object-position: center center;
+            }
+          }
+
           .info {
             display: flex;
             flex-direction: column;
             gap: 2px;
-          
+            width: 100%;
+            min-height: 70px;
+            background-color: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 8px;
+            border-radius: 6px;
+
             p {
               color: var(--btn-text);
               font-family: "Playfair Display", serif;
               font-weight: 400;
-              font-size: 10px;
+              font-size: 13px;
               letter-spacing: 1px;
+              text-wrap: wrap;
             }
           }
         }
@@ -325,12 +345,7 @@
           <a href="#drink" id="drink" class="link">Drink</a>
           <a href="#dessert" id="dessert" class="link">Dessert</a>
         </div>
-        <div class="menu" id="menuCont">
-          <!-- <div class="menuItem" id="meals">
-            <h1>First Meal</h1>
-            <div class="items meals" id="foodCont"></div>
-          </div> -->
-      </main>
+        <div class="menu" id="menuCont"></main>
       <footer>
         <a href="#" class="backPreviousPage"> Edit a meal </a>
         <!-- Real Link -->
@@ -364,7 +379,7 @@
 
         // Previous page logic
         backPreviousPage.addEventListener('click', () => {
-          window.location.href = "https://qrmenuarmenia.site/api/cafeadmin/cafe-admin-my-accout-page";
+          window.location.href = "https://qrmenuarmenia.site/api/cafeadmin/cafe-admin-my-account-page";
           // window.location.href = './cafeAdminMyAccount.html'
         })
 
@@ -416,6 +431,9 @@
                 
                 item.innerHTML += `
                                     <div data-kind="${meal.kind}" data-category="${meal.category}" class="item" id="${mealCategories[index] + i} ${meal.id}">
+                                      <div class="likeBtn">
+                                        <img src="/api/static/icons/liked.svg" alt="liked" />
+                                      </div>
                                       <img src="${meal.image_src}" alt="${meal.image_src}" class="item-img" id="image${mealCategories[index] + i}"/>
                                       <div class="info">
                                         <p class="name">${meals[mealCategories[index]][i].name}</p>
