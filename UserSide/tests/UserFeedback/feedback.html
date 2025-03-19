@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="feedback.css">
+</head>
+<body>
+  <div class="feedback-page">
+    <div class="feedback-content">
+      <h2>Feedback</h2>
+      <p>Please rate our menu service</p>
+      <div class="rating">
+        <div class="rating-points">
+        </div>
+        <span id="selected-rating"></span>
+      </div>
+      <p>Please provide any additional feedback</p>
+      <textarea id="feedback-text" rows="4"></textarea>
+      <button id="submit-feedback">Submit Feedback</button>
+    </div>
+  </div>
+
+
+
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <span class="popup-icon">✔</span>
+    <p id="popup-message"></p>
+    <button id="popup-close">OK</button>
+  </div>
+</div>
+
+
+
+  <script src="feedback.js"></script>
+</body>
+</html>

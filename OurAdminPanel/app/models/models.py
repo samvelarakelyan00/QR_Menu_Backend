@@ -67,6 +67,17 @@ class HoReKaMenu(Base):
     horekaclient_id = Column(Integer, ForeignKey("horekaclients.id"))
 
 
+class UserFeedback(Base):
+    __tablename__ = "user_feedbacks"
+
+    id = Column(Integer, primary_key=True)
+    rating = Column(Integer, nullable=False)
+    feedback_text = Column(String, nullable=False)
+    created_at = Column(TIMESTAMP, nullable=False, server_default=text("now()"))
+
+    horeka_client_id = Column(Integer, ForeignKey("horekaclients.id"))
+
+
 class Payment(Base):
     __tablename__ = "payments"
 

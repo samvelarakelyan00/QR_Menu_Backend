@@ -1,7 +1,7 @@
 import qrcode
 
 # Data to encode in the QR code
-data = "http://3.93.76.24/api/1"
+data = "https://qrmenuarmenia.site/api/1"
 
 # Create a QR code object with specific settings
 qr = qrcode.QRCode(
