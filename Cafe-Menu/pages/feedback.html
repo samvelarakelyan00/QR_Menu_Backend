@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feedback</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #121212;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      .feedback_header {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        position: relative;
+
+        .back_btn {
+          padding: 6px 12px;
+          width: 30px;
+          height: 30px;
+          border: 2px solid #b35c32;
+          background-color: transparent;
+          border-radius: 100px;
+          position: absolute;
+          left: 0;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+          }
+        }
+      }
+
+      .feedback-page {
+        width: 100%;
+        max-width: 600px;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      .feedback-content {
+        background-color: #2a2a2a;
+        padding: 30px;
+        border-radius: 12px;
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .rating {
+        margin: 30px 0;
+      }
+
+      .rating-points {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .rating-point {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid #b35c32;
+        margin: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        font-size: 18px;
+        box-sizing: border-box;
+      }
+
+      .rating-point.selected {
+        background-color: #b35c32;
+        color: #fff;
+      }
+
+      #selected-rating {
+        font-weight: bold;
+        margin-top: 20px;
+        font-size: 20px;
+      }
+
+      textarea {
+        width: 100%;
+        margin: 20px 0;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        resize: vertical;
+        font-size: 18px;
+        min-height: 250px;
+        box-sizing: border-box;
+        color: #000;
+      }
+
+      button {
+        padding: 15px 30px;
+        background-color: #b35c32;
+        color: #000;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin: 10px;
+        font-size: 18px;
+        box-sizing: border-box;
+      }
+
+      button:hover {
+        background-color: #964b27;
+      }
+
+      #notification-container {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1001;
+      }
+
+      .notification {
+        padding: 15px 25px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        color: #fff;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .notification.success {
+        background-color: #4caf50;
+      }
+
+      .notification.error {
+        background-color: #f44336;
+      }
+
+      .notification.show {
+        opacity: 1;
+      }
+
+      .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #2a2a2a;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        display: none;
+        z-index: 1000;
+      }
+
+      .popup-content {
+        font-size: 18px;
+        color: #fff;
+      }
+
+      #popup-close {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background: #b35c32;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #000;
+        font-size: 16px;
+      }
+
+      #popup-close:hover {
+        background: #964b27;
+      }
+
+      .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #2a2a2a;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        display: none;
+        z-index: 1000;
+        border: 3px solid #4caf50;
+      }
+
+      .popup-content {
+        font-size: 18px;
+        color: #4caf50;
+        font-weight: bold;
+      }
+
+      .popup-icon {
+        font-size: 40px;
+        color: #4caf50;
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      #popup-close {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background: #4caf50;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #fff;
+        font-size: 16px;
+      }
+
+      #popup-close:hover {
+        background: #388e3c;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="feedback-page">
+      <div class="feedback-content">
+        <div class="feedback_header">
+          <a
+            href="https://qrmenuarmenia.site/api/cafe/menu/get-menu"
+            class="back_btn"
+          >
+            <img src="/api/static/icons/left-arrow.svg" alt="Back" />
+          </a>
+          <h2>Feedback</h2>
+        </div>
+        <p>What could you say about our Menu Service</p>
+        <div class="rating">
+          <div class="rating-points"></div>
+          <span id="selected-rating"></span>
+        </div>
+        <p>Please provide any additional feedback</p>
+        <textarea id="feedback-text" rows="4"></textarea>
+        <button id="submit-feedback">Submit Feedback</button>
+      </div>
+    </div>
+
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <span class="popup-icon">✔</span>
+        <p id="popup-message"></p>
+        <button id="popup-close">OK</button>
+      </div>
+    </div>
+
+    <script>
+      const ratingPointsContainer = document.querySelector(".rating-points");
+      const selectedRating = document.getElementById("selected-rating");
+      const feedbackText = document.getElementById("feedback-text");
+      const submitButton = document.getElementById("submit-feedback");
+
+      const popup = document.getElementById("popup");
+      const popupMessage = document.getElementById("popup-message");
+      const popupClose = document.getElementById("popup-close");
+      const popupIcon = document.querySelector(".popup-icon");
+
+      let currentRating = 0;
+
+      // Generate rating points
+      for (let i = 1; i <= 10; i++) {
+        const ratingPoint = document.createElement("div");
+        ratingPoint.classList.add("rating-point");
+        ratingPoint.textContent = i;
+
+        ratingPoint.addEventListener("click", () => {
+          currentRating = i;
+          selectedRating.textContent = `Rating: ${i}`;
+
+          document
+            .querySelectorAll(".rating-point")
+            .forEach((point) => point.classList.remove("selected"));
+          ratingPoint.classList.add("selected");
+        });
+
+        ratingPointsContainer.appendChild(ratingPoint);
+      }
+
+      submitButton.addEventListener("click", () => {
+        if (currentRating === 0) {
+          showPopup("Please select a rating.", false);
+          return;
+        }
+
+        const feedback_text = feedbackText.value;
+        sendFeedback(currentRating, feedback_text);
+      });
+
+      function showPopup(message, isSuccess = true) {
+        popupMessage.textContent = message;
+        if (isSuccess) {
+          popup.style.borderColor = "#4CAF50";
+          popupMessage.style.color = "#4CAF50";
+          popupIcon.textContent = "✔";
+          popupIcon.style.color = "#4CAF50";
+        } else {
+          popup.style.borderColor = "#F44336";
+          popupMessage.style.color = "#F44336";
+          popupIcon.textContent = "✖";
+          popupIcon.style.color = "#F44336";
+        }
+        popup.style.display = "block";
+      }
+
+      popupClose.addEventListener("click", () => {
+        popup.style.display = "none";
+      });
+
+      async function sendFeedback(rating, feedback_text) {
+        try {
+          const response = await fetch(
+            "https://qrmenuarmenia.site/api/api/users/feedback",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                horeka_client_id: localStorage.getItem("cafeIdIndex"),
+                rating,
+                feedback_text,
+              }),
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Failed to send feedback.");
+          }
+
+          // Clear the form
+          currentRating = 0;
+          selectedRating.textContent = "";
+          feedbackText.value = "";
+          document
+            .querySelectorAll(".rating-point")
+            .forEach((point) => point.classList.remove("selected"));
+
+          showPopup("Feedback sent successfully!", true);
+        } catch (error) {
+          showPopup("Failed to send feedback. Please try again.", false);
+        }
+      }
+    </script>
+  </body>
+</html>
