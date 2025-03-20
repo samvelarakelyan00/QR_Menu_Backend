@@ -29,14 +29,6 @@ class UserService:
 
     def scan_qr_info(self, scan_data: UserScanQRSchema):
         try:
-            horeka_client_id = scan_data.horeka_client_id
-        except Exception as err:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=str(err)
-            )
-
-        try:
             scan = models.QRScanInfo(**dict(scan_data))
             self.session.add(scan)
             self.session.commit()

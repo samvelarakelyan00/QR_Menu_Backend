@@ -30,22 +30,6 @@ router = APIRouter(
 )
 
 
-# @router.post("/add-menu-new")
-# def add_menu_new(menu_new_data: MenuAddNew,
-#                 menu_crud_service: menuCRUD_service.MenuCRUDService = Depends(),
-#                 current_admin=Depends(cafe_admin_auth_service.get_current_admin)):
-#
-#     try:
-#         horekaclient_id = current_admin.__dict__.get("horekaclient_id")
-#     except Exception as err:
-#         raise HTTPException(
-#             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-#             detail=err
-#         )
-#
-#     return menu_crud_service.add_menu_new(horekaclient_id, menu_new_data)
-
-
 @router.post("/add-menu-new")
 async def add_menu_new(
         kind: str = Form(...),

@@ -8,6 +8,7 @@ class HoReKaClientCreateSchema(BaseModel):
     address: str
     image_src: str
     logo: str
+    payment_amount: float
 
     class Config:
         from_attributes = True

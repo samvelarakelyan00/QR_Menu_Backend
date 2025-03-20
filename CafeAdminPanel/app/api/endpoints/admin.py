@@ -32,3 +32,19 @@ def get_menu_by_product_id(
         )
 
     return admin_servie.get_horeka_admin_by_id(horeka_admin_id)
+
+
+@router.get("/my-account-page-info")
+def get_horeka_admin_my_account_page_info(
+    admin_servie=Depends(admin_service.AdminService),
+    current_admin=Depends(cafe_admin_auth_service.get_current_admin)
+):
+    try:
+        horeka_admin_id = current_admin.__dict__.get("id")
+    except Exception as err:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=err
+        )
+
+    return admin_servie.get_horeka_admin_my_account_page_info(horeka_admin_id)

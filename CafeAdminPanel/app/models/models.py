@@ -33,6 +33,8 @@ class HoReKaClient(Base):
     logo = Column(String, nullable=True)
     created_at = Column(TIMESTAMP, nullable=False, server_default=text("now()"))
 
+    payment_amount = Column(Float, nullable=True)
+
 
 class HoReKaAdmin(Base):
     __tablename__ = "horekadmin"
