@@ -9,6 +9,7 @@ from database import get_session
 from models import models
 
 from schemas.user_schemas import (
+    UserScanQRSchema,
     UserFeedbackSchema
 )
 
@@ -25,6 +26,28 @@ CORS_HEADERS = {
 class UserService:
     def __init__(self, session: Session = Depends(get_session)):
         self.session = session
+
+    def scan_qr_info(self, scan_data: UserScanQRSchema):
+        try:
+            horeka_client_id = scan_data.horeka_client_id
+        except Exception as err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=str(err)
+            )
+
+        try:
+            scan = models.QRScanInfo(**dict(scan_data))
+            self.session.add(scan)
+            self.session.commit()
+        except Exception as err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=str(err)
+            )
+
+        return "OK"
+
 
     def user_feedback(self, user_feedback_data: UserFeedbackSchema):
         try:

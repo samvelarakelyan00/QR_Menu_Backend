@@ -1,10 +1,16 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 
 from fastapi.openapi.docs import get_swagger_ui_html
 
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+
+from schemas.user_schemas import (
+    UserScanQRSchema
+)
+
+from services.user import UserService
 
 from api import router
 
@@ -29,7 +35,12 @@ async def get_docs():
 
 
 @app.get("/{id}")
-def index():
+def index(id: int,
+          user_service: UserService=Depends()):
+    qr_scan_data = UserScanQRSchema(horeka_client_id=id)
+
+    user_service.scan_qr_info(qr_scan_data)
+
     return FileResponse('../../Cafe-Menu/index.html')
 
 

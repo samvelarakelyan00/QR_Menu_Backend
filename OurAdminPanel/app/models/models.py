@@ -101,3 +101,11 @@ class Payment(Base):
     trans_date = Column(String, nullable=True)  # Transaction date from Idram
 
     subs_plan = Column(String, nullable=False)
+
+
+class QRScanInfo(Base):
+    __tablename__ = "qr_scan_info"
+
+    id = Column(Integer, primary_key=True, index=True)
+    created_at = Column(TIMESTAMP, nullable=False, server_default=text("now()"))
+    horeka_client_id = Column(Integer, ForeignKey("horekaclients.id"))
