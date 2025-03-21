@@ -10,6 +10,7 @@ from database import get_session
 from models import models
 
 
+
 CORS_HEADERS = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
@@ -76,29 +77,11 @@ class AdminService:
         horeka_client = horeka_client.__dict__
 
 
-        try:  # TODO get correct subs plan data, have or not yet, last subs plan and right check available_to
-            horeka_client_subs_plan_data = self.session.query(models.Payment).filter_by(horeka_client_id=horeka_client_id).first()
-        except Exception as err:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=str(err)
-            )
-
-        if horeka_client_subs_plan_data is not None:  # TODO get correct subs plan data, have or not yet, last subs plan and right check available_to
-            horeka_client_subs_plan_data = horeka_client_subs_plan_data.__dict__
-            horeka_subs_plan = horeka_client_subs_plan_data.get("subs_plan")
-            horeka_subs_plan_expires = horeka_client_subs_plan_data.get("available_to")
-        else:
-            horeka_subs_plan = None
-            horeka_subs_plan_expires = None
-
-
         info = {
-            "horeka_name": horeka_client.get("name"),
-            "admin_name": horeka_admin.get("name"),
-            "admin_email": horeka_admin.get("email"),
-            "horeka_subs_plan": horeka_subs_plan,
-            "horeka_subs_plan_expires": horeka_subs_plan_expires
-        }
+                    "horeka_name": horeka_client.get("name"),
+                    "admin_name": horeka_admin.get("name"),
+                    "admin_email": horeka_admin.get("email")
+                }
+
 
         return info

@@ -56,20 +56,20 @@ class PaymentService: # TODO
             )
 
         return horeka_admin
-    #
-    # def get_user_last_payment(self, user_id: int):
-    #     try:
-    #         last_payment = (self.session.query(models.Payment)
-    #                         .filter(and_(models.Payment.user_id == user_id, models.Payment.status == 'paid'))
-    #                         .order_by(desc(models.Payment.updated_at))
-    #                         .first())
-    #     except Exception as err:
-    #         raise HTTPException(
-    #             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-    #             detail=err
-    #         )
-    #
-    #     return last_payment
+
+    def get_horeka_admin_last_payment(self, horeka_admin_id: int):
+        try:
+            last_payment = (self.session.query(models.Payment)
+                            .filter(and_(models.Payment.id == horeka_admin_id, models.Payment.status == 'paid'))
+                            .order_by(desc(models.Payment.updated_at))
+                            .first())
+        except Exception as err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=err
+            )
+
+        return last_payment
     #
     # def check_user_payment(self, user_id):
     #     try:
