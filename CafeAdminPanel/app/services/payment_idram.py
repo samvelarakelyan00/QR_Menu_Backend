@@ -59,14 +59,22 @@ class PaymentService: # TODO
 
     def get_horeka_admin_last_payment(self, horeka_admin_id: int):
         try:
+            horeka_admin = self.find_horeka_admin(horeka_admin_id)
+            horeka_client_id = horeka_admin.__dict__.get("horekaclient_id")
+        except Exception as err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=str(err)
+            )
+        try:
             last_payment = (self.session.query(models.Payment)
-                            .filter(and_(models.Payment.id == horeka_admin_id, models.Payment.status == 'paid'))
+                            .filter(and_(models.Payment.horeka_client_id == horeka_client_id, models.Payment.status == 'paid'))
                             .order_by(desc(models.Payment.updated_at))
                             .first())
         except Exception as err:
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=err
+                detail=str(err)
             )
 
         return last_payment

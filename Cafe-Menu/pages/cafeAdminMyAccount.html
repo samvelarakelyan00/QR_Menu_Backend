@@ -264,17 +264,21 @@
 
           <div class="account-details">
             <div class="detail-item">
-              <i class="fas fa-store"></i> <span>Cafe Example</span>
+              <i class="fas fa-store"></i>
+              <p id="cafe_name">Loading...</p>
             </div>
             <div class="detail-item">
-              <i class="fas fa-user"></i> <span>John Doe</span>
+              <i class="fas fa-user"></i>
+              <p id="cafe_admin_name">Loading...</p>
             </div>
             <div class="detail-item">
-              <i class="fas fa-envelope"></i> <span>john.doe@example.com</span>
+              <i class="fas fa-envelope"></i>
+              <p id="cafe_admin_email">Loading...</p>
             </div>
             <div class="detail-item">
-              <i class="fas fa-gem"></i> <span>Basic Plan</span>
-              <span class="date-range">Expires: 2024-12-31</span>
+              <i class="fas fa-gem"></i>
+              <p id="cafe_subscription_plan">Loading...</p>
+              <p id="date_of_plan" class="date-range"></p>
             </div>
           </div>
 
@@ -315,7 +319,7 @@
           </div>
 
           <div class="copyright">
-            <p>© 2025 Your Company. All rights reserved.</p>
+            <p id="copyright_text">Loading ...</p>
           </div>
         </div>
       </main>
@@ -328,6 +332,51 @@
       burgerMenu.addEventListener("click", () => {
         menuItems.classList.toggle("show-menu");
       });
+
+      // /////////////////////////////////////////////////////////////
+      const cafe_name = document.getElementById("cafe_name");
+      const cafe_admin_name = document.getElementById("cafe_admin_name");
+      const cafe_admin_email = document.getElementById("cafe_admin_email");
+      const cafe_subscription_plan = document.getElementById(
+        "cafe_subscription_plan"
+      );
+      const date_of_plan = document.getElementById("date_of_plan");
+      const copyright_text = document.getElementById("copyright_text");
+
+      copyright_text.innerText = `© ${new Date().getFullYear()} Your Company. All rights reserved.`;
+
+      async function get_admin_data(link) {
+        try {
+          const response = await fetch(link, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+          });
+          const data = await response.json();
+
+          console.log(data);
+
+          cafe_name.innerText = data.horeka_name;
+          cafe_admin_name.innerText = data.admin_name;
+          cafe_admin_email.innerText = data.admin_email;
+
+          if (!(data.horeka_subs_plan && data.horeka_subs_plan_expires)) {
+            cafe_subscription_plan.innerText = "No plan!";
+            date_of_plan.innerText = "";
+          } else {
+            cafe_subscription_plan.innerText = data.horeka_subs_plan;
+            date_of_plan.innerText = data.horeka_subs_plan_expires;
+          }
+        } catch (error) {
+          console.log("Error fetching data: ", error);
+        }
+      }
+
+      get_admin_data(
+        "https://qrmenuarmenia.site/api/cafeadmin/api/admin/my-account-page-info"
+      );
     </script>
   </body>
 </html>
