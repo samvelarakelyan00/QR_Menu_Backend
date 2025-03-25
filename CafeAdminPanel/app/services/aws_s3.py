@@ -82,10 +82,16 @@ class S3Manager:
             print(f'Error generating public URL: {e}')
             return None
 
+    def delete_object(self, bucket_name, object_key):
+        self.s3.delete_object(Bucket=bucket_name, Key=object_key)
+
+        return f"Deleted {object_key} from {bucket_name}"
+
 
 s3_manager = S3Manager(aws_access_key_id='AKIA6ODU7TY6ERGQ6HZD',
                        aws_secret_access_key='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',
                        region_name='us-east-1')
+
 
 # print(s3_manager.get_public_url('pubsfiles', 'pubsimages/style.css'))
 

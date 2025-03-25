@@ -16,6 +16,7 @@ from schemas.menu_schema import (
     ProductUpdate
 )
 
+from aws_s3 import s3_manager
 
 CORS_HEADERS = {
     "Access-Control-Allow-Origin": "*",
@@ -113,22 +114,8 @@ class MenuCRUDService:
             )
 
         try:
-            product_kind = product.__dict__.get("kind").replace(" ", "")
-            product_category = product.__dict__.get("category").replace(" ", "")
-
-            search_path = f"../../../{product_kind}/{product_category}"
-            image_name = product.__dict__.get('image_src')
-
-            matching_files = glob.glob(f"{search_path}/**/{image_name}", recursive=True)
-
-            if not matching_files:
-                return f"File '{image_name}' not found."
-
-            try:
-                for file_path in matching_files:
-                    os.remove(file_path)
-            except Exception as e:
-                return f"Error deleting {file_path}: {e}"
+            s3_manager.delete_object("qrmenufilesandimages",
+                                     dict(product).get("image_src"))
 
             self.session.delete(product)
             self.session.commit()

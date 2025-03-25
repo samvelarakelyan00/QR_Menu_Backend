@@ -1,0 +1,32 @@
+Personal Data Processing Policy
+
+
+1. Introduction
+At qrmenuarmenia.site, we are committed to protecting your personal data. This Personal Data Processing Policy outlines how we collect, use, store, and protect your data.
+
+2. Data Collection
+When you register on our site, we collect the following personal data:
+
+Username
+
+Email address
+
+Password
+
+3. Data Use
+The personal data we collect is used solely for the purpose of managing your account and providing our services. This includes authentication, user management, and communication regarding your account.
+
+4. Data Storage
+Your personal data is securely stored on Amazon servers. We retain your data indefinitely for as long as your account is active. Please note that, at present, users cannot delete their accounts. However, we are working on implementing account deletion functionality in the future.
+
+5. Data Sharing
+We do not share your personal data with any third parties. Your data is used exclusively for the purposes outlined in this policy.
+
+6. Data Security
+We implement robust security measures to protect your personal data. This includes using secure servers and encryption to safeguard your information from unauthorized access.
+
+7. User Rights
+Currently, users do not have the ability to delete their accounts. However, we plan to introduce this feature in the future. If you have any questions about your data or wish to request a change, please contact us at goldnsip@gmail.com.
+
+8. Contact Information
+For any questions or concerns regarding this policy or your personal data, please contact us at goldnsip@gmail.com or +374 33 81 01 31.
