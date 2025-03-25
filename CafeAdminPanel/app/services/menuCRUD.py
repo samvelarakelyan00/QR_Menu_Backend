@@ -16,7 +16,7 @@ from schemas.menu_schema import (
     ProductUpdate
 )
 
-from aws_s3 import s3_manager
+from .aws_s3 import s3_manager
 
 CORS_HEADERS = {
     "Access-Control-Allow-Origin": "*",
