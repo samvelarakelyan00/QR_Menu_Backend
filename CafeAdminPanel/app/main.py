@@ -66,4 +66,36 @@ def admin_add_meal():
     return FileResponse('../../Cafe-Menu/pages/addMeal.html')
 
 
+@app.get("/cafe-admin-terms/{term}/{lang}")
+def admin_get_term(term, lang):
+    if term == "cancellation_policy":
+        if lang == "en":
+            return FileResponse('../../Cafe-Menu/pages/Terms/EN/cancellation_policy.html')
+        elif lang == "ru":
+            return FileResponse('../../Cafe-Menu/pages/Terms/RU/cancellation_policy.html')
+        elif lang == "hy":
+            return FileResponse('../../Cafe-Menu/pages/Terms/HY/cancellation_policy.html')
+    elif term == "privacy_policy":
+        if lang == "en":
+            return FileResponse('../../Cafe-Menu/pages/Terms/EN/privacy_policy.html')
+        elif lang == "ru":
+            return FileResponse('../../Cafe-Menu/pages/Terms/RU/privacy_policy.html')
+        elif lang == "hy":
+            return FileResponse('../../Cafe-Menu/pages/Terms/HY/privacy_policy.html')
+    elif term == "terms_of_use":
+        if lang == "en":
+            return FileResponse('../../Cafe-Menu/pages/Terms/EN/terms_of_use.html')
+        elif lang == "ru":
+            return FileResponse('../../Cafe-Menu/pages/Terms/RU/terms_of_use.html')
+        elif lang == "hy":
+            return FileResponse('../../Cafe-Menu/pages/Terms/HY/terms_of_use.html')
+    if term == "personal_data":
+        if lang == "en":
+            return FileResponse('../../Cafe-Menu/pages/Terms/EN/personal_data.html')
+        elif lang == "ru":
+            return FileResponse('../../Cafe-Menu/pages/Terms/RU/personal_data.html')
+        elif lang == "hy":
+            return FileResponse('../../Cafe-Menu/pages/Terms/HY/personal_data.html')
+
+
 app.include_router(router)
