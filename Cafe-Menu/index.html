@@ -193,10 +193,10 @@
       </div>
       <div class="info">
         <h1 id="welcome-message"></h1>
-        <a href="https://qrmenuarmenia.site/api/cafe/menu/get-menu"
-          >Go to menu</a
-        >
-        <!-- <a href="pages/menu.html">Go to menu</a> -->
+        <!-- <a href="https://qrmenuarmenia.site/api/cafe/menu/get-menu">
+          Go to menu
+        </a> -->
+        <a href="pages/menu.html">Go to menu</a>
       </div>
       <img alt="Cafe Logo" class="main-page-icon" id="r-logo" />
 
@@ -256,10 +256,7 @@
           "Персональные \n Данные",
         ],
       };
-      let stringified_terms = JSON.stringify(term_names);
       const terms_buttons = document.querySelectorAll(".terms");
-
-      localStorage.setItem("term_names", stringified_terms);
 
       const copyright_text = document.getElementById("copyright_text");
 
@@ -279,8 +276,6 @@
       const wMessage = document.getElementById("welcome-message");
       const languages = document.getElementById("languages");
 
-      console.log(languages);
-
       // -------------------------------------------------------------
 
       let cafeIndex = localStorage.setItem("cafeIdIndex", indexURL);
@@ -289,10 +284,8 @@
       languages.addEventListener("change", (event) => {
         cafeLang = event.target.value;
         localStorage.setItem("language", cafeLang);
-        let term_names = JSON.parse(localStorage.getItem("term_names"));
 
         if (term_names.hasOwnProperty(event.target.value)) {
-          console.log(typeof term_names[event.target.value]);
           term_names[event.target.value].forEach((term_content, index) => {
             terms_buttons[index].textContent = term_content;
           });
@@ -341,7 +334,6 @@
               }
             );
 
-            console.log(response);
             window.open(
               `https://qrmenuarmenia.site/api/cafe/menu/users/${term}/${lang}`,
               "_blank"
