@@ -35,6 +35,12 @@ async def get_docs():
     return get_swagger_ui_html(openapi_url="/api/openapi.json", title="docs")
 
 
+
+@app.get("/")
+def menu():
+    return FileResponse('../../Cafe-Menu/main.html')
+
+
 @app.get("/{id}")
 def index(id: int,
           user_service: UserService=Depends()):
