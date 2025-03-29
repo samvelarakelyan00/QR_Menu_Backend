@@ -317,14 +317,14 @@
             />
           </div>
 
-          <div class="footer-links">
+          <!-- <div class="footer-links">
             <button class="terms" id="privacy_policy">Privacy Policy</button>
             <button class="terms" id="cencellation_policy">
               Cancellation Policy
             </button>
             <button class="terms" id="terms_of_use">Terms of Use</button>
             <button class="terms" id="personal_data">Personal Data</button>
-          </div>
+          </div> -->
 
           <div class="copyright">
             <p id="copyright_text">Loading ...</p>
@@ -396,7 +396,7 @@
 
           try {
             const response = await fetch(
-              `https://qrmenuarmenia.site/api/cafeadmin/cafe-admin-terms/${term}/${lang}`,
+              `https://qrmenuarmenia.site/api/cafe/menu/users/${term}/${lang}`,
               {
                 method: "GET",
                 headers: {
@@ -404,7 +404,6 @@
                 },
               }
             );
-            const data = response.json();
 
             console.log(data);
           } catch (error) {

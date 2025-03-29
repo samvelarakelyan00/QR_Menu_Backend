@@ -40,7 +40,7 @@ def get_menu_by_product_id(
 @router.get("/my-account-page-info")
 def get_horeka_admin_my_account_page_info(
     admin_servie=Depends(admin_service.AdminService),
-    payment_idram_service=Depends(payment_idram_service.PaymentService),
+    payment_idram_service=Depends(payment_idram_service.IDramPaymentService),
     current_admin=Depends(cafe_admin_auth_service.get_current_admin)
 ):
     try:

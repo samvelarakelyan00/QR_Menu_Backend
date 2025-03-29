@@ -34,7 +34,7 @@ CORS_HEADERS = {
 SECRET_KEY = "7saWDJZkFmaJ4elKoClpDJsi3w8gBUTdzDUKJ6"
 
 
-class PaymentService: # TODO
+class IDramPaymentService: # TODO
     def __init__(self, session: Session = Depends(get_session)):
         self.session = session
 
@@ -262,62 +262,62 @@ class PaymentService: # TODO
     def payment_fail(self):  # payment_status_update_data: PaymentStatusUpdateSchema
         return FileResponse("../templates/fail.html")
 
-    def payment_data_to_users_with_subs(self, edp_bill_no):
-        # ============== Store needed data to users_with_subs ===============
-        try:
-            # Check if the order exists and the amount is correct
-            payment = self.session.query(models.Payment).filter(models.Payment.order_id == int(edp_bill_no)).first()
-        except Exception as err:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"Error occurred while trying to find the payment with EDP_BILL_NO '{edp_bill_no}'\n"
-                       f"Check if the order exists and the amount is correct\n"
-                       f"ERR: {err}"
-            )
-
-        if payment is None:
-            print(f"Payment record not found for Bill No: {edp_bill_no}")
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Payment record not found")
-
-        try:
-            payment = payment.__dict__
-
-            status = payment.get("status")
-            if status != 'paid':
-                return None
-
-
-            user_id = payment.get('user_id')
-            amount = payment.get('amount')
-            buy_date = payment.get('updated_at')
-            subs_end_date = payment.get("available_to")
-
-            user = self.session.query(models.User).filter_by(user_id=user_id).first().__dict__
-
-            promocode = user.get("special_promocode")
-            username = user.get("username")
-            reg_date = user.get("created_at")
-
-            user_with_subs = models.UsersWithSubs(
-                promocode=promocode,
-                amount=amount,
-                buy_date=buy_date,
-                subs_end_date=subs_end_date,
-                user_id=user_id,
-                username=username,
-                reg_date=reg_date
-            )
-
-            self.session.add(user_with_subs)
-            self.session.commit()
-
-            return "OK"
-        except Exception as err:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"Error occurred while trying to add payment data with payment EDP_BILL_NO '{edp_bill_no}'\n"
-                       f"ERR: {err}"
-            )
+    # def payment_data_to_users_with_subs(self, edp_bill_no):
+    #     # ============== Store needed data to users_with_subs ===============
+    #     try:
+    #         # Check if the order exists and the amount is correct
+    #         payment = self.session.query(models.Payment).filter(models.Payment.order_id == int(edp_bill_no)).first()
+    #     except Exception as err:
+    #         raise HTTPException(
+    #             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+    #             detail=f"Error occurred while trying to find the payment with EDP_BILL_NO '{edp_bill_no}'\n"
+    #                    f"Check if the order exists and the amount is correct\n"
+    #                    f"ERR: {err}"
+    #         )
+    #
+    #     if payment is None:
+    #         print(f"Payment record not found for Bill No: {edp_bill_no}")
+    #         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Payment record not found")
+    #
+    #     try:
+    #         payment = payment.__dict__
+    #
+    #         status = payment.get("status")
+    #         if status != 'paid':
+    #             return None
+    #
+    #
+    #         user_id = payment.get('user_id')
+    #         amount = payment.get('amount')
+    #         buy_date = payment.get('updated_at')
+    #         subs_end_date = payment.get("available_to")
+    #
+    #         user = self.session.query(models.User).filter_by(user_id=user_id).first().__dict__
+    #
+    #         promocode = user.get("special_promocode")
+    #         username = user.get("username")
+    #         reg_date = user.get("created_at")
+    #
+    #         user_with_subs = models.UsersWithSubs(
+    #             promocode=promocode,
+    #             amount=amount,
+    #             buy_date=buy_date,
+    #             subs_end_date=subs_end_date,
+    #             user_id=user_id,
+    #             username=username,
+    #             reg_date=reg_date
+    #         )
+    #
+    #         self.session.add(user_with_subs)
+    #         self.session.commit()
+    #
+    #         return "OK"
+    #     except Exception as err:
+    #         raise HTTPException(
+    #             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+    #             detail=f"Error occurred while trying to add payment data with payment EDP_BILL_NO '{edp_bill_no}'\n"
+    #                    f"ERR: {err}"
+    #         )
 
     def payment_result(self,
                        EDP_PRECHECK: str = Form(None),  # Allow None for the pre-check

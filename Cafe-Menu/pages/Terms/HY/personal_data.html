@@ -3,7 +3,234 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Personal Data</title>
+    <title>Անձնական տվյալների մշակման քաղաքականություն</title>
+    <style>
+      /* (Same styles as before) */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #1a1a1a;
+        color: #fff;
+        line-height: 1.6;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .title {
+        color: #ff6200;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+
+      .intro-text {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .policy-section {
+        border: 2px solid #ff6200;
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+
+      .policy-title {
+        color: #fff;
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+      }
+
+      .policy-text {
+        font-size: 1.1rem;
+      }
+
+      .back-button {
+        display: inline-block;
+        padding: 10px 40px;
+        background-color: #000;
+        color: #fff;
+        text-decoration: none;
+        border: 2px solid #ff6200;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+      }
+
+      .back-button:hover {
+        background-color: #ff6200;
+        color: #000;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+
+        .title {
+          font-size: 2rem;
+        }
+
+        .intro-text {
+          font-size: 1rem;
+        }
+
+        .policy-section {
+          padding: 15px;
+        }
+
+        .policy-title {
+          font-size: 1.5rem;
+        }
+
+        .policy-text {
+          font-size: 0.95rem;
+        }
+
+        .back-button {
+          padding: 8px 30px;
+          font-size: 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 15px;
+        }
+
+        .title {
+          font-size: 1.5rem;
+        }
+
+        .intro-text {
+          font-size: 0.9rem;
+        }
+
+        .policy-section {
+          padding: 10px;
+        }
+
+        .policy-title {
+          font-size: 1.2rem;
+        }
+
+        .policy-text {
+          font-size: 0.85rem;
+        }
+
+        .back-button {
+          padding: 6px 20px;
+          font-size: 0.9rem;
+        }
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <h1 class="title">Անձնական տվյալների մշակման քաղաքականություն</h1>
+      <p class="intro-text">
+        qrmenuarmenia.site-ում մենք պարտավորվում ենք պաշտպանել ձեր անձնական
+        տվյալները: Այս Անձնական Տվյալների Մշակման Քաղաքականությունը նկարագրում
+        է, թե ինչպես ենք մենք հավաքում, օգտագործում, պահպանում և պաշտպանում ձեր
+        տվյալները։
+      </p>
+
+      <div class="policy-section">
+        <h2 class="policy-title">1. Ներածություն</h2>
+        <p class="policy-text">
+          qrmenuarmenia.site-ում մենք պարտավորվում ենք պաշտպանել ձեր անձնական
+          տվյալները: Այս Անձնական Տվյալների Մշակման Քաղաքականությունը նկարագրում
+          է, թե ինչպես ենք մենք հավաքում, օգտագործում, պահպանում և պաշտպանում
+          ձեր տվյալները։
+        </p>
+      </div>
+
+      <div class="policy-section">
+        <h2 class="policy-title">2. Տվյալների Հավաքագրում</h2>
+        <p class="policy-text">
+          Երբ գրանցվում եք մեր կայքում, մենք հավաքում ենք հետևյալ անձնական
+          տվյալները՝ Օգտանուն, Էլեկտրոնային հասցե, Գաղտնաբառ։
+        </p>
+      </div>
+
+      <div class="policy-section">
+        <h2 class="policy-title">3. Տվյալների օգտագործում</h2>
+        <p class="policy-text">
+          Մենք հավաքագրված անձնական տվյալները օգտագործում ենք բացառապես ձեր
+          հաշվի կառավարումն ապահովելու և մեր ծառայությունները մատուցելու
+          նպատակով։Սա ներառում է նույնականացում, օգտատերի տվայլների մշակմում և
+          հաղորդակցություն ձեր հաշվի հետ կապված:
+        </p>
+      </div>
+
+      <div class="policy-section">
+        <h2 class="policy-title">4. Տվյալների պահպանում</h2>
+        <p class="policy-text">
+          Ձեր անձնական տվյալները ապահով կերպով պահվում են Amazon-ի սերվերներում։
+          Մենք պահպանում ենք ձեր տվյալները անորոշ ժամանակով, քանի դեռ ձեր հաշիվը
+          ակտիվ է։Խնդրում ենք նկատի ունենալ, որ ներկայումս օգտվողները չեն կարող
+          ջնջել իրենց հաշիվները: Այնուամենայնիվ, մենք աշխատում ենք ապագայում
+          հաշիվների ջնջման գործառույթն ավելացնելու վրա:
+        </p>
+      </div>
+
+      <div class="policy-section">
+        <h2 class="policy-title">5. Տվյալների փոխանակում</h2>
+        <p class="policy-text">
+          Մենք չենք կիսում ձեր անձնական տվյալները որևէ երրորդ կողմի հետ: Ձեր
+          տվյալները օգտագործվում են բացառապես սույն քաղաքականության մեջ նշված
+          նպատակների համար:
+        </p>
+      </div>
+
+      <div class="policy-section">
+        <h2 class="policy-title">6. Տվյալների անվտանգություն</h2>
+        <p class="policy-text">
+          Մենք իրականացնում ենք անվտանգության լուրջ միջոցներ՝ ձեր անձնական
+          տվյալները պաշտպանելու համար: Սա ներառում է անվտանգ սերվերների և
+          գաղտնագրման օգտագործումը՝ ձեր տեղեկատվությունը չարտոնված մուտքից
+          պաշտպանելու համար:
+        </p>
+      </div>
+
+      <div class="policy-section">
+        <h2 class="policy-title">7. Օգտատերի իրավունքները</h2>
+        <p class="policy-text">
+          Ներկայումս օգտատերերը հնարավորություն չունեն ջնջել իրենց հաշիվները։
+          Այնուամենայնիվ, մենք նախատեսում ենք ապագայում ավելացնել այս
+          գործառույթը: Եթե ձեր տվյալների վերաբերյալ հարցեր ունեք կամ ցանկանում
+          եք փոփոխություն պահանջել, խնդրում ենք կապվել մեզ հետ
+          samvel.arakelyan00@gmail.com հասցեով:
+        </p>
+      </div>
+
+      <div class="policy-section">
+        <h2 class="policy-title">8. Կոնտակտային տվյալներ</h2>
+        <p class="policy-text">
+          Այս քաղաքականության կամ ձեր անձնական տվյալների վերաբերյալ ցանկացած
+          հարցի կամ մտահոգության դեպքում, խնդրում ենք կապնվել մեզ հետ՝
+          samvel.arakelyan00@gmail.com էլ․ հասցեով կամ +374 77 34 48 78
+          հեռախոսահամարով։
+        </p>
+      </div>
+
+      <a href="#" class="back-button">Վերադառնալ</a>
+    </div>
+  </body>
 </html>
