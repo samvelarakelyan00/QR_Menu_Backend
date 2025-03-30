@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tip Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .tip-page {
+            background-color: #2a2a2a;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            box-sizing: border-box;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .tip-section {
+            margin-bottom: 30px;
+        }
+
+        .tip-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .tip-amount {
+            background-color: #b35c32;
+            color: #000;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .tip-amount:hover,
+        .tip-amount.selected,
+        .tip-amount:active {
+            background-color: #964b27;
+            color: #fff;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+            transform: scale(1.05);
+        }
+
+        #submit-tip {
+            background-color: #b35c32;
+            color: #000;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        #submit-tip:hover {
+            background-color: #964b27;
+        }
+    </style>
+</head>
+<body>
+    <div class="tip-page">
+        <div class="tip-section">
+            <h2>Tip to Place</h2>
+            <div class="tip-buttons">
+                <div class="button-row">
+                    <button class="tip-amount" data-amount="100">100</button>
+                    <button class="tip-amount" data-amount="200">200</button>
+                    <button class="tip-amount" data-amount="300">300</button>
+                    <button class="tip-amount" data-amount="500">500</button>
+                </div>
+                <div class="button-row">
+                    <button class="tip-amount" data-amount="1000">1000</button>
+                    <button class="tip-amount" data-amount="2000">2000</button>
+                    <button class="tip-amount" data-amount="3000">3000</button>
+                    <button class="tip-amount" data-amount="5000">5000</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip-section">
+            <h2>Tip to Menu</h2>
+            <div class="tip-buttons">
+                <div class="button-row">
+                    <button class="tip-amount" data-amount="100">100</button>
+                    <button class="tip-amount" data-amount="200">200</button>
+                    <button class="tip-amount" data-amount="300">300</button>
+                    <button class="tip-amount" data-amount="500">500</button>
+                </div>
+                <div class="button-row">
+                    <button class="tip-amount" data-amount="1000">1000</button>
+                    <button class="tip-amount" data-amount="2000">2000</button>
+                    <button class="tip-amount" data-amount="3000">3000</button>
+                    <button class="tip-amount" data-amount="5000">5000</button>
+                </div>
+            </div>
+        </div>
+
+        <button id="submit-tip">Submit</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("Script loaded and DOM is ready!");
+
+            const tipSections = document.querySelectorAll('.tip-section');
+
+            tipSections.forEach(section => {
+                const buttons = section.querySelectorAll('.tip-amount');
+
+                buttons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        console.log(`Button clicked: ${button.dataset.amount}`);
+
+                        section.querySelectorAll('.tip-amount').forEach(btn => btn.classList.remove('selected'));
+                        button.classList.add('selected');
+                    });
+                });
+
+                const defaultButton = section.querySelector('.tip-amount[data-amount="300"]');
+                if (defaultButton) {
+                    defaultButton.classList.add('selected');
+                    console.log(`Default button selected: ${defaultButton.dataset.amount}`);
+                }
+            });
+
+            document.getElementById('submit-tip').addEventListener('click', () => {
+                console.log("Submit button clicked!");
+
+                const selectedTips = [];
+
+                tipSections.forEach(section => {
+                    const selectedButton = section.querySelector('.tip-amount.selected');
+                    if (selectedButton) {
+                        selectedTips.push({
+                            section: section.querySelector('h2').textContent.trim(),
+                            amount: selectedButton.dataset.amount
+                        });
+                    }
+                });
+
+                console.log("Selected Tips:", selectedTips);
+                alert(`Selected Tips:\n${selectedTips.map(tip => `${tip.section}: ${tip.amount}`).join("\n")}`);
+            });
+        });
+    </script>
+</body>
+</html>
