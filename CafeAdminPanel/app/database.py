@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 DATABASE_URL = "postgresql+psycopg2://postgres:password@localhost:5432/qrmenu"
 # Create the engine
 engine = create_engine(DATABASE_URL)
-Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Session = sessionmaker(autocommit=False, bind=engine)
 
 # Define the Base
 Base = declarative_base()

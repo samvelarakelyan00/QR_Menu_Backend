@@ -109,7 +109,7 @@ class PaymentIDramUserBasicTip(Base):
     __tablename__ = "payments_idram_user_basic_tip"
 
     id = Column(Integer, primary_key=True, index=True)
-    order_id = Column(String, unique=True)
+    order_id = Column(Integer, unique=True)
     amount = Column(Float)
     status = Column(String)
     created_at = Column(TIMESTAMP, nullable=False, default=func.now() + text("Interval '4 hours'"))

@@ -40,6 +40,8 @@ class IDramPaymentServiceUserBasicTip: # TODO
 
     def get_next_order_id(self):
         max_order_id = self.session.query(func.max(models.PaymentIDramUserBasicTip.order_id)).scalar()
+        print(max_order_id)
+        print(type(max_order_id))
         return (max_order_id or 0) + 1
 
     def start_payment(self, payment_data: PaymentIDramInitiationSchemaUserBasicTip):
@@ -47,6 +49,7 @@ class IDramPaymentServiceUserBasicTip: # TODO
             amount = payment_data.EDP_AMOUNT
             required_payment_amount = payment_data.REQUIRED_PAYMENT_AMOUNT
             horekaclient_id = payment_data.HoReKaClientId
+            horeka_part_amount = float(amount) - float(amount) * 0.1
         except Exception as err:
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -68,6 +71,7 @@ class IDramPaymentServiceUserBasicTip: # TODO
                 amount=amount,
                 status=payment_status,
                 horeka_client_id=horekaclient_id,
+                horeka_part=horeka_part_amount
             )
         except Exception as err:
             raise HTTPException(
