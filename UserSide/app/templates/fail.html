@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idram Payment Failure</title>
+</head>
+<body style="margin: 0; font-family: Arial, sans-serif; background-color: #202020;">
+
+    <div style="width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center;">
+        <div style="width: 600px; min-height: 300px; display: flex; flex-direction: column; align-items: center; border: 5px solid #DC3545; border-radius: 8px; background-color: #1b1b1b;">
+            <h1 style="color: #DC3545; font-size: 24px; font-weight: 400; margin-top: 50px;">Payment Failed!</h1>
+            <p style="color: #f6f6f6; font-size: 18px; font-weight: 400; margin-top: 50px; text-align: center; line-height: 1.5; word-wrap: break-word;">
+                Unfortunately, your transaction could not be completed. Please try again.
+            </p>
+            <button onclick="retryPayment()" style="width: 200px; padding: 10px 0; border-radius: 8px; border: none; margin-top: 30px; font-size: 20px; background-color: #DC3545; color: #f6f6f6; font-weight: 400; cursor: pointer;">
+                Retry Payment
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function retryPayment() {
+            window.location.href = "/";
+        }
+    </script>
+
+</body>
+</html>

@@ -9,7 +9,7 @@ class PaymentIDramInitiationSchemaUserBasicTip(BaseModel):
     EDP_AMOUNT: condecimal(gt=0, max_digits=10, decimal_places=2) = Field(..., description="Amount of the payment")
     # EDP_BILL_NO: str = Field(..., description="Bill ID according to merchant's accounting system")
     EDP_EMAIL: Optional[str] = Field(None, description="Email address for payment confirmation notifications")
-    REQUIRED_PAYMENT_AMOUNT: float = 100.00
+    REQUIRED_PAYMENT_AMOUNT: condecimal(gt=99, lt=100001, max_digits=5, decimal_places=2) = Field(..., description="Required payment amount")
     HoReKaClientId: int
 
 
