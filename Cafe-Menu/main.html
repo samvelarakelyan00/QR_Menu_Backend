@@ -92,8 +92,8 @@
 
           .copyright {
             text-align: center;
-            font-size: 16px;
-            color: black;
+            font-size: 8px;
+            color: aliceblue;
           }
         }
       }
@@ -128,6 +128,7 @@
             color: aliceblue;
             font-weight: 600;
             letter-spacing: 1px;
+            cursor: pointer;
           }
         }
 
@@ -186,7 +187,7 @@
     </div>
 
     <div class="languages_cont">
-      <img src="./static/icons/globe.svg" alt="Globe" id="lang_btn" />
+      <img src="/api/static/icons/globe.svg" alt="Globe" id="lang_btn" />
 
       <div class="languages_disabled" id="languages_cont">
         <p data-lang="en" class="lang">English</p>
@@ -203,6 +204,7 @@
         "go_menu_example_btn"
       );
       const terms_buttons = document.querySelectorAll(".terms");
+      const copyright_text = document.getElementById("copyright_text");
 
       lang_btn.addEventListener("click", () => {
         if (languages_cont.className === "languages_enabled") {
@@ -210,18 +212,27 @@
         } else languages_cont.className = "languages_enabled";
       });
 
+      copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Aremenia. All right reserved.`;
+
       languages.forEach((lang) => {
         lang.addEventListener("click", async () => {
           try {
-            const response = await fetch("/data/main.json");
+            // Real Link
+            const response = await fetch("/api/data/get-main-json");
+            // Test link
+            // const response = await fetch("./data/main.json");
             const data = await response.json();
 
             go_menu_example_btn.innerText =
-              data.title[lang.getAttribute("data-lang")];
+              data.button[lang.getAttribute("data-lang")];
 
             terms_buttons.forEach((btn, index) => {
               btn.innerText = data.terms[lang.getAttribute("data-lang")][index];
             });
+
+            copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Aremenia. ${
+              data.footer[lang.getAttribute("data-lang")]
+            }.`;
           } catch (error) {
             console.error("Error fetching data: ", error);
           }
@@ -231,8 +242,6 @@
       });
 
       // //////////////////////////////////////////////////////////////////////////////////
-      const copyright_text = document.getElementById("copyright_text");
-      copyright_text.innerText = `© ${new Date().getFullYear()} Your Company. All rights reserved.`;
 
       terms_buttons.forEach((button) => {
         button.addEventListener("click", async () => {

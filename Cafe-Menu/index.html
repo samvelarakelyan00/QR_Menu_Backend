@@ -173,8 +173,8 @@
 
           .copyright {
             text-align: center;
-            font-size: 16px;
-            color: black;
+            font-size: 8px;
+            color: aliceblue;
           }
         }
       }
@@ -192,11 +192,14 @@
         </select>
       </div>
       <div class="info">
-        <h1 id="welcome-message"></h1>
-        <a href="https://qrmenuarmenia.site/api/cafe/menu/get-menu">
-          Go to menu
+        <!-- <h1 id="welcome-message"></h1> -->
+        <a
+          href="https://qrmenuarmenia.site/api/cafe/menu/get-menu"
+          id="menu_btn"
+        >
+          Menu
         </a>
-        <!-- <a href="pages/menu.html">Go to menu</a> -->
+        <!-- <a href="pages/menu.html" id="menu_btn">Menu</a> -->
       </div>
       <img alt="Cafe Logo" class="main-page-icon" id="r-logo" />
 
@@ -236,26 +239,6 @@
     </section>
 
     <script>
-      const term_names = {
-        hy: [
-          "Գաղտնիության \n Քաղաքականություն",
-          "Չեղարկման \n Քաղաքականություն",
-          "Օգտագործման \n Պայմաններ",
-          "Անձնական \n Տվյալներ",
-        ],
-        en: [
-          "Privacy \n Policy",
-          "Cancellation \n Policy",
-          "Terms \n of \n Use",
-          "Personal \n Data",
-        ],
-        ru: [
-          "Политика \n Конфиденциальности",
-          "Политика \n Отмены",
-          "Правила \n Использования",
-          "Персональные \n Данные",
-        ],
-      };
       const terms_buttons = document.querySelectorAll(".terms");
       const copyright_text = document.getElementById("copyright_text");
       copyright_text.innerText = `© ${new Date().getFullYear()} Your Company. All rights reserved.`;
@@ -273,6 +256,8 @@
       const rLogo = document.getElementById("r-logo");
       const wMessage = document.getElementById("welcome-message");
       const languages = document.getElementById("languages");
+      const menu_btn = document.getElementById("menu_btn");
+      // let translated_content = "Welcome to";
 
       // -------------------------------------------------------------
 
@@ -283,11 +268,25 @@
         cafeLang = event.target.value;
         localStorage.setItem("language", cafeLang);
 
-        if (term_names.hasOwnProperty(event.target.value)) {
-          term_names[event.target.value].forEach((term_content, index) => {
-            terms_buttons[index].textContent = term_content;
-          });
-        }
+        event.target.addEventListener("click", async () => {
+          try {
+            const response = await fetch("/api/data/get-index-json");
+            const data = await response.json();
+
+            // translated_content = data.title[event.target.value];
+            menu_btn.innerText = data.button[event.target.value];
+
+            terms_buttons.forEach((btn, index) => {
+              btn.innerText = data.terms[event.target.value][index];
+            });
+
+            copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Armenia. ${
+              data.footer[event.target.value]
+            }.`;
+          } catch (error) {
+            console.error("Error fetching data: ", error);
+          }
+        });
       });
 
       async function FetchingAPI(link) {
@@ -298,7 +297,7 @@
           bodyBg.src = data.image_src;
           rTitle.innerText = data.name;
           rLogo.src = data.logo;
-          wMessage.innerText = `Welcome to ${data.name}`;
+          // wMessage.innerText = `${translated_content} ${data.name}`;
         } catch (error) {
           console.log("Error fetching URL", error);
         }
