@@ -41,6 +41,11 @@ def menu():
     return FileResponse('../../Cafe-Menu/main.html')
 
 
+@app.get("/data/get-index-json")
+def menu():
+    return FileResponse('../../Cafe-Menu/data/index.json')
+
+
 @app.get("/data/get-main-json")
 def menu():
     return FileResponse('../../Cafe-Menu/data/main.json')
