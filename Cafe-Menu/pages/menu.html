@@ -325,8 +325,51 @@
 
         .copyright {
           text-align: center;
-          font-size: 16px;
+          font-size: 8px;
           color: #999;
+        }
+      }
+
+      .languages_cont {
+        min-width: 40px;
+        min-height: 40px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 14px;
+        background-color: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(4px);
+        padding: 6px;
+        border-radius: 12px;
+        border: 1px solid aliceblue;
+
+        img {
+          max-width: 40px;
+          max-height: 40px;
+          object-fit: cover;
+          object-position: center center;
+        }
+
+        .languages_enabled {
+          scale: 1;
+          display: grid;
+          gap: 4px;
+
+          p {
+            color: aliceblue;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+          }
+        }
+
+        .languages_disabled {
+          display: none;
         }
       }
 
@@ -376,35 +419,35 @@
       </nav>
       <main>
         <div class="links">
-          <a href="#meals" class="link active">Food</a>
-          <a href="#salad" class="link">Salad</a>
-          <a href="#drink" class="link">Drink</a>
-          <a href="#dessert" class="link">Dessert</a>
+          <a href="#meals" id="food" class="link active">Food</a>
+          <a href="#salad" id="salad" class="link">Salad</a>
+          <a href="#drink" id="drink" class="link">Drink</a>
+          <a href="#dessert" id="dessert" class="link">Dessert</a>
         </div>
         <div class="menu" id="menuCont"></div>
       </main>
       <footer>
         <a class="backPreviousPage">
           <img src="/api/static/icons/home.svg" alt="home" />
-          Home
+          <p class="footer_navbar_link">Home</p>
         </a>
         <a href="#menu">
           <img src="/api/static/icons/menu.svg" alt="menu" />
-          Menu
+          <p class="footer_navbar_link">Menu</p>
         </a>
         <!-- Real Link -->
         <a href="https://qrmenuarmenia.site/api/cafe/menu/tip">
           <img src="/api/static/icons/Tip.svg" alt="Tip" />
-          Tip
+          <p class="footer_navbar_link">Tip</p>
         </a>
         <!-- Real Link -->
         <a href="https://qrmenuarmenia.site/api/cafe/menu/feedback">
           <img src="/api/static/icons/feed_back.svg" alt="feed_back" />
-          Feedback
+          <p class="footer_navbar_link">Feedback</p>
         </a>
         <a href="#">
           <img src="/api/static/icons/order.svg" alt="order" />
-          Order
+          <p class="footer_navbar_link">Order</p>
         </a>
       </footer>
 
@@ -443,6 +486,16 @@
       </div>
     </section>
 
+    <div class="languages_cont">
+      <img src="/api/static/icons/globe.svg" alt="Globe" id="lang_btn" />
+
+      <div class="languages_disabled" id="languages_cont">
+        <p data-lang="en" class="lang">English</p>
+        <p data-lang="ru" class="lang">Русский</p>
+        <p data-lang="hy" class="lang">Հայերեն</p>
+      </div>
+    </div>
+
     <script>
       const admin_menu_API =
         "https://qrmenuarmenia.site/api/api/menu-filter/all-menu/";
@@ -459,14 +512,61 @@
       let menuItem = document.createElement("div");
       const backPreviousPageBtns =
         document.querySelectorAll(".backPreviousPage");
-
       const currentLang = localStorage.getItem("language");
+      const languages_cont = document.getElementById("languages_cont");
+      const lang_btn = document.getElementById("lang_btn");
+      const languages = document.querySelectorAll(".lang");
+      const terms_buttons = document.querySelectorAll(".terms");
+      const copyright_text = document.getElementById("copyright_text");
+      const menu_title = document.getElementById("menuTitle");
+      const footer_navbar_links = document.querySelectorAll(
+        ".footer_navbar_link"
+      );
+      copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Armenia. All rights reserved.`;
 
       const valuta = {
         en: "AMD",
         hy: "դր",
         ru: "др",
       };
+
+      // Languages container functionality
+      lang_btn.addEventListener("click", () => {
+        if (languages_cont.className === "languages_enabled") {
+          languages_cont.className = "languages_disabled";
+        } else languages_cont.className = "languages_enabled";
+      });
+
+      // Languages functionality
+      languages.forEach((lang) => {
+        lang.addEventListener("click", async () => {
+          try {
+            const response = await fetch("/api/data/get-menu-json");
+            const data = await response.json();
+
+            menu_title.innerText = data.title[lang.getAttribute("data-lang")];
+            navbarLinks.forEach((link, index) => {
+              link.innerText =
+                data.kinds[lang.getAttribute("data-lang")][index];
+            });
+            footer_navbar_links.forEach((link, index) => {
+              link.innerText =
+                data.footer_navbar[lang.getAttribute("data-lang")][index];
+            });
+            terms_buttons.forEach((link, index) => {
+              link.innerText =
+                data.terms[lang.getAttribute("data-lang")][index];
+            });
+            copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Armenia. ${
+              data.footer[lang.getAttribute("data-lang")]
+            }.`;
+          } catch (error) {
+            console.error("Error fetching data: ", error);
+          }
+
+          localStorage.setItem("language", lang.getAttribute("data-lang"));
+        });
+      });
 
       // backPreviousPage bt event listener
       backPreviousPageBtns.forEach((btn) => {
@@ -601,7 +701,7 @@
           }
           link.classList.add("active");
 
-          currentLinkId = link.textContent.toLocaleLowerCase();
+          currentLinkId = link.id.toLocaleLowerCase();
 
           meals = {};
           menuItem.innerHTML = "";
@@ -610,8 +710,6 @@
           clickedMealPage();
         });
       });
-
-      const terms_buttons = document.querySelectorAll(".terms");
 
       terms_buttons.forEach((button) => {
         button.addEventListener("click", async () => {
@@ -638,10 +736,6 @@
           }
         });
       });
-
-      const copyright_text = document.getElementById("copyright_text");
-
-      copyright_text.innerText = `© ${new Date().getFullYear()} Your Company. All rights reserved.`;
 
       window.onload =
         (updateContent(), clickedMealPage(), fetchingAPI(admin_menu_API_Link));
