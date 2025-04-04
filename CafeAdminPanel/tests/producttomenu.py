@@ -4,6 +4,7 @@ import time
 import requests
 
 from menudata import datalist
+from menudata_hy import datalist_hy
 
 
 def add_menu_new(url: str, form_data: dict, file_path: str = "", token: str=""):
@@ -33,17 +34,16 @@ def add_menu_new(url: str, form_data: dict, file_path: str = "", token: str=""):
 # auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDE2ODg3MjgsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJ0bWJsIEFybWVuIiwiZW1haWwiOiJ0bWJsQGdtYWlsLmNvbSIsImhvcmVrYWNsaWVudF9pZCI6MX19.5gpBnEZ876lw4p4DZ3dC-BUlxkqghyXTG-ZAicaFk88"
 
 # aws test ec2 url
-# url = "http://23.20.175.90/api/cafeadmin/api/menuCRUD/add-menu-new"
 
-url = "http://3.93.76.24/api/cafeadmin/api/menuCRUD/add-menu-new"
+url = "https://qrmenuarmenia.site/api/cafeadmin/api/menuCRUD/add-menu-new"
 
-auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDIxMTE5OTUsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJtZWxvZHlfYWRtaW4iLCJlbWFpbCI6Im1lbG9keUBnbWFpbC5jb20iLCJob3Jla2FjbGllbnRfaWQiOjF9fQ.2GncYrOonUmSsA-NfjcBcO3L0pM145uoF8PW8Sp5Eu4"
+auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDM3NjczNzMsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJtZWxvZHlfYWRtaW4iLCJlbWFpbCI6Im1lbG9keUBnbWFpbC5jb20iLCJob3Jla2FjbGllbnRfaWQiOjF9fQ.8xOZ9uxJ21pdeQiiA20OJOwjoeIGX2yn2OwEFbbuEoU"
 # aws test ec2 token
 # auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDE2OTA2OTIsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJtZWxvZHlfYWRtaW4iLCJlbWFpbCI6Im1lbG9keUBnbWFpbC5jb20iLCJob3Jla2FjbGllbnRfaWQiOjF9fQ.OUxhvrgyU1Evfy0AoMM0C52hrMbqIXPN2B-0iHQEMeg"
 
 image_directory = "../../../../images"
 
-for form_data in datalist:
+for form_data in datalist_hy:
     # Construct full image file path
     image_path = os.path.join(f"{image_directory}/{form_data.get('kind')}/{form_data.get('category')}/", form_data["image"])
 
@@ -52,4 +52,4 @@ for form_data in datalist:
         continue  # Skip if image does not exist
 
     add_menu_new(url, form_data, image_path, auth_token)
-    time.sleep(1)  # Avoid overwhelming the server
+    time.sleep(0.5)  # Avoid overwhelming the server
