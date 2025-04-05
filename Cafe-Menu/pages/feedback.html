@@ -284,6 +284,90 @@
       #popup-close:hover {
         background: #388e3c;
       }
+
+      .footer_content {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px;
+
+        .payment-methods {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 20px;
+        }
+
+        .payment-methods img {
+          margin: 0 10px;
+          height: 20px; /* Adjust image size */
+        }
+
+        .footer-links {
+          text-align: center;
+          margin-bottom: 10px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .footer-links button {
+          background-color: transparent;
+          font-size: 10px;
+          border: none;
+          color: white;
+        }
+
+        .copyright {
+          text-align: center;
+          font-size: 8px;
+          color: #999;
+        }
+      }
+
+      .languages_cont {
+        min-width: 40px;
+        min-height: 40px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 14px;
+        background-color: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(4px);
+        padding: 6px;
+        border-radius: 12px;
+        border: 1px solid aliceblue;
+
+        img {
+          max-width: 40px;
+          max-height: 40px;
+          object-fit: cover;
+          object-position: center center;
+        }
+
+        .languages_enabled {
+          scale: 1;
+          display: grid;
+          gap: 4px;
+
+          p {
+            color: aliceblue;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+          }
+        }
+
+        .languages_disabled {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -297,16 +381,16 @@
             >
               <img src="/api/static/icons/left-arrow.svg" alt="Back" />
             </a>
-            <h2>Feedback</h2>
+            <h2 id="title">Feedback</h2>
           </div>
-          <p>What could you say about our Menu Service</p>
+          <p id="subtitle">What could you say about our Menu Service</p>
           <div class="rating">
             <div class="rating-points"></div>
             <span id="selected-rating"></span>
           </div>
-          <p>Please provide any additional feedback</p>
+          <p id="about_feedback">Please provide any additional feedback</p>
           <textarea id="feedback-text" rows="4"></textarea>
-          <button id="submit-feedback">Submit Feedback</button>
+          <button id="submit-feedback">Send</button>
         </div>
       </div>
 
@@ -350,6 +434,16 @@
         <span class="popup-icon">✔</span>
         <p id="popup-message"></p>
         <button id="popup-close">OK</button>
+      </div>
+    </div>
+
+    <div class="languages_cont">
+      <img src="/api/static/icons/globe.svg" alt="Globe" id="lang_btn" />
+
+      <div class="languages_disabled" id="languages_cont">
+        <p data-lang="en" class="lang">English</p>
+        <p data-lang="ru" class="lang">Русский</p>
+        <p data-lang="hy" class="lang">Հայերեն</p>
       </div>
     </div>
 
@@ -454,7 +548,7 @@
 
       const terms_buttons = document.querySelectorAll(".terms");
       const copyright_text = document.getElementById("copyright_text");
-      copyright_text.innerText = `© ${new Date().getFullYear()} Your Company. All rights reserved.`;
+      copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Armenia. All rights reserved.`;
 
       terms_buttons.forEach((button) => {
         button.addEventListener("click", async () => {
@@ -479,6 +573,55 @@
           } catch (error) {
             console.log("Error getting data: ", error);
           }
+        });
+      });
+
+      // /////////////////////////////////////////////////////////////////////////////////////
+      const languages_cont = document.getElementById("languages_cont");
+      const lang_btn = document.getElementById("lang_btn");
+      const languages = document.querySelectorAll(".lang");
+      const menu_title = document.getElementById("menuTitle");
+      const footer_navbar_links = document.querySelectorAll(
+        ".footer_navbar_link"
+      );
+      const about_feedback = document.getElementById("about_feedback");
+      const subtitle = document.getElementById("subtitle");
+      const title = document.getElementById("title");
+
+      lang_btn.addEventListener("click", () => {
+        if (languages_cont.className === "languages_enabled") {
+          languages_cont.className = "languages_disabled";
+        } else languages_cont.className = "languages_enabled";
+      });
+
+      languages.forEach((lang) => {
+        lang.addEventListener("click", async () => {
+          try {
+            const response = await fetch("/api/data/get-feedback-json");
+            const data = await response.json();
+
+            title.innerText = data.title[lang.getAttribute("data-lang")];
+            subtitle.innerText = data.subtitle[lang.getAttribute("data-lang")];
+            about_feedback.innerText =
+              data.about_feedback[lang.getAttribute("data-lang")];
+            submitButton.innerText =
+              data.submit_button[lang.getAttribute("data-lang")];
+            footer_navbar_links.forEach((link, index) => {
+              link.innerText =
+                data.footer_navbar[lang.getAttribute("data-lang")][index];
+            });
+            terms_buttons.forEach((term, index) => {
+              term.innerText =
+                data.terms[lang.getAttribute("data-lang")][index];
+            });
+            copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Armenia. ${
+              data.footer[lang.getAttribute("data-lang")]
+            }.`;
+          } catch (error) {
+            console.error("Error fetching data: ", error);
+          }
+
+          localStorage.setItem("language", lang.getAttribute("data-lang"));
         });
       });
     </script>

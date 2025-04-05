@@ -61,6 +61,16 @@ def menu():
     return FileResponse('../../Cafe-Menu/data/about-meal.json')
 
 
+@app.get("/data/get-tip-json")
+def menu():
+    return FileResponse('../../Cafe-Menu/data/tip.json')
+
+
+@app.get("/data/get-feedback-json")
+def menu():
+    return FileResponse('../../Cafe-Menu/data/feedback.json')
+
+
 @app.get("/{id}")
 def index(id: int,
           user_service: UserService=Depends()):
