@@ -5,10 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tip Page</title>
     <style>
-      body,
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #121212;
+      }
+
       section {
         font-family: Arial, sans-serif;
-        background-color: #121212;
         color: #fff;
         display: flex;
         flex-direction: column;
@@ -28,6 +36,32 @@
         img {
           max-width: 40px;
           max-height: 40px;
+        }
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        gap: 24px;
+        margin-top: 54px;
+
+        .title_cont {
+          text-align: center;
+          /* display: none; */
+
+          h1 {
+            font-size: 2em;
+          }
+
+          p {
+            text-wrap: wrap;
+            color: #b35c32;
+            font-style: italic;
+            padding: 0 16px;
+          }
         }
       }
 
@@ -183,44 +217,55 @@
       <a class="backPreviousPage">
         <img src="/api/static/icons/left-arrow.svg" alt="icon" />
       </a>
-      <div class="tip-page">
-        <div class="tip-section">
-          <h2 id="tip_title">Tip</h2>
-          <div class="tip-buttons">
-            <div class="button-row">
-              <button class="tip-amount" data-amount="100">100</button>
-              <button class="tip-amount" data-amount="200">200</button>
-              <button class="tip-amount" data-amount="300">300</button>
-              <button class="tip-amount" data-amount="500">500</button>
-            </div>
-            <div class="button-row">
-              <button class="tip-amount" data-amount="1000">1000</button>
-              <button class="tip-amount" data-amount="2000">2000</button>
-              <button class="tip-amount" data-amount="3000">3000</button>
-              <button class="tip-amount" data-amount="5000">5000</button>
+      <div class="container">
+        <div class="title_cont">
+          <h1>QR Menu Armenia</h1>
+          <p id="subtitle_tip_page">
+            Thank you so much for your generosity! 💛 Your tip means a lot to
+            us, and we truly appreciate your support. Every contribution helps
+            us continue providing great service and making your experience even
+            better. Cheers to you! 🥂😊
+          </p>
+        </div>
+        <div class="tip-page">
+          <div class="tip-section">
+            <h2 id="tip_title">Tip</h2>
+            <div class="tip-buttons">
+              <div class="button-row">
+                <button class="tip-amount" data-amount="100">100</button>
+                <button class="tip-amount" data-amount="200">200</button>
+                <button class="tip-amount" data-amount="300">300</button>
+                <button class="tip-amount" data-amount="500">500</button>
+              </div>
+              <div class="button-row">
+                <button class="tip-amount" data-amount="1000">1000</button>
+                <button class="tip-amount" data-amount="2000">2000</button>
+                <button class="tip-amount" data-amount="3000">3000</button>
+                <button class="tip-amount" data-amount="5000">5000</button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="tip-section">
-          <h2 id="tip_company_title">Tip to Menu</h2>
-          <div class="tip-buttons">
-            <div class="button-row">
-              <button class="tip-amount" data-amount="100">100</button>
-              <button class="tip-amount" data-amount="200">200</button>
-              <button class="tip-amount" data-amount="300">300</button>
-              <button class="tip-amount" data-amount="500">500</button>
-            </div>
-            <div class="button-row">
-              <button class="tip-amount" data-amount="1000">1000</button>
-              <button class="tip-amount" data-amount="2000">2000</button>
-              <button class="tip-amount" data-amount="3000">3000</button>
-              <button class="tip-amount" data-amount="5000">5000</button>
+          <div class="tip-section">
+            <h2 id="tip_company_title">Tip to Menu</h2>
+            <div class="tip-buttons">
+              <div class="button-row">
+                <button class="tip-amount" data-amount="100">100</button>
+                <button class="tip-amount" data-amount="200">200</button>
+                <button class="tip-amount" data-amount="300">300</button>
+                <button class="tip-amount" data-amount="500">500</button>
+              </div>
+              <div class="button-row">
+                <button class="tip-amount" data-amount="1000">1000</button>
+                <button class="tip-amount" data-amount="2000">2000</button>
+                <button class="tip-amount" data-amount="3000">3000</button>
+                <button class="tip-amount" data-amount="5000">5000</button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <button id="submit-tip">Confirm</button>
+          <button id="submit-tip">Confirm</button>
+        </div>
       </div>
       <div class="footer_content">
         <div class="payment-methods">
@@ -378,6 +423,7 @@
       );
       const tip_title = document.getElementById("tip_title");
       const tip_company_title = document.getElementById("tip_company_title");
+      const subtitle_tip_page = document.getElementById("subtitle_tip_page");
 
       lang_btn.addEventListener("click", () => {
         if (languages_cont.className === "languages_enabled") {
@@ -389,6 +435,7 @@
         lang.addEventListener("click", async () => {
           try {
             const response = await fetch("/api/data/get-tip-json");
+            // const response = await fetch("../data/tip.json");
             const data = await response.json();
 
             document.getElementById("submit-tip").innerText =
@@ -397,6 +444,8 @@
               data.title_restaurant[lang.getAttribute("data-lang")];
             tip_company_title.innerText =
               data.title_company[lang.getAttribute("data-lang")];
+            subtitle_tip_page.innerText =
+              data.subtitle_tip_page[lang.getAttribute("data-lang")];
             footer_navbar_links.forEach((link, index) => {
               link.innerText =
                 data.footer_navbar[lang.getAttribute("data-lang")][index];
