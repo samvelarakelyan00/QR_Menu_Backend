@@ -3,6 +3,7 @@ from fastapi.exceptions import HTTPException
 from pydantic.v1 import NoneIsAllowedError
 
 # SqlAlchemy
+from sqlalchemy import text
 from sqlalchemy.orm.session import Session
 
 # Own
@@ -74,14 +75,29 @@ class AdminService:
                 detail=f"HoReKa client with id '{horeka_client_id}' was not found!"
             )
 
+        # Get HoReKa client total tips amount
+        try:
+            horeka_client_tips = self.session.execute(
+                                text("""SELECT horeka_part, updated_at, waiter_id 
+                                     FROM payments_idram_user_basic_tip
+                                     WHERE horeka_client_id = :client_id AND status = 'paid'"""),
+                                {"client_id": horeka_client_id}
+                            ).mappings().all()
+
+        except Exception as err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=str(err)
+            )
+
         horeka_client = horeka_client.__dict__
 
 
         info = {
                     "horeka_name": horeka_client.get("name"),
                     "admin_name": horeka_admin.get("name"),
-                    "admin_email": horeka_admin.get("email")
+                    "admin_email": horeka_admin.get("email"),
+                    "horeka_client_tips": horeka_client_tips
                 }
-
 
         return info
