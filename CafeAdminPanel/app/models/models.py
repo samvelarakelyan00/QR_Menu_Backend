@@ -1,5 +1,7 @@
+from xmlrpc.client import Boolean
+
 from sqlalchemy import (
-    Column, String, Integer, Float,
+    Column, String, Integer, Float, Boolean,
     ForeignKey, TIMESTAMP, text, func
 )
 
@@ -114,4 +116,5 @@ class PaymentIDramUserBasicTip(Base):
     trans_id = Column(String, nullable=True)
     trans_date = Column(String, nullable=True)
     horeka_part = Column(Float, nullable=False)
+    horeka_part_paid = Column(Boolean, nullable=False, server_default='false')
     waiter_id = Column(Integer, nullable=True)

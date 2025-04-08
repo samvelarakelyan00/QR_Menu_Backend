@@ -90,6 +90,8 @@ class AdminService:
                 detail=str(err)
             )
 
+        total_sum_horeka_part = sum(item["horeka_part"] for item in horeka_client_tips)
+
         horeka_client = horeka_client.__dict__
 
 
@@ -97,6 +99,7 @@ class AdminService:
                     "horeka_name": horeka_client.get("name"),
                     "admin_name": horeka_admin.get("name"),
                     "admin_email": horeka_admin.get("email"),
+                    "total_sum_amount": total_sum_horeka_part,
                     "horeka_client_tips": horeka_client_tips
                 }
 

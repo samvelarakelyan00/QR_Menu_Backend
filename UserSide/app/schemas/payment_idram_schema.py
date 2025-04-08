@@ -2,14 +2,14 @@ from pydantic import BaseModel, Field, condecimal
 from typing import Optional
 
 
-class PaymentIDramInitiationSchemaUserBasicTip(BaseModel):
+class PaymentIDramInitiationSchemaUserBasicTip(BaseModel):  # TODO REQUIRED_PAYMENT_AMOUNT when I try to send 1000 it says that max dig is 3, then I change max_digits 5 to 10 and it's OK now, but I need to double check this option and more
     EDP_LANGUAGE: str = Field(..., description="Language for Idram interface")
     EDP_REC_ACCOUNT: str = Field(..., description="Idram ID of the merchant")
     EDP_DESCRIPTION: str = Field(..., description="Description of the product or service")
     EDP_AMOUNT: condecimal(gt=0, max_digits=10, decimal_places=2) = Field(..., description="Amount of the payment")
     # EDP_BILL_NO: str = Field(..., description="Bill ID according to merchant's accounting system")
     EDP_EMAIL: Optional[str] = Field(None, description="Email address for payment confirmation notifications")
-    REQUIRED_PAYMENT_AMOUNT: condecimal(gt=99, lt=100001, max_digits=5, decimal_places=2) = Field(..., description="Required payment amount")
+    REQUIRED_PAYMENT_AMOUNT: condecimal(gt=99, lt=100001, max_digits=10, decimal_places=2) = Field(..., description="Required payment amount")
     HoReKaClientId: int
 
 

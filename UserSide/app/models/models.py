@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Float, ForeignKey, TIMESTAMP, text, func
+from sqlalchemy import Column, String, Integer, Float, ForeignKey, TIMESTAMP, text, func, Boolean
 
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -105,4 +105,5 @@ class PaymentIDramUserBasicTip(Base):
     trans_id = Column(String, nullable=True)
     trans_date = Column(String, nullable=True)
     horeka_part = Column(Float, nullable=False)
+    horeka_part_paid = Column(Boolean, nullable=False, server_default='false')
     waiter_id = Column(Integer, nullable=True)
