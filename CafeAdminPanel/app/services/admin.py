@@ -75,14 +75,18 @@ class AdminService:
                 detail=f"HoReKa client with id '{horeka_client_id}' was not found!"
             )
 
-        # Get HoReKa client total tips amount
+        # Get HoReKa client total tips amount (only unpaid ones)
         try:
             horeka_client_tips = self.session.execute(
-                                text("""SELECT horeka_part, updated_at, waiter_id 
-                                     FROM payments_idram_user_basic_tip
-                                     WHERE horeka_client_id = :client_id AND status = 'paid'"""),
-                                {"client_id": horeka_client_id}
-                            ).mappings().all()
+                text("""
+                    SELECT horeka_part, updated_at, waiter_id 
+                    FROM payments_idram_user_basic_tip
+                    WHERE horeka_client_id = :client_id 
+                      AND status = 'paid' 
+                      AND horeka_part_paid = false
+                """),
+                {"client_id": horeka_client_id}
+            ).mappings().all()
 
         except Exception as err:
             raise HTTPException(
