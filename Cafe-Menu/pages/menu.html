@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cafe Menu</title>
+    <title>QR Menu Armenia | Menu</title>
 
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+IT+Trad:wght@100..400&display=swap");
@@ -311,6 +311,7 @@
           text-align: center;
           margin-bottom: 10px;
           display: flex;
+          flex-wrap: wrap;
           justify-content: center;
           align-items: center;
           gap: 12px;
@@ -552,6 +553,7 @@
         lang.addEventListener("click", async () => {
           try {
             const response = await fetch("/api/data/get-menu-json");
+            // const response = await fetch("../data/menu.json");
             const data = await response.json();
 
             menu_title.innerText = data.title[lang.getAttribute("data-lang")];
@@ -575,8 +577,43 @@
           }
 
           localStorage.setItem("language", lang.getAttribute("data-lang"));
+
+          location.reload();
         });
       });
+
+      // defaultPageLanguege Functionality
+
+      async function defaultPageLanguege() {
+        try {
+          // Real Link
+          const response = await fetch("/api/data/get-menu-json");
+          // Test Link
+          // const response = await fetch("../data/menu.json");
+          const data = await response.json();
+
+          menu_title.innerText = data.title[localStorage.getItem("language")];
+          navbarLinks.forEach((link, index) => {
+            link.innerText =
+              data.kinds[localStorage.getItem("language")][index];
+          });
+          footer_navbar_links.forEach((link, index) => {
+            link.innerText =
+              data.footer_navbar[localStorage.getItem("language")][index];
+          });
+          terms_buttons.forEach((link, index) => {
+            link.innerText =
+              data.terms[localStorage.getItem("language")][index];
+          });
+          copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Armenia. ${
+            data.footer[localStorage.getItem("language")]
+          }.`;
+        } catch (error) {
+          console.error("Error fetching data: ", error);
+        }
+
+        localStorage.setItem("language", lang.getAttribute("data-lang"));
+      }
 
       // backPreviousPage bt event listener
       backPreviousPageBtns.forEach((btn) => {
@@ -748,7 +785,10 @@
       });
 
       window.onload =
-        (updateContent(), clickedMealPage(), fetchingAPI(admin_menu_API_Link));
+        (updateContent(),
+        clickedMealPage(),
+        fetchingAPI(admin_menu_API_Link),
+        defaultPageLanguege());
     </script>
   </body>
 </html>

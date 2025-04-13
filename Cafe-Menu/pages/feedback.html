@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Feedback</title>
+    <title>QR Menu Armenia | Feedback</title>
 
     <style>
       * {
@@ -309,7 +309,7 @@
           flex-wrap: wrap;
           justify-content: center;
           align-items: center;
-          gap: 12px;
+          gap: 6px;
         }
 
         .footer-links button {
@@ -317,6 +317,7 @@
           font-size: 10px;
           border: none;
           color: white;
+          padding: 0;
         }
 
         .copyright {
@@ -457,6 +458,7 @@
       const popupMessage = document.getElementById("popup-message");
       const popupClose = document.getElementById("popup-close");
       const popupIcon = document.querySelector(".popup-icon");
+      let lang = localStorage.getItem("language") || "en";
 
       let currentRating = 0;
 
@@ -598,6 +600,7 @@
         lang.addEventListener("click", async () => {
           try {
             const response = await fetch("/api/data/get-feedback-json");
+            // const response = await fetch("../data/feedback.json");
             const data = await response.json();
 
             title.innerText = data.title[lang.getAttribute("data-lang")];
@@ -623,6 +626,36 @@
 
           localStorage.setItem("language", lang.getAttribute("data-lang"));
         });
+      });
+
+      //  Default language selection
+
+      async function defaultContentByLang() {
+        try {
+          const response = await fetch("/api/data/get-feedback-json");
+          // const response = await fetch("../data/feedback.json");
+          const data = await response.json();
+
+          title.innerText = data.title[lang];
+          subtitle.innerText = data.subtitle[lang];
+          about_feedback.innerText = data.about_feedback[lang];
+          submitButton.innerText = data.submit_button[lang];
+          footer_navbar_links.forEach((link, index) => {
+            link.innerText = data.footer_navbar[lang][index];
+          });
+          terms_buttons.forEach((term, index) => {
+            term.innerText = data.terms[lang][index];
+          });
+          copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Armenia. ${
+            data.footer[lang]
+          }.`;
+        } catch (error) {
+          console.error("Error fetching data: ", error);
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        defaultContentByLang();
       });
     </script>
   </body>

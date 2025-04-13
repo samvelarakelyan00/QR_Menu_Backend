@@ -56,6 +56,8 @@
         .footer_content {
           display: flex;
           flex-direction: column;
+          justify-content: center;
+          align-items: center;
           gap: 12px;
           position: absolute;
           bottom: 24px;
@@ -64,6 +66,7 @@
           .payment-methods {
             display: flex;
             justify-content: center;
+            align-items: center;
             margin-bottom: 20px;
           }
 
@@ -197,6 +200,11 @@
     </div>
 
     <script>
+      const current_lang =
+        localStorage.getItem("language") ||
+        localStorage.setItem("language", "en");
+
+      ////////////////////////////////////////////////////////////////////////
       const languages_cont = document.getElementById("languages_cont");
       const lang_btn = document.getElementById("lang_btn");
       const languages = document.querySelectorAll(".lang");
@@ -240,6 +248,32 @@
           localStorage.setItem("language", lang.getAttribute("data-lang"));
         });
       });
+
+      // ---------------------------------------------------------------------------------
+
+      async function defaultPageLanguege() {
+        try {
+          // Real Link
+          const response = await fetch("/api/data/get-main-json");
+          // Test link
+          // const response = await fetch("./data/main.json");
+          const data = await response.json();
+
+          go_menu_example_btn.innerText = data.button[current_lang];
+
+          terms_buttons.forEach((btn, index) => {
+            btn.innerText = data.terms[current_lang][index];
+          });
+
+          copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Aremenia. ${
+            data.footer[current_lang]
+          }.`;
+        } catch (error) {
+          console.error("Error fetching data: ", error);
+        }
+      }
+
+      defaultPageLanguege();
 
       // //////////////////////////////////////////////////////////////////////////////////
 

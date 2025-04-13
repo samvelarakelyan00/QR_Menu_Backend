@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tip Page</title>
+    <title>QR Menu Armenia | Tip Page</title>
     <style>
       * {
         margin: 0;
@@ -325,38 +325,28 @@
 
       // //////////////////////////////////////////////////////////////////////
       document.addEventListener("DOMContentLoaded", () => {
-        console.log("Script loaded and DOM is ready!");
-
         const tipSections = document.querySelectorAll(".tip-section");
 
         tipSections.forEach((section) => {
           const buttons = section.querySelectorAll(".tip-amount");
 
           buttons.forEach((button) => {
-            button.addEventListener("click", () => {
-              console.log(`Button clicked: ${button.dataset.amount}`);
+            button.addEventListener("click", (e) => {
+              e.preventDefault(); // important for mobile to prevent ghost clicks
 
-              section
-                .querySelectorAll(".tip-amount")
-                .forEach((btn) => btn.classList.remove("selected"));
-              button.classList.add("selected");
+              // If this button is already selected, deselect it
+              if (button.classList.contains("selected")) {
+                button.classList.remove("selected");
+              } else {
+                // Deselect others in the section
+                buttons.forEach((btn) => btn.classList.remove("selected"));
+                button.classList.add("selected");
+              }
             });
           });
-
-          const defaultButton = section.querySelector(
-            '.tip-amount[data-amount="300"]'
-          );
-          if (defaultButton) {
-            defaultButton.classList.add("selected");
-            console.log(
-              `Default button selected: ${defaultButton.dataset.amount}`
-            );
-          }
         });
 
         document.getElementById("submit-tip").addEventListener("click", () => {
-          console.log("Submit button clicked!");
-
           const selectedTips = [];
 
           tipSections.forEach((section) => {
@@ -371,23 +361,25 @@
             }
           });
 
-          console.log("Selected Tips:", selectedTips);
-          alert(
-            `Selected Tips:\n${selectedTips
-              .map((tip) => `${tip.section}: ${tip.amount}`)
-              .join("\n")}`
-          );
+          if (selectedTips.length > 0) {
+            alert(
+              `Selected Tips:\n${selectedTips
+                .map((tip) => `${tip.section}: ${tip.amount}`)
+                .join("\n")}`
+            );
+          } else {
+            alert("Please select at least one tip before submitting.");
+          }
         });
       });
-
       // /////////////////////////////////////////////////////////////////////////////
 
+      let lang = localStorage.getItem("language") || "en";
       const terms_buttons = document.querySelectorAll(".terms");
 
       terms_buttons.forEach((button) => {
         button.addEventListener("click", async () => {
           let term = button.id;
-          let lang = localStorage.getItem("language");
 
           try {
             const response = await fetch(
@@ -463,6 +455,37 @@
 
           localStorage.setItem("language", lang.getAttribute("data-lang"));
         });
+      });
+
+      //  Default language selection
+
+      async function defaultContentByLang() {
+        try {
+          const response = await fetch("/api/data/get-tip-json");
+          // const response = await fetch("../data/tip.json");
+          const data = await response.json();
+
+          document.getElementById("submit-tip").innerText =
+            data.confirm_button[lang];
+          tip_title.innerText = data.title_restaurant[lang];
+          tip_company_title.innerText = data.title_company[lang];
+          subtitle_tip_page.innerText = data.subtitle_tip_page[lang];
+          footer_navbar_links.forEach((link, index) => {
+            link.innerText = data.footer_navbar[lang][index];
+          });
+          terms_buttons.forEach((term, index) => {
+            term.innerText = data.terms[lang][index];
+          });
+          copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Armenia. ${
+            data.footer[lang]
+          }.`;
+        } catch (error) {
+          console.error("Error fetching data: ", error);
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        defaultContentByLang();
       });
     </script>
   </body>

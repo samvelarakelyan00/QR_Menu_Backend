@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cafe Menu</title>
+    <title>QR Menu Armenia | Home</title>
 
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Playwrite+IT+Trad:wght@100..400&display=swap");
@@ -66,20 +66,39 @@
           font-weight: 400;
         }
 
-        select {
-          width: auto;
-          height: auto;
-          padding: 4px 12px;
-          background-color: transparent;
-          border: 2px solid black;
-          border-radius: 100px;
-          backdrop-filter: blur(4px);
-          animation: pulse 1s infinite linear;
+        .languages_cont {
+          min-width: 40px;
+          min-height: 40px;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          align-items: center;
+          gap: 14px;
 
-          option {
-            font-size: 16px;
-            font-weight: normal;
-            letter-spacing: 1px;
+          img {
+            max-width: 40px;
+            max-height: 40px;
+            object-fit: cover;
+            object-position: center center;
+          }
+
+          .languages_enabled {
+            display: grid;
+            gap: 4px;
+
+            button {
+              color: black;
+              font-weight: 600;
+              letter-spacing: 1px;
+              cursor: pointer;
+              border: none;
+              background-color: transparent;
+            }
+          }
+
+          .languages_disabled {
+            display: none;
           }
         }
       }
@@ -159,6 +178,7 @@
             text-align: center;
             margin-bottom: 10px;
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             align-items: center;
             gap: 12px;
@@ -185,21 +205,25 @@
       <img alt="" id="body-bg" class="body-bg" />
       <div class="banner">
         <h1 class="title" id="r-title"></h1>
-        <select name="languages" id="languages">
-          <option class="lang" value="en" selected>English</option>
-          <option class="lang" value="ru">Russian</option>
-          <option class="lang" value="hy">Armenian</option>
-        </select>
+        <div class="languages_cont">
+          <img src="/api/static/icons/globe.svg" alt="Globe" id="lang_btn" />
+
+          <div class="languages_disabled" id="languages_cont">
+            <button data-lang="en" class="lang">English</button>
+            <button data-lang="ru" class="lang">Русский</button>
+            <button data-lang="hy" class="lang">Հայերեն</button>
+          </div>
+        </div>
       </div>
       <div class="info">
         <!-- <h1 id="welcome-message"></h1> -->
-        <a
+        <!-- <a
           href="https://qrmenuarmenia.site/api/cafe/menu/get-menu"
           id="menu_btn"
         >
           Menu
-        </a>
-        <!-- <a href="pages/menu.html" id="menu_btn">Menu</a> -->
+        </a> -->
+        <a href="pages/menu.html" id="menu_btn">Menu</a>
       </div>
       <img alt="Cafe Logo" class="main-page-icon" id="r-logo" />
 
@@ -255,39 +279,77 @@
       const rTitle = document.getElementById("r-title");
       const rLogo = document.getElementById("r-logo");
       const wMessage = document.getElementById("welcome-message");
-      const languages = document.getElementById("languages");
+      const lang_btn = document.getElementById("lang_btn");
+      const languages = document.querySelectorAll(".lang");
       const menu_btn = document.getElementById("menu_btn");
       // let translated_content = "Welcome to";
 
       // -------------------------------------------------------------
 
-      let cafeIndex = localStorage.setItem("cafeIdIndex", indexURL);
-      let cafeLang = localStorage.setItem("language", "en");
+      lang_btn.addEventListener("click", () => {
+        if (languages_cont.className === "languages_enabled") {
+          languages_cont.className = "languages_disabled";
+        } else languages_cont.className = "languages_enabled";
+      });
 
-      languages.addEventListener("change", (event) => {
-        cafeLang = event.target.value;
-        localStorage.setItem("language", cafeLang);
-
-        event.target.addEventListener("click", async () => {
+      languages.forEach((lang) => {
+        lang.addEventListener("click", async () => {
           try {
+            // Real Link
             const response = await fetch("/api/data/get-index-json");
+            // Test link
+            // const response = await fetch("./data/index.json");
             const data = await response.json();
 
-            // translated_content = data.title[event.target.value];
-            menu_btn.innerText = data.button[event.target.value];
+            menu_btn.innerText = data.button[lang.getAttribute("data-lang")];
 
             terms_buttons.forEach((btn, index) => {
-              btn.innerText = data.terms[event.target.value][index];
+              btn.innerText = data.terms[lang.getAttribute("data-lang")][index];
             });
 
-            copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Armenia. ${
-              data.footer[event.target.value]
+            copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Aremenia. ${
+              data.footer[lang.getAttribute("data-lang")]
             }.`;
           } catch (error) {
             console.error("Error fetching data: ", error);
           }
+
+          localStorage.setItem("language", lang.getAttribute("data-lang"));
         });
       });
+
+      // ------------------------------------------------------------
+
+      async function defaultPageLanguege() {
+        try {
+          // Real Link
+          const response = await fetch("/api/data/get-index-json");
+          // Test link
+          // const response = await fetch("./data/index.json");
+          const data = await response.json();
+
+          menu_btn.innerText = data.button[localStorage.getItem("language")];
+
+          terms_buttons.forEach((btn, index) => {
+            btn.innerText = data.terms[localStorage.getItem("language")][index];
+          });
+
+          copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Aremenia. ${
+            data.footer[localStorage.getItem("language")]
+          }.`;
+        } catch (error) {
+          console.error("Error fetching data: ", error);
+        }
+      }
+
+      defaultPageLanguege();
+
+      // -------------------------------------------------------------
+
+      let cafeIndex = localStorage.setItem("cafeIdIndex", indexURL);
+      let cafeLang =
+        localStorage.getItem("language") ||
+        localStorage.setItem("language", "en");
 
       async function FetchingAPI(link) {
         try {
