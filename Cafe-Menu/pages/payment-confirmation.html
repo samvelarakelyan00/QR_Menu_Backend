@@ -95,13 +95,16 @@
       <p class="total-amount" id="total-amount"></p>
       <div class="buttons">
         <button class="button back-btn" onclick="goBack()">Back</button>
-        <button class="button pay-btn" onclick="proceedToIdram()">Pay Now</button>
+        <button class="button pay-btn" onclick="proceedToIdram()">
+          Pay Now
+        </button>
       </div>
     </div>
 
     <script>
       // Retrieve tip details and total amount from localStorage
-      const selectedTips = JSON.parse(localStorage.getItem("selectedTips")) || [];
+      const selectedTips =
+        JSON.parse(localStorage.getItem("selectedTips")) || [];
       const totalAmount = localStorage.getItem("totalAmount") || 0;
 
       // Display the tip details
@@ -113,11 +116,14 @@
       });
 
       // Display the total amount
-      document.getElementById("total-amount").innerText = `Total: ${totalAmount} AMD`;
+      document.getElementById(
+        "total-amount"
+      ).innerText = `Total: ${totalAmount} AMD`;
 
       // Go back to the tip page
       function goBack() {
-        window.location.href = "/index.html"; // Adjust this to the path of your tip page
+        window.location.href =
+          "https://qrmenuarmenia.site/api/cafe/menu/tip-payment-inform"; // Adjust this to the path of your tip page
       }
 
       // Proceed to Idram payment
@@ -128,7 +134,9 @@
         const returnUrl = "https://qrmenuarmenia.site/payment-callback"; // Replace with your callback URL
 
         // Idram payment URL (this is a simplified example; adjust based on Idram's API documentation)
-        const idramPaymentUrl = `https://bank.idram.am/payment.aspx?EDP_REC_ACCOUNT=${merchantId}&EDP_AMOUNT=${totalAmount}&EDP_BILL_NO=${transactionId}&EDP_RETURN_URL=${encodeURIComponent(returnUrl)}`;
+        const idramPaymentUrl = `https://bank.idram.am/payment.aspx?EDP_REC_ACCOUNT=${merchantId}&EDP_AMOUNT=${totalAmount}&EDP_BILL_NO=${transactionId}&EDP_RETURN_URL=${encodeURIComponent(
+          returnUrl
+        )}`;
 
         // Redirect to Idram payment page
         window.location.href = idramPaymentUrl;
