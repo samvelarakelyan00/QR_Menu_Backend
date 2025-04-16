@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Confirmation | QR Menu Armenia</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #121212;
+        font-family: Arial, sans-serif;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 16px;
+      }
+
+      .container {
+        background-color: #2a2a2a;
+        padding: 30px;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 600px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+      }
+
+      .tip-details {
+        margin-bottom: 20px;
+      }
+
+      .tip-details p {
+        font-size: 1.1em;
+        margin: 5px 0;
+      }
+
+      .total-amount {
+        font-size: 1.3em;
+        font-weight: bold;
+        color: #b35c32;
+        margin: 15px 0;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .back-btn {
+        background-color: #555;
+        color: #fff;
+      }
+
+      .back-btn:hover {
+        background-color: #444;
+      }
+
+      .pay-btn {
+        background-color: #b35c32;
+        color: #000;
+      }
+
+      .pay-btn:hover {
+        background-color: #964b27;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Tip Payment via Idram</h2>
+      <div class="tip-details" id="tip-details"></div>
+      <p class="total-amount" id="total-amount"></p>
+      <div class="buttons">
+        <button class="button back-btn" onclick="goBack()">Back</button>
+        <button class="button pay-btn" onclick="proceedToIdram()">Pay Now</button>
+      </div>
+    </div>
+
+    <script>
+      // Retrieve tip details and total amount from localStorage
+      const selectedTips = JSON.parse(localStorage.getItem("selectedTips")) || [];
+      const totalAmount = localStorage.getItem("totalAmount") || 0;
+
+      // Display the tip details
+      const tipDetailsDiv = document.getElementById("tip-details");
+      selectedTips.forEach((tip) => {
+        const p = document.createElement("p");
+        p.innerText = `${tip.section}: ${tip.amount} AMD`;
+        tipDetailsDiv.appendChild(p);
+      });
+
+      // Display the total amount
+      document.getElementById("total-amount").innerText = `Total: ${totalAmount} AMD`;
+
+      // Go back to the tip page
+      function goBack() {
+        window.location.href = "/index.html"; // Adjust this to the path of your tip page
+      }
+
+      // Proceed to Idram payment
+      function proceedToIdram() {
+        // Replace these values with your actual Idram merchant details
+        const merchantId = "YOUR_IDRAM_MERCHANT_ID"; // Replace with your Idram merchant ID
+        const transactionId = `TX-${Date.now()}`; // Generate a unique transaction ID
+        const returnUrl = "https://qrmenuarmenia.site/payment-callback"; // Replace with your callback URL
+
+        // Idram payment URL (this is a simplified example; adjust based on Idram's API documentation)
+        const idramPaymentUrl = `https://bank.idram.am/payment.aspx?EDP_REC_ACCOUNT=${merchantId}&EDP_AMOUNT=${totalAmount}&EDP_BILL_NO=${transactionId}&EDP_RETURN_URL=${encodeURIComponent(returnUrl)}`;
+
+        // Redirect to Idram payment page
+        window.location.href = idramPaymentUrl;
+      }
+    </script>
+  </body>
+</html>

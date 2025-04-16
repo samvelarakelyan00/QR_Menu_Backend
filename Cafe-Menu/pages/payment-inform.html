@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Menu Armenia | Payment Inform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #121212;
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 16px 0;
+            gap: 24px;
+        }
+
+        .languages_cont {
+            min-width: 40px;
+            min-height: 40px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+            padding: 6px;
+            border-radius: 12px;
+            border: 1px solid aliceblue;
+        }
+
+        .languages_cont img {
+            max-width: 40px;
+            max-height: 40px;
+            object-fit: cover;
+            object-position: center center;
+        }
+
+        .languages_enabled {
+            scale: 1;
+            display: grid;
+            gap: 4px;
+        }
+
+        .languages_enabled p {
+            color: aliceblue;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .languages_disabled {
+            display: none;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            gap: 24px;
+            margin-top: 54px;
+        }
+
+        .title_cont {
+            text-align: center;
+        }
+
+        .title_cont h1 {
+            font-size: 2em;
+        }
+
+        .title_cont p {
+            text-wrap: wrap;
+            color: #b35c32;
+            font-style: italic;
+            padding: 0 16px;
+        }
+
+        .payment-details {
+            background-color: #2a2a2a;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            box-sizing: border-box;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .tip-summary {
+            margin-bottom: 20px;
+        }
+
+        .tip-summary h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .tip-summary p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .total-amount {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .benefits {
+            text-align: left;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        .benefits p {
+            margin: 10px 0;
+        }
+
+        .benefits p strong {
+            color: #b35c32;
+        }
+
+        #pay-now {
+            background-color: #b35c32;
+            color: #000;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        #pay-now:hover {
+            background-color: #964b27;
+        }
+
+        .footer_content {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 12px;
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .payment-methods img {
+            margin: 0 10px;
+            height: 20px;
+        }
+
+        .footer-links {
+            text-align: center;
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-links button {
+            background-color: transparent;
+            font-size: 10px;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 8px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="container">
+            <div class="title_cont">
+                <h1>QR Menu Armenia</h1>
+                <p>Your Tip Payment</p>
+            </div>
+            <div class="payment-details">
+                <div class="tip-summary">
+                    <h2>Your Tip Details</h2>
+                    <div id="tip-details"></div>
+                    <div class="total-amount" id="total-amount"></div>
+                </div>
+                <div class="benefits">
+                    <p><strong>SUPPORT OUR SERVICE:</strong> Your tip helps us maintain high-quality service and improve your experience at QR Menu Armenia.</p>
+                    <p><strong>ENHANCE THE MENU:</strong> Tips to the menu support the development of new features and better offerings for all users.</p>
+                    <p><strong>THANK YOU:</strong> We appreciate your generosity, which keeps our community thriving!</p>
+                </div>
+                <button id="pay-now">Pay Now</button>
+            </div>
+        </div>
+        <div class="footer_content">
+            <div class="payment-methods">
+                <img src="/api/static/images/Cafe Menu Images/idramLogo.webp" alt="Idram Logo" />
+                <img src="/api/static/images/Cafe Menu Images/visaLogo.webp" alt="Visa Logo" />
+                <img src="/api/static/images/Cafe Menu Images/arca.webp" alt="Arca Logo" />
+                <img src="/api/static/images/Cafe Menu Images/mastercardLogo.png" alt="MasterCard Logo" />
+            </div>
+            <div class="footer-links">
+                <button class="terms" id="privacy_policy">Privacy Policy</button>
+                <button class="terms" id="cancellation_policy">Cancellation Policy</button>
+                <button class="terms" id="terms_of_use">Terms of Use</button>
+                <button class="terms" id="personal_data">Personal Data</button>
+            </div>
+            <div class="copyright">
+                <p id="copyright_text">© 2025 QR Menu Armenia. All rights reserved.</p>
+            </div>
+        </div>
+    </section>
+    <div class="languages_cont">
+        <img src="/api/static/icons/globe.svg" alt="Globe" id="lang_btn" />
+        <div class="languages_disabled" id="languages_cont">
+            <p data-lang="en" class="lang">English</p>
+            <p data-lang="ru" class="lang">Русский</p>
+            <p data-lang="hy" class="lang">Հայերեն</p>
+        </div>
+    </div>
+
+    <script>
+        // Extract tip details from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const tipDetails = document.getElementById('tip-details');
+        const totalAmountElement = document.getElementById('total-amount');
+        let total = 0;
+
+        const tipEntries = [];
+        urlParams.forEach((value, key) => {
+            const decodedKey = decodeURIComponent(key);
+            tipEntries.push({ section: decodedKey, amount: parseInt(value) });
+            total += parseInt(value);
+        });
+
+        // Display tip details
+        tipEntries.forEach(entry => {
+            const p = document.createElement('p');
+            p.textContent = `${entry.section}: ${entry.amount} AMD`;
+            tipDetails.appendChild(p);
+        });
+
+        // Display total amount
+        totalAmountElement.textContent = `Total: ${total} AMD`;
+
+        // Language selection functionality
+        let lang = localStorage.getItem("language") || "en";
+        const languages_cont = document.getElementById("languages_cont");
+        const lang_btn = document.getElementById("lang_btn");
+        const languages = document.querySelectorAll(".lang");
+
+        lang_btn.addEventListener("click", () => {
+            if (languages_cont.className === "languages_enabled") {
+                languages_cont.className = "languages_disabled";
+            } else {
+                languages_cont.className = "languages_enabled";
+            }
+        });
+
+        languages.forEach((lang) => {
+            lang.addEventListener("click", () => {
+                localStorage.setItem("language", lang.getAttribute("data-lang"));
+                // Optionally, fetch translated content here if needed
+            });
+        });
+
+        // Terms buttons functionality
+        const terms_buttons = document.querySelectorAll(".terms");
+        terms_buttons.forEach((button) => {
+            button.addEventListener("click", async () => {
+                let term = button.id;
+                try {
+                    window.open(
+                        `https://qrmenuarmenia.site/api/cafe/menu/users/${term}/${lang}`,
+                        "_blank"
+                    );
+                } catch (error) {
+                    console.log("Error opening terms page: ", error);
+                }
+            });
+        });
+
+        // Pay Now button functionality
+        document.getElementById("pay-now").addEventListener("click", () => {
+            // Redirect to a payment gateway or confirmation page
+            window.location.href = "https://qrmenuarmenia.site/api/cafe/menu/tip-payment-confirm"
+            // For a real implementation, you would redirect to a payment processor
+            // window.location.href = "https://payment-gateway-url?amount=" + total;
+        });
+    </script>
+</body>
+</html>

@@ -101,6 +101,16 @@ def menu():
     return FileResponse('../../Cafe-Menu/pages/tip.html')
 
 
+@app.get("/cafe/menu/tip-payment-inform")
+def menu():
+    return FileResponse('../../Cafe-Menu/pages/payment-inform.html')
+
+
+@app.get("/cafe/menu/tip-payment-confirm")
+def menu():
+    return FileResponse('../../Cafe-Menu/pages/payment-confirmation.html')
+
+
 @app.get("/cafe/menu/users/{term}/{lang}")
 def user_get_term(term, lang):
     try:

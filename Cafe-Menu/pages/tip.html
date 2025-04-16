@@ -362,11 +362,7 @@
           });
 
           if (selectedTips.length > 0) {
-            alert(
-              `Selected Tips:\n${selectedTips
-                .map((tip) => `${tip.section}: ${tip.amount}`)
-                .join("\n")}`
-            );
+            window.location.href = "https://qrmenuarmenia.site/api/cafe/menu/tip-payment-confirm"
           } else {
             alert("Please select at least one tip before submitting.");
           }
