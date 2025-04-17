@@ -9,3 +9,15 @@ class UserFeedbackSchema(BaseModel):
 
 class UserScanQRSchema(BaseModel):
     horeka_client_id: int
+
+
+class TipPayInfo(BaseModel):
+    horeka_client_id: int
+    horeka_tip_amount: float
+    menu_tip_amount: float
+
+
+class TipIdramLastButtonInfo(BaseModel):
+    horeka_client_id: int
+    horeka_tip_amount: float
+    menu_tip_amount: float

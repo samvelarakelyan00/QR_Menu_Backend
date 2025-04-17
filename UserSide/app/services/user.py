@@ -10,7 +10,9 @@ from models import models
 
 from schemas.user_schemas import (
     UserScanQRSchema,
-    UserFeedbackSchema
+    UserFeedbackSchema,
+    TipPayInfo,
+    TipIdramLastButtonInfo
 )
 
 
@@ -43,18 +45,34 @@ class UserService:
 
     def user_feedback(self, user_feedback_data: UserFeedbackSchema):
         try:
-            horeka_client_id = user_feedback_data.horeka_client_id
-            rating = user_feedback_data.rating
-            feedback_text = user_feedback_data.feedback_text
+            feedback = models.UserFeedback(**dict(user_feedback_data))
+            self.session.add(feedback)
+            self.session.commit()
         except Exception as err:
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail=str(err)
             )
 
+        return "OK"
+
+    def get_tip_pay_info(self, tip_pay_info_data: TipPayInfo):
         try:
-            feedback = models.UserFeedback(**dict(user_feedback_data))
-            self.session.add(feedback)
+            tip_pay_info = models.TipPageClickInfoGet(**dict(tip_pay_info_data))
+            self.session.add(tip_pay_info)
+            self.session.commit()
+        except Exception as err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=str(err)
+            )
+
+        return "OK"
+
+    def get_tip_idram_last_button_info(self, tip_idram_last_button_data: TipIdramLastButtonInfo):
+        try:
+            tip_idram_last_button = models.TipViaIdramEndButtonInfoGet(**dict(tip_idram_last_button_data))
+            self.session.add(tip_idram_last_button)
             self.session.commit()
         except Exception as err:
             raise HTTPException(
