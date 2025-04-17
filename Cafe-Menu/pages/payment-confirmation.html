@@ -86,6 +86,62 @@
       .pay-btn:hover {
         background-color: #964b27;
       }
+
+      /* Popup styles */
+      .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        display: none;
+      }
+
+      .popup {
+        background-color: #1d1d1d;
+        border: 2px solid #b35c32;
+        border-radius: 12px;
+        padding: 25px 20px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(179, 92, 50, 0.3);
+        max-width: 300px;
+        color: #b35c32;
+      }
+
+      .popup-message {
+        font-size: 16px;
+        margin-bottom: 20px;
+        color: #b35c32;
+      }
+
+      .popup-message p {
+        margin-bottom: 10px;
+        line-height: 1.4;
+      }
+
+      .popup-message img {
+        width: 48px;
+        margin: 10px 0;
+      }
+
+      .popup button {
+        padding: 8px 16px;
+        background-color: #b35c32;
+        color: #000;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .popup button:hover {
+        background-color: #964b27;
+      }
     </style>
   </head>
   <body>
@@ -98,6 +154,22 @@
         <button class="button pay-btn" onclick="proceedToIdram()">
           Pay Now
         </button>
+      </div>
+    </div>
+
+    <!-- Popup -->
+    <div class="popup-overlay" id="popup-overlay">
+      <div class="popup">
+        <div class="popup-message">
+          <p>Tip functionality is not available for now.</p>
+          <img
+            src="https://raw.githubusercontent.com/twitter/twemoji/master/assets/svg/1f497.svg"
+            alt="Thank you"
+            style="width: 100px; margin: 10px 0; border-radius: 10px;"
+          />
+          <p>We truly appreciate your kindness and willingness to support the team.</p>
+        </div>
+        <button onclick="closePopup()">OK</button>
       </div>
     </div>
 
@@ -123,23 +195,16 @@
       // Go back to the tip page
       function goBack() {
         window.location.href =
-          "https://qrmenuarmenia.site/api/cafe/menu/tip-payment-inform"; // Adjust this to the path of your tip page
+          "https://qrmenuarmenia.site/api/cafe/menu/tip-payment-inform";
       }
 
-      // Proceed to Idram payment
+      // Show popup
       function proceedToIdram() {
-        // Replace these values with your actual Idram merchant details
-        const merchantId = "YOUR_IDRAM_MERCHANT_ID"; // Replace with your Idram merchant ID
-        const transactionId = `TX-${Date.now()}`; // Generate a unique transaction ID
-        const returnUrl = "https://qrmenuarmenia.site/payment-callback"; // Replace with your callback URL
+        document.getElementById("popup-overlay").style.display = "flex";
+      }
 
-        // Idram payment URL (this is a simplified example; adjust based on Idram's API documentation)
-        const idramPaymentUrl = `https://bank.idram.am/payment.aspx?EDP_REC_ACCOUNT=${merchantId}&EDP_AMOUNT=${totalAmount}&EDP_BILL_NO=${transactionId}&EDP_RETURN_URL=${encodeURIComponent(
-          returnUrl
-        )}`;
-
-        // Redirect to Idram payment page
-        window.location.href = idramPaymentUrl;
+      function closePopup() {
+        document.getElementById("popup-overlay").style.display = "none";
       }
     </script>
   </body>
