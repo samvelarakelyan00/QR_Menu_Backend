@@ -342,14 +342,9 @@
         }
       }
 
-      defaultPageLanguege();
-
       // -------------------------------------------------------------
 
       let cafeIndex = localStorage.setItem("cafeIdIndex", indexURL);
-      let cafeLang =
-        localStorage.getItem("language") ||
-        localStorage.setItem("language", "en");
 
       async function FetchingAPI(link) {
         try {
@@ -401,6 +396,10 @@
             console.log("Error getting data: ", error);
           }
         });
+      });
+
+      window.addEventListener("DOMContentLoaded", () => {
+        defaultPageLanguege();
       });
     </script>
   </body>

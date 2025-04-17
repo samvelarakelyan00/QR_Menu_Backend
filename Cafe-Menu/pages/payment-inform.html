@@ -134,15 +134,30 @@
         margin-bottom: 15px;
       }
 
-      .tip-summary p {
-        font-size: 16px;
-        margin: 5px 0;
-      }
+      ul {
+        list-style: numbers;
 
-      .total-amount {
-        font-size: 18px;
-        font-weight: bold;
-        margin: 15px 0;
+        li {
+          p {
+            text-align: start;
+            font-size: 18px;
+            padding: 8px;
+
+            &.final_price {
+              color: lime;
+              font-weight: bold;
+              letter-spacing: 1px;
+              text-align: center;
+            }
+          }
+        }
+
+        li:last-child {
+          list-style: none;
+          border: 2px solid lime;
+          border-radius: 4px;
+          margin-top: 16px;
+        }
       }
 
       .benefits {
@@ -226,13 +241,15 @@
         </a>
         <div class="title_cont">
           <h1>QR Menu Armenia</h1>
-          <p>Your Tip Payment</p>
         </div>
         <div class="payment-details">
           <div class="tip-summary">
-            <h2>Your Tip Details</h2>
-            <div id="tip-details"></div>
-            <div class="total-amount" id="total-amount"></div>
+            <h2 id="tip-amount-title">Your Tip Details</h2>
+            <ul>
+              <li><p id="tip-to-cafe"></p></li>
+              <li><p id="tip-to-menu"></p></li>
+              <li><p class="final_price" id="total-amount"></p></li>
+            </ul>
           </div>
           <div class="benefits">
             <p>
@@ -296,34 +313,52 @@
     </div>
 
     <script>
-      // Extract tip details from URL parameters
-      const urlParams = new URLSearchParams(window.location.search);
-      const tipDetails = document.getElementById("tip-details");
+      // Parsing tup data
+      const tip_data = JSON.parse(localStorage.getItem("tip-amount"));
+      const tipToCafe = document.getElementById("tip-to-cafe");
+      const tipToMenu = document.getElementById("tip-to-menu");
       const totalAmountElement = document.getElementById("total-amount");
-      let total = 0;
+      let totalAmount = 0;
 
-      const tipEntries = [];
-      urlParams.forEach((value, key) => {
-        const decodedKey = decodeURIComponent(key);
-        tipEntries.push({ section: decodedKey, amount: parseInt(value) });
-        total += parseInt(value);
-      });
+      // Total, Menu & Cafe tip shower functionality
+      function tipAmountShower(data) {
+        if (data.length === 1) {
+          if (data[0].section === "Tip") {
+            tipToCafe.innerText = `Tip to Cafe: ${data[0].amount}AMD`;
+            tipToMenu.innerText = "Tip to Menu: 0AMD";
+            totalAmountElement.innerText = `Total: ${data[0].amount}AMD`;
+          } else if (data[0].section === "Tip to Menu") {
+            tipToCafe.innerText = "Tip to Cafe: 0AMD";
+            tipToMenu.innerText = `Tip to Menu: ${data[0].amount}AMD`;
+            totalAmountElement.innerText = `Total: ${data[0].amount}AMD`;
+          }
+        } else if (data.length === 2) {
+          data.forEach((info) => {
+            if (info.section === "Tip") {
+              tipToCafe.innerText = `Tip to Cafe: ${info.amount}AMD`;
+              totalAmount += Number(info.amount);
+            } else if (info.section === "Tip to Menu") {
+              tipToMenu.innerText = `Tip to Menu: ${info.amount}AMD`;
+              totalAmount += Number(info.amount);
+            }
+          });
 
-      // Display tip details
-      tipEntries.forEach((entry) => {
-        const p = document.createElement("p");
-        p.textContent = `${entry.section}: ${entry.amount} AMD`;
-        tipDetails.appendChild(p);
-      });
+          totalAmountElement.innerText = `Total: ${totalAmount}AMD`;
+        }
+      }
 
-      // Display total amount
-      totalAmountElement.textContent = `Total: ${total} AMD`;
-
+      tipAmountShower(tip_data);
       // Language selection functionality
-      let lang = localStorage.getItem("language") || "en";
+
       const languages_cont = document.getElementById("languages_cont");
       const lang_btn = document.getElementById("lang_btn");
       const languages = document.querySelectorAll(".lang");
+      const tipAmountTitle = document.getElementById("tip-amount-title");
+      const payNowBtn = document.getElementById("pay-now");
+      const footer_navbar_links = document.querySelectorAll(
+        ".footer_navbar_link"
+      );
+      const terms_buttons = document.querySelectorAll(".terms");
 
       lang_btn.addEventListener("click", () => {
         if (languages_cont.className === "languages_enabled") {
@@ -334,17 +369,41 @@
       });
 
       languages.forEach((lang) => {
-        lang.addEventListener("click", () => {
+        lang.addEventListener("click", async () => {
+          try {
+            const response = await fetch("/api/data/tip-inform-json");
+            const data = await response.json();
+
+            tipAmountTitle.innerText =
+              data.tip_title[lang.getAttribute("data-lang")];
+            payNowBtn.innerText =
+              data.submit_btn[lang.getAttribute("data-lang")];
+            footer_navbar_links.forEach((link, index) => {
+              link.innerText =
+                data.footer_navbar[lang.getAttribute("data-lang")][index];
+            });
+            terms_buttons.forEach((term, index) => {
+              term.innerText =
+                data.terms[lang.getAttribute("data-lang")][index];
+            });
+            copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Armenia. ${
+              data.footer[lang.getAttribute("data-lang")]
+            }.`;
+          } catch (error) {
+            console.error(("Error fetching data: ", error));
+          }
+
           localStorage.setItem("language", lang.getAttribute("data-lang"));
-          // Optionally, fetch translated content here if needed
         });
       });
 
       // Terms buttons functionality
-      const terms_buttons = document.querySelectorAll(".terms");
+
       terms_buttons.forEach((button) => {
         button.addEventListener("click", async () => {
           let term = button.id;
+          let lang = localStorage.getItem("language") || "en";
+
           try {
             window.open(
               `https://qrmenuarmenia.site/api/cafe/menu/users/${term}/${lang}`,

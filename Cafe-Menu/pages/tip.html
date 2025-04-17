@@ -232,8 +232,8 @@
           <p id="subtitle_tip_page">
             Thank you so much for your generosity! 💛 Your tip means a lot to
             us, and we truly appreciate your support. Every contribution helps
-            us continue providing great service and making your experience even
-            better. Cheers to you! 🥂😊
+            us continue providing great service and making your daily life more
+            comfortable 😊
           </p>
         </div>
         <div class="tip-page">
@@ -367,12 +367,15 @@
                 section: section.querySelector("h2").textContent.trim(),
                 amount: selectedButton.dataset.amount,
               });
+
+              localStorage.setItem("tip-amount", JSON.stringify(selectedTips));
             }
           });
 
           if (selectedTips.length > 0) {
             window.location.href =
               "https://qrmenuarmenia.site/api/cafe/menu/tip-payment-inform";
+            // window.location.href = "./payment-inform.html";
           } else {
             alert("Please select at least one tip before submitting.");
           }
@@ -380,16 +383,16 @@
       });
       // /////////////////////////////////////////////////////////////////////////////
 
-      let lang = localStorage.getItem("language") || "en";
       const terms_buttons = document.querySelectorAll(".terms");
 
       terms_buttons.forEach((button) => {
         button.addEventListener("click", async () => {
           let term = button.id;
+          let language_setter = localStorage.getItem("language");
 
           try {
             const response = await fetch(
-              `https://qrmenuarmenia.site/api/cafe/menu/users/${term}/${lang}`,
+              `https://qrmenuarmenia.site/api/cafe/menu/users/${term}/${language_setter}`,
               {
                 method: "GET",
                 headers: {
@@ -399,7 +402,7 @@
             );
 
             window.open(
-              `https://qrmenuarmenia.site/api/cafe/menu/users/${term}/${lang}`,
+              `https://qrmenuarmenia.site/api/cafe/menu/users/${term}/${language_setter}`,
               "_blank"
             );
           } catch (error) {
@@ -470,20 +473,21 @@
           const response = await fetch("/api/data/get-tip-json");
           // const response = await fetch("../data/tip.json");
           const data = await response.json();
+          let language_setter = localStorage.getItem("language");
 
           document.getElementById("submit-tip").innerText =
-            data.confirm_button[lang];
-          tip_title.innerText = data.title_restaurant[lang];
-          tip_company_title.innerText = data.title_company[lang];
-          subtitle_tip_page.innerText = data.subtitle_tip_page[lang];
+            data.confirm_button[language_setter];
+          tip_title.innerText = data.title_restaurant[language_setter];
+          tip_company_title.innerText = data.title_company[language_setter];
+          subtitle_tip_page.innerText = data.subtitle_tip_page[language_setter];
           footer_navbar_links.forEach((link, index) => {
-            link.innerText = data.footer_navbar[lang][index];
+            link.innerText = data.footer_navbar[language_setter][index];
           });
           terms_buttons.forEach((term, index) => {
-            term.innerText = data.terms[lang][index];
+            term.innerText = data.terms[language_setter][index];
           });
           copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Armenia. ${
-            data.footer[lang]
+            data.footer[language_setter]
           }.`;
         } catch (error) {
           console.error("Error fetching data: ", error);

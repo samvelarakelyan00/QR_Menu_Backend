@@ -66,6 +66,11 @@ def menu():
     return FileResponse('../../Cafe-Menu/data/tip.json')
 
 
+@app.get("/data/get-tip-inform-json")
+def menu():
+    return FileResponse('../../Cafe-Menu/data/tip-inform.json')
+
+
 @app.get("/data/get-feedback-json")
 def menu():
     return FileResponse('../../Cafe-Menu/data/feedback.json')
