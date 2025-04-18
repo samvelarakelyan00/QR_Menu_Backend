@@ -389,7 +389,7 @@
       languages.forEach((lang) => {
         lang.addEventListener("click", async () => {
           try {
-            const response = await fetch("/api/data/tip-inform-json");
+            const response = await fetch("/api/data/get-tip-inform-json");
             // const response = await fetch("../data/tip-inform.json");
             const data = await response.json();
 
@@ -432,7 +432,7 @@
 
       async function defaultContentByLang() {
         try {
-          const response = await fetch("/api/data/tip-inform-json");
+          const response = await fetch("/api/data/get-tip-inform-json");
           // const response = await fetch("../data/tip-inform.json");
           const data = await response.json();
 
