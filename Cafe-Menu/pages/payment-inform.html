@@ -252,18 +252,19 @@
             </ul>
           </div>
           <div class="benefits">
-            <p>
-              <strong>SUPPORT OUR SERVICE:</strong> Your tip helps us maintain
-              high-quality service and improve your experience at QR Menu
-              Armenia.
+            <p class="benifit_content">
+              <strong class="benifit_strong">SUPPORT OUR SERVICE:</strong> Your
+              tip helps us maintain high-quality service and improve your
+              experience at QR Menu Armenia.
             </p>
-            <p>
-              <strong>ENHANCE THE MENU:</strong> Tips to the menu support the
-              development of new features and better offerings for all users.
+            <p class="benifit_content">
+              <strong class="benifit_strong">ENHANCE THE MENU:</strong> Tips to
+              the menu support the development of new features and better
+              offerings for all users.
             </p>
-            <p>
-              <strong>THANK YOU:</strong> We appreciate your generosity, which
-              keeps our community thriving!
+            <p class="benifit_content">
+              <strong class="benifit_strong">THANK YOU:</strong> We appreciate
+              your generosity, which keeps our community thriving!
             </p>
           </div>
           <button id="pay-now">Pay Now</button>
@@ -323,27 +324,43 @@
       // Total, Menu & Cafe tip shower functionality
       function tipAmountShower(data) {
         if (data.length === 1) {
-          if (data[0].section === "Tip") {
-            tipToCafe.innerText = `Tip to Cafe: ${data[0].amount}AMD`;
-            tipToMenu.innerText = "Tip to Menu: 0AMD";
-            totalAmountElement.innerText = `Total: ${data[0].amount}AMD`;
-          } else if (data[0].section === "Tip to Menu") {
-            tipToCafe.innerText = "Tip to Cafe: 0AMD";
-            tipToMenu.innerText = `Tip to Menu: ${data[0].amount}AMD`;
-            totalAmountElement.innerText = `Total: ${data[0].amount}AMD`;
+          if (
+            data[0].section === "Tip" ||
+            data[0].section === "Թեյավճար" ||
+            data[0].section === "Чаевые"
+          ) {
+            tipToCafe.innerText = `Tip to Cafe: ${data[0].amount} AMD`;
+            tipToMenu.innerText = "Tip to Menu: 0 AMD";
+            totalAmountElement.innerText = `Total: ${data[0].amount} AMD`;
+          } else if (
+            data[0].section === "Tip to Menu" ||
+            data[0].section === "Թեյավճար մենյուին" ||
+            data[0].section === "Чаевые для меню"
+          ) {
+            tipToCafe.innerText = "Tip to Cafe: 0 AMD";
+            tipToMenu.innerText = `Tip to Menu: ${data[0].amount} AMD`;
+            totalAmountElement.innerText = `Total: ${data[0].amount} AMD`;
           }
         } else if (data.length === 2) {
           data.forEach((info) => {
-            if (info.section === "Tip") {
-              tipToCafe.innerText = `Tip to Cafe: ${info.amount}AMD`;
+            if (
+              info.section === "Tip" ||
+              info.section === "Թեյավճար" ||
+              info.section === "Чаевые"
+            ) {
+              tipToCafe.innerText = `Tip To Cafe: ${info.amount} AMD`;
               totalAmount += Number(info.amount);
-            } else if (info.section === "Tip to Menu") {
-              tipToMenu.innerText = `Tip to Menu: ${info.amount}AMD`;
+            } else if (
+              info.section === "Tip To Menu" ||
+              info.section === "Թեյավճար մենյուին" ||
+              info.section === "Чаевые для меню"
+            ) {
+              tipToMenu.innerText = `Tip To Menu: ${info.amount} AMD`;
               totalAmount += Number(info.amount);
             }
           });
 
-          totalAmountElement.innerText = `Total: ${totalAmount}AMD`;
+          totalAmountElement.innerText = `Total: ${totalAmount} AMD`;
         }
       }
 
@@ -354,6 +371,7 @@
       const lang_btn = document.getElementById("lang_btn");
       const languages = document.querySelectorAll(".lang");
       const tipAmountTitle = document.getElementById("tip-amount-title");
+      const benifitContainer = document.querySelectorAll(".benifit_content");
       const payNowBtn = document.getElementById("pay-now");
       const footer_navbar_links = document.querySelectorAll(
         ".footer_navbar_link"
@@ -372,10 +390,23 @@
         lang.addEventListener("click", async () => {
           try {
             const response = await fetch("/api/data/tip-inform-json");
+            // const response = await fetch("../data/tip-inform.json");
             const data = await response.json();
 
             tipAmountTitle.innerText =
               data.tip_title[lang.getAttribute("data-lang")];
+
+            benifitContainer.forEach((cont, index) => {
+              cont.innerHTML = `<strong> ${
+                data.benifits[index][lang.getAttribute("data-lang")].split(
+                  ":"
+                )[0]
+              }: </strong> ${
+                data.benifits[index][lang.getAttribute("data-lang")].split(
+                  ":"
+                )[1]
+              }`;
+            });
             payNowBtn.innerText =
               data.submit_btn[lang.getAttribute("data-lang")];
             footer_navbar_links.forEach((link, index) => {
@@ -395,6 +426,49 @@
 
           localStorage.setItem("language", lang.getAttribute("data-lang"));
         });
+      });
+
+      //  Default language selection
+
+      async function defaultContentByLang() {
+        try {
+          const response = await fetch("/api/data/tip-inform-json");
+          // const response = await fetch("../data/tip-inform.json");
+          const data = await response.json();
+
+          tipAmountTitle.innerText =
+            data.tip_title[localStorage.getItem("language")];
+          benifitContainer.forEach((cont, index) => {
+            cont.innerHTML = `<strong> ${
+              data.benifits[index][localStorage.getItem("language")].split(
+                ":"
+              )[0]
+            }: </strong> ${
+              data.benifits[index][localStorage.getItem("language")].split(
+                ":"
+              )[1]
+            }`;
+          });
+          payNowBtn.innerText =
+            data.submit_btn[localStorage.getItem("language")];
+          footer_navbar_links.forEach((link, index) => {
+            link.innerText =
+              data.footer_navbar[localStorage.getItem("language")][index];
+          });
+          terms_buttons.forEach((term, index) => {
+            term.innerText =
+              data.terms[localStorage.getItem("language")][index];
+          });
+          copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Armenia. ${
+            data.footer[localStorage.getItem("language")]
+          }.`;
+        } catch (error) {
+          console.error("Error fetching data: ", error);
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        defaultContentByLang();
       });
 
       // Terms buttons functionality
@@ -420,6 +494,9 @@
         // Redirect to a payment gateway or confirmation page
         window.location.href =
           "https://qrmenuarmenia.site/api/cafe/menu/tip-payment-confirm";
+
+        // window.location.href = "./payment-confirmation.html";
+
         // For a real implementation, you would redirect to a payment processor
         // window.location.href = "https://payment-gateway-url?amount=" + total;
       });

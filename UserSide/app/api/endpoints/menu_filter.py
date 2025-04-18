@@ -75,3 +75,35 @@ def get_menu_by_kind(horekaclient_id: int,
                      ):
 
     return menu_fileter_service.get_menu_by_category(horekaclient_id, category, language)
+
+
+@router.get("/by-price-above/{horekaclient_id}")
+def get_menu_by_price_above(horekaclient_id: int,
+                           min_price: float = 1200,
+                           language: str = 'en',
+                           menu_fileter_service: menu_filter_service.MenuFilterService = Depends()):
+    """
+    Get menu items with price above specified value
+    """
+    return menu_fileter_service.get_menu_by_price_above(horekaclient_id, min_price, language)
+
+
+@router.get("/by-nutritional-values/{horekaclient_id}")
+def get_menu_by_nutritional_values(horekaclient_id: int,
+                                 max_calories: float = 20,
+                                 min_weight: float = 100,
+                                 min_price: float = 3450,
+                                 language: str = 'en',
+                                 menu_fileter_service: menu_filter_service.MenuFilterService = Depends()):
+    """
+    Get menu items filtered by calories, weight, and price
+    """
+    return menu_fileter_service.get_menu_by_nutritional_values(
+        horekaclient_id,
+        max_calories,
+        min_weight,
+        min_price,
+        language
+    )
+
+

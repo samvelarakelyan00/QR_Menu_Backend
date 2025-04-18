@@ -634,6 +634,7 @@
           });
           const data = await response.json();
           dataArray = data.filter((meal) => meal);
+          console.log(data);
         } catch (error) {
           console.log("Error fetching data: ", error);
         }

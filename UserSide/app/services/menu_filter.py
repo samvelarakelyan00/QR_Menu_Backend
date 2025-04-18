@@ -110,3 +110,39 @@ class MenuFilterService:
             )
 
         return menu_by_kind
+
+    def get_menu_by_price_above(self, horekaclient_id: int, min_price: float = 1200, language: str = 'en'):
+        try:
+            menu_items = (
+                self.session.query(models.HoReKaMenu)
+                .filter_by(horekaclient_id=horekaclient_id)
+                .filter_by(language=language)
+                .filter(models.HoReKaMenu.price > min_price)
+                .all()
+            )
+        except Exception as err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=str(err)
+            )
+
+        return menu_items
+
+    def get_menu_by_nutritional_values(self, horekaclient_id: int, max_calories: float = 20, min_weight: float = 100, min_price: float = 3450, language: str = 'en'):
+        try:
+            menu_items = (
+                self.session.query(models.HoReKaMenu)
+                .filter_by(horekaclient_id=horekaclient_id)
+                .filter_by(language=language)
+                .filter(models.HoReKaMenu.calories < max_calories)
+                .filter(models.HoReKaMenu.weight > min_weight)
+                .filter(models.HoReKaMenu.price > min_price)
+                .all()
+            )
+        except Exception as err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=str(err)
+            )
+
+        return menu_items
