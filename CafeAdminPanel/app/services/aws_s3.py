@@ -8,7 +8,7 @@ class S3Manager:
         self.s3 = boto3.client('s3',
                                aws_access_key_id=aws_access_key_id,
                                aws_secret_access_key=aws_secret_access_key,
-                               region_name=region_name)
+                               region_name=region_name)  # This without keys will auto use ~/.aws/credentials config
         self.region_name = region_name
 
     def create_bucket(self, bucket_name, region=None):
@@ -88,9 +88,9 @@ class S3Manager:
         return f"Deleted {object_key} from {bucket_name}"
 
 
-s3_manager = S3Manager(aws_access_key_id='AKIA6ODU7TY6ERGQ6HZD',
-                       aws_secret_access_key='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',
-                       region_name='us-east-1')
+s3_manager = S3Manager(aws_access_key_id='AKIAYIMIJP47IG5P7WFF',
+                       aws_secret_access_key='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',
+                       region_name='us-east-1') # This without keys will auto use ~/.aws/credentials config
 
 
 # print(s3_manager.get_public_url('pubsfiles', 'pubsimages/style.css'))

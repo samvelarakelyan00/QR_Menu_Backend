@@ -31,7 +31,6 @@ datalist_hy = [
 {'kind': 'drink', 'category': 'Cocktail', 'name': 'Նեգրոնի', 'quantity': '1 բաժակ', 'price': 2200, 'description': 'Նեգրոնի, շատ լավ Նեգրոնի, հոյակապ Նեգրոնի', 'image': 'test_nogroni_cocktail.webp', 'language': 'hy'},
 {'kind': 'drink', 'category': 'Cocktail', 'name': 'Մանհեթեն', 'quantity': '1 բաժակ', 'price': 2800, 'description': 'Մանհեթեն, շատ լավ Մանհեթեն, հոյակապ Մանհեթեն', 'image': 'test_manhattan_cocktail.webp', 'language': 'hy'},
 
-
 {'kind': 'drink', 'category': 'SodaDrink', 'name': 'Coca-cola', 'quantity': '1 շիշ', 'price': 550, 'description': 'Coca-cola, շատ լավ Coca-cola, հոյակապ Coca-cola', 'image': 'test_sodadrink_cocacola.webp', 'language': 'hy'},
 {'kind': 'drink', 'category': 'SodaDrink', 'name': 'Fanta', 'quantity': '1 շիշ', 'price': 550, 'description': 'Fanta, շատ լավ Fanta, հոյակապ Fanta', 'image': 'test_fanta_sodadrink.webp', 'language': 'hy'},
 {'kind': 'drink', 'category': 'SodaDrink', 'name': 'Sprite', 'quantity': '1 շիշ', 'price': 550, 'description': 'Sprite, շատ լավ Sprite, հոյակապ Sprite', 'image': 'test_sprite_sodadrink.webp', 'language': 'hy'},
@@ -79,6 +78,5 @@ datalist_hy = [
 {'kind': 'salad', 'category': 'FruitSalad', 'name': 'Տամ ֆոնլամայ ռուամ', 'quantity': '1 բաժին', 'price': 2000, 'description': 'Տամ ֆոնլամայ ռուամ խրթխրթան հազարով, պարմեզանով, չորահացով և սերուցքային սոուսով։', 'image': 'test_tamphonlamai_fruit.webp', 'language': 'hy'},
 {'kind': 'salad', 'category': 'FruitSalad', 'name': 'Բանան', 'quantity': '1 բաժին', 'price': 1100, 'description': 'Բանան խրթխրթան հազարով, պարմեզանով, չորահացով և սերուցքային սոուսով։', 'image': 'test_banana_fruit.webp', 'language': 'hy'},
 {'kind': 'salad', 'category': 'FruitSalad', 'name': 'Ժելե', 'quantity': '1 բաժին', 'price': 1750, 'description': 'Ժելե խրթխրթան հազարով, պարմեզանով, չորահացով և սերուցքային սոուսով։', 'image': 'test_jello_fruit.webp', 'language': 'hy'},
-
 
 ]

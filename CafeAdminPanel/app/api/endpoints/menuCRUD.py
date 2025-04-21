@@ -65,11 +65,11 @@ async def add_menu_new(
 
         # IMAGE_FOLDER = os.path.abspath(os.path.join(os.getcwd(), "..", "..", "..", "..", "images"))
 
-        aws_s3_service.s3_manager.upload_file(file_path, 'qrmenufilesandimages',
+        aws_s3_service.s3_manager.upload_file(file_path, 'qrmenuarmeniafilesandimagesbucket',
                                               image.filename+unique_filename,
                                               public_read=True)
 
-        image_src = aws_s3_service.s3_manager.get_public_url('qrmenufilesandimages', image.filename+unique_filename)
+        image_src = aws_s3_service.s3_manager.get_public_url('qrmenuarmeniafilesandimagesbucket', image.filename+unique_filename)
 
         # Prepare menu data
         menu_data = {

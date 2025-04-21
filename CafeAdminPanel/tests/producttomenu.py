@@ -5,6 +5,7 @@ import requests
 
 from menudata import datalist
 from menudata_hy import datalist_hy
+from menudata_ru import datalist_ru
 
 
 def add_menu_new(url: str, form_data: dict, file_path: str = "", token: str=""):
@@ -37,13 +38,13 @@ def add_menu_new(url: str, form_data: dict, file_path: str = "", token: str=""):
 
 url = "https://qrmenuarmenia.site/api/cafeadmin/api/menuCRUD/add-menu-new"
 
-auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDM3NjczNzMsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJtZWxvZHlfYWRtaW4iLCJlbWFpbCI6Im1lbG9keUBnbWFpbC5jb20iLCJob3Jla2FjbGllbnRfaWQiOjF9fQ.8xOZ9uxJ21pdeQiiA20OJOwjoeIGX2yn2OwEFbbuEoU"
+auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDUzMzUwMzgsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJtZWxvZHlfYWRtaW4iLCJlbWFpbCI6Im1lbG9keUBnbWFpbC5jb20iLCJob3Jla2FjbGllbnRfaWQiOjF9fQ.iZHa54Z-WVQuJvhG4YTCOiCHa3qBvE5-q4b3dFuz4Xc"
 # aws test ec2 token
 # auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDE2OTA2OTIsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJtZWxvZHlfYWRtaW4iLCJlbWFpbCI6Im1lbG9keUBnbWFpbC5jb20iLCJob3Jla2FjbGllbnRfaWQiOjF9fQ.OUxhvrgyU1Evfy0AoMM0C52hrMbqIXPN2B-0iHQEMeg"
 
 image_directory = "../../../../images"
 
-for form_data in datalist_hy:
+for form_data in datalist:
     # Construct full image file path
     image_path = os.path.join(f"{image_directory}/{form_data.get('kind')}/{form_data.get('category')}/", form_data["image"])
 

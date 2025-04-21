@@ -114,7 +114,7 @@ class MenuCRUDService:
             )
 
         try:
-            s3_manager.delete_object("qrmenufilesandimages",
+            s3_manager.delete_object("qrmenuarmeniafilesandimagesbucket",
                                      dict(product).get("image_src"))
 
             self.session.delete(product)
