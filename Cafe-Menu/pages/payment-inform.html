@@ -316,9 +316,9 @@
     <script>
       // Parsing tup data
       const tip_data = JSON.parse(localStorage.getItem("tip-amount"));
-      const tipToCafe = document.getElementById("tip-to-cafe");
-      const tipToMenu = document.getElementById("tip-to-menu");
-      const totalAmountElement = document.getElementById("total-amount");
+      let tipToCafe = document.getElementById("tip-to-cafe");
+      let tipToMenu = document.getElementById("tip-to-menu");
+      let totalAmountElement = document.getElementById("total-amount");
       let totalAmount = 0;
 
       // Total, Menu & Cafe tip shower functionality
