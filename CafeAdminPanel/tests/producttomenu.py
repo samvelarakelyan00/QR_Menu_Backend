@@ -38,7 +38,7 @@ def add_menu_new(url: str, form_data: dict, file_path: str = "", token: str=""):
 
 url = "https://qrmenuarmenia.site/api/cafeadmin/api/menuCRUD/add-menu-new"
 
-auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDUzMzUwMzgsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJtZWxvZHlfYWRtaW4iLCJlbWFpbCI6Im1lbG9keUBnbWFpbC5jb20iLCJob3Jla2FjbGllbnRfaWQiOjF9fQ.iZHa54Z-WVQuJvhG4YTCOiCHa3qBvE5-q4b3dFuz4Xc"
+auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDUzMzgzMjYsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJtZWxvZHlfYWRtaW4iLCJlbWFpbCI6Im1lbG9keUBnbWFpbC5jb20iLCJob3Jla2FjbGllbnRfaWQiOjF9fQ.6YQNKXJCar_Pghl93piYOiZAbgeeAw276PKIGI1WSnk"
 # aws test ec2 token
 # auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDE2OTA2OTIsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJtZWxvZHlfYWRtaW4iLCJlbWFpbCI6Im1lbG9keUBnbWFpbC5jb20iLCJob3Jla2FjbGllbnRfaWQiOjF9fQ.OUxhvrgyU1Evfy0AoMM0C52hrMbqIXPN2B-0iHQEMeg"
 

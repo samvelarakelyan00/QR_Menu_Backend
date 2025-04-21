@@ -1,674 +1,96 @@
 datalist = [
   # food
   # Pizza
-{
-  "kind": "food",
-  "category": "Pizza",
-  "name": "Pizza Pepperoni",
-  "quantity": "1 piece",
-  "price": 450,
-  "description": "Pizza Pepperoni, very good Pizza Pepperoni, nice Pizza Pepperoni",
-  "image": "test_pizza_pepperoni.webp",
-  "language": "en"
-},
-{
-  "kind": "food",
-  "category": "Pizza",
-  "name": "Pizza Margarita",
-  "quantity": "1 piece",
-  "price": 300,
-  "description": "Pizza Margarita, very good Pizza Margarita, nice Pizza Margarita",
-  "image": "test_pizza_margarita.webp",
-  "language": "en"
-},
-{
-  "kind": "food",
-  "category": "Pizza",
-  "name": "Pizza Capricciosa",
-  "quantity": "1 piece",
-  "price": 650,
-  "description": "Pizza Capricciosa, very good Pizza Capricciosa, nice Pizza Capricciosa",
-  "image": "test_pizza_capricciosa.webp",
-  "language": "en"
-},
-{
-  "kind": "food",
-  "category": "Pizza",
-  "name": "Pizza Mushroom",
-  "quantity": "1 piece",
-  "price": 500,
-  "description": "Pizza Mushroom, very good Pizza Mushroom, nice Pizza Mushroom",
-  "image": "test_pizza_mushroom.webp",
-  "language": "en"
-},
-{
-  "kind": "food",
-  "category": "Pizza",
-  "name": "Pizza Seafood",
-  "quantity": "1 piece",
-  "price": 700,
-  "description": "Pizza Seafood, very good Pizza Seafood, nice Pizza Seafood",
-  "image": "test_pizza_seafood.webp",
-  "language": "en"
-},
-  # Soup
-{
-  "kind": "food",
-  "category": "Soup",
-  "name": "Tomato Soup",
-  "quantity": "1 plate",
-  "price": 1800,
-  "description": "Soup Tomato, very good Soup Tomato, nice Soup Tomato",
-  "image": "test_tomato_soup.webp",
-  "language": "en"
-},
-{
-  "kind": "food",
-  "category": "Soup",
-  "name": "Chicken Noodle Soup",
-  "quantity": "1 plate",
-  "price": 2400,
-  "description": "Soup Chicken, very good Soup Chicken, nice Soup Chicken",
-  "image": "test_chicken_noodle_soup.webp",
-  "language": "en"
-},
-{
-  "kind": "food",
-  "category": "Soup",
-  "name": "Broccoli Cheddar Soup",
-  "quantity": "1 plate",
-  "price": 2200,
-  "description": "Soup Broccoli, very good Soup Broccoli, nice Soup Broccoli",
-  "image": "test_borccoli_cheddar_soup.webp",
-  "language": "en"
-},
-{
-  "kind": "food",
-  "category": "Soup",
-  "name": "Matzo Ball Soup",
-  "quantity": "1 plate",
-  "price": 2500,
-  "description": "Soup Matzo, very good Soup Matzo, nice Soup Matzo",
-  "image": "test_matzo_ball_soup.webp",
-  "language": "en"
-},
-{
-  "kind": "food",
-  "category": "Soup",
-  "name": "PHO Soup",
-  "quantity": "1 plate",
-  "price": 2100,
-  "description": "Soup PHO, very good Soup PHO, nice Soup PHO",
-  "image": "test_pho_soup.avif",
-  "language": "en"
-},
-  # Barbecue
-{
-  "kind": "food",
-  "category": "Barbecue",
-  "name": "Pork Ribs",
-  "quantity": "1 portion",
-  "price": 3200,
-  "description": "Barbecue Pork, very good Barbecue Pork, nice Barbecue Pork",
-  "image": "test_porkribs_barbecue.webp",
-  "language": "en"
-},
-{
-  "kind": "food",
-  "category": "Barbecue",
-  "name": "Brisket",
-  "quantity": "1 portion",
-  "price": 3200,
-  "description": "Brisket, very good Brisket, nice Brisket",
-  "image": "test_brisket_barbecue.webp",
-  "language": "en"
-},
-{
-  "kind": "food",
-  "category": "Barbecue",
-  "name": "Whole Hog",
-  "quantity": "1 portion",
-  "price": 130000,
-  "description": "Barbecue Hog, very good Barbecue Hog, nice Barbecue Hog",
-  "image": "test_wholehog_barbecue.webp",
-  "language": "en"
-},
-{
-  "kind": "food",
-  "category": "Barbecue",
-  "name": "Chicken",
-  "quantity": "1 portion",
-  "price": 2800,
-  "description": "Barbecue Chicken, very good Barbecue Chicken, nice Barbecue Chicken",
-  "image": "test_chicken_barbecue.webp",
-  "language": "en"
-},
-{
-  "kind": "food",
-  "category": "Barbecue",
-  "name": "Qabab",
-  "quantity": "1 portion",
-  "price": 1900,
-  "description": "Barbecue Qabab, very good Barbecue Qabab, nice Barbecue Qabab",
-  "image": "test_qabab_barbecue.webp",
-  "language": "en"
-},
+{"kind": "food", "category": "Pizza", "name": "Pizza Pepperoni", "quantity": "1 piece", "price": 450, "description": "Pepperoni Pizza is a classic favorite known for its bold, savory flavor. It features a soft, oven-baked dough base topped with rich tomato sauce, gooey mozzarella cheese, and slices of spicy pepperoni. Each bite is enhanced with a blend of Italian herbs like oregano and basil. Finished with a light drizzle of olive oil, this pizza delivers a deliciously crispy and flavorful experience.", "image": "test_pizza_pepperoni.webp", "language": "en"},
+{"kind": "food", "category": "Pizza", "name": "Pizza Margarita", "quantity": "1 piece", "price": 300, "description": "Pizza Margarita is a simple yet delicious classic. It features a thin, crispy crust topped with fresh tomato sauce, creamy mozzarella cheese, and a sprinkle of fragrant basil leaves. The pizza is finished off with a drizzle of olive oil, bringing out the fresh, light, and harmonious flavors of the ingredients. It’s a perfect choice for those who appreciate traditional Italian flavors.", "image": "test_pizza_margarita.webp", "language": "en"},
+{"kind": "food", "category": "Pizza", "name": "Pizza Capricciosa", "quantity": "1 piece", "price": 650, "description": "Pizza Capricciosa is a flavorful, hearty option for pizza lovers. It features a crispy crust topped with rich tomato sauce, creamy mozzarella cheese, savory ham, mushrooms, and artichokes. The pizza is completed with a sprinkling of olives and a dash of olive oil, giving it a well-balanced mix of savory and tangy flavors. This pizza is perfect for those who enjoy a variety of textures and tastes in one bite.", "image": "test_pizza_capricciosa.webp", "language": "en"},
+{"kind": "food", "category": "Pizza", "name": "Pizza Mushroom", "quantity": "1 piece", "price": 500, "description": "Pizza Mushroom is a delightful choice for mushroom lovers. The pizza is topped with rich tomato sauce, creamy mozzarella cheese, and a generous portion of fresh mushrooms. The earthy flavor of the mushrooms complements the creamy cheese and savory sauce, creating a perfect balance of textures and tastes. This pizza is ideal for those who enjoy the deep flavors of mushrooms on a crispy crust.", "image": "test_pizza_mushroom.webp", "language": "en"},
+{"kind": "food", "category": "Pizza", "name": "Pizza Seafood", "quantity": "1 piece", "price": 700, "description": "Pizza Seafood is a perfect choice for seafood lovers. This pizza features a delightful combination of shrimp, squid, and mussels, topped with a rich tomato sauce and melted mozzarella cheese. The savory seafood flavors blend beautifully with the creamy cheese, creating a perfect harmony of tastes. Enjoy the taste of the ocean with each bite of this flavorful pizza.", "image": "test_pizza_seafood.webp", "language": "en"},
 
-  # Burger
-{
-  "kind": "food",
-  "category": "Burger",
-  "name": "Cheeseburger",
-  "quantity": "1 portion",
-  "price": 1800,
-  "description": "Burger Cheeseburger, very good Burger Cheeseburger, nice Burger Cheeseburger",
-  "image": "test_cheeseburger_burger.webp",
-  "language": "en"
-},
-{
-  "kind": "food",
-  "category": "Burger",
-  "name": "Bacon Burger",
-  "quantity": "1 portion",
-  "price": 2200,
-  "description": "Burger Bacon, very good Burger Bacon, nice Burger Bacon",
-  "image": "test_baconburger_burger.webp",
-  "language": "en"
-},
-{
-  "kind": "food",
-  "category": "Burger",
-  "name": "Chicken Burger",
-  "quantity": "1 portion",
-  "price": 2000,
-  "description": "Burger Chicken, very good Burger Chicken, nice Burger Chicken",
-  "image": "test_chickenburger_burger.webp",
-  "language": "en"
-},
-{
-  "kind": "food",
-  "category": "Burger",
-  "name": "Breakfast Burger",
-  "quantity": "1 portion",
-  "price": 2400,
-  "description": "Burger Breakfast, very good Burger Breakfast, nice Burger Breakfast",
-  "image": "test_breakfastburger_burger.webp",
-  "language": "en"
-},
-{
-  "kind": "food",
-  "category": "Burger",
-  "name": "Vegan Sliders",
-  "quantity": "1 portion",
-  "price": 2500,
-  "description": "Burger Sliders, very good Burger Sliders, nice Burger Sliders",
-  "image": "test_sliders_burger.webp",
-  "language": "en"
-},
+{"kind": "food", "category": "Soup", "name": "Tomato Soup", "quantity": "1 plate", "price": 1800, "description": "Tomato Soup is a comforting classic, perfect for any season. This rich and creamy soup is made from fresh tomatoes, slowly simmered with aromatic herbs and spices. The smooth texture and savory taste will warm you up from the inside out. Enjoy the delicious flavors of this homemade soup, a true delight for your taste buds.", "image": "test_tomato_soup.webp", "language": "en"},
+{"kind": "food", "category": "Soup", "name": "Chicken Noodle Soup", "quantity": "1 plate", "price": 2400, "description": "Chicken Noodle Soup is a hearty and flavorful dish made with tender chicken pieces, savory broth, and soft noodles. The combination of fresh vegetables and aromatic spices creates a comforting and nourishing soup. Perfect for any time of the year, this soup will warm you up and satisfy your cravings with its delicious taste.", "image": "test_chicken_noodle_soup.webp", "language": "en"},
+{"kind": "food", "category": "Soup", "name": "Broccoli Cheddar Soup", "quantity": "1 plate", "price": 2200, "description": "Broccoli Cheddar Soup is a creamy and delicious soup made with fresh broccoli and melted cheddar cheese. The rich, velvety texture combined with the earthy flavor of broccoli and the sharpness of cheddar makes this soup both comforting and satisfying. Perfect for a cozy meal, it offers a warm and flavorful experience.", "image": "test_borccoli_cheddar_soup.webp", "language": "en"},
+{"kind": "food", "category": "Soup", "name": "Matzo Ball Soup", "quantity": "1 plate", "price": 2500, "description": "Matzo Ball Soup is a comforting, savory soup made with light and fluffy matzo balls served in a flavorful chicken broth. The matzo balls, made from matzo meal, eggs, and seasonings, offer a satisfying texture, while the rich broth brings warmth and depth to the dish. A classic Jewish comfort food that is perfect for any occasion.", "image": "test_matzo_ball_soup.webp", "language": "en"},
+{"kind": "food", "category": "Soup", "name": "PHO Soup", "quantity": "1 plate", "price": 2100, "description": "Pho Soup is a traditional Vietnamese dish featuring a fragrant and aromatic broth made from simmered beef bones, herbs, and spices. The dish includes rice noodles, thinly sliced beef, and fresh herbs, offering a rich and savory flavor profile. It’s perfect for a warm, satisfying meal that is both comforting and full of flavor.", "image": "test_pho_soup.avif", "language": "en"},
+
+{"kind": "food", "category": "Barbecue", "name": "Pork Ribs", "quantity": "1 portion", "price": 3200, "description": "Tender and juicy pork ribs, slow-cooked to perfection with a rich smoky flavor. The ribs are seasoned with a special blend of spices and barbecue sauce, offering a delightful combination of savory, sweet, and smoky notes. A must-try dish for barbecue lovers!", "image": "test_porkribs_barbecue.webp", "language": "en"},
+{"kind": "food", "category": "Barbecue", "name": "Brisket", "quantity": "1 portion", "price": 3200, "description": "Succulent and tender brisket, slow-cooked to perfection with a smoky flavor. It’s seasoned with a unique blend of spices and barbecue sauce, offering a savory and rich taste that melts in your mouth. Perfect for barbecue enthusiasts looking for a hearty and flavorful dish!", "image": "test_brisket_barbecue.webp", "language": "en"},
+{"kind": "food", "category": "Barbecue", "name": "Whole Hog", "quantity": "1 portion", "price": 130000, "description": "A whole hog, slow-cooked to perfection with a smoky flavor and juicy tenderness. This grand barbecue experience is seasoned with a blend of spices and cooked low and slow, ensuring every bite is full of rich, smoky goodness. Perfect for large gatherings or those looking for an unforgettable feast!", "image": "test_wholehog_barbecue.webp", "language": "en"},
+{"kind": "food", "category": "Barbecue", "name": "Chicken", "quantity": "1 portion", "price": 2800, "description": "Tender chicken, grilled to perfection with a smoky flavor. This barbecue chicken is seasoned with a special blend of spices and slow-cooked for that perfect balance of juiciness and smokiness. A perfect choice for any barbecue lover!", "image": "test_chicken_barbecue.webp", "language": "en"},
+{"kind": "food", "category": "Barbecue", "name": "Qabab", "quantity": "1 portion", "price": 1900, "description": "A flavorful and tender skewer of grilled meat, seasoned with a special mix of spices for an unforgettable barbecue experience. Perfectly cooked to enhance the natural flavors and served hot for a delicious meal!", "image": "test_qabab_barbecue.webp", "language": "en"},
+
+{"kind": "food", "category": "Burger", "name": "Cheeseburger", "quantity": "1 portion", "price": 1800, "description": "A classic cheeseburger with a juicy beef patty, melted cheese, and fresh toppings, served in a soft bun for a satisfying and delicious meal. Perfect for burger lovers who appreciate a great combination of flavors!", "image": "test_cheeseburger_burger.webp", "language": "en"},
+{"kind": "food", "category": "Burger", "name": "Bacon Burger", "quantity": "1 portion", "price": 2200, "description": "A savory bacon burger with a juicy beef patty, crispy bacon, melted cheese, and fresh toppings, all served in a soft bun for a mouthwatering meal. Perfect for bacon lovers who enjoy a satisfying and flavorful bite.", "image": "test_baconburger_burger.webp", "language": "en"},
+{"kind": "food", "category": "Burger", "name": "Chicken Burger", "quantity": "1 portion", "price": 2000, "description": "A delicious chicken burger featuring a tender chicken patty, fresh vegetables, and a soft bun, providing a satisfying and flavorful meal for those who prefer chicken over beef. A perfect balance of taste and texture for any burger lover.", "image": "test_chickenburger_burger.webp", "language": "en"},
+{"kind": "food", "category": "Burger", "name": "Breakfast Burger", "quantity": "1 portion", "price": 2400, "description": "Start your day with a delicious breakfast burger, featuring a savory combination of eggs, bacon, cheese, and a soft bun. This hearty breakfast option is perfect for those who want a filling, flavorful meal to kickstart their morning.", "image": "test_breakfastburger_burger.webp", "language": "en"},
+{"kind": "food", "category": "Burger", "name": "Vegan Sliders", "quantity": "1 portion", "price": 2500, "description": "Enjoy a plant-based delight with these vegan sliders. Packed with flavor, each slider features a savory patty, fresh veggies, and a soft bun, offering a tasty and satisfying bite for vegan and non-vegan eaters alike.", "image": "test_sliders_burger.webp", "language": "en"},
+
 
 
   # drink
   # Cocktail
-{
-  "kind": "drink",
-  "category": "Cocktail",
-  "name": "Long Island",
-  "quantity": "1 cup",
-  "price": 3400,
-  "description": "Long Island, very good Long Island, nice Long Island",
-  "image": "test_cocktail_longisland.webp",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "Cocktail",
-  "name": "Bloody Maria",
-  "quantity": "1 cup",
-  "price": 4200,
-  "description": "Bloody Maria, very good Bloody Maria, nice Bloody Maria",
-  "image": "test_bloodymaria_cocktail.webp",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "Cocktail",
-  "name": "Mojito",
-  "quantity": "1 cup",
-  "price": 1800,
-  "description": "Mojito, very good Mojito, nice Mojito",
-  "image": "test_mojito_cocktail.webp",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "Cocktail",
-  "name": "Negroni",
-  "quantity": "1 cup",
-  "price": 2200,
-  "description": "Negroni, very good Negroni, nice Negroni",
-  "image": "test_nogroni_cocktail.webp",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "Cocktail",
-  "name": "Manhattan",
-  "quantity": "1 cup",
-  "price": 2800,
-  "description": "Manhattan, very good Manhattan, nice Manhattan",
-  "image": "test_manhattan_cocktail.webp",
-  "language": "en"
-},
+{ "kind": "drink", "category": "Cocktail", "name": "Long Island", "quantity": "1 cup", "price": 3400, "description": "Long Island, very good Long Island, nice Long Island", "image": "test_cocktail_longisland.webp", "language": "en" },
+{ "kind": "drink", "category": "Cocktail", "name": "Bloody Maria", "quantity": "1 cup", "price": 4200, "description": "Bloody Maria, very good Bloody Maria, nice Bloody Maria", "image": "test_bloodymaria_cocktail.webp", "language": "en" },
+{ "kind": "drink", "category": "Cocktail", "name": "Mojito", "quantity": "1 cup", "price": 1800, "description": "Mojito, very good Mojito, nice Mojito", "image": "test_mojito_cocktail.webp", "language": "en" },
+{ "kind": "drink", "category": "Cocktail", "name": "Negroni", "quantity": "1 cup", "price": 2200, "description": "Negroni, very good Negroni, nice Negroni", "image": "test_nogroni_cocktail.webp", "language": "en" },
+{ "kind": "drink", "category": "Cocktail", "name": "Manhattan", "quantity": "1 cup", "price": 2800, "description": "Manhattan, very good Manhattan, nice Manhattan", "image": "test_manhattan_cocktail.webp", "language": "en" },
 
-  # SodaDrink
-{
-  "kind": "drink",
-  "category": "SodaDrink",
-  "name": "Coca-cola",
-  "quantity": "1 bottle",
-  "price": 550,
-  "description": "Coca-cola, very good Coca-cola, nice Coca-cola",
-  "image": "test_sodadrink_cocacola.webp",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "SodaDrink",
-  "name": "Fanta",
-  "quantity": "1 bottle",
-  "price": 550,
-  "description": "Fanta, very good Fanta, nice Fanta",
-  "image": "test_fanta_sodadrink.webp",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "SodaDrink",
-  "name": "Sprite",
-  "quantity": "1 bottle",
-  "price": 550,
-  "description": "Sprite, very good Sprite, nice Sprite",
-  "image": "test_sprite_sodadrink.webp",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "SodaDrink",
-  "name": "Pepsi",
-  "quantity": "1 bottle",
-  "price": 550,
-  "description": "Pepsi, very good Pepsi, nice Pepsi",
-  "image": "test_pepsi_sodadrink.avif",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "SodaDrink",
-  "name": "Mirinda",
-  "quantity": "1 bottle",
-  "price": 550,
-  "description": "Mirinda, very good Mirinda, nice Mirinda",
-  "image": "test_mirinda_sodadrink.webp",
-  "language": "en"
-},
+{ "kind": "drink", "category": "SodaDrink", "name": "Coca-cola", "quantity": "1 bottle", "price": 550, "description": "Coca-cola, very good Coca-cola, nice Coca-cola", "image": "test_sodadrink_cocacola.webp", "language": "en" },
+{ "kind": "drink", "category": "SodaDrink", "name": "Fanta", "quantity": "1 bottle", "price": 550, "description": "Fanta, very good Fanta, nice Fanta", "image": "test_fanta_sodadrink.webp", "language": "en" },
+{ "kind": "drink", "category": "SodaDrink", "name": "Sprite", "quantity": "1 bottle", "price": 550, "description": "Sprite, very good Sprite, nice Sprite", "image": "test_sprite_sodadrink.webp", "language": "en" },
+{ "kind": "drink", "category": "SodaDrink", "name": "Pepsi", "quantity": "1 bottle", "price": 550, "description": "Pepsi, very good Pepsi, nice Pepsi", "image": "test_pepsi_sodadrink.avif", "language": "en" },
+{ "kind": "drink", "category": "SodaDrink", "name": "Mirinda", "quantity": "1 bottle", "price": 550, "description": "Mirinda, very good Mirinda, nice Mirinda", "image": "test_mirinda_sodadrink.webp", "language": "en" },
 
-  # Vodka
-{
-  "kind": "drink",
-  "category": "Vodka",
-  "name": "Absolut",
-  "quantity": "1 bottle",
-  "price": 13500,
-  "description": "Absolut, very good Absolut, nice Absolut",
-  "image": "test_vodka_absolut.webp",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "Vodka",
-  "name": "Finlandia",
-  "quantity": "1 bottle",
-  "price": 9000,
-  "description": "Finlandia, very good Finlandia, nice Finlandia",
-  "image": "test_finlandia_vodka.webp",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "Vodka",
-  "name": "Russian Standard",
-  "quantity": "1 bottle",
-  "price": 12000,
-  "description": "Russian Standard, very good Russian Standard, nice Russian Standard",
-  "image": "test_russianstandard_vodka.webp",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "Vodka",
-  "name": "Stolichnaya",
-  "quantity": "1 bottle",
-  "price": 11500,
-  "description": "Stolichnaya, very good Stolichnaya, nice Stolichnaya",
-  "image": "test_stolichnaya_vodka.webp",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "Vodka",
-  "name": "SKYY",
-  "quantity": "1 bottle",
-  "price": 13000,
-  "description": "SKYY, very good SKYY, nice SKYY",
-  "image": "test_skyy_vodka.webp",
-  "language": "en"
-},
+{ "kind": "drink", "category": "Vodka", "name": "Absolut", "quantity": "1 bottle", "price": 13500, "description": "Absolut, very good Absolut, nice Absolut", "image": "test_vodka_absolut.webp", "language": "en" },
+{ "kind": "drink", "category": "Vodka", "name": "Finlandia", "quantity": "1 bottle", "price": 9000, "description": "Finlandia, very good Finlandia, nice Finlandia", "image": "test_finlandia_vodka.webp", "language": "en" },
+{ "kind": "drink", "category": "Vodka", "name": "Russian Standard", "quantity": "1 bottle", "price": 12000, "description": "Russian Standard, very good Russian Standard, nice Russian Standard", "image": "test_russianstandard_vodka.webp", "language": "en" },
+{ "kind": "drink", "category": "Vodka", "name": "Stolichnaya", "quantity": "1 bottle", "price": 11500, "description": "Stolichnaya, very good Stolichnaya, nice Stolichnaya", "image": "test_stolichnaya_vodka.webp", "language": "en" },
+{ "kind": "drink", "category": "Vodka", "name": "SKYY", "quantity": "1 bottle", "price": 13000, "description": "SKYY, very good SKYY, nice SKYY", "image": "test_skyy_vodka.webp", "language": "en" },
 
-  # Beer
-{
-  "kind": "drink",
-  "category": "Beer",
-  "name": "Stella",
-  "quantity": "1 bottle",
-  "price": 1000,
-  "description": "Stella, very good Stella, nice Stella",
-  "image": "test_beer_stella.webp",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "Beer",
-  "name": "Bud",
-  "quantity": "1 bottle",
-  "price": 1100,
-  "description": "Bud, very good Bud, nice Bud",
-  "image": "test_bud_beer.webp",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "Beer",
-  "name": "Heineken",
-  "quantity": "1 bottle",
-  "price": 1500,
-  "description": "Heineken, very good Heineken, nice Heineken",
-  "image": "test_heineken_beer.webp",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "Beer",
-  "name": "Corona",
-  "quantity": "1 bottle",
-  "price": 800,
-  "description": "Corona, very good Corona, nice Corona",
-  "image": "test_corona_beer.webp",
-  "language": "en"
-},
-{
-  "kind": "drink",
-  "category": "Beer",
-  "name": "Tuborg",
-  "quantity": "1 bottle",
-  "price": 1100,
-  "description": "Tuborg, very good Tuborg, nice Tuborg",
-  "image": "test_tuborg_beer.webp",
-  "language": "en"
-},
+{ "kind": "drink", "category": "Beer", "name": "Stella", "quantity": "1 bottle", "price": 1000, "description": "Stella, very good Stella, nice Stella", "image": "test_beer_stella.webp", "language": "en" },
+{ "kind": "drink", "category": "Beer", "name": "Bud", "quantity": "1 bottle", "price": 1100, "description": "Bud, very good Bud, nice Bud", "image": "test_bud_beer.webp", "language": "en" },
+{ "kind": "drink", "category": "Beer", "name": "Heineken", "quantity": "1 bottle", "price": 1500, "description": "Heineken, very good Heineken, nice Heineken", "image": "test_heineken_beer.webp", "language": "en" },
+{ "kind": "drink", "category": "Beer", "name": "Corona", "quantity": "1 bottle", "price": 800, "description": "Corona, very good Corona, nice Corona", "image": "test_corona_beer.webp", "language": "en" },
+{ "kind": "drink", "category": "Beer", "name": "Tuborg", "quantity": "1 bottle", "price": 1100, "description": "Tuborg, very good Tuborg, nice Tuborg", "image": "test_tuborg_beer.webp", "language": "en" },
+
+
 
   # dessert
   # Cake
-{
-  "kind": "dessert",
-  "category": "Cake",
-  "name": "Brownie",
-  "quantity": "1 peace",
-  "price": 800,
-  "description": "Brownie, very good Brownie, nice Brownie",
-  "image": "test_dessert_brownie.webp",
-  "language": "en"
-},
-{
-  "kind": "dessert",
-  "category": "Cake",
-  "name": "Angel",
-  "quantity": "1 peace",
-  "price": 550,
-  "description": "Angel, very good Angel, nice Angel",
-  "image": "test_angel_cake.webp",
-  "language": "en"
-},
-{
-  "kind": "dessert",
-  "category": "Cake",
-  "name": "Blackout",
-  "quantity": "1 peace",
-  "price": 650,
-  "description": "Blackout, very good Blackout, nice Blackout",
-  "image": "test_blackout_cake.webp",
-  "language": "en"
-},
-{
-  "kind": "dessert",
-  "category": "Cake",
-  "name": "Battenberg",
-  "quantity": "1 peace",
-  "price": 400,
-  "description": "Battenberg, very good Battenberg, nice Battenberg",
-  "image": "test_battenberg_cake.webp",
-  "language": "en"
-},
-{
-  "kind": "dessert",
-  "category": "Cake",
-  "name": "Bundt",
-  "quantity": "1 peace",
-  "price": 800,
-  "description": "Bundt, very good Bundt, nice Bundt",
-  "image": "test_bundt_cake.webp",
-  "language": "en"
-},
+{"kind": "dessert", "category": "Cake", "name": "Brownie", "quantity": "1 piece", "price": 800, "description": "Rich, decadent, and perfectly baked, this brownie offers a delicious chocolate experience that melts in your mouth with every bite. A true classic for dessert lovers.", "image": "test_dessert_brownie.webp", "language": "en"},
+{"kind": "dessert", "category": "Cake", "name": "Angel", "quantity": "1 piece", "price": 550, "description": "A light and fluffy cake that feels like heaven with every bite. This delicate treat will melt in your mouth, leaving a sweet and soft aftertaste. A true angelic dessert.", "image": "test_angel_cake.webp", "language": "en"},
+{"kind": "dessert", "category": "Cake", "name": "Blackout", "quantity": "1 piece", "price": 650, "description": "A rich, dark cake with layers of intense flavor. Perfectly balanced with a decadent chocolate taste, the Blackout cake offers a satisfying experience that leaves you craving for more.", "image": "test_blackout_cake.webp", "language": "en"},
+{"kind": "dessert", "category": "Cake", "name": "Battenberg", "quantity": "1 piece", "price": 400, "description": "A traditional British cake, beautifully layered with almond and fruit flavors. The Battenberg cake offers a delightful balance of textures and flavors, making each bite a true treat.", "image": "test_battenberg_cake.webp", "language": "en"},
+{"kind": "dessert", "category": "Cake", "name": "Bundt", "quantity": "1 piece", "price": 800, "description": "A deliciously moist Bundt cake, with a rich flavor and beautiful presentation. Perfect for any occasion, this cake will leave you wanting more.", "image": "test_bundt_cake.webp", "language": "en"},
 
-  # Icecream
-{
-  "kind": "dessert",
-  "category": "Icecream",
-  "name": "Gelato",
-  "quantity": "1 peace",
-  "price": 800,
-  "description": "Gelato, very good Gelato, nice Gelato",
-  "image": "test_icecream_chocolategelato.webp",
-  "language": "en"
-},
-{
-  "kind": "dessert",
-  "category": "Icecream",
-  "name": "Mango Kulfi",
-  "quantity": "1 peace",
-  "price": 650,
-  "description": "Mango Kulfi, very good Mango Kulfi, nice Mango Kulfi",
-  "image": "test_mangokulfi_icecream.webp",
-  "language": "en"
-},
-{
-  "kind": "dessert",
-  "category": "Icecream",
-  "name": "Philadelphia",
-  "quantity": "1 peace",
-  "price": 700,
-  "description": "Philadelphia, very good Philadelphia, nice Philadelphia",
-  "image": "test_philadelphia_icecream.webp",
-  "language": "en"
-},
-{
-  "kind": "dessert",
-  "category": "Icecream",
-  "name": "Italian Ice",
-  "quantity": "1 peace",
-  "price": 600,
-  "description": "Italian Ice, very good Italian Ice, nice Italian Ice",
-  "image": "test_italianice_icecream.webp",
-  "language": "en"
-},
-{
-  "kind": "dessert",
-  "category": "Icecream",
-  "name": "Popsicle",
-  "quantity": "1 peace",
-  "price": 800,
-  "description": "Popsicle, very good Popsicle, nice Popsicle",
-  "image": "test_popsicle_icecream.webp",
-  "language": "en"
-},
+
+# Icecream
+{"kind": "dessert", "category": "Icecream", "name": "Gelato", "quantity": "1 piece", "price": 800, "description": "Gelato, a smooth and creamy frozen treat with rich flavor, perfect for any ice cream lover. A delightful experience in every bite.", "image": "test_icecream_chocolategelato.webp", "language": "en"},
+{"kind": "dessert", "category": "Icecream", "name": "Mango Kulfi", "quantity": "1 piece", "price": 650, "description": "Mango Kulfi, a rich and creamy frozen dessert with the vibrant flavor of mango, offering a refreshing and indulgent treat.", "image": "test_mangokulfi_icecream.webp", "language": "en"},
+{"kind": "dessert", "category": "Icecream", "name": "Philadelphia", "quantity": "1 piece", "price": 700, "description": "Philadelphia, a creamy and rich ice cream offering a smooth, delightful experience with a tangy yet sweet taste.", "image": "test_philadelphia_icecream.webp", "language": "en"},
+{"kind": "dessert", "category": "Icecream", "name": "Italian Ice", "quantity": "1 piece", "price": 600, "description": "Italian Ice, a refreshing frozen treat, offering a tangy and fruity flavor that's perfect for a hot day.", "image": "test_italianice_icecream.webp", "language": "en"},
+{"kind": "dessert", "category": "Icecream", "name": "Popsicle", "quantity": "1 piece", "price": 800, "description": "Popsicle, a delicious frozen treat, offering a refreshing burst of flavor with every bite.", "image": "test_popsicle_icecream.webp", "language": "en"},
+
+
 
   # salad
   # Green
-{
-  "kind": "salad",
-  "category": "GreenSalad",
-  "name": "Big Italian Salad",
-  "quantity": "1 pate",
-  "price": 1200,
-  "description": "Italian Salad, very good Italian Salad, nice Italian Salad",
-  "image": "test_salad_bigitaliansalad.webp",
-  "language": "en"
-},
-{
-  "kind": "salad",
-  "category": "GreenSalad",
-  "name": "Caesar Salad",
-  "quantity": "1 plate",
-  "price": 1500,
-  "description": "Classic Caesar Salad with crispy romaine, Parmesan, croutons, and creamy dressing.",
-  "image": "test_caesar_green.webp",
-  "language": "en"
-},
-{
-  "kind": "salad",
-  "category": "GreenSalad",
-  "name": "Garden Salad",
-  "quantity": "1 plate",
-  "price": 1600,
-  "description": "Classic Garden Salad with crispy romaine, Parmesan, croutons, and creamy dressing.",
-  "image": "test_garden_green.webp",
-  "language": "en"
-},
-{
-  "kind": "salad",
-  "category": "GreenSalad",
-  "name": "Michigan Salad",
-  "quantity": "1 plate",
-  "price": 2300,
-  "description": "Michigan Salad with crispy romaine, Parmesan, croutons, and creamy dressing.",
-  "image": "test_michigan_green.webp",
-  "language": "en"
-},
+{"kind":"salad","category":"GreenSalad","name":"Big Italian Salad","quantity":"1 pate","price":1200,"description":"Italian Salad, very good Italian Salad, nice Italian Salad","image":"test_salad_bigitaliansalad.webp","language":"en"},
+{"kind":"salad","category":"GreenSalad","name":"Caesar Salad","quantity":"1 plate","price":1500,"description":"Classic Caesar Salad with crispy romaine, Parmesan, croutons, and creamy dressing.","image":"test_caesar_green.webp","language":"en"},
+{"kind":"salad","category":"GreenSalad","name":"Garden Salad","quantity":"1 plate","price":1600,"description":"Classic Garden Salad with crispy romaine, Parmesan, croutons, and creamy dressing.","image":"test_garden_green.webp","language":"en"},
+{"kind":"salad","category":"GreenSalad","name":"Michigan Salad","quantity":"1 plate","price":2300,"description":"Michigan Salad with crispy romaine, Parmesan, croutons, and creamy dressing.","image":"test_michigan_green.webp","language":"en"},
 
-    # Vegetable
+{"kind":"salad","category":"VegetableSalad","name":"Cobb","quantity":"1 portion","price":2800,"description":"Cobb with crispy romaine, Parmesan, croutons, and creamy dressing.","image":"test_cobb_vegetable.webp","language":"en"},
+{"kind":"salad","category":"VegetableSalad","name":"Acar","quantity":"1 portion","price":1800,"description":"Acar with crispy romaine, Parmesan, croutons, and creamy dressing.","image":"test_acarvegetable.webp","language":"en"},
+{"kind":"salad","category":"VegetableSalad","name":"dressed herring","quantity":"1 portion","price":1900,"description":"dressed herring with crispy romaine, Parmesan, croutons, and creamy dressing.","image":"test_dressedherring_vegetable.webp","language":"en"},
+{"kind":"salad","category":"VegetableSalad","name":"Avghan","quantity":"1 portion","price":2000,"description":"Avghan with crispy romaine, Parmesan, croutons, and creamy dressing.","image":"test_ahfgan_vegetable.webp","language":"en"},
+{"kind":"salad","category":"VegetableSalad","name":"Celery Victor","quantity":"1 portion","price":2100,"description":"Celery Victor with crispy romaine, Parmesan, croutons, and creamy dressing.","image":"test_celeryvictor_vegetable.webp","language":"en"},
 
-{
-  "kind": "salad",
-  "category": "VegetableSalad",
-  "name": "Cobb",
-  "quantity": "1 portion",
-  "price": 2800,
-  "description": "Cobb with crispy romaine, Parmesan, croutons, and creamy dressing.",
-  "image": "test_cobb_vegetable.webp",
-  "language": "en"
-},
-{
-  "kind": "salad",
-  "category": "VegetableSalad",
-  "name": "Acar",
-  "quantity": "1 portion",
-  "price": 1800,
-  "description": "Acar with crispy romaine, Parmesan, croutons, and creamy dressing.",
-  "image": "test_acarvegetable.webp",
-  "language": "en"
-},
-{
-  "kind": "salad",
-  "category": "VegetableSalad",
-  "name": "dressed herring",
-  "quantity": "1 portion",
-  "price": 1900,
-  "description": "dressed herring with crispy romaine, Parmesan, croutons, and creamy dressing.",
-  "image": "test_dressedherring_vegetable.webp",
-  "language": "en"
-},
-{
-  "kind": "salad",
-  "category": "VegetableSalad",
-  "name": "Avghan",
-  "quantity": "1 portion",
-  "price": 2000,
-  "description": "Avghan with crispy romaine, Parmesan, croutons, and creamy dressing.",
-  "image": "test_ahfgan_vegetable.webp",
-  "language": "en"
-},
-{
-  "kind": "salad",
-  "category": "VegetableSalad",
-  "name": "Celery Victor",
-  "quantity": "1 portion",
-  "price": 2100,
-  "description": "Celery Victor with crispy romaine, Parmesan, croutons, and creamy dressing.",
-  "image": "test_celeryvictor_vegetable.webp",
-  "language": "en"
-},
-
-    # Fruit
-
-{
-  "kind": "salad",
-  "category": "FruitSalad",
-  "name": "Macedonia",
-  "quantity": "1 portion",
-  "price": 2400,
-  "description": "Macedonia with crispy romaine, Parmesan, croutons, and creamy dressing.",
-  "image": "test_macadonia_fruit.webp",
-  "language": "en"
-},
-{
-  "kind": "salad",
-  "category": "FruitSalad",
-  "name": "Ambrosia",
-  "quantity": "1 portion",
-  "price": 2400,
-  "description": "Ambrosia with crispy romaine, Parmesan, croutons, and creamy dressing.",
-  "image": "test_ambrosia_fruit.webp",
-  "language": "en"
-},
-{
-  "kind": "salad",
-  "category": "FruitSalad",
-  "name": "Tam phonlamai ruam",
-  "quantity": "1 portion",
-  "price": 2000,
-  "description": "Tam phonlamai ruam with crispy romaine, Parmesan, croutons, and creamy dressing.",
-  "image": "test_tamphonlamai_fruit.webp",
-  "language": "en"
-},
-{
-  "kind": "salad",
-  "category": "FruitSalad",
-  "name": "Banana",
-  "quantity": "1 portion",
-  "price": 1100,
-  "description": "Banana with crispy romaine, Parmesan, croutons, and creamy dressing.",
-  "image": "test_banana_fruit.webp",
-  "language": "en"
-},
-{
-  "kind": "salad",
-  "category": "FruitSalad",
-  "name": "Jello",
-  "quantity": "1 portion",
-  "price": 1750,
-  "description": "Jello with crispy romaine, Parmesan, croutons, and creamy dressing.",
-  "image": "test_jello_fruit.webp",
-  "language": "en"
-},
+{"kind":"salad","category":"FruitSalad","name":"Macedonia","quantity":"1 portion","price":2400,"description":"Macedonia with crispy romaine, Parmesan, croutons, and creamy dressing.","image":"test_macadonia_fruit.webp","language":"en"},
+{"kind":"salad","category":"FruitSalad","name":"Ambrosia","quantity":"1 portion","price":2400,"description":"Ambrosia with crispy romaine, Parmesan, croutons, and creamy dressing.","image":"test_ambrosia_fruit.webp","language":"en"},
+{"kind":"salad","category":"FruitSalad","name":"Tam phonlamai ruam","quantity":"1 portion","price":2000,"description":"Tam phonlamai ruam with crispy romaine, Parmesan, croutons, and creamy dressing.","image":"test_tamphonlamai_fruit.webp","language":"en"},
+{"kind":"salad","category":"FruitSalad","name":"Banana","quantity":"1 portion","price":1100,"description":"Banana with crispy romaine, Parmesan, croutons, and creamy dressing.","image":"test_banana_fruit.webp","language":"en"},
+{"kind":"salad","category":"FruitSalad","name":"Jello","quantity":"1 portion","price":1750,"description":"Jello with crispy romaine, Parmesan, croutons, and creamy dressing.","image":"test_jello_fruit.webp","language":"en"}
 
 
 ]
