@@ -27,11 +27,12 @@ def get_menu_by_product_id(horekaclient_id: int,
     return menu_fileter_service.get_horeka_by_id(horekaclient_id)
 
 
-@router.get("/all-menu/{horekaclient_id}")
+@router.get("/all-menu/{horekaclient_id}/{lang}")
 def get_all_menu(horekaclient_id: int,
+                 lang: str = 'en',
                  menu_fileter_service: menu_filter_service.MenuFilterService = Depends()):
 
-    return menu_fileter_service.get_all_menu(horekaclient_id)
+    return menu_fileter_service.get_all_menu(horekaclient_id, lang)
 
 
 @router.post("/get-image")
