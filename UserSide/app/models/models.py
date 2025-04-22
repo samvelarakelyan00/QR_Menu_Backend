@@ -83,7 +83,7 @@ class UserFeedback(Base):
 class PaymentIDramUserBasicTip(Base):
     __tablename__ = "payments_idram_user_basic_tip"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True)
     order_id = Column(Integer, unique=True)
     amount = Column(Float)
     status = Column(String)
@@ -104,7 +104,7 @@ class PaymentIDramUserBasicTip(Base):
 class QRScanInfo(Base):
     __tablename__ = "qr_scan_info"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True)
     created_at = Column(TIMESTAMP, nullable=False, server_default=text("now()"))
     horeka_client_id = Column(Integer, ForeignKey("horekaclients.id"))
 
@@ -112,7 +112,7 @@ class QRScanInfo(Base):
 class TipPageClickInfoGet(Base):
     __tablename__ = "tip_page_click_info_get"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True)
 
     created_at = Column(TIMESTAMP, nullable=False, server_default=text("now()"))
     horeka_client_id = Column(Integer, ForeignKey("horekaclients.id"))
@@ -123,7 +123,7 @@ class TipPageClickInfoGet(Base):
 class TipViaIdramEndButtonInfoGet(Base):
     __tablename__ = "tip_via_idram_end_button_info_get"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True)
 
     created_at = Column(TIMESTAMP, nullable=False, server_default=text("now()"))
     horeka_client_id = Column(Integer, ForeignKey("horekaclients.id"))
