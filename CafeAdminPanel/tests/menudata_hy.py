@@ -27,7 +27,8 @@ datalist_hy = [
 
 
 # drink
-{ "kind": "drink", "category": "Cocktail", "name": "Լոնգ Այլենդ", "quantity": "1 բաժակ", "price": 3400, "description": "Լոնգ Այլենդ — խիտ կոկտեյլ վոդկայով, ռոմով, ջինով, տեկիլայով և տրիպլ սեկով՝ ավարտված կոկա-կոլայով՝ ուժեղ, բայց հարթ համի համար։", "image": "test_cocktail_longisland.webp", "language": "hy" },
+# Cocktail
+{"kind": "drink", "category": "Cocktail", "name": "Լոնգ Այլենդ", "quantity": "1 բաժակ", "price": 3400, "description": "Լոնգ Այլենդ — խիտ կոկտեյլ վոդկայով, ռոմով, ջինով, տեկիլայով և տրիպլ սեկով՝ ավարտված կոկա-կոլայով՝ ուժեղ, բայց հարթ համի համար։", "image": "test_cocktail_longisland.webp", "language": "hy" },
 {"kind": "drink", "category": "Cocktail", "name": "Բլադի Մարիա", "quantity": "1 բաժակ", "price": 4200, "description": "Բլադի Մարիան համարձակ տարբերակ է դասական Բլադի Մերիից՝ վոդկան փոխարինված է թեքիլայով՝ տալով կծու ու համեղ համ։ Հիանալի է թե՛ բրանչի, թե՛ երեկոյան հանգստի համար։ Լոլիկի հյութը, լայմը և համեմունքները միախառնվում են՝ ստեղծելով հագեցած ու բուրավետ կոկտեյլ։", "image": "test_bloodymaria_cocktail.webp", "language": "hy" },
 {'kind': 'drink', 'category': 'Cocktail', 'name': 'Մոխիտո', 'quantity': '1 բաժակ', 'price': 1800, 'description': 'Մոխիտո, շատ լավ Մոխիտո, հոյակապ Մոխիտո', 'image': 'test_mojito_cocktail.webp', 'language': 'hy'},
 {"kind": "drink", "category": "Cocktail", "name": "Նեգրոնի", "quantity": "1 բաժակ", "price": 2200, "description": "Նեգրոնին համարձակ ու նրբաճաշակ կոկտեյլ է՝ դառը և քաղցր համերի իդեալական հավասարակշռությամբ։ Ջինի, վերմուտի և կամպարիի խառնուրդը տալիս է խորը ու արտահայտիչ համ։ Հիանալի է նրանց համար, ովքեր սիրում են բարդ ու նուրբ ըմպելիքներ։", "image": "test_nogroni_cocktail.webp", "language": "hy" },
