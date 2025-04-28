@@ -44,7 +44,7 @@ auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDU0ODc4MTcsImNhZ
 
 image_directory = "../../../../images"
 
-for form_data in datalist_hy:
+for form_data in datalist_ru:
     # Construct full image file path
     image_path = os.path.join(f"{image_directory}/{form_data.get('kind')}/{form_data.get('category')}/", form_data["image"])
 
