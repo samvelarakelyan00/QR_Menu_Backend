@@ -101,7 +101,7 @@
 
       .tip-amount {
         background-color: #b35c32;
-        color: #000;
+        color: #fff;
         padding: 8px 16px;
         border: none;
         border-radius: 20px;
@@ -236,6 +236,7 @@
             comfortable 😊
           </p>
         </div>
+
         <div class="tip-page">
           <div class="tip-section">
             <h2 id="tip_title">Tip</h2>
@@ -259,17 +260,9 @@
             <h2 id="tip_company_title">Tip to Menu</h2>
             <div class="tip-buttons">
               <div class="button-row">
-                <button class="tip-amount" data-amount="81" style="font-size: 18px">81</button>
-<!--                <button class="tip-amount" data-amount="98">98</button>-->
-<!--                <button class="tip-amount" data-amount="288">188</button>-->
-<!--                <button class="tip-amount" data-amount="500">500</button>-->
+                <button class="tip-amount selected" data-amount="50" style="font-size: 18px">50</button>
+                <button class="tip-amount" data-amount="99" style="font-size: 18px">99</button>
               </div>
-<!--              <div class="button-row">-->
-<!--                <button class="tip-amount" data-amount="1000">1000</button>-->
-<!--                <button class="tip-amount" data-amount="2000">2000</button>-->
-<!--                <button class="tip-amount" data-amount="3000">3000</button>-->
-<!--                <button class="tip-amount" data-amount="5000">5000</button>-->
-<!--              </div>-->
             </div>
           </div>
 
@@ -375,7 +368,6 @@
           if (selectedTips.length > 0) {
             window.location.href =
               "https://qrmenuarmenia.site/api/cafe/menu/tip-payment-inform";
-            // window.location.href = "./payment-inform.html";
           } else {
             alert("Please select at least one tip before submitting.");
           }
@@ -436,7 +428,6 @@
         lang.addEventListener("click", async () => {
           try {
             const response = await fetch("/api/data/get-tip-json");
-            // const response = await fetch("../data/tip.json");
             const data = await response.json();
 
             document.getElementById("submit-tip").innerText =
@@ -471,9 +462,13 @@
       async function defaultContentByLang() {
         try {
           const response = await fetch("/api/data/get-tip-json");
-          // const response = await fetch("../data/tip.json");
           const data = await response.json();
           let language_setter = localStorage.getItem("language");
+
+          if (!language_setter) {
+            language_setter = "en";
+            localStorage.setItem('language', language_setter);
+          }
 
           document.getElementById("submit-tip").innerText =
             data.confirm_button[language_setter];
