@@ -584,7 +584,7 @@
 
       // defaultPageLanguege Functionality
 
-      async function defaultPageLanguege() {
+      async function defaultPageLanguege(lang) {
         try {
           // Real Link
           const response = await fetch("/api/data/get-menu-json");
@@ -789,7 +789,7 @@
         (updateContent(),
         clickedMealPage(),
         fetchingAPI(admin_menu_API_Link + `/${currentLang}`),
-        defaultPageLanguege());
+        defaultPageLanguege(currentLang));
     </script>
   </body>
 </html>
