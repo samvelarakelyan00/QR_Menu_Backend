@@ -220,10 +220,7 @@
   </head>
   <body>
     <section>
-      <a
-        class="backPreviousPage"
-        href="https://qrmenuarmenia.site/api/cafe/menu/get-menu"
-      >
+      <a class="backPreviousPage" href="/api/cafe/menu/get-menu">
         <img src="/api/static/icons/left-arrow.svg" alt="icon" />
       </a>
       <div class="container">
@@ -260,8 +257,20 @@
             <h2 id="tip_company_title">Tip to Menu</h2>
             <div class="tip-buttons">
               <div class="button-row">
-                <button class="tip-amount selected" data-amount="50" style="font-size: 18px">50</button>
-                <button class="tip-amount" data-amount="99" style="font-size: 18px">99</button>
+                <button
+                  class="tip-amount selected"
+                  data-amount="50"
+                  style="font-size: 18px"
+                >
+                  50
+                </button>
+                <button
+                  class="tip-amount"
+                  data-amount="99"
+                  style="font-size: 18px"
+                >
+                  99
+                </button>
               </div>
             </div>
           </div>
@@ -321,7 +330,7 @@
       backPreviousPageBtns.forEach((btn) => {
         btn.addEventListener("click", () => {
           // Real Link
-          window.location.href = `https://qrmenuarmenia.site/api/cafe/menu/get-menu`;
+          window.location.href = `/api/cafe/menu/get-menu`;
         });
       });
 
@@ -366,8 +375,7 @@
           });
 
           if (selectedTips.length > 0) {
-            window.location.href =
-              "https://qrmenuarmenia.site/api/cafe/menu/tip-payment-inform";
+            window.location.href = "/api/cafe/menu/tip-payment-inform";
           } else {
             alert("Please select at least one tip before submitting.");
           }
@@ -467,7 +475,7 @@
 
           if (!language_setter) {
             language_setter = "en";
-            localStorage.setItem('language', language_setter);
+            localStorage.setItem("language", language_setter);
           }
 
           document.getElementById("submit-tip").innerText =
@@ -489,9 +497,7 @@
         }
       }
 
-      document.addEventListener("DOMContentLoaded", function () {
-        defaultContentByLang();
-      });
+      document.addEventListener("DOMContentLoaded", defaultContentByLang);
     </script>
   </body>
 </html>

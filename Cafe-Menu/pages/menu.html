@@ -437,7 +437,7 @@
           <p class="footer_navbar_link">Menu</p>
         </a>
         <!-- Real Link -->
-        <a href="https://qrmenuarmenia.site/api/cafe/menu/tip">
+        <a href="/api/cafe/menu/tip">
           <img src="/api/static/icons/Tip.svg" alt="Tip" />
           <p class="footer_navbar_link">Tip</p>
         </a>
@@ -447,7 +447,7 @@
           <p class="footer_navbar_link">Tip</p>
         </a> -->
         <!-- Real Link -->
-        <a href="https://qrmenuarmenia.site/api/cafe/menu/feedback">
+        <a href="/api/cafe/menu/feedback">
           <img src="/api/static/icons/feed_back.svg" alt="feed_back" />
           <p class="footer_navbar_link">Feedback</p>
         </a>
@@ -619,7 +619,7 @@
       backPreviousPageBtns.forEach((btn) => {
         btn.addEventListener("click", () => {
           // Real Link
-          window.location.href = `https://qrmenuarmenia.site/api/${cafeIdIndex}`;
+          window.location.href = `/api/${cafeIdIndex}`;
         });
       });
 
@@ -731,8 +731,7 @@
 
               localStorage.setItem("aboutMeal", JSON.stringify(aboutMeal));
               // Real Link
-              window.location.href =
-                "https://qrmenuarmenia.site/api/cafe/menu/get-about-meal";
+              window.location.href = "/api/cafe/menu/get-about-meal";
 
               // Test Link
               // window.location.href = "./about-meal.html";

@@ -538,14 +538,8 @@
       const backHomePageBtn = document.querySelector(".backHomePage");
       // const orderLink = document.getElementById("orderLink");
       let imageUrl = "";
-      backPreviousPageBtn.setAttribute(
-        "href",
-        `https://qrmenuarmenia.site/api/cafe/menu/get-menu`
-      );
-      backHomePageBtn.setAttribute(
-        "href",
-        `https://qrmenuarmenia.site/api/${pageURLIndex}`
-      );
+      backPreviousPageBtn.setAttribute("href", `/api/cafe/menu/get-menu`);
+      backHomePageBtn.setAttribute("href", `/api/${pageURLIndex}`);
       // orderLink.setAttribute("href", "#");
       const mealName = document.getElementById("name");
       const mealPrice = document.getElementById("price");
