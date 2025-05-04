@@ -264,6 +264,13 @@
 
     <!-- Only the <script> section is shown with corrections -->
     <script>
+      let lang = localStorage.getItem("language");
+
+      if (!lang) {
+        lang = "en";
+        localStorage.setItem("language", lang);
+      }
+
       const terms_buttons = document.querySelectorAll(".terms");
       const copyright_text = document.getElementById("copyright_text");
       copyright_text.innerText = `© ${new Date().getFullYear()} Your Company. All rights reserved.`;
@@ -309,7 +316,6 @@
       });
 
       async function defaultPageLanguege() {
-        let lang = localStorage.getItem("language") || "en"; // fallback
         try {
           const response = await fetch("/api/data/get-index-json");
           const data = await response.json();
