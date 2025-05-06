@@ -83,7 +83,7 @@ def menu():
 # For Goldnsip
 @app.get("/goldnsip/home")
 def menu():
-    return FileResponse('../../build/index.html')
+    return FileResponse('../../GoldnsipFront/index.html')
 
 
 @app.get("/{id}")
