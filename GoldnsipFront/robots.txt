@@ -1,5 +1,4 @@
 # robots.txt
-# for testing
 
 # All user agents are allowed to access everything except for the specified directories
 User-agent: *
