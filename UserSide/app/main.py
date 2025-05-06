@@ -156,4 +156,10 @@ def user_get_term(term, lang):
         raise HTTPException(status_code=500)
 
 
+# For Goldnsip
+@app.get("/goldnsip")
+def menu():
+    return FileResponse('../../build/index.html')
+
+
 app.include_router(router)
