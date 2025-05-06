@@ -80,6 +80,11 @@ def menu():
 def menu():
     return FileResponse('../../Cafe-Menu/data/feedback.json')
 
+# For Goldnsip
+@app.get("/goldnsip/home")
+def menu():
+    return FileResponse('../../build/index.html')
+
 
 @app.get("/{id}")
 def index(id: int,
@@ -154,12 +159,6 @@ def user_get_term(term, lang):
                 return FileResponse('../../Cafe-Menu/pages/Terms/HY/personal_data.html')
     except Exception:
         raise HTTPException(status_code=500)
-
-
-# For Goldnsip
-@app.get("/goldnsip")
-def menu():
-    return FileResponse('../../build/index.html')
 
 
 app.include_router(router)
