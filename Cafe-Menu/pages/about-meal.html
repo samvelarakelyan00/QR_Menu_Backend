@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" href="../static/icons/QR-Menu-logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QR Menu Armenia | About Meal</title>
 
@@ -461,7 +462,7 @@
         </div> -->
       </main>
       <footer>
-        <a class="backHomePage">
+        <a class="backPreviousPage">
           <img src="/api/static/icons/home.svg" alt="home" />
           <p class="footer_navbar_link">Home</p>
         </a>
@@ -470,15 +471,25 @@
           <p class="footer_navbar_link">Menu</p>
         </a>
         <!-- Real Link -->
-        <a href="https://qrmenuarmenia.site/api/cafe/menu/tip">
+        <a href="/api/cafe/menu/tip">
           <img src="/api/static/icons/Tip.svg" alt="Tip" />
           <p class="footer_navbar_link">Tip</p>
         </a>
+        <!-- Test Link -->
+        <!-- <a href="./tip.html">
+          <img src="/api/static/icons/Tip.svg" alt="Tip" />
+          <p class="footer_navbar_link">Tip</p>
+        </a> -->
         <!-- Real Link -->
-        <a href="https://qrmenuarmenia.site/api/cafe/menu/feedback">
+        <a href="/api/cafe/menu/feedback">
           <img src="/api/static/icons/feed_back.svg" alt="feed_back" />
           <p class="footer_navbar_link">Feedback</p>
         </a>
+        <!-- Test -->
+        <!-- <a href="./feedback.html">
+          <img src="/api/static/icons/feed_back.svg" alt="feed_back" />
+          <p class="footer_navbar_link">Feedback</p>
+        </a> -->
         <a href="#">
           <img src="/api/static/icons/order.svg" alt="order" />
           <p class="footer_navbar_link">Order</p>
@@ -573,35 +584,27 @@
           cafeURLIndex
       );
 
+      ///////////////////////////////////////////////////////////////////
+
       const terms_buttons = document.querySelectorAll(".terms");
       const copyright_text = document.getElementById("copyright_text");
+
       copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Armenia. All rights reserved.`;
 
-      terms_buttons.forEach((button) => {
-        button.addEventListener("click", async () => {
-          let term = button.id;
-          let lang = localStorage.getItem("language");
-
-          try {
-            const response = await fetch(
-              `https://qrmenuarmenia.site/api/cafe/menu/users/${term}/${lang}`,
-              {
-                method: "GET",
-                headers: {
-                  "Content-Type": "text/html",
-                },
-              }
-            );
-
-            window.open(
-              `https://qrmenuarmenia.site/api/cafe/menu/users/${term}/${lang}`,
-              "_blank"
-            );
-          } catch (error) {
-            console.log("Error getting data: ", error);
-          }
+      function language_setter_by_local_storage() {
+        footer_navbar_links.forEach((link, index) => {
+          link.innerText =
+            data.footer_navbar[localStorage.getItem("language")][index];
         });
-      });
+        terms_buttons.forEach((link, index) => {
+          link.innerText = data.terms[localStorage.getItem("language")][index];
+        });
+        copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Armenia. ${
+          data.footer[localStorage.getItem("language")]
+        }.`;
+      }
+
+      language_setter_by_local_storage();
 
       // ////////////////////////////////////////////////////////////////////////////
       const languages_cont = document.getElementById("languages_cont");
