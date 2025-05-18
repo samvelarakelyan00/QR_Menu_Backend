@@ -584,36 +584,67 @@
           cafeURLIndex
       );
 
-      ///////////////////////////////////////////////////////////////////
-
+      const footer_navbar_links = document.querySelectorAll(
+        ".footer_navbar_link"
+      );
       const terms_buttons = document.querySelectorAll(".terms");
       const copyright_text = document.getElementById("copyright_text");
-
       copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Armenia. All rights reserved.`;
 
-      function language_setter_by_local_storage() {
-        footer_navbar_links.forEach((link, index) => {
-          link.innerText =
-            data.footer_navbar[localStorage.getItem("language")][index];
-        });
-        terms_buttons.forEach((link, index) => {
-          link.innerText = data.terms[localStorage.getItem("language")][index];
-        });
-        copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Armenia. ${
-          data.footer[localStorage.getItem("language")]
-        }.`;
+      async function translation_by_language() {
+        try {
+          const response = await fetch("../data/about-meal.json");
+          const data = await response.json();
+
+          footer_navbar_links.forEach((link, index) => {
+            link.innerText =
+              data.footer_navbar[localStorage.getItem("language")][index];
+          });
+
+          terms_buttons.forEach((term, index) => {
+            term.innerText =
+              data.terms[localStorage.getItem("language")][index];
+          });
+
+          copyright_text.innerText = `© ${new Date().getFullYear()} QR Menu Armenia. ${
+            data.footer[localStorage.getItem("language")]
+          }.`;
+        } catch (error) {
+          console.error("Error Fetching data: ", error);
+        }
       }
 
-      language_setter_by_local_storage();
+      terms_buttons.forEach((button) => {
+        button.addEventListener("click", async () => {
+          let term = button.id;
+          let lang = localStorage.getItem("language");
+
+          try {
+            const response = await fetch(
+              `https://qrmenuarmenia.site/api/cafe/menu/users/${term}/${lang}`,
+              {
+                method: "GET",
+                headers: {
+                  "Content-Type": "text/html",
+                },
+              }
+            );
+
+            window.open(
+              `https://qrmenuarmenia.site/api/cafe/menu/users/${term}/${lang}`,
+              "_blank"
+            );
+          } catch (error) {
+            console.log("Error getting data: ", error);
+          }
+        });
+      });
 
       // ////////////////////////////////////////////////////////////////////////////
       const languages_cont = document.getElementById("languages_cont");
       // const lang_btn = document.getElementById("lang_btn");
       const languages = document.querySelectorAll(".lang");
       const menu_title = document.getElementById("menuTitle");
-      const footer_navbar_links = document.querySelectorAll(
-        ".footer_navbar_link"
-      );
 
       // lang_btn.addEventListener("click", () => {
       //   if (languages_cont.className === "languages_enabled") {

@@ -252,6 +252,7 @@
 
       async function defaultPageLanguage() {
         try {
+          // const response = await fetch("./data/main.json");
           const response = await fetch("/api/data/get-main-json");
           const data = await response.json();
 
