@@ -593,7 +593,7 @@
 
       async function translation_by_language() {
         try {
-          const response = await fetch("../data/about-meal.json");
+          const response = await fetch("/api/data/get-about-meal-json");
           const data = await response.json();
 
           footer_navbar_links.forEach((link, index) => {
