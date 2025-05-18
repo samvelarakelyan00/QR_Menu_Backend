@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melody Cafe & Restaurant</title>
+    <style>
+        /* --- General Styles (Applied to both pages) --- */
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #181818;
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- Navigation Bar (Applied to both pages) --- */
+        nav {
+            background-color: #222;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #b35c32; /* Accent color */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #f0f0f0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #b35c32;
+        }
+
+        /* --- Footer (Applied to both pages) --- */
+        footer {
+            background-color: #222;
+            color: #ccc;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9em;
+        }
+
+        /* --- Homepage Styles --- */
+        .hero {
+            background-image: url('your-hero-image.jpg'); /* Replace with your image */
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #b35c32;
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #d4145a;
+        }
+
+        .body-content {
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .body-content h2 {
+            font-size: 2em;
+            color: #b35c32;
+            margin-bottom: 20px;
+        }
+
+        .body-content p {
+            font-size: 1.1em;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .feature h3 {
+            color: #f0f0f0;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: #bbb;
+        }
+
+        /* --- Order Online Page Styles --- */
+        .order-page-container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 8px;
+        }
+
+        .order-page-title {
+            color: #b35c32;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .order-page-category {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 20px;
+        }
+
+        .order-page-category h2 {
+            color: #f0f0f0;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .order-page-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed #555;
+        }
+
+        .order-page-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-page-item-details {
+            flex-grow: 1;
+            margin-right: 15px;
+        }
+
+        .order-page-item-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .order-page-item-description {
+            color: #bbb;
+            font-size: 0.9em;
+        }
+
+        .order-page-item-price {
+            color: #b35c32;
+            font-weight: bold;
+        }
+
+        .order-page-quantity-control {
+            display: flex;
+            align-items: center;
+        }
+
+        .order-page-quantity-control button {
+            background-color: #333;
+            color: #f0f0f0;
+            border: none;
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 1em;
+        }
+
+        .order-page-quantity-control input {
+            width: 40px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid #555;
+            background-color: #444;
+            color: #f0f0f0;
+            border-radius: 3px;
+        }
+
+        .order-page-add-to-cart {
+            background-color: #b35c32;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .order-page-add-to-cart:hover {
+            background-color: #d4145a;
+        }
+
+        .order-page-cart-summary {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 8px;
+        }
+
+        .order-page-cart-summary h2 {
+            color: #f0f0f0;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .order-page-cart-items {
+            list-style: none;
+            padding: 0;
+        }
+
+        .order-page-cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dashed #444;
+        }
+
+        .order-page-cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-page-cart-item-name {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        .order-page-cart-item-price {
+            color: #b35c32;
+            font-weight: bold;
+        }
+
+        .order-page-cart-total {
+            text-align: right;
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #f0f0f0;
+        }
+
+        .order-page-checkout-button {
+            display: block;
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .order-page-checkout-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* --- Basic Navigation (Optional - for standalone order.html) --- */
+        nav {
+            background-color: #222;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #b35c32;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 15px;
+        }
+
+        nav ul li a {
+            color: #f0f0f0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #b35c32;
+        }
+    </style>
+</head>
+<body>
+    <section id="home">
+        <nav>
+            <div class="container">
+                <div class="logo">Mushroom Cafe</div>
+                <ul>
+                    <li><a href="https://qrmenuarmenia.site/api/1">Menu</a></li>
+                    <li><a href="order.html">Order Online</a></li>
+                    <li><a href="reservations.html">Reservations</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#about">About Us</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <header class="hero">
+            <div class="hero-content">
+                <h1>Welcome to Mushroom Cafe</h1>
+                <p>Experience the finest flavors and a cozy atmosphere.</p>
+                <a href="https://qrmenuarmenia.site/api/1" class="button">View Our Menu</a>
+            </div>
+        </header>
+
+        <section class="body-content container">
+            <h2>Our Specialties</h2>
+            <p>Discover a delightful range of dishes prepared with passion and the freshest ingredients.</p>
+            <div class="features">
+                <div class="feature">
+                    <h3>Delicious Food</h3>
+                    <p>From savory appetizers to mouth-watering main courses.</p>
+                </div>
+                <div class="feature">
+                    <h3>Cozy Atmosphere</h3>
+                    <p>A perfect place to relax and enjoy your meal.</p>
+                </div>
+                <div class="feature">
+                    <h3>Friendly Service</h3>
+                    <p>Our team is dedicated to making your experience memorable.</p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <section id="order" class="order-page" style="display: none;">
+        <nav>
+            <div class="container">
+                <div class="logo">Melody Cafe</div>
+                <ul>
+                    <li><a href="home-page.html">Home</a></li>
+                    <li><a href="https://qrmenuarmenia.site/api/1">Menu</a></li>
+                    <li><a href="#">Reservations</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="order-page-container">
+            <h1 class="order-page-title">Order Online</h1>
+
+            <section class="order-page-category">
+                <h2>Pizzas</h2>
+                <div class="order-page-item">
+                    <div class="order-page-item-details">
+                        <div class="order-page-item-name">Margherita Pizza</div>
+                        <div class="order-page-item-description">Classic tomato sauce, mozzarella cheese, and basil.</div>
+                    </div>
+                    <span class="order-page-item-price">$12.99</span>
+                    <div class="order-page-quantity-control">
+                        <button>-</button>
+                        <input type="number" value="0" min="0">
+                        <button>+</button>
+                    </div>
+                    <button class="order-page-add-to-cart">Add to Cart</button>
+                </div>
+                <div class="order-page-item">
+                    <div class="order-page-item-details">
+                        <div class="order-page-item-name">Pepperoni Pizza</div>
+                        <div class="order-page-item-description">Tomato sauce, mozzarella cheese, and pepperoni slices.</div>
+                    </div>
+                    <span class="order-page-item-price">$14.99</span>
+                    <div class="order-page-quantity-control">
+                        <button>-</button>
+                        <input type="number" value="0" min="0">
+                        <button>+</button>
+                    </div>
+                    <button class="order-page-add-to-cart">Add to Cart</button>
+                </div>
+                </section>
+
+            <section class="order-page-category">
+                <h2>Burgers</h2>
+                <div class="order-page-item">
+                    <div class="order-page-item-details">
+                        <div class="order-page-item-name">Classic Burger</div>
+                        <div class="order-page-item-description">Beef patty, lettuce, tomato, onion, and special sauce.</div>
+                    </div>
+                    <span class="order-page-item-price">$9.99</span>
+                    <div class="order-page-quantity-control">
+                        <button>-</button>
+                        <input type="number" value="0" min="0">
+                        <button>+</button>
+                    </div>
+                    <button class="order-page-add-to-cart">Add to Cart</button>
+                </div>
+                </section>
+
+            <aside class="order-page-cart-summary">
+                <h2>Your Cart</h2>
+                <ul class="order-page-cart-items">
+                    </ul>
+                <div class="order-page-cart-total">
+                    Total: $0.00
+                </div>
+                <button class="order-page-checkout-button">Proceed to Checkout</button>
+            </aside>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Melody Cafe & Restaurant. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- JavaScript ---
+
+        const homeSection = document.getElementById('home');
+        const orderSection = document.getElementById('order');
+        const orderLinks = document.querySelectorAll('a[href="order.html"]');
+
+        // --- Page Navigation ---
+        function showSection(sectionId) {
+            homeSection.style.display = 'none';
+            orderSection.style.display = 'none';
+
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.style.display = 'block';
+            }
+        }
+
+        // Event listener for the "Order Online" link(s)
+        orderLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                showSection('order');
+            });
+        });
+
+        // --- Homepage - Smooth Scrolling ---
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => { // Changed selector
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // --- Order Online Page - Quantity Controls ---
+        if (orderSection) {
+            document.querySelectorAll('.order-page-quantity-control').forEach(control => {
+                const incrementButton = control.querySelector('button:last-child');
+                const decrementButton = control.querySelector('button:first-child');
+                const input = control.querySelector('input');
+
+                incrementButton.addEventListener('click', () => {
+                    input.value = parseInt(input.value) + 1;
+                });
+
+                decrementButton.addEventListener('click', () => {
+                    if (parseInt(input.value) > 0) {
+                        input.value = parseInt(input.value) - 1;
+                }
+                });
+            });
+
+            // --- Order Online Page - Add to Cart ---
+            document.querySelectorAll('.order-page-add-to-cart').forEach(button => {
+                button.addEventListener('click', () => {
+                    alert('Item added to cart (functionality not fully implemented)');
+                });
+            });
+        }
+
+        // Show the home section by default
+        showSection('home');
+    </script>
+</body>
+</html>

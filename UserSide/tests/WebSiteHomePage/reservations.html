@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservations - Melody Cafe</title>
+    <style>
+        /* --- General Styles (Applied to all pages) --- */
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #181818;
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- Navigation Bar (Applied to all pages) --- */
+        nav {
+            background-color: #222;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #b35c32;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #f0f0f0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #b35c32;
+        }
+
+        /* --- Footer (Applied to all pages) --- */
+        footer {
+            background-color: #222;
+            color: #ccc;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9em;
+        }
+
+        /* --- Reservations Page Styles --- */
+        .reservation-page-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #222;
+            border-radius: 8px;
+        }
+
+        .reservation-page-title {
+            color: #b35c32;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .reservation-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #f0f0f0;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #444;
+            color: #f0f0f0;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #b35c32;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvgxmlns='http://www.w3.org/2000/svg'viewBox='0 0 4 5'%3E%3Cpathfill='%23f0f0f0'd='M2 0L0 2h4z'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 8px 10px;
+            padding-right: 30px;
+        }
+
+        .reservation-button {
+            background-color: #b35c32;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+            align-self: center;
+            margin-top: 10px;
+        }
+
+        .reservation-button:hover {
+            background-color: #d4145a;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .message.success {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        .message.error {
+            background-color: #f44336;
+            color: #fff;
+        }
+        .time-select {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .time-select button{
+          background-color: #444;
+          color: #f0f0f0;
+          border: none;
+          padding: 10px 15px;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 1em;
+          transition: background-color 0.3s ease;
+          white-space: nowrap;
+        }
+        .time-select button:hover{
+            background-color: #b35c32;
+        }
+        .time-select button.selected{
+            background-color: #b35c32;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">Melody Cafe</div>
+            <ul>
+                <li><a href="home-page.html">Home</a></li>
+                <li><a href="order.html">Order Online</a></li>
+                <li><a href="https://qrmenuarmenia.site/api/1">Menu</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="reservation-page-container">
+        <h1 class="reservation-page-title">Make a Reservation</h1>
+
+        <form class="reservation-form" id="reservation-form">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="time">Time:</label>
+                <div class="time-select" id="time-select">
+                    </div>
+                <input type="hidden" name="time" id="selected-time">
+            </div>
+            <div class="form-group">
+                <label for="guests">Number of Guests:</label>
+                <select id="guests" name="guests" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6+">6+</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Special Requests:</label>
+                <textarea id="message" name="message" rows="4"></textarea>
+            </div>
+
+            <button type="submit" class="reservation-button">Make Reservation</button>
+        </form>
+
+        <div id="reservation-message" class="message" style="display: none;"></div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Melody Cafe & Restaurant. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- JavaScript ---
+        const reservationForm = document.getElementById('reservation-form');
+        const reservationMessage = document.getElementById('reservation-message');
+        const timeSelect = document.getElementById('time-select');
+        const selectedTimeInput = document.getElementById('selected-time');
+
+        const availableTimes = [
+            "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM",
+            "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM"
+        ];
+        function generateTimeButtons(){
+            timeSelect.innerHTML = '';
+            availableTimes.forEach(time => {
+                const button = document.createElement('button');
+                button.textContent = time;
+                button.addEventListener('click', () => {
+                    const selectedButtons = timeSelect.querySelectorAll('.selected');
+                    selectedButtons.forEach(b => b.classList.remove('selected'));
+                    button.classList.add('selected');
+                    selectedTimeInput.value = time;
+                });
+                timeSelect.appendChild(button);
+            })
+        }
+        generateTimeButtons();
+
+        reservationForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(reservationForm);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const phone = formData.get('phone');
+            const date = formData.get('date');
+            const time = formData.get('time');
+            const guests = formData.get('guests');
+            const message = formData.get('message');
+
+            // Basic validation (you should have more robust validation on the server)
+            if (!name || !email || !phone || !date || !time || !guests) {
+                displayMessage('Please fill in all required fields.', 'error');
+                return;
+            }
+
+            // Simulate sending data to a server (replace with actual AJAX/fetch)
+            setTimeout(() => {
+                // Simulate success or failure
+                const success = Math.random() < 0.8; // 80% chance of success
+
+                if (success) {
+                    displayMessage(`Thank you, ${name}! Your reservation for ${guests} guests is confirmed for ${date} at ${time}.`, 'success');
+                    reservationForm.reset();
+                    generateTimeButtons();
+                    selectedTimeInput.value = '';
+                } else {
+                    displayMessage('Sorry, there was an error processing your reservation. Please try again.', 'error');
+                }
+            }, 2000); // Simulate a 2-second delay
+        });
+
+        function displayMessage(text, type) {
+            reservationMessage.textContent = text;
+            reservationMessage.className = `message ${type}`;
+            reservationMessage.style.display = 'block';
+
+            // Clear the message after a few seconds
+            setTimeout(() => {
+                reservationMessage.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
