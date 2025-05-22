@@ -51,6 +51,26 @@ def get_cafe_website(id: int=1):
     return FileResponse('../../Cafe-Menu/WebSiteHomePage/home-page.html')
 
 
+@app.get("/cafe/website/{id}/orders/")
+def get_cafe_website(id: int=1):
+    return FileResponse('../../Cafe-Menu/WebSiteHomePage/order.html')
+
+
+@app.get("/cafe/website/{id}/reservations/")
+def get_cafe_website(id: int=1):
+    return FileResponse('../../Cafe-Menu/WebSiteHomePage/reservations.html')
+
+
+@app.get("/cafe/website/{id}/about-us")  # TODO
+def get_cafe_website(id: int=1):
+    return FileResponse('../../Cafe-Menu/WebSiteHomePage/home-page.html')
+
+
+@app.get("/cafe/website/{id}/contact-us")  # TODO
+def get_cafe_website(id: int=1):
+    return FileResponse('../../Cafe-Menu/WebSiteHomePage/home-page.html')
+
+
 @app.get("/data/get-index-json")
 def menu():
     return FileResponse('../../Cafe-Menu/data/index.json')
