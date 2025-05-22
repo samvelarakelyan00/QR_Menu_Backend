@@ -1,252 +1,302 @@
 <!DOCTYPE html>
 <html lang="en-GB">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Reservations - Melody Cafe</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #181818;
-      color: #f0f0f0;
-      line-height: 1.6;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    nav {
-      background-color: #222;
-      padding: 15px 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    nav .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      font-size: 1.5em;
-      font-weight: bold;
-      color: #b35c32;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      margin: 0;
-      padding: 0;
-    }
-    nav ul li {
-      margin-left: 20px;
-    }
-    nav ul li a {
-      color: #f0f0f0;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    nav ul li a:hover {
-      color: #b35c32;
-    }
-    footer {
-      background-color: #222;
-      color: #ccc;
-      text-align: center;
-      padding: 20px 0;
-      font-size: 0.9em;
-    }
-    .reservation-page-container {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 30px;
-      background-color: #222;
-      border-radius: 8px;
-    }
-    .reservation-page-title {
-      color: #b35c32;
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 2em;
-    }
-    .reservation-form {
-      display: flex;
-      flex-direction: column;
-    }
-    .form-group {
-      margin-bottom: 20px;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      color: #f0f0f0;
-      font-weight: bold;
-    }
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #555;
-      border-radius: 5px;
-      background-color: #444;
-      color: #f0f0f0;
-      font-size: 1em;
-      transition: border-color 0.3s ease;
-    }
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: #b35c32;
-    }
-    .form-group textarea {
-      resize: vertical;
-    }
-    .reservation-button {
-      background-color: #b35c32;
-      color: #fff;
-      border: none;
-      padding: 15px 30px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1.1em;
-      transition: background-color 0.3s ease;
-      align-self: center;
-      margin-top: 10px;
-    }
-    .reservation-button:hover {
-      background-color: #d4145a;
-    }
-    .message {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 5px;
-      text-align: center;
-      font-weight: bold;
-    }
-    .message.success {
-      background-color: #4caf50;
-      color: #fff;
-    }
-    .message.error {
-      background-color: #f44336;
-      color: #fff;
-    }
-  </style>
-</head>
-<body>
-  <nav>
-    <div class="container">
-      <div class="logo">Melody Cafe</div>
-      <ul>
-        <li><a href="https://qrmenuarmenia.site/api/cafe/website/1">Home</a></li>
-        <li><a href="https://qrmenuarmenia.site/api/cafe/website/1/orders/">Order Online</a></li>
-        <li><a href="https://qrmenuarmenia.site/api/1">Menu</a></li>
-        <li><a href="https://qrmenuarmenia.site/api/cafe/website/1">Contact Us</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <div class="reservation-page-container">
-    <h1 class="reservation-page-title">Make a Reservation</h1>
-
-    <form class="reservation-form" id="reservation-form">
-      <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required/>
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required/>
-      </div>
-
-      <div class="form-group">
-        <label for="phone">Phone:</label>
-        <input type="tel" id="phone" name="phone" required/>
-      </div>
-
-      <div class="form-group">
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date" required/>
-      </div>
-
-      <div class="form-group">
-        <label for="time">Time:</label>
-        <input type="time" id="time" name="time" required step="900" />
-        <!-- step="900" = 15 minute increments -->
-      </div>
-
-      <div class="form-group">
-        <label for="guests">Number of Guests:</label>
-        <select id="guests" name="guests" required>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6+">6+</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="message">Special Requests:</label>
-        <textarea id="message" name="message" rows="4"></textarea>
-      </div>
-
-      <button type="submit" class="reservation-button">Make Reservation</button>
-    </form>
-
-    <div id="reservation-message" class="message" style="display: none;"></div>
-  </div>
-
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 Melody Cafe & Restaurant. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script>
-    const reservationForm = document.getElementById('reservation-form');
-    const reservationMessage = document.getElementById('reservation-message');
-
-    reservationForm.addEventListener('submit', (event) => {
-      event.preventDefault();
-
-      const formData = new FormData(reservationForm);
-      const name = formData.get('name');
-      const email = formData.get('email');
-      const phone = formData.get('phone');
-      const date = formData.get('date');
-      const time = formData.get('time');
-      const guests = formData.get('guests');
-      const message = formData.get('message');
-
-      if (!name || !email || !phone || !date || !time || !guests) {
-        displayMessage('Please fill in all required fields.', 'error');
-        return;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservations - Melody Cafe</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #181818;
+        color: #f0f0f0;
+        line-height: 1.6;
       }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      nav {
+        background-color: #222;
+        padding: 15px 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      nav .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #b35c32;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+      }
+      nav ul li {
+        margin-left: 20px;
+      }
+      nav ul li a {
+        color: #f0f0f0;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      nav ul li a:hover {
+        color: #b35c32;
+      }
+      footer {
+        background-color: #222;
+        color: #ccc;
+        text-align: center;
+        padding: 20px 0;
+        font-size: 0.9em;
+      }
+      .reservation-page-container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 30px;
+        background-color: #222;
+        border-radius: 8px;
+      }
+      .reservation-page-title {
+        color: #b35c32;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2em;
+      }
+      .reservation-form {
+        display: flex;
+        flex-direction: column;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #f0f0f0;
+        font-weight: bold;
+      }
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #555;
+        border-radius: 5px;
+        background-color: #444;
+        color: #f0f0f0;
+        font-size: 1em;
+        transition: border-color 0.3s ease;
+      }
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: #b35c32;
+      }
+      .form-group textarea {
+        resize: vertical;
+      }
+      .reservation-button {
+        background-color: #b35c32;
+        color: #fff;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.1em;
+        transition: background-color 0.3s ease;
+        align-self: center;
+        margin-top: 10px;
+      }
+      .reservation-button:hover {
+        background-color: #d4145a;
+      }
+      .message {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+      }
+      .message.success {
+        background-color: #4caf50;
+        color: #fff;
+      }
+      .message.error {
+        background-color: #f44336;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="container">
+        <div class="logo">Melody Cafe</div>
+        <ul>
+          <li>
+            <a href="https://qrmenuarmenia.site/api/cafe/website/1">Home</a>
+          </li>
+          <li>
+            <a href="https://qrmenuarmenia.site/api/cafe/website/1/orders/"
+              >Order Online</a
+            >
+          </li>
+          <li><a href="https://qrmenuarmenia.site/api/1">Menu</a></li>
+          <li>
+            <a href="https://qrmenuarmenia.site/api/cafe/website/1"
+              >Contact Us</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-      // Simulate success response
-      setTimeout(() => {
-        displayMessage(`Thank you, ${name}! Your reservation for ${guests} guests is confirmed on ${date} at ${time}.`, 'success');
-        reservationForm.reset();
-      }, 1500);
-    });
+    <div class="reservation-page-container">
+      <h1 class="reservation-page-title">Make a Reservation</h1>
 
-    function displayMessage(text, type) {
-      reservationMessage.textContent = text;
-      reservationMessage.className = `message ${type}`;
-      reservationMessage.style.display = 'block';
+      <form class="reservation-form" id="reservation-form">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+        </div>
 
-      setTimeout(() => {
-        reservationMessage.style.display = 'none';
-      }, 5000);
-    }
-  </script>
-</body>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone:</label>
+          <input type="tel" id="phone" name="phone" required />
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date" required />
+        </div>
+
+        <div class="form-group">
+          <label for="time">Time:</label>
+          <input type="time" id="time" name="time" required step="900" />
+          <!-- step="900" = 15 minute increments -->
+        </div>
+
+        <div class="form-group">
+          <label for="guests">Number of Guests:</label>
+          <select id="guests" name="guests" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6+">6+</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Special Requests:</label>
+          <textarea id="message" name="message" rows="4"></textarea>
+        </div>
+
+        <button type="submit" class="reservation-button">
+          Make Reservation
+        </button>
+      </form>
+
+      <div id="reservation-message" class="message" style="display: none"></div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Melody Cafe & Restaurant. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      const reservationForm = document.getElementById("reservation-form");
+      const reservationMessage = document.getElementById("reservation-message");
+
+      reservationForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(reservationForm);
+        const name = formData.get("name");
+        const email = formData.get("email");
+        const phone = formData.get("phone");
+        const date = formData.get("date");
+        const time = "18:01:13.160Z";
+        const guests = formData.get("guests");
+        const message = formData.get("message");
+
+        if (!name || !email || !phone || !date || !time || !guests) {
+          displayMessage("Please fill in all required fields.", "error");
+          return;
+        }
+
+        const isoTime = new Date(`${date}T${time}`).toISOString();
+
+        const payload = {
+          name: name,
+          email: email,
+          phone: phone,
+          reserve_date: date,
+          reserve_time: isoTime,
+          guests_count: guests === "6+" ? 6 : parseInt(guests),
+          special_requests: message,
+        };
+
+        console.log("Sending payload:", payload); // 🔍 DEBUG LOG
+
+        fetch("https://qrmenuarmenia.site/api/api/cafe/reservations/1", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              return response.json().then((err) => {
+                throw new Error(JSON.stringify(err));
+              });
+            }
+            return response.json();
+          })
+          .then((data) => {
+            displayMessage(
+              `Thank you, ${name}! Your reservation for ${guests} guests is confirmed on ${date} at ${time}.`,
+              "success"
+            );
+            reservationForm.reset();
+          })
+          .catch((error) => {
+            console.error("Fetch error:", error); // 🔍 More info in dev tools
+            displayMessage(
+              "Sorry, there was a problem submitting your reservation. Please try again.",
+              "error"
+            );
+          });
+      });
+
+      function displayMessage(text, type) {
+        reservationMessage.textContent = text;
+        reservationMessage.className = `message ${type}`;
+        reservationMessage.style.display = "block";
+
+        setTimeout(() => {
+          reservationMessage.style.display = "none";
+        }, 5000);
+      }
+    </script>
+  </body>
 </html>
