@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Float, ForeignKey, TIMESTAMP, text, func, Boolean
+from sqlalchemy import Column, String, Integer, Float, ForeignKey, TIMESTAMP, text, func, Boolean, Date, Time
 
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -129,3 +129,21 @@ class TipViaIdramEndButtonInfoGet(Base):
     horeka_client_id = Column(Integer, ForeignKey("horekaclients.id"))
     horeka_tip_amount = Column(Float, nullable=False)
     menu_tip_amount = Column(Float, nullable=False)
+
+
+class Reservation(Base):
+    __tablename__ = "reservations"
+
+    id = Column(Integer, primary_key=True)
+
+    name = Column(String)
+    email = Column(String)
+    phone = Column(String)
+    reserve_date = Column(Date)
+    reserve_time = Column(Time)
+    guests_count = Column(Integer, server_default='1')
+    special_requests = Column(String, nullable=True)
+
+    created_at = Column(TIMESTAMP, nullable=False, server_default=text("now()"))
+
+    horeka_client_id = Column(Integer, ForeignKey("horekaclients.id"))

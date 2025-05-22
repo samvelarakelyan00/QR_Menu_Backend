@@ -2,7 +2,7 @@ from xmlrpc.client import Boolean
 
 from sqlalchemy import (
     Column, String, Integer, Float, Boolean,
-    ForeignKey, TIMESTAMP, text, func
+    ForeignKey, TIMESTAMP, text, func, Date, Time
 )
 
 from sqlalchemy.ext.declarative import declarative_base
@@ -118,3 +118,21 @@ class PaymentIDramUserBasicTip(Base):
     horeka_part = Column(Float, nullable=False)
     horeka_part_paid = Column(Boolean, nullable=False, server_default='false')
     waiter_id = Column(Integer, nullable=True)
+
+
+class Reservation(Base):
+    __tablename__ = "reservations"
+
+    id = Column(Integer, primary_key=True)
+
+    name = Column(String)
+    email = Column(String)
+    phone = Column(String)
+    reserve_date = Column(Date)
+    reserve_time = Column(Time)
+    guests_count = Column(Integer, server_default='1')
+    special_requests = Column(String, nullable=True)
+
+    created_at = Column(TIMESTAMP, nullable=False, server_default=text("now()"))
+
+    horeka_client_id = Column(Integer, ForeignKey("horekaclients.id"))
