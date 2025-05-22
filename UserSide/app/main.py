@@ -46,6 +46,11 @@ def menu():
     return FileResponse('../../Cafe-Menu/data/main.json')
 
 
+@app.get("/cafe/website/{id}")
+def get_cafe_website(id: int=1):
+    return FileResponse('../../Cafe-Menu/WebSiteHomePage/home-page.html')
+
+
 @app.get("/data/get-index-json")
 def menu():
     return FileResponse('../../Cafe-Menu/data/index.json')
@@ -79,11 +84,6 @@ def menu():
 @app.get("/data/get-feedback-json")
 def menu():
     return FileResponse('../../Cafe-Menu/data/feedback.json')
-
-# For Goldnsip
-@app.get("/goldnsip/home")
-def menu():
-    return FileResponse('../../GoldnsipFront/index.html')
 
 
 @app.get("/{id}")
