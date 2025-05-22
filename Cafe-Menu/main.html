@@ -38,18 +38,47 @@
             color: #f5f5ff;
           }
 
-          a {
-            padding: 6px 16px;
-            color: #f5f5ff;
-            text-decoration: none;
-            border: 1px solid orange;
-            border-radius: 6px;
-            transition: all 0.1s linear;
-            font-size: 18px;
+          .menu_example {
+            width: 280px;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
 
-            &:hover {
-              background-color: orange;
-              color: black;
+            .header {
+              border: 6px ridge #b35c32;
+              padding: 8px 12px;
+
+              h1 {
+                cursor: pointer;
+              }
+
+              img {
+                width: 220px;
+                height: 110px;
+                cursor: pointer;
+              }
+            }
+
+            button {
+              top: 110%;
+              padding: 6px 12px;
+              font-size: 16px;
+              border-radius: 6px;
+              background-color: transparent;
+              color: white;
+              border: 2px solid #b35c32;
+              cursor: pointer;
+              transition: all linear 0.1s;
+
+              &:hover {
+                scale: 1.05;
+                background-color: #b35c32;
+                color: azure;
+                filter: drop-shadow(0px 0px 4px azure);
+              }
             }
           }
         }
@@ -147,12 +176,17 @@
     <div class="container">
       <div class="header">
         <h1>QR Menu Armenia</h1>
-        <!-- Real Link -->
-        <a href="https://www.qrmenuarmenia.site/api/1" id="go_menu_example_btn">
-          Menu Example
-        </a>
-        <!-- Test Link -->
-        <!-- <a href="./index.html" id="go_menu_example_btn">Menu Example</a> -->
+        <div class="menu_example">
+          <div class="header">
+            <img
+              src="/api/static/images/sitehome.png"
+              alt="img 1"
+              class="cafe_website_link"
+            />
+            <h1 class="title cafe_website_link">Mushroom</h1>
+          </div>
+          <button class="cafe_website_link">Go To Website</button>
+        </div>
       </div>
 
       <div class="footer_content">
@@ -271,6 +305,18 @@
       }
 
       defaultPageLanguage();
+
+      const horeca_website_box =
+        document.querySelectorAll(".cafe_website_link");
+
+      horeca_website_box.forEach((box) => {
+        box.addEventListener("click", () => {
+          window.open(
+            "https://qrmenuarmenia.site/api/cafe/website/1",
+            "_blank"
+          );
+        });
+      });
 
       terms_buttons.forEach((button) => {
         button.addEventListener("click", async () => {

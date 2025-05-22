@@ -95,22 +95,6 @@ async def add_menu_new(
         )
 
 
-@router.post("/get-image")
-async def get_image(product_image_get_data: ProductImageGet,
-                    current_admin=Depends(cafe_admin_auth_service.get_current_admin)):
-    kind = product_image_get_data.kind
-    category = product_image_get_data.category
-    filename = product_image_get_data.filename
-    file_path = os.path.abspath(os.path.join(os.getcwd(), "..", "..", ".."))
-    file_path = os.path.join(f"{file_path}/{kind}/{category}", filename)
-    print(file_path)
-
-    if not os.path.exists(file_path):
-        raise HTTPException(status_code=404, detail="Image not found")
-
-    return FileResponse(file_path)
-
-
 @router.get("/all-menu")
 def get_all_menu(menu_crud_service: menuCRUD_service.MenuCRUDService = Depends(),
                  current_admin=Depends(cafe_admin_auth_service.get_current_admin)):

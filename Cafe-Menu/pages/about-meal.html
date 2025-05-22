@@ -546,11 +546,11 @@
       const parsedLocalData = JSON.parse(localStorage.getItem("aboutMeal"));
       const pageURLIndex = localStorage.getItem("cafeIdIndex");
       const backPreviousPageBtn = document.querySelector(".backPreviousPage");
-      const backHomePageBtn = document.querySelector(".backHomePage");
+      // const backHomePageBtn = document.querySelector(".backHomePage");
       // const orderLink = document.getElementById("orderLink");
       let imageUrl = "";
       backPreviousPageBtn.setAttribute("href", `/api/cafe/menu/get-menu`);
-      backHomePageBtn.setAttribute("href", `/api/${pageURLIndex}`);
+      // backHomePageBtn.setAttribute("href", `/api/${pageURLIndex}`);
       // orderLink.setAttribute("href", "#");
       const mealName = document.getElementById("name");
       const mealPrice = document.getElementById("price");
