@@ -1,4 +1,5 @@
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, TIMESTAMP, text, func, Boolean, Date, Time
+from sqlalchemy.dialects.postgresql import ARRAY
 
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -172,3 +173,14 @@ class Reservation(Base):
     created_at = Column(TIMESTAMP, nullable=False, server_default=text("now()"))
 
     horeka_client_id = Column(Integer, ForeignKey("horekaclients.id"))
+
+
+class TermText(Base):
+    __tablename__  = "terms_texts"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    term_kind = Column(String(128))
+    language = Column(String(2))
+    title = Column(String, nullable=True)
+    sections = Column(ARRAY(String))
