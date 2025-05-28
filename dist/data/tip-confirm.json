@@ -1,0 +1,22 @@
+{
+  "tip_title": {
+    "en": "Tip Confirmation",
+    "ru": "Подтверждение Чаевых",
+    "hy": "Թեյավճարի Հաստատում"
+  },
+  "title_idram": {
+    "en": "Tip Payment via Idram",
+    "ru": "Оплата чаевых через Idram",
+    "hy": "Թեյավճարի վճարում Idram-ով"
+  },
+  "title_card": {
+    "en": "Tip Payment via Card",
+    "ru": "Оплата чаевых через Карту",
+    "hy": "Թեյավճարի վճարում Քարտով"
+  },
+  "pay_now_btn": {
+    "en": "Pay Now",
+    "ru": "Оплатить Сейчас",
+    "hy": "Վճարել Հիմա"
+  }
+}

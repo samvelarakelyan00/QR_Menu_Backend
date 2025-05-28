@@ -182,5 +182,6 @@ class TermText(Base):
 
     term_kind = Column(String(128))
     language = Column(String(2))
-    title = Column(String, nullable=True)
+    title = Column(String)
+    pre_section = Column(String, nullable=True)
     sections = Column(ARRAY(String))

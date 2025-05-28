@@ -36,9 +36,10 @@ async def get_docs():
 
 
 
-@app.get("/")
-def menu():
-    return FileResponse('../../Cafe-Menu/main.html')
+# @app.get("/")
+# def menu():
+#     # return FileResponse('../../Cafe-Menu/main.html')
+#     return "OK"
 
 
 @app.get("/data/get-main-json")

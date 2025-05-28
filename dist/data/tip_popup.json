@@ -1,0 +1,17 @@
+{
+  "title_message": {
+    "en": "Tip functionality is not available for now.",
+    "ru": "Функция чаевых пока недоступна.",
+    "hy": "Թեյավճարի գործառույթը դեռ հասանելի չէ։"
+  },
+  "dev_message": {
+    "en": "We truly appreciate your kindness and willingness to support the team.",
+    "ru": "Мы очень ценим вашу доброту и готовность поддержать команду.",
+    "hy": "Մենք իսկապես գնահատում ենք Ձեր բարությունը և թիմին աջակցելու պատրաստակամությունը։"
+  },
+  "close_btn": {
+    "en": "Close",
+    "ru": "Закрыть",
+    "hy": "Փակել"
+  }
+}

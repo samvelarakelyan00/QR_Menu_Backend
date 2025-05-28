@@ -1,0 +1,68 @@
+{
+  "button": {
+    "en": "Menu Example",
+    "ru": "Пример Меню",
+    "hy": "Մենյուի Օրինակ"
+  },
+  "terms": {
+    "en": [
+      {
+        "content": "Privacy Policy",
+        "type": "privacy_policy"
+      },
+      {
+        "content": "Cancellation Policy",
+        "type": "cancellation_policy"
+      },
+      {
+        "content": "Terms of Use",
+        "type": "terms_of_use"
+      },
+      {
+        "content": "Personal Data",
+        "type": "personal_data"
+      }
+    ],
+    "ru": [
+      {
+        "content": "Политика Конфиденциальности",
+        "type": "privacy_policy"
+      },
+      {
+        "content": "Политика Отмены",
+        "type": "cancellation_policy"
+      },
+      {
+        "content": "Правила Использования",
+        "type": "terms_of_use"
+      },
+      {
+        "content": "Персональные Данные",
+        "type": "personal_data"
+      }
+    ],
+    "hy": [
+      {
+        "content": "Գաղտնիության Քաղաքականություն",
+        "type": "privacy_policy"
+      },
+      {
+        "content": "Չեղարկման Քաղաքականություն",
+        "type": "cancellation_policy"
+      },
+      {
+        "content": "Օգտագործման Պայմաններ",
+        "type": "terms_of_use"
+      },
+      {
+        "content": "Անձնական Տվյալներ",
+        "type": "personal_data"
+      }
+    ]
+  },
+  "footer": {
+    "en": "All right reserved",
+    "ru": "Все права защищены",
+    "hy": "Բոլոր իրավունքները պաշտպանված են"
+  }
+}

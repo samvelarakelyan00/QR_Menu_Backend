@@ -1,0 +1,51 @@
+{
+  "title": {
+    "en": "Menu",
+    "ru": "Меню",
+    "hy": "Մենյու"
+  },
+  "kinds": {
+    "en": [
+      { "content": "Food", "kind": "food" },
+      { "content": "Salad", "kind": "salad" },
+      { "content": "Drink", "kind": "drink" },
+      { "content": "Dessert", "kind": "dessert" }
+    ],
+    "ru": [
+      { "content": "Еда", "kind": "food" },
+      { "content": "Салат", "kind": "salad" },
+      { "content": "Напиток", "kind": "drink" },
+      { "content": "Десерт", "kind": "dessert" }
+    ],
+
+    "hy": [
+      { "content": "Ուտելիք", "kind": "food" },
+      { "content": "Աղցան", "kind": "salad" },
+      { "content": "Խմիչք", "kind": "drink" },
+      { "content": "Աղանդեր", "kind": "dessert" }
+    ]
+  },
+  "footer_navbar": {
+    "en": [
+      { "content": "Home", "url": "/index" },
+      { "content": "Menu", "url": "/menu" },
+      { "content": "Tip", "url": "/menu/tip" },
+      { "content": "Feedback", "url": "/menu/feedback" },
+      { "content": "Order", "url": "/menu/order" }
+    ],
+    "ru": [
+      { "content": "Главная", "url": "/index" },
+      { "content": "Меню", "url": "/menu" },
+      { "content": "Чаевые", "url": "/menu/tip" },
+      { "content": "Обратная связь", "url": "/menu/feedback" },
+      { "content": "Заказ", "url": "/menu/order" }
+    ],
+    "hy": [
+      { "content": "Գլխավոր", "url": "/index" },
+      { "content": "Մենյու", "url": "/menu" },
+      { "content": "Թեյավճար", "url": "/menu/tip" },
+      { "content": "Հետադարձ կապ", "url": "/menu/feedback" },
+      { "content": "Պատվեր", "url": "/menu/order" }
+    ]
+  }
+}
