@@ -1,8 +1,8 @@
-"""new table for terms texts store
+"""generate terms_text table
 
-Revision ID: a6697d86560d
+Revision ID: a2b6bd6a9201
 Revises: 2133634831ab
-Create Date: 2025-05-28 16:33:22.505483
+Create Date: 2025-05-29 12:09:56.758826
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
-revision: str = 'a6697d86560d'
+revision: str = 'a2b6bd6a9201'
 down_revision: Union[str, None] = '2133634831ab'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -26,6 +26,7 @@ def upgrade() -> None:
     sa.Column('term_kind', sa.String(length=128), nullable=True),
     sa.Column('language', sa.String(length=2), nullable=True),
     sa.Column('title', sa.String(), nullable=True),
+    sa.Column('pre_section', sa.String(), nullable=True),
     sa.Column('sections', postgresql.ARRAY(sa.String()), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )

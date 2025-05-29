@@ -6,7 +6,7 @@ class TermCreateSchema(BaseModel):
     term_kind: str
     language: str
     title: str
-    pre_section: str
+    pre_section: None | str = None
     sections: List[str]
 
     class Config:

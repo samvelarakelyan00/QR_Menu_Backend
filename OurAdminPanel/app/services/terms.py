@@ -27,11 +27,12 @@ class TermsServiceCRUD:
     def __init__(self, session: Session = Depends(get_session)):
         self.session = session
 
-    def create_horeka_client(self, term_create_data: TermCreateSchema):
+    def create_term(self, term_create_data: TermCreateSchema):
         try:
-            new_horeka_client = models.TermText(**term_create_data.dict())
+            new_term = models.TermText(**term_create_data.dict())
+            print(new_term.__dict__)
 
-            self.session.add(new_horeka_client)
+            self.session.add(new_term)
             self.session.commit()
 
             return "OK"

@@ -18,7 +18,7 @@ router = APIRouter(
 
 @router.post("/add-term")
 def add_term(term_create_data: TermCreateSchema,
-          service: terms_curd_service.TermsServiceCRUD = Depends(),
-          current_admin=Depends(admin_auth_service.get_current_admin)):
+             service: terms_curd_service.TermsServiceCRUD = Depends(),
+          ):  # current_admin=Depends(admin_auth_service.get_current_admin)
 
-    return service.create_horeka_client(term_create_data)
+    return service.create_term(term_create_data)
