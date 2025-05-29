@@ -19,6 +19,15 @@ router = APIRouter(
 @router.post("/add-term")
 def add_term(term_create_data: TermCreateSchema,
              service: terms_curd_service.TermsServiceCRUD = Depends(),
-          ):  # current_admin=Depends(admin_auth_service.get_current_admin)
+             current_admin=Depends(admin_auth_service.get_current_admin)):
 
     return service.create_term(term_create_data)
+
+
+@router.get("/term/by-lang/by-kind/{lang}/{kind}")
+def add_term(lang: str,
+             kind: str,
+             service: terms_curd_service.TermsServiceCRUD = Depends(),
+             current_admin=Depends(admin_auth_service.get_current_admin)):
+
+    return service.get_term(lang, kind)
