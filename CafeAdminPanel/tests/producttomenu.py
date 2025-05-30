@@ -29,22 +29,22 @@ def add_menu_new(url: str, form_data: dict, file_path: str = "", token: str=""):
 
 
 # localhost url
-# url = "http://127.0.0.1:8080/api/menuCRUD/add-menu-new"
+url = "http://127.0.0.1:8080/api/menuCRUD/add-menu-new"
 
 # localhost token
-# auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDE2ODg3MjgsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJ0bWJsIEFybWVuIiwiZW1haWwiOiJ0bWJsQGdtYWlsLmNvbSIsImhvcmVrYWNsaWVudF9pZCI6MX19.5gpBnEZ876lw4p4DZ3dC-BUlxkqghyXTG-ZAicaFk88"
+auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDg2OTI1NDUsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJ0bWJsIEFybWVuIiwiZW1haWwiOiJ0bWJsQGdtYWlsLmNvbSIsImhvcmVrYWNsaWVudF9pZCI6MX19.g-1MzneiMXDw5-woYQhkyvUglprMvs9iC8Fz9Lq2KIk"
 
 # aws test ec2 url
 
-url = "https://qrmenuarmenia.site/api/cafeadmin/api/menuCRUD/add-menu-new"
+# url = "https://qrmenuarmenia.site/api/cafeadmin/api/menuCRUD/add-menu-new"
 
-auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDU0ODc4MTcsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJtZWxvZHlfYWRtaW4iLCJlbWFpbCI6Im1lbG9keUBnbWFpbC5jb20iLCJob3Jla2FjbGllbnRfaWQiOjF9fQ.6M6mjS0j4L9MQ00zhQGRmd7JcrDRRH48t2aqlh43V0Y"
+# auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDg2OTI1NDUsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJ0bWJsIEFybWVuIiwiZW1haWwiOiJ0bWJsQGdtYWlsLmNvbSIsImhvcmVrYWNsaWVudF9pZCI6MX19.g-1MzneiMXDw5-woYQhkyvUglprMvs9iC8Fz9Lq2KIk"
 # aws test ec2 token
 # auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDE2OTA2OTIsImNhZmVfYWRtaW4iOnsiaWQiOjEsIm5hbWUiOiJtZWxvZHlfYWRtaW4iLCJlbWFpbCI6Im1lbG9keUBnbWFpbC5jb20iLCJob3Jla2FjbGllbnRfaWQiOjF9fQ.OUxhvrgyU1Evfy0AoMM0C52hrMbqIXPN2B-0iHQEMeg"
 
 image_directory = "../../../../images"
 
-for form_data in datalist_ru:
+for form_data in datalist_hy:
     # Construct full image file path
     image_path = os.path.join(f"{image_directory}/{form_data.get('kind')}/{form_data.get('category')}/", form_data["image"])
 

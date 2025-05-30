@@ -13,6 +13,19 @@ router = APIRouter(
 )
 
 
+@router.get("/all/by-lang/{lang}")
+def get_all_menu_by_lang(lang: str,
+                     menu_crud_service: menu_filter_service.MenuFilterService = Depends(),
+                     current_admin=Depends(cafe_admin_auth_service.get_current_admin)):
+
+    try:
+        horekaclient_id = current_admin.__dict__.get("horekaclient_id")
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    return menu_crud_service.get_all_menu_by_lang(horekaclient_id, lang)
+
+
 @router.get("/by-product-id/{product_id}")
 def get_menu_by_product_id(product_id: int,
                      menu_crud_service: menu_filter_service.MenuFilterService = Depends(),
@@ -20,29 +33,24 @@ def get_menu_by_product_id(product_id: int,
 
     try:
         horekaclient_id = current_admin.__dict__.get("horekaclient_id")
-    except Exception as err:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=err
-        )
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     return menu_crud_service.get_menu_by_product_id(horekaclient_id, product_id)
 
 
-@router.get("/by-kind/{kind}")
+@router.get("/by-kind/by-lang/{kind}/{lang}")
 def get_menu_by_kind(kind: str,
+                     lang: str,
                      menu_crud_service: menu_filter_service.MenuFilterService = Depends(),
                      current_admin=Depends(cafe_admin_auth_service.get_current_admin)):
 
     try:
         horekaclient_id = current_admin.__dict__.get("horekaclient_id")
-    except Exception as err:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=err
-        )
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    return menu_crud_service.get_menu_by_kind(horekaclient_id, kind)
+    return menu_crud_service.get_menu_by_kind_lang(horekaclient_id, kind, lang)
 
 
 @router.get("/get-menu-all-kinds")
@@ -51,11 +59,8 @@ def get_menu_all_kinds(
                 current_admin=Depends(cafe_admin_auth_service.get_current_admin)):
     try:
         horekaclient_id = current_admin.__dict__.get("horekaclient_id")
-    except Exception as err:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=err
-        )
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     return menu_filter_service.get_menu_all_kinds(horekaclient_id)
 
@@ -67,10 +72,7 @@ def get_menu_all_categories(
                 current_admin=Depends(cafe_admin_auth_service.get_current_admin)):
     try:
         horekaclient_id = current_admin.__dict__.get("horekaclient_id")
-    except Exception as err:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=err
-        )
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     return menu_filter_service.get_menu_all_categories(horekaclient_id, kind)

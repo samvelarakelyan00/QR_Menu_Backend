@@ -77,7 +77,6 @@ class MenuCRUDService:
 
         try:
             update_data = product_update_data.dict(exclude_unset=True)  # Exclude fields that were not provided
-            print(update_data)
 
             for key, value in update_data.items():
                 setattr(product, key, value)  # Dynamically update the model attributes

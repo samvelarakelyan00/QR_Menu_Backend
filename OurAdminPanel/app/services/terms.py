@@ -41,21 +41,3 @@ class TermsServiceCRUD:
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail=str(err)
             )
-
-    def get_term(self, lang: str, kind: str):
-        try:
-            term_data = (self.session.query(models.TermText)
-                         .filter(models.TermText.language==lang, models.TermText.term_kind==kind)
-                         .first())
-        except Exception as err:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=str(err)
-            )
-
-        if term_data is None:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND
-            )
-
-        return term_data

@@ -31,9 +31,11 @@ for term in data:
 
 # API endpoint
 url = "http://127.0.0.1:8888/api/termsCRUD/add-term"
+url = "https://qrmenuarmenia.site/api/admin/api/termsCRUD/add-term"
 
 # Your Bearer token
 token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDg1OTU1NzIsImFkbWluIjp7ImlkIjoxLCJuYW1lIjoiU2FtdmVsIiwiZW1haWwiOiJzYW12ZWwuYXJha2VseWFuMDBAZ21haWwuY29tIn19.-_y9Z5yJCsBF4HXZ3Y4sJuoOJsf6aNlPCqVWgl6xU3k"
+token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDg2MDAyMjcsImFkbWluIjp7ImlkIjoxLCJuYW1lIjoiU2FtdmVsIiwiZW1haWwiOiJzYW12ZWwuYXJha2VseWFuMDBAZ21haWwuY29tIn19.YcClIlY60nAi-7Pf8hFhJ-ua3I-dEsCTIvrJWdKDV5E"
 
 # Headers with authorization
 headers = {
@@ -43,8 +45,8 @@ headers = {
 
 # Send POST request
 
-for term in terms_list:
-    response = requests.post(url, headers=headers, json=term)
-
-    # Print the response
-    print("Status Code:", response.status_code)
+# for term in terms_list:
+#     response = requests.post(url, headers=headers, json=term)
+#
+#     # Print the response
+#     print("Status Code:", response.status_code)

@@ -20,7 +20,7 @@ router = APIRouter(
 
 
 @router.get("/by-horekaclient-id/{horekaclient_id}", response_model=HoReKaClientResponse)
-def get_menu_by_product_id(horekaclient_id: int,
+def get_horeka_by_id(horekaclient_id: int,
                            menu_fileter_service: menu_filter_service.MenuFilterService = Depends()
                            ):
 
@@ -33,20 +33,6 @@ def get_all_menu(horekaclient_id: int,
                  menu_fileter_service: menu_filter_service.MenuFilterService = Depends()):
 
     return menu_fileter_service.get_all_menu(horekaclient_id, lang)
-
-
-@router.post("/get-image")
-async def get_image(product_image_get_data: ProductImageGet):
-    kind = product_image_get_data.kind
-    category = product_image_get_data.category
-    filename = product_image_get_data.filename
-    file_path = os.path.abspath(os.path.join(os.getcwd(), "..", "..", ".."))
-    file_path = os.path.join(f"{file_path}/{kind}/{category}", filename)
-
-    if not os.path.exists(file_path):
-        raise HTTPException(status_code=404, detail="Image not found")
-
-    return FileResponse(file_path)
 
 
 @router.get("/by-product-id/{product_id}")
