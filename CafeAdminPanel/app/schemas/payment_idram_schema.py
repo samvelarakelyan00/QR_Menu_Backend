@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field, condecimal
 from typing import Optional
 
 
-class PaymentIDramInitiationSchema(BaseModel):
+class PaymentIDramInitiationSchemaSubsPlan(BaseModel):
     EDP_LANGUAGE: str = Field(..., description="Language for Idram interface")
     EDP_REC_ACCOUNT: str = Field(..., description="Idram ID of the merchant")
     EDP_DESCRIPTION: str = Field(..., description="Description of the product or service")
@@ -10,7 +10,8 @@ class PaymentIDramInitiationSchema(BaseModel):
     # EDP_BILL_NO: str = Field(..., description="Bill ID according to merchant's accounting system")
     EDP_EMAIL: Optional[str] = Field(None, description="Email address for payment confirmation notifications")
     REQUIRED_PAYMENT_AMOUNT: float = 4800.00
-    EDP_SUBS_PLAN: str = 'first'
+    EDP_SUBS_PLAN: Optional[str] = 'first'
+    HoReKaClientId: int
 
 
 
@@ -25,7 +26,7 @@ class PaymentIDramStatusUpdateSchema(BaseModel):
     status: str = Field(..., description="New status of the payment")
 
 
-class StartPaymentIDramResponseSchema(BaseModel):
+class StartPaymentIDramResponseSchemaHoReKaSubsPlan(BaseModel):
     payment_url: str
     order_id: int
     status: str

@@ -84,7 +84,7 @@ class Payment(Base):
     status = Column(String)  # Payment status (e.g., "pending", "paid", "failed", etc.)
     created_at = Column(TIMESTAMP, nullable=False, default=func.now() + text("Interval '4 hours'"))
     updated_at = Column(TIMESTAMP, nullable=False, default=func.now() + text("Interval '4 hours'"),
-                        onupdate=func.now() + text("Interval '4 hours'"))
+                                                   onupdate=func.now() + text("Interval '4 hours'"))
     available_to = Column(TIMESTAMP, nullable=False, default=func.now()
                                                              + text("Interval '4 hours'")
                                                              + text("Interval '31 days'"))
