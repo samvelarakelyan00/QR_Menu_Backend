@@ -49,33 +49,35 @@ class CheckHoReCaSubsPlanService:
 
         return horeka_admin
 
+    def get_horeca_admin_last_payment(self, horeca_admin_id: int):
+        horeca_admin = self.find_horeka_admin(horeca_admin_id)
+
+        try:
+            horeca_client_id = horeca_admin.__dict__.get("horekaclient_id")
+        except Exception:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        try:
+            last_payment = (self.session.query(models.Payment)
+                            .filter(and_(models.Payment.horeka_client_id == horeca_client_id,
+                                         models.Payment.status == 'paid'))
+                            .order_by(desc(models.Payment.updated_at))
+                            .first())
+        except Exception:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        return last_payment
+
+# ===========================   TODO payment statrt order_id 10+ got error   =========================================
+
+
 
 # class IDramPaymentService: # TODO
 #     def __init__(self, session: Session = Depends(get_session)):
 #         self.session = session
 #
 
-#     def get_horeka_admin_last_payment(self, horeka_admin_id: int):
-#         try:
-#             horeka_admin = self.find_horeka_admin(horeka_admin_id)
-#             horeka_client_id = horeka_admin.__dict__.get("horekaclient_id")
-#         except Exception as err:
-#             raise HTTPException(
-#                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-#                 detail=str(err)
-#             )
-#         try:
-#             last_payment = (self.session.query(models.PaymentIDram)
-#                             .filter(and_(models.PaymentIDram.horeka_client_id == horeka_client_id, models.PaymentIDram.status == 'paid'))
-#                             .order_by(desc(models.PaymentIDram.updated_at))
-#                             .first())
-#         except Exception as err:
-#             raise HTTPException(
-#                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-#                 detail=str(err)
-#             )
-#
-#         return last_payment
+
 #     #
 #     # def check_user_payment(self, user_id):
 #     #     try:
