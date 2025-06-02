@@ -1,9 +1,8 @@
 import hashlib
 
-# FastAPI
-from fastapi import status, Depends, Form
 from fastapi.exceptions import HTTPException
 from fastapi.responses import FileResponse, PlainTextResponse
+from fastapi import status, Depends, Form
 
 # SqlAlchemy
 from sqlalchemy import func
@@ -11,11 +10,11 @@ from sqlalchemy.orm.session import Session
 
 # Own
 from schemas.payment_idram_schema import (
-    PaymentIDramInitiationSchemaUserBasicTip,
-    PaymentIDramStatusSchemaUserBasicTip,
-    PaymentIDramStatusUpdateSchemaUserBasicTip,
-    StartPaymentIDramResponseSchemaUserBasicTip,
-    PaymentIDramResultSchemaUserBasicTip
+    PaymentIDramInitiationSchemaSubsPlan,
+    PaymentIDramStatusSchema,
+    PaymentIDramStatusUpdateSchema,
+    StartPaymentIDramResponseSchemaHoReKaSubsPlan,
+    PaymentIDramResultSchema
 )
 
 from database import get_session
@@ -30,29 +29,34 @@ CORS_HEADERS = {
     "Access-Control-Max-Age": "3600"
 }
 
-SECRET_KEY = "7saWDJZkFmaJ4elKoClpDJsi3w8gBUTdzDUKJ6"
+SECRET_KEY = "secret1234"
 
 
-class IDramPaymentServiceUserBasicTip:
+class IDramPaymentServiceHoReKaSubsPlan:
+    @staticmethod
+    def payment_success():
+        return FileResponse("./templates/success.html")
+
+    @staticmethod
+    def payment_fail():
+        return FileResponse("./templates/fail.html")
+
     def __init__(self, session: Session = Depends(get_session)):
         self.session = session
 
     def get_next_order_id(self):
-        max_order_id = self.session.query(func.max(models.PaymentIDramUserBasicTip.order_id)).scalar()
+        max_order_id = self.session.query(func.max(models.Payment.order_id)).scalar()
+        if max_order_id is None:
+            return 1
+        return int(max_order_id) + 1
 
-        return (max_order_id or 0) + 1
-
-    def start_payment(self, payment_data: PaymentIDramInitiationSchemaUserBasicTip):
+    def start_payment(self, horeka_client_id: int, payment_data: PaymentIDramInitiationSchemaSubsPlan):
         try:
             amount = payment_data.EDP_AMOUNT
             required_payment_amount = payment_data.REQUIRED_PAYMENT_AMOUNT
-            horekaclient_id = payment_data.HoReKaClientId
-            horeka_part_amount = float(amount) - float(amount) * 0.1
-        except Exception as err:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"Can't get data\nERR: {err}"
-            )
+            subs_plan = payment_data.EDP_SUBS_PLAN
+        except Exception:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         if amount != required_payment_amount:
             raise HTTPException(
@@ -61,32 +65,27 @@ class IDramPaymentServiceUserBasicTip:
             )
 
         try:
-            next_order_id = self.get_next_order_id()
+            next_order_id = str(self.get_next_order_id())
             payment_status = "pending"
 
-            payment = models.PaymentIDramUserBasicTip(
+            payment = models.Payment(
                 order_id=next_order_id,
                 amount=amount,
                 status=payment_status,
-                horeka_client_id=horekaclient_id,
-                horeka_part=horeka_part_amount
+                horeka_client_id=horeka_client_id,
+                subs_plan=subs_plan
             )
-        except Exception as err:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"Error occurred while trying to make PaymentIDram model\nERR: {err}"
-            )
+
+        except Exception:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         try:
             self.session.add(payment)
             self.session.commit()
             self.session.refresh(payment)
-        except Exception as err:
+        except Exception:
             self.session.rollback()
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"Error occurred while trying to add payment data to db\nERR: {err}"
-            )
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
         finally:
             self.session.close()
 
@@ -104,19 +103,12 @@ class IDramPaymentServiceUserBasicTip:
             f"EDP_SIGNATURE={signature}"
         )
 
-        return StartPaymentIDramResponseSchemaUserBasicTip(
+        return StartPaymentIDramResponseSchemaHoReKaSubsPlan(
             payment_url=payment_url,
             order_id=payment.order_id,
             status="pending",
             required_payment_amount=required_payment_amount
         )
-
-    def payment_success(self):  # payment_status_update_data: PaymentStatusUpdateSchema
-        return FileResponse("./templates/success.html")
-
-    def payment_fail(self):  # payment_status_update_data: PaymentStatusUpdateSchema
-        return FileResponse("./templates/fail.html")
-
 
     def payment_result(self,
                        EDP_PRECHECK: str = Form(None),
@@ -131,14 +123,9 @@ class IDramPaymentServiceUserBasicTip:
 
         if EDP_PRECHECK == "YES":
             try:
-                payment = self.session.query(models.Payment).filter(models.Payment.order_id == int(EDP_BILL_NO)).first()
-            except Exception as err:
-                raise HTTPException(
-                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                    detail=f"Error occurred while trying to find the payment with EDP_BILL_NO '{EDP_BILL_NO}'\n"
-                           f"Check if the order exists and the amount is correct\n"
-                           f"ERR: {err}"
-                )
+                payment = self.session.query(models.Payment).filter(models.Payment.order_id == str(EDP_BILL_NO)).first()
+            except Exception:
+                raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
             if payment is None or round(payment.amount, 2) != round(EDP_AMOUNT, 2):
                 raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
@@ -147,17 +134,12 @@ class IDramPaymentServiceUserBasicTip:
             return PlainTextResponse(content="OK", status_code=200)
         else:
             try:
-                payment = self.session.query(models.PaymentIDramUserBasicTip).filter(models.PaymentIDramUserBasicTip.order_id == int(EDP_BILL_NO)).first()
-            except Exception as err:
-                raise HTTPException(
-                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                    detail=f"Error occurred while trying to find order with EDP_BILL_NO '{EDP_BILL_NO}'\n"
-                           f"# Find the payment record in the database using the bill_no\n"
-                           f"ERR: {err}"
-                )
+                payment = self.session.query(models.Payment).filter(models.Payment.order_id == str(EDP_BILL_NO)).first()
+            except Exception:
+                raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
             if payment is None:
-                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="PaymentIDram record not found")
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
             # # TODO check given data for CHECK_SUM validation
             # # Validate required fields for payment confirmation
@@ -206,11 +188,7 @@ class IDramPaymentServiceUserBasicTip:
                 payment.payer_account = EDP_PAYER_ACCOUNT
 
                 self.session.commit()
-            except Exception as err:
-                raise HTTPException(
-                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                    detail="Error occurred when EDP_STATUS = 1\n"
-                           f"ERR: {err}"
-                )
+            except Exception:
+                raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
             return PlainTextResponse(content="OK", status_code=200)

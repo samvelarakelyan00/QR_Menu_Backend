@@ -70,6 +70,16 @@ class HoReKaMenu(Base):
     horekaclient_id = Column(Integer, ForeignKey("horekaclients.id"))
 
 
+class HoReCaSubsPlan(Base):
+    __tablename__ = "horeca_subs_plans"
+
+    id = Column(Integer, primary_key=True)
+
+    name = Column(String(128), nullable=False)
+    amount = Column(Float)
+    duration = Column(Integer, server_default="31")
+
+
 class UserFeedback(Base):
     __tablename__ = "user_feedbacks"
 

@@ -81,13 +81,23 @@ class UserFeedback(Base):
     horeka_client_id = Column(Integer, ForeignKey("horekaclients.id"))
 
 
+class HoReCaSubsPlan(Base):
+    __tablename__ = "horeca_subs_plans"
+
+    id = Column(Integer, primary_key=True)
+
+    name = Column(String(128), nullable=False)
+    amount = Column(Float)
+    duration = Column(Integer, server_default="31")
+
+
 class Payment(Base):
     __tablename__ = "payments"
 
     id = Column(Integer, primary_key=True)
     order_id = Column(String, unique=True)  # Bill number from merchant
     amount = Column(Float)
-    status = Column(String)  # Payment status (e.g., "pending", "paid", "failed", etc.)
+    status = Column(String)  # PaymentIDram status (e.g., "pending", "paid", "failed", etc.)
     created_at = Column(TIMESTAMP, nullable=False, default=func.now() + text("Interval '4 hours'"))
     updated_at = Column(TIMESTAMP, nullable=False, default=func.now() + text("Interval '4 hours'"),
                         onupdate=func.now() + text("Interval '4 hours'"))

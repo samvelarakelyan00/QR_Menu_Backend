@@ -24,7 +24,7 @@ CORS_HEADERS = {
 
 router = APIRouter(
     prefix='/payment/idram/users/basic-tip',
-    tags=["Payment IDram User Basic Tip"]
+    tags=["PaymentIDram IDram User Basic Tip"]
 )
 
 

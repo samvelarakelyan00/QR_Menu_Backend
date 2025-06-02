@@ -11,7 +11,7 @@ from schemas.admin_schema import (
 
 from services import admin_auth as cafe_admin_auth_service
 from services import admin as admin_service
-from services import payment_idram as payment_idram_service
+from services.PaymentIDram import payment_idram as payment_idram_service
 
 
 router = APIRouter(
