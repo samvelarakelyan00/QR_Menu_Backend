@@ -32,7 +32,7 @@ from schemas.payment_idram_schema import (
 )
 
 from services.PaymentIDram import horeca_subs_payment_check as horeca_subs_idram_payment_check_service
-from services import admin_auth as cafe_admin_auth_service
+from services.Admin import admin_auth as cafe_admin_auth_service
 
 
 CORS_HEADERS = {

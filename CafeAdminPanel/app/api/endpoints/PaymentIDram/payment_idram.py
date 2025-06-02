@@ -11,7 +11,7 @@ from schemas.payment_idram_schema import (
 )
 
 from services.PaymentIDram import payment_idram as idram_payment_service
-from services import admin_auth as cafe_admin_auth_service
+from services.Admin import admin_auth as cafe_admin_auth_service
 
 
 CORS_HEADERS = {

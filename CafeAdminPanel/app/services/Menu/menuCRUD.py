@@ -16,7 +16,7 @@ from schemas.menu_schema import (
     ProductUpdate
 )
 
-from .aws_s3 import s3_manager
+from ..aws_s3 import s3_manager
 
 CORS_HEADERS = {
     "Access-Control-Allow-Origin": "*",
@@ -39,20 +39,15 @@ class MenuCRUDService:
             self.session.commit()
 
             return "OK"
-        except Exception as err:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=err
-            )
+        except Exception:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def get_all_menu(self, horekaclient_id):
         try:
             all_menu = self.session.query(models.HoReKaMenu).filter_by(horekaclient_id=horekaclient_id).all()
-        except Exception as err:
+        except Exception:
             raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=err
-            )
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return all_menu
 
@@ -63,17 +58,11 @@ class MenuCRUDService:
                 .filter_by(horekaclient_id=horekaclient_id, id=product_id)
                 .first()
             )
-        except Exception as err:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=str(err)
-            )
+        except Exception:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         if not product:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail="Product not found"
-            )
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
         try:
             update_data = product_update_data.dict(exclude_unset=True)  # Exclude fields that were not provided
@@ -86,12 +75,9 @@ class MenuCRUDService:
 
             return product
 
-        except Exception as err:
+        except Exception:
             self.session.rollback()
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=str(err)
-            )
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def delete_product(self, horekaclient_id: int, product_id: int):
         try:
@@ -100,17 +86,11 @@ class MenuCRUDService:
                 .filter_by(horekaclient_id=horekaclient_id, id=product_id)
                 .first()
             )
-        except Exception as err:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=str(err)
-            )
+        except Exception:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         if not product:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail="Product not found"
-            )
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
         try:
             s3_manager.delete_object("qrmenuarmeniafilesandimagesbucket",
@@ -118,9 +98,6 @@ class MenuCRUDService:
 
             self.session.delete(product)
             self.session.commit()
-        except Exception as err:
+        except Exception:
             self.session.rollback()
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=str(err)
-            )
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -18,8 +18,8 @@ from schemas.menu_schema import (
     ProductImageGet
 )
 
-from services import admin_auth as cafe_admin_auth_service
-from services import menuCRUD as menuCRUD_service
+from services.Admin import admin_auth as cafe_admin_auth_service
+from services.Menu import menuCRUD as menuCRUD_service
 
 from services import aws_s3 as aws_s3_service
 

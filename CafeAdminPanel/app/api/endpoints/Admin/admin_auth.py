@@ -8,7 +8,7 @@ from schemas.auth_schema import (
     CafeAdminLoginForm,
 )
 
-from services import admin_auth as cafe_admin_auth_service
+from services.Admin import admin_auth as cafe_admin_auth_service
 
 
 router = APIRouter(
