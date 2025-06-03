@@ -9,12 +9,6 @@ from sqlalchemy.orm.session import Session
 from database import get_session
 from models import models
 
-from schemas.admin_schema import (
-    HoReCaSubsPlanCreateSchema,
-    HoReCaSubsPlanUpdateSchema
-)
-
-
 
 CORS_HEADERS = {
     "Access-Control-Allow-Origin": "*",
@@ -113,14 +107,6 @@ class AdminService:
 
         return info
 
-    def add_new_horeca_subs_plan(self, subs_plan_data: HoReCaSubsPlanCreateSchema):
-        try:
-            subs_plan = models.HoReCaSubsPlan(**subs_plan_data.__dict__)
-            self.session.add(subs_plan)
-            self.session.commit()
-        except Exception:
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
     def get_available_subs_plans(self):
         try:
             subs_plans = self.session.query(models.HoReCaSubsPlan).all()
@@ -139,41 +125,3 @@ class AdminService:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
         return subs_plan
-
-    def update_subs_plan(self, subs_plan_id: int, subs_plan_update_data: HoReCaSubsPlanUpdateSchema):
-        try:
-            subs_plan = self.session.query(models.HoReCaSubsPlan).filter_by(id=subs_plan_id).first()
-        except Exception:
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-        if subs_plan is None:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
-
-        try:
-            update_data = subs_plan_update_data.dict(exclude_unset=True)  # Exclude fields that were not provided
-
-            for key, value in update_data.items():
-                setattr(subs_plan, key, value)  # Dynamically update the model attributes
-
-            self.session.commit()
-            self.session.refresh(subs_plan)
-
-            return subs_plan
-        except Exception:
-            self.session.rollback()
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-    def delete_subs_plan(self, subs_plan_id: int):
-        try:
-            subs_plan = self.session.query(models.HoReCaSubsPlan).filter_by(id=subs_plan_id).first()
-        except Exception:
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-        if subs_plan is None:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
-
-        try:
-            self.session.delete(subs_plan)
-            self.session.commit()
-        except Exception:
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)

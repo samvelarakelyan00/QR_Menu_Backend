@@ -50,24 +50,14 @@ router = APIRouter(
 )
 
 
-@router.get("/find-horeca-admin", response_model=CafeAdminOut)
-def find_user_by_username(
-    payment_service: horeca_subs_idram_payment_check_service.CheckHoReCaSubsPlanService = Depends(),
-    current_admin = Depends(cafe_admin_auth_service.get_current_admin)
-):
-    horeca_admin_id = current_admin.__dict__.get("id")
-
-    return payment_service.find_horeka_admin(horeca_admin_id)
-
-
-@router.get("/last-payment")
+@router.get("/check-payment")
 def get_horeca_admin_last_payment(
     payment_service: horeca_subs_idram_payment_check_service.CheckHoReCaSubsPlanService = Depends(),
     current_admin = Depends(cafe_admin_auth_service.get_current_admin)
 ):
     horeca_admin_id = current_admin.__dict__.get("id")
 
-    return payment_service.get_horeca_admin_last_payment(horeca_admin_id)
+    return payment_service.is_payment_ok(horeca_admin_id)
 
 
 

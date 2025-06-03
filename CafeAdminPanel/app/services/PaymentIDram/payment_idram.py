@@ -48,7 +48,7 @@ class IDramPaymentServiceHoReKaSubsPlan:
         max_order_id = self.session.query(func.max(models.Payment.order_id)).scalar()
         if max_order_id is None:
             return 1
-        return int(max_order_id) + 1
+        return max_order_id + 1
 
     def start_payment(self, horeka_client_id: int, payment_data: PaymentIDramInitiationSchemaSubsPlan):
         try:
@@ -65,8 +65,7 @@ class IDramPaymentServiceHoReKaSubsPlan:
             )
 
         try:
-            next_order_id = str(self.get_next_order_id())
-            print(next_order_id)
+            next_order_id = self.get_next_order_id()
             payment_status = "pending"
 
             payment = models.Payment(
@@ -77,16 +76,16 @@ class IDramPaymentServiceHoReKaSubsPlan:
                 subs_plan=subs_plan
             )
 
-        except Exception as err:
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(err))
+        except Exception:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         try:
             self.session.add(payment)
             self.session.commit()
             self.session.refresh(payment)
-        except Exception as err:
+        except Exception:
             self.session.rollback()
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(err))
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
         finally:
             self.session.close()
 

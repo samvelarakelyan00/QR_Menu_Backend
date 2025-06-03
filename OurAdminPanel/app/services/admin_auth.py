@@ -4,14 +4,13 @@ import datetime
 # FastAPI
 from fastapi.exceptions import HTTPException
 from fastapi import status, Depends
-from pydantic import ValidationError
 from fastapi.security.oauth2 import OAuth2PasswordBearer
 
 # SqlAlchemy
 from sqlalchemy.orm.session import Session
 
 # Security
-from jose import jwt, JWTError
+from jose import jwt
 
 # Own
 from schemas.auth_schema import Token, AdminLoginForm, AdminOut
@@ -35,9 +34,8 @@ def get_current_admin(token: str = Depends(oauth2_schema)):
     try:
         current_admin = AdminAuthService.verify_token(token)
         return current_admin
-    except Exception as err:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
-                            detail=err)
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
 
 
 class AdminAuthService:
@@ -51,16 +49,15 @@ class AdminAuthService:
                     "WWW-Authenticated": 'Bearer'
                 }
             )
-        except Exception as err:
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+        except Exception:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
         try:
             payload = jwt.decode(
                 token,
                 "secret",
                 algorithms=["HS256"]
             )
-        except Exception as err:
+        except Exception:
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail=exception
@@ -68,15 +65,13 @@ class AdminAuthService:
 
         try:
             admin_data = payload.get('admin')
-        except Exception as err:
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+        except Exception:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         try:
             admin = AdminOut.parse_obj(admin_data)
-        except Exception as err:
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+        except Exception:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return admin
 
@@ -84,9 +79,8 @@ class AdminAuthService:
     def create_token(cls, admin):
         try:
             admin_data = AdminOut.from_orm(admin)
-        except Exception as err:
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+        except Exception:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         try:
             now = datetime.datetime.utcnow()
@@ -94,21 +88,18 @@ class AdminAuthService:
                 "exp": now + datetime.timedelta(minutes=1440),  # 1440 min -> 1 day, (max av. -> 43200, 1 month)
                 "admin": admin_data.dict()
             }
-        except Exception as err:
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+        except Exception:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         try:
             token = jwt.encode(payload, "secret", algorithm="HS256")
-        except Exception as err:
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+        except Exception:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
         try:
             access_token = Token(access_token=token)
             return access_token
-        except Exception as err:
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+        except Exception:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def __init__(self, session: Session = Depends(get_session)):
         self.session = session
@@ -117,9 +108,8 @@ class AdminAuthService:
         try:
             email = login_data.email
             password = login_data.password
-        except Exception as err:
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+        except Exception:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         try:
             admin = self.session.query(models.OurAdmin).filter_by(email=email).first()
@@ -132,18 +122,16 @@ class AdminAuthService:
 
         try:
             password_from_db = admin.__dict__.get('password')
-        except Exception as err:
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+        except Exception:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        if password_from_db != login_data.password:
+        if password_from_db != password:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                                 detail="Wrong Data")
 
         try:
             access_token = self.create_token(admin)
-        except Exception as err:
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=err)
+        except Exception:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return access_token

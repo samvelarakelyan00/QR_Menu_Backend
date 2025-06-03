@@ -6,9 +6,7 @@ from fastapi.exceptions import HTTPException
 
 # Own
 from schemas.admin_schema import (
-    HoReKaAdminOutSchema,
-    HoReCaSubsPlanCreateSchema,
-    HoReCaSubsPlanUpdateSchema
+    HoReKaAdminOutSchema
 )
 
 from services.Admin import admin_auth as cafe_admin_auth_service
@@ -24,23 +22,23 @@ router = APIRouter(
 
 @router.get("",
             response_model=HoReKaAdminOutSchema)
-def get_menu_by_product_id(
+def get_horeca_admin(
     admin_servie=Depends(admin_service.AdminService),
     current_admin=Depends(cafe_admin_auth_service.get_current_admin)
 ):
 
     try:
-        horeka_admin_id = current_admin.__dict__.get("id")
+        horeca_admin_id = current_admin.__dict__.get("id")
     except Exception as err:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=err
         )
 
-    return admin_servie.get_horeka_admin_by_id(horeka_admin_id)
+    return admin_servie.get_horeka_admin_by_id(horeca_admin_id)
 
 
-@router.get("/my-account-page-info")
+@router.get("/my-account-page-info")  # TODO
 def get_horeka_admin_my_account_page_info(
     admin_servie=Depends(admin_service.AdminService),
     payment_idram_service=Depends(payment_idram_service.IDramPaymentServiceHoReKaSubsPlan),
@@ -79,16 +77,6 @@ def get_horeka_admin_my_account_page_info(
 
     return horeka_admin_page_info
 
-
-@router.post("/add/horeca-subs-plan")
-def get_menu_by_product_id(
-    subs_plan_data: HoReCaSubsPlanCreateSchema,
-    admin_servie=Depends(admin_service.AdminService),
-    current_admin=Depends(cafe_admin_auth_service.get_current_admin)
-):
-
-    return admin_servie.add_new_horeca_subs_plan(subs_plan_data)
-
 @router.get("/horeca-subs-plan/all")
 def get_available_subs_plans(
     admin_servie=Depends(admin_service.AdminService),
@@ -106,25 +94,3 @@ def get_subs_plan_by_name(
 ):
 
     return admin_servie.get_subs_plan_by_name(name)
-
-
-@router.put("/horeca-subs-plan/update/{subs_plan_id}")
-def update_subs_plan(
-    subs_plan_id: int,
-    subs_plan_update_data: HoReCaSubsPlanUpdateSchema,
-    admin_servie=Depends(admin_service.AdminService),
-    current_admin=Depends(cafe_admin_auth_service.get_current_admin)
-):
-
-    return admin_servie.update_subs_plan(subs_plan_id, subs_plan_update_data)
-
-
-@router.delete("/horeca-subs-plan/delete/{subs_plan_id}",
-               status_code=status.HTTP_204_NO_CONTENT)
-def delete_subs_plan(
-    subs_plan_id: int,
-    admin_servie=Depends(admin_service.AdminService),
-    current_admin=Depends(cafe_admin_auth_service.get_current_admin)
-):
-
-    return admin_servie.delete_subs_plan(subs_plan_id)
