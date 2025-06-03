@@ -48,7 +48,7 @@ class CheckHoReCaSubsPlanService:
 
         return horeca_admin
 
-    def is_payment_ok(self, horeca_admin_id):
+    def check_current_payment(self, horeca_admin_id):
 
         horeca_admin = self.find_horeca_admin(horeca_admin_id)
 

@@ -1,14 +1,11 @@
 import os
-import sys
 import uuid
 from typing import Optional
 
 # FastAPI
-from fastapi import APIRouter, UploadFile, File, Form, Depends, HTTPException
-from fastapi.responses import FileResponse
+from fastapi import APIRouter, UploadFile, File, Form, Depends
 from fastapi.exceptions import HTTPException
 
-from sqlalchemy.orm import Session
 from starlette import status
 
 # Own
@@ -20,6 +17,7 @@ from schemas.menu_schema import (
 
 from services.Admin import admin_auth as cafe_admin_auth_service
 from services.Menu import menuCRUD as menuCRUD_service
+from services.PaymentIDram import horeca_subs_payment_check as payment_check_service
 
 from services import aws_s3 as aws_s3_service
 
@@ -44,8 +42,17 @@ async def add_menu_new(
         calories: Optional[float] = Form(None),
         image: UploadFile = File(...),
         menu_crud_service: menuCRUD_service.MenuCRUDService = Depends(),
+        payment_check_service: payment_check_service.CheckHoReCaSubsPlanService = Depends(),
         current_admin=Depends(cafe_admin_auth_service.get_current_admin)
 ):
+    try:
+        current_payment = payment_check_service.check_current_payment(current_admin.__dict__.get("id"))
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    if current_payment is None:
+        raise HTTPException(status_code=status.HTTP_402_PAYMENT_REQUIRED)
+
     try:
         horekaclient_id = current_admin.__dict__.get("horekaclient_id")
 
@@ -88,24 +95,26 @@ async def add_menu_new(
 
         return menu_crud_service.add_menu_new(horekaclient_id, menu_data)
 
-    except Exception as err:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=str(err),
-        )
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @router.get("/all-menu")
 def get_all_menu(menu_crud_service: menuCRUD_service.MenuCRUDService = Depends(),
+                 payment_check_service: payment_check_service.CheckHoReCaSubsPlanService = Depends(),
                  current_admin=Depends(cafe_admin_auth_service.get_current_admin)):
+    try:
+        current_payment = payment_check_service.check_current_payment(current_admin.__dict__.get("id"))
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    if current_payment is None:
+        raise HTTPException(status_code=status.HTTP_402_PAYMENT_REQUIRED)
 
     try:
         horekaclient_id = current_admin.__dict__.get("horekaclient_id")
-    except Exception as err:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=err
-        )
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     return menu_crud_service.get_all_menu(horekaclient_id)
 
@@ -114,15 +123,20 @@ def get_all_menu(menu_crud_service: menuCRUD_service.MenuCRUDService = Depends()
 def update_product(product_id: int,
                    product_update_data: ProductUpdate,
                    menu_crud_service: menuCRUD_service.MenuCRUDService = Depends(),
+                   payment_check_service: payment_check_service.CheckHoReCaSubsPlanService = Depends(),
                    current_admin=Depends(cafe_admin_auth_service.get_current_admin)):
+    try:
+        current_payment = payment_check_service.check_current_payment(current_admin.__dict__.get("id"))
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    if current_payment is None:
+        raise HTTPException(status_code=status.HTTP_402_PAYMENT_REQUIRED)
 
     try:
         horekaclient_id = current_admin.__dict__.get("horekaclient_id")
-    except Exception as err:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=err
-        )
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     return menu_crud_service.update_product(horekaclient_id, product_id, product_update_data)
 
@@ -130,14 +144,19 @@ def update_product(product_id: int,
 @router.delete("/delete-product/{product_id}")
 def delete_product(product_id: int,
                    menu_crud_service: menuCRUD_service.MenuCRUDService = Depends(),
+                   payment_check_service: payment_check_service.CheckHoReCaSubsPlanService = Depends(),
                    current_admin=Depends(cafe_admin_auth_service.get_current_admin)):
+    try:
+        current_payment = payment_check_service.check_current_payment(current_admin.__dict__.get("id"))
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    if current_payment is None:
+        raise HTTPException(status_code=status.HTTP_402_PAYMENT_REQUIRED)
 
     try:
         horekaclient_id = current_admin.__dict__.get("horekaclient_id")
-    except Exception as err:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=err
-        )
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     return menu_crud_service.delete_product(horekaclient_id, product_id)
