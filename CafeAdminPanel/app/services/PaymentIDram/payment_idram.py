@@ -66,6 +66,7 @@ class IDramPaymentServiceHoReKaSubsPlan:
 
         try:
             next_order_id = str(self.get_next_order_id())
+            print(next_order_id)
             payment_status = "pending"
 
             payment = models.Payment(
@@ -76,16 +77,16 @@ class IDramPaymentServiceHoReKaSubsPlan:
                 subs_plan=subs_plan
             )
 
-        except Exception:
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except Exception as err:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(err))
 
         try:
             self.session.add(payment)
             self.session.commit()
             self.session.refresh(payment)
-        except Exception:
+        except Exception as err:
             self.session.rollback()
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(err))
         finally:
             self.session.close()
 

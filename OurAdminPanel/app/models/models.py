@@ -95,7 +95,7 @@ class Payment(Base):
     __tablename__ = "payments"
 
     id = Column(Integer, primary_key=True)
-    order_id = Column(String, unique=True)  # Bill number from merchant
+    order_id = Column(Integer, unique=True)  # Bill number from merchant
     amount = Column(Float)
     status = Column(String)  # PaymentIDram status (e.g., "pending", "paid", "failed", etc.)
     created_at = Column(TIMESTAMP, nullable=False, default=func.now() + text("Interval '4 hours'"))

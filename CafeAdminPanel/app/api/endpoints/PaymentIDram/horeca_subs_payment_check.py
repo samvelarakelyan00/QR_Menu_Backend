@@ -50,7 +50,7 @@ router = APIRouter(
 )
 
 
-@router.get("/find-horeca_admin-by-id", response_model=CafeAdminOut)
+@router.get("/find-horeca-admin", response_model=CafeAdminOut)
 def find_user_by_username(
     payment_service: horeca_subs_idram_payment_check_service.CheckHoReCaSubsPlanService = Depends(),
     current_admin = Depends(cafe_admin_auth_service.get_current_admin)
